@@ -12,15 +12,15 @@
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
   <!-- Vendor CSS Files -->
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-  <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
-  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="../assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="../assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="../assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="../assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
   <!-- Template Main CSS File -->
-  <link href="assets/css/style.css" rel="stylesheet">
+  <link href="../assets/css/style.css" rel="stylesheet">
   <style>
     h1 {
     	font-size : 22px;
@@ -95,11 +95,12 @@
       <!--navbar 메뉴 -->
     </div>
   </header><!-- End Header -->
+  <br><br><br>
   <section id="main-contents">
   <h1>관리자 전용 메인 페이지</h1>
  	<div class="row">
  		<div class="col-lg-4 col-md-4 col-xs-4 col-sm-4">
-		<a href="admin/reposted_page.jsp">
+		<a href="reposted_page.jsp">
 			<div class="card">
 				<div class="card-header">
 					<h1>신고 게시물/댓글/응원댓글 목록</h1>
@@ -109,7 +110,7 @@
 				</div>
 			</div>
 		</a>
-		<a href="admin/support_approval.jsp">
+		<a href="support_approval.jsp">
 			<div class="card">
 				<div class="card-header">
 					<h1>승인 대기 캠페인 목록</h1>
@@ -119,7 +120,7 @@
 				</div>
 			</div>
 		</a>
-		<a href="admin/support_delete.jsp">
+		<a href="support_delete.jsp">
 			<div class="card">
 				<div class="card-header">
 					<h1>캠페인 관리</h1>
@@ -129,7 +130,7 @@
 				</div>
 			</div>
 		</a>
-		<a href="admin/member_manage.jsp">
+		<a href="member_manage.jsp">
 			<div class="card">
 				<div class="card-header">
 					<h1>회원 관리</h1>
@@ -139,7 +140,7 @@
 				</div>
 			</div>
 		</a>
-		<a href="admin/support_manage.jsp">
+		<a href="support_manage.jsp">
 			<div class="card">
 				<div class="card-header">
 					<h1>후원 결제 관리</h1>
@@ -149,7 +150,7 @@
 				</div>
 			</div>
 		</a>
-		<a href="admin/sports_manage.jsp">
+		<a href="sports_manage.jsp">
 			<div class="card">
 				<div class="card-header">
 					<h1>종목 관리</h1>

@@ -26,13 +26,39 @@
   <link href="../assets/css/style.css" rel="stylesheet">
   
 <style>
+	#main {
+		 width:100%;
+		 height : 800px;
+	}
+	/*제목*/
+	h1{
+	    vertical-align:middle;
+	    line-height:30px;
+   		color: rgb(140, 158, 91);
+	    text-align: center;
+	}
+	/*탭 메뉴 글씨 디자인*/
+	.subtitle{
+		text-align: center;
+		vertical-align:middle;
+	    line-height:30px;
+	    font-size:14pt;
+   		color: rgb(140, 158, 91);
+	}
 /*탭관련 css*/
 	.container{
 				margin: 0 auto;
 	}
+	ul, li{
+		list-style: none;
+		text-align: center;
+		padding : 0px;
+		margin : 0px;
+	}
 	ul.tabs{
 	  margin: 0px;
 	  padding: 0px;
+	  text-align: center;
 	  list-style: none;
 	}
 	ul.tabs li{
@@ -44,19 +70,63 @@
 	}
 	
 	ul.tabs li.current{
-	  background: #ededed;
+	  background-color: #ededed;
 	  color: #222;
 	}
 	
 	.tab-content{
-	 /* visibility : hiddin;*/
 	  display: none;
-	  background: #ededed;
+	  background-color: #ededed;
 	  padding: 15px;
 	}
 	
 	.tab-content.current{
 	  display: inherit;
+	}
+	
+/* 테이블(게시판 형태) CSS*/
+	.ulTable {
+		margin-top:10px;
+		text-align: center;
+	}
+	
+	.ulTable > li:first-child > ul > li {
+		background-color:#c9c9c9;
+		font-weight:bold;
+		text-align:center;
+	}
+	
+	.ulTable > li > ul {
+		clear:both;
+		padding:0px auto;
+		position:relative;
+		min-width:50px;
+	}
+	.ulTable > li > ul > li {
+		float:left;
+		font-size:10pt;
+		border-bottom:1px solid #ededed;
+		vertical-align:baseline;
+	}
+	.ulTable > li > ul > li:first-child                {width:10%;} /*No 열 크기*/
+	.ulTable > li > ul > li:first-child +li            {width:35%;} /*제목 열 크기*/
+	.ulTable > li > ul > li:first-child +li+li         {width:20%;} /*작성일 열 크기*/
+	.ulTable > li > ul > li:first-child +li+li+li      {width:15%;} /*작성자 열 크기*/
+	.ulTable > li > ul > li:first-child +li+li+li+li   {width:10%;} /*추천수 열 크기*/
+	.ulTable > li > ul > li:first-child +li+li+li+li+li{width:10%;} /*조회수 열 크기*/
+	
+	#divPaging {
+		clear:both;
+		margin:0 auto;
+		width:220px;
+		height:50px;
+	}
+	
+	#divPaging > div {
+		float:left;
+		width: 30px;
+		margin:0 auto;
+		text-align:center;
 	}
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -96,75 +166,84 @@
   <main id="main">
   		<section id="reposted">
       		<div class="container">
-      		<div class="row">
-      			<div class="section-title">
-		      		<ul class="tabs">
-			      		<li class="tab-link current" data-tab="tab-1">신고 게시물</li>
-			      		<li class="tab-link" data-tab="tab-2">신고 댓글 </li>
-			      		<li class="tab-link" data-tab="tab-3">신고 응원글</li>
+	      		<h1>신고글 관리</h1><br><br>
+	      		<ul class="tabs">
+		      		<li class="tab-link current" data-tab="tab-1">신고 게시물</li>
+		      		<li class="tab-link" data-tab="tab-2">신고 댓글 </li>
+		      		<li class="tab-link" data-tab="tab-3">신고 응원글</li>
+	   			</ul>
+  					<!-- 페이징 처리 -->
+  					<!-- 회원 클릭시 회원 detail페이지/게시물 제목 클릭시 게시물 상세 조회 -->
+  					<div id="tab-1" class="tab-content">
+	        		<ul class ="ulTable">
+	   					<li>
+	   						<h3 class="subtitle">신고 게시물</h3>
+	   						<ul>
+	   							<li>No</li>
+	   							<li>제목</li>
+	   							<li>작성자</li>
+	   							<li>날짜</li>
+	   							<li>신고수</li>
+	   						</ul>
+	   					</li>
+	   					<li>
+	   						<ul>
+	   							<li>1</li>
+	   							<li>불법주정차</li>
+	   							<li>car</li>
+	   							<li>2021-09-27</li>
+	   							<li>5</li>
+	   						</ul>
+	   					</li>
+	   				</ul>
+        		</div>
+        		<div id="tab-2" class="tab-content">
+	        		<ul class ="ulTable">
+	   					<li>
+	   						<h3 class="subtitle">신고 댓글</h3>
+	   						<ul>
+	   							<li>No</li>
+	   							<li>댓글내용</li>
+	   							<li>작성자</li>
+	   							<li>날짜</li>
+	   							<li>신고수</li>
+	   						</ul>
+	   					</li>
+	   					<li>
+	   						<ul>
+	   							<li>1</li>
+	   							<li>2</li>
+	   							<li>3</li>
+	   							<li>4</li>
+	   							<li>5</li>
+	   						</ul>
+	   					</li>
+	   				</ul>
+        		</div>
+        		<div id="tab-3" class="tab-content">
+	        		<ul class ="ulTable">
+	   					<li>
+		   					<h3 class="subtitle">신고 응원글</h3>
+		   					<ul>
+	   							<li>No</li>
+	   							<li>응원글 내용</li>
+	   							<li>작성자</li>
+	   							<li>날짜</li>
+	   							<li>신고수</li>
+		   					</ul>
+		   				</li>
 		   			</ul>
-		   			<div id="tab-1" class="tab-content-current">
-	   					<h2>신고 게시물</h2>
-	   					<table>
-	   						<tr>
-	   							<th>No</th>
-	   							<th>제목</th>
-	   							<th>작성자</th>
-	   							<th>날짜</th>
-	   							<th>신고수</th>
-	   						</tr>
-	   						<tr>
-	   							<td>1</td>
-	   							<td>정말</td>
-	   							<td>user</td>
-	   							<td>2021/09/26</td>
-	   							<td>10</td>
-	   						</tr>
-	   					</table>
-	        		</div>
-   					<!-- 페이징 처리 -->
-   					<!-- 회원 클릭시 회원 detail페이지/게시물 제목 클릭시 게시물 상세 조회 -->
-	        		<div id="tab-2" class="tab-content">
-	   					<h2>신고 댓글</h2>
-	   					<table>
-	   						<tr>
-	   							<th>No</th>
-	   							<th>댓글내용</th>
-	   							<th>작성자</th>
-	   							<th>날짜</th>
-	   							<th>신고수</th>
-	   						</tr>
-	   						<tr>
-	   							<td>2</td>
-	   							<td>졸리고</td>
-	   							<td>user</td>
-	   							<td>2021/09/26</td>
-	   							<td>10</td>
-	   						</tr>
-	   					</table>
-	        		</div>
-	        		<div id="tab-3" class="tab-content">
-	   					<h2>신고 응원글</h2>
-	   					<table>
-	   						<tr>
-	   							<th>No</th>
-	   							<th>응원글 내용</th>
-	   							<th>작성자</th>
-	   							<th>날짜</th>
-	   							<th>신고수</th>
-	   						</tr>
-	   						<tr>
-	   							<td>3</td>
-	   							<td>잘래</td>
-	   							<td>user</td>
-	   							<td>2021/09/26</td>
-	   							<td>10</td>
-	   						</tr>
-	   					</table>
-	   				</div>
-	        	</div>
-	        	</div>
-	   		</div>
+   				</div>
+	   				<div id="divPaging">
+						<div>◀</div>
+						<div><b>1</b></div>
+						<div>2</div>
+						<div>3</div>
+						<div>4</div>
+						<div>5</div>
+						<div>▶</div>
+					</div>
+   				</div>
         </section>
   </main>
   <br><br>
@@ -202,18 +281,15 @@
 	<script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 	
 	<script>
-	
-	$(document).ready(function(){
-		$('ul.tabs li').click(function(){
-	    	var tab_id = $(this).attr('data-tab');
-	
-		    $('ul.tabs li').removeClass('current');
-	   		$('.tab-content').removeClass('current');
-	
-	    	$(this).addClass('current');
-	 		$("#"+tab_id).addClass('current');
-	  	})
-	})
+		$(function(){
+			$('ul.tabs li').click(function(){
+		    	var tab_id = $(this).attr('data-tab');
+			    $('ul.tabs li').removeClass('current');
+		   		$('.tab-content').removeClass('current');
+		    	$(this).addClass('current');
+		 		$("#"+tab_id).addClass('current');
+		  	})
+		});
 	</script>
 </body>
 </html>

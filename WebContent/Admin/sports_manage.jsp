@@ -19,15 +19,36 @@
   <!-- Template Main CSS File -->
   <link href="../assets/css/style.css" rel="stylesheet">
   <style>
+  /*파일 첨부 버튼 css*/
   	.input-file-button{
-  		padding : 6px 25px;
-  		background-color: #FF6600;
+  		padding : 6px 10px;
+  		background-color: #1d284b;
   		border-radius : 4px;
   		color : white;
   		cursor: pointer;
+  		width: 150px;
   	}
-  	input [type=file]{
+  	#input-file{
   		visibility : hidden;
+  	}
+  	/* 파일명 upload */
+	.file-upload.upload-name {
+	    display: inline-block;
+	    padding: 6px 10px;  /* label의 패딩값과 일치 */
+	    font-size: inherit;
+	    font-family: inherit;
+	    line-height: normal;
+	    vertical-align: middle;
+	    background-color: #f5f5f5;
+	    border: 1px solid #ebebeb;
+	   	width : 300px;
+	   	height: 30px;
+	}
+  	.Btn{
+  		padding : 6px 10px;
+  		background-color: #1d284b;
+  		border-radius : 4px;
+  		color : white;
   	}
   </style>
 </head>
@@ -75,10 +96,13 @@
 							</select>
 							<!-- 이름값도 넘겨주기 -->
 							<input type="text" placeholder="종목 이름 입력" size="30"><br><br>
-							<textarea id="sports_enroll" name="sport_enroll" cols="100" rows="20">내용</textarea><br>
-							<label class="input-file-button" for="input-file">업로드</label>
-							<input type="file" id="input-file"><br><br><!-- 적용이 안된다.. -->
-							<button>미리보기</button> <input type="submit" value="등록하기"> <input type="reset" value="취소" onclick="location.href='../Admin_Main.jsp'">
+							<textarea id="sports_enroll" name="sport_enroll" cols="100" rows="20" placeholder=" 내용을 입력하세요."></textarea><br>
+							<div class="file-upload">
+								<input type="text" class="upload-name" value="파일선택" readonly="readonly">
+								<label class="input-file-button" for="input-file">파일 업로드</label>
+								<input type="file" id="input-file"><hr><br><br><!-- 파일버튼 숨김 -->
+							</div>
+							<button class="Btn">미리보기</button> <input type="submit" value="등록하기" class="Btn"> <input type="reset" value="취소" onclick="location.href='Admin_Main.jsp'" class="Btn">
 						</form>
 					</div>
 				</div>
@@ -116,6 +140,29 @@
   </footer>
 <!-- End Footer -->
 <!-- Vendor JS Files -->
-	<script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script src="../assets/vendor/bootstrap/js/bootstr-ap.bundle.min.js"></script>
+	<script>
+		$(function(){
+			$('.upload-name').val('파일선택');
+			$('.input-file').change(function(){
+				var filename = $(this).val();
+				$('.upload-name').val();
+			});
+		});
+			/* 	var fileTarget = $('.file-upload#input-file');
+				fileTarget.on('change', function(){
+					if(window.FileReader){ //modern browser
+						var filename = $(this)[0].files[0].name;
+					}else { //old IE
+						var filename = $(this).val().split('/').pop().split('\\').pop(); //파일명 추출
+					}
+					// 추출한 파일명 삽입
+			          $(this).siblings('.upload-name').val(filename);
+			     })
+			 })    
+			     */
+		
+		
+	</script>
 </body>
 </html>
