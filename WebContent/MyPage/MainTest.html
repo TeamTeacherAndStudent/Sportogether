@@ -2,8 +2,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>나의 활동 차트</title>
 
+<title>Admin Page</title>
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
@@ -17,46 +17,8 @@
 
   <!-- Template Main CSS File -->
   <link href="../assets/css/style.css" rel="stylesheet">
-  
-      <!--Load the AJAX API-->
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-
-      // Load the Visualization API and the corechart package.
-      google.charts.load('current', {'packages':['corechart']});
-
-      // Set a callback to run when the Google Visualization API is loaded.
-      google.charts.setOnLoadCallback(drawChart);
-
-      // Callback that creates and populates a data table,
-      // instantiates the pie chart, passes in the data and
-      // draws it.
-      function drawChart() {
-
-        // Create the data table.
-        var data = new google.visualization.DataTable();
-        data.addColumn('string', 'Topping');
-        data.addColumn('number', 'Slices');
-        data.addRows([
-          ['Mushrooms', 3],
-          ['Onions', 1],
-          ['Olives', 1],
-          ['Zucchini', 1],
-          ['Pepperoni', 2]
-        ]);
-
-        // Set chart options
-        var options = {'title':'내가 한 후원 종목 비율 확인',
-                       'width':700,
-                       'height':500};
-
-        // Instantiate and draw our chart, passing in some options.
-        var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
-        chart.draw(data, options);
-      }
-    </script>
-  
   <style>
+  
 #main-title {
 	margin-top: 2%;
 	width: 100%;
@@ -71,55 +33,56 @@
 	line-height: 50px;
 	text-align: center;
 }
-
-#main-content {
-	/* margin-top : 5%; */
-	margin-left: 15%;
-	margin-right: 15%;
-	margint-bottom: 15%;
-	display: flex;
-	justify-content: center;
-	vertical-align: middle;
-}
-
-
-
-#back-btn{
-	margin-left: 25%;
-	margin-right: 25%;
-	text-align : right;
-}
-button{
-  	background-color :  #1d284b;
-	color : white;
-  	border-style : none;
-  	font-family: "Raleway", sans-serif;
-  	font-weight: 600;
-  	font-size: 14px;
-  	letter-spacing: 1px;
- 	display: inline-block;
-  	padding: 12px 32px;
-  	border-radius: 5px;
-  	transition: 0.3s;
-  	line-height: 1;
-  	-webkit-animation-delay: 0.8s;
-  	animation-delay: 0.8s;
-  	margin-top: 6px;
-  	border: 2px solid #1d284b;
-}
-
-button:hover{
-  background: #006fbe;
-  color: #fff;
-  text-decoration: none;
-}
-</style>
+/*     h1 {
+    	font-size : 22px;
+    	font-weight : bold;
+    } */
+    .card {
+    	height: 400px;
+		width: 350px;
+		border-radius: 15px;
+		display: inline-block;
+		margin-top: 50px;
+		margin-left: 50px;
+		margin-bottom: 50px;
+		position: relative;
+		box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+		overflow: hidden;
+    }
+    card-header {
+		-webkit-transition: 0.5s; /*사파리 & 크롬*/
+	    -moz-transition: 0.5s;  /*파이어폭스*/
+	    -ms-transition: 0.5s;	/*인터넷 익스플로러*/
+	    -o-transition: 0.5s;  /*오페라*/
+	    transition: 0.5s;
+		width: 100%;
+		height: 600px;
+		border-radius: 15px 15px 0 0;
+	}
+	.card:hover .card-header  {
+		opacity: 0.8;
+	}
+    .card-body {
+    	background-image : url("");
+		background-size: 100% 280px;
+		background-repeat: no-repeat;	
+    }
+    
+    .card:hover {
+    	opacity: 1;
+	    -webkit-transition: .5s ease-in-out;
+	    -moz-transition: .5s ease-in-out;
+	    -ms-transition: .5s ease-in-out;
+	    -o-transition: .5s ease-in-out;
+	    transition : .5s ease-in-out;
+  	}
+  </style>
 </head>
 <body>
- <!-- ======= Header ======= -->
-  <header id="header" class="fixed-top">
+	<!-- ======= Header ======= -->
+  	<header id="header" class="fixed-top">
     <div class="container d-flex align-items-center justify-content-between">
-<!-- 여기에 로고 사진 추가 -->
+		<!-- 여기에 로고 사진 추가 -->
       <h1 class="logo"><a href="index.html"> Sportogether </a></h1>
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
@@ -133,49 +96,99 @@ button:hover{
           <li class="dropdown"><a href="#"><span>SIDE MENU</span> <i class="bi bi-chevron-down"></i></a>
           <ul>
              <li><a href="notice.html">공지사항</a></li>     
-             <li><a href="myinfo.html">마이페이지</a></li>
+             <li><a href="adminPage.html">관리자 페이지</a></li>
              <li><a href="qna">1:1문의</a></li>
           </ul>
           </li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
-      </nav><!-- .navbar -->
-
+      </nav>
+      <!--navbar 메뉴 -->
     </div>
   </header><!-- End Header -->
-
- <!-- === Main ===  -->
- 	<main>
- 	<section>
- 		<div id="main-title"> <h1>활동차트</h1></div>
+  
+  
+  <!-- main -->
+  <main>
+   	<section>
+ 		<div id="main-title"> <h1>My Page</h1></div>
  	</section>
- 	
- 		
- 		<!-- section : 프로필 수정-->
-		<section>	
-			<div id="main-content">
-				 <!--Div that will hold the pie chart-->
-   				 <div id="chart_div"></div>
-				<div id="count">
-				<br><br><br><br><br><br><br><br>
-					후원 횟수 : 10 <br>
-					스포투게더 방문횟수 : 46
+  
+  <section id="main-contents">
+  
+  <h1>관리자 전용 메인 페이지</h1>
+ 	<div class="row">
+ 		<div class="col-lg-4 col-md-4 col-xs-4 col-sm-4">
+		<a href="admin/reposted_page.jsp">
+			<div class="card">
+				<div class="card-header">
+					<h1>신고 게시물/댓글/응원댓글 목록</h1>
+				</div>
+				<div class="card-body">
+				
 				</div>
 			</div>
-		</section>
-		<section>
-			<div id="back-btn">
-				<button>마이 페이지로</button>
+		</a>
+		<a href="admin/support_approval.jsp">
+			<div class="card">
+				<div class="card-header">
+					<h1>승인 대기 캠페인 목록</h1>
+				</div>
+				<div class="card-body">
+				
+				</div>
 			</div>
-		</section>		
-	</main>
-
-
-
-     <!-- footer 옆으로 넘어감 방지 -->
+		</a>
+		<a href="admin/support_delete.jsp">
+			<div class="card">
+				<div class="card-header">
+					<h1>캠페인 관리</h1>
+				</div>
+				<div class="card-body">
+				
+				</div>
+			</div>
+		</a>
+		<a href="admin/member_manage.jsp">
+			<div class="card">
+				<div class="card-header">
+					<h1>회원 관리</h1>
+				</div>
+				<div class="card-body">
+				
+				</div>
+			</div>
+		</a>
+		<a href="admin/support_manage.jsp">
+			<div class="card">
+				<div class="card-header">
+					<h1>후원 결제 관리</h1>
+				</div>
+				<div class="card-body">
+				
+				</div>
+			</div>
+		</a>
+		<a href="admin/sports_manage.jsp">
+			<div class="card">
+				<div class="card-header">
+					<h1>종목 관리</h1>
+				</div>
+				<div class="card-body">
+				
+				</div>
+			</div>
+		</a>
+		</div>
+	</div>
+  </section>
+  </main>
+  
+       <!-- footer 옆으로 넘어감 방지 -->
     <div style="clear:both;"></div> 
-
- <!-- ======= Footer ======= -->
+    
+    
+	  <!-- ======= Footer ======= -->
   <footer id="footer">
     <div class="container">
       <h3>SPORTOGETHER</h3>
@@ -204,21 +217,9 @@ button:hover{
       </div>
     </div>
   </footer><!-- End Footer -->
-
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-
-  <!-- Vendor JS Files -->
-  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-  <script src="assets/vendor/php-email-form/validate.js"></script>
-  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
   
-  <!-- Template Main JS File -->
-  <script src="assets/js/main.js"></script>
-  <script src = "assets/js/jquery-1.12.3.min.js"></script>
-  <script src = "assets/js/jquery.counterup.min.js"></script>
-  <script src = "assets/js/waypoints.min.js"></script>
-
+ 
+  <!-- Vendor JS Files -->
+	<script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

@@ -8,27 +8,26 @@
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
   <!-- Vendor CSS Files -->
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-  <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
-  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="../assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="../assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="../assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="../assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
   <!-- Template Main CSS File -->
-  <link href="assets/css/style.css" rel="stylesheet">
+  <link href="../assets/css/style.css" rel="stylesheet">
   
   <style>
 #main-title {
 	margin-top: 2%;
 	width: 100%;
 	height: 100px;
-	background-color: #165992;
 	padding: 1.5%;
 }
 
 #main-title h1 {
-	color: white;
+	color: #1d284b;
 	/* margin-left: 15%; */
 	font-weight: bolder;
 	line-height: 50px;
@@ -45,30 +44,85 @@
 	vertical-align: middle;
 }
 
-table.type11 {
-	border-collapse: separate;
-	border-spacing: 1px;
-	text-align: center;
-	line-height: 1.5;
-	margin: 20px 10px;
+
+
+h2{
+  padding: 5px 10px;
+  border-bottom:1px solid #848484;
+  border-left:8px solid #848484;
 }
 
-table.type11 th {
-	width: 155px;
-	padding: 10px;
-	font-weight: bold;
-	vertical-align: top;
-	color: #fff;
-	background: #165992;
+
+ul, li{ 
+    list-style:none;
+    text-align:center;
+    padding:0;
+    margin:0;
 }
 
-table.type11 td {
-	width: 155px;
-	padding: 10px;
-	vertical-align: top;
-	border-bottom: 1px solid #ccc;
-	background: #f7feff;
+#mainWrapper{
+    width: 950px;
+    margin: auto; 
+    justify-content: center;
+	vertical-align: middle;
+	align-items: center;
+
+} 
+
+#mainWrapper > ul > li:first-child {
+    text-align: center;
+    font-size:14pt;
+    height:40px;
+    vertical-align:middle;
+    line-height:30px;
 }
+
+#ulTable {margin-top:10px;}
+
+
+#ulTable > li:first-child > ul > li {
+    background: #165992;
+    color : #fff;
+    font-weight:bold;
+    text-align:center;
+}
+
+#ulTable > li > ul {
+    clear:both;
+    padding:0px auto;
+    position:relative;
+    min-width:50px;
+}
+#ulTable > li > ul > li { 
+    float:left;
+    font-size:10pt;
+    border-bottom:1px solid silver;
+    vertical-align:baseline;
+}    
+
+#ulTable > li > ul > li:first-child                {width:10%;} /*No 열 크기*/
+#ulTable > li > ul > li:first-child +li            {width:25%;} /*제목 열 크기*/
+#ulTable > li > ul > li:first-child +li+li         {width:25%;} /*작성일 열 크기*/
+#ulTable > li > ul > li:first-child +li+li+li      {width:20%;} /*작성자 열 크기*/
+#ulTable > li > ul > li:first-child +li+li+li+li   {width:15%;} /*추천수 열 크기*/
+
+
+#divPaging {
+    clear:both; 
+    margin:0 auto; 
+    padding : 20px;
+    width:250px; 
+    height:50px;
+}
+
+#divPaging > div {
+    float:left;
+    width: 30px;
+    margin:0 auto;
+    text-align:center;
+}
+
+
 
 #back-btn{
 	margin-left: 25%;
@@ -76,11 +130,28 @@ table.type11 td {
 	text-align : right;
 }
 button{
-	font-size: 1.1em;
-	border-radius : 10px;
-  	background-color :  rgb(58, 121, 191);
+  	background-color :  #1d284b;
 	color : white;
   	border-style : none;
+  	font-family: "Raleway", sans-serif;
+  	font-weight: 600;
+  	font-size: 14px;
+  	letter-spacing: 1px;
+ 	display: inline-block;
+  	padding: 12px 32px;
+  	border-radius: 5px;
+  	transition: 0.3s;
+  	line-height: 1;
+  	-webkit-animation-delay: 0.8s;
+  	animation-delay: 0.8s;
+  	margin-top: 6px;
+  	border: 2px solid #1d284b;
+}
+
+button:hover{
+  background: #006fbe;
+  color: #fff;
+  text-decoration: none;
 }
 
 </style>
@@ -115,60 +186,194 @@ button{
   </header><!-- End Header -->
 
  <!-- === Main ===  -->
- 	<main>
+ 	<main id="main">
  	<section>
  		<div id="main-title"> <h1>후원 내역</h1></div>
- 	</section>
- 	
+	</section>
  		
- 		<!-- section : 프로필 수정-->
-		<section>	
-			<div id="main-content">
-				<table class="type11">
-					<thead>
-						<tr>
-							<th scope="cols">No</th>
-							<th scope="cols">후원선수</th>
-							<th scope="cols">후원종목</th>
-							<th scope="cols">후원종목</th>
-							<th scope="cols">후원일</th>
-							<th scope="cols">후원금액</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>내용</td>
-							<td>내용</td>
-							<td>내용</td>
-							<td>내용</td>
-							<td>내용</td>
-							<td>내용</td>
-						</tr>
-						<tr>
-							<td>내용</td>
-							<td>내용</td>
-							<td>내용</td>
-							<td>내용</td>
-							<td>내용</td>
-							<td>내용</td>
-						</tr>
-						<tr>
-							<td>내용</td>
-							<td>내용</td>
-							<td>내용</td>
-							<td>내용</td>
-							<td>내용</td>
-							<td>내용</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</section>
+        <div id="mainWrapper">
+            <ul>
+                <li>
+                    <ul id ="ulTable">
+                        <li>
+                            <ul>
+                                <li>No</li>
+                                <li>후원선수</li>
+                                <li>후원종목</li>
+                                <li>후원일</li>
+                                <li>후원금액</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <ul>
+                                <li>1</li>
+                                <li class="left">김연경</li>
+                                <li>배구</li>
+                                <li>2021.08.01</li>
+                                <li>1,000원</li>
+                            </ul>
+                        </li>
+    
+                        <li>
+                            <ul>
+                                <li>2</li>
+                                <li class="left">김연경</li>
+                                <li>배구</li>
+                                <li>2021.08.01</li>
+                                <li>1,000원</li>
+                            </ul>
+                        </li>
+    
+                        <li>
+                            <ul>
+                                <li>3</li>
+                                <li class="left">김연경</li>
+                                <li>배구</li>
+                                <li>2021.08.01</li>
+                                <li>1,000원</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <ul>
+                                <li>4</li>
+                                <li class="left">김연경</li>
+                                <li>배구</li>
+                                <li>2021.08.01</li>
+                                <li>1,000원</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <ul>
+                                <li>5</li>
+                                <li class="left">김연경</li>
+                                <li>배구</li>
+                                <li>2021.08.01</li>
+                                <li>1,000원</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <ul>
+                                <li>6</li>
+                                <li class="left">김연경</li>
+                                <li>배구</li>
+                                <li>2021.08.01</li>
+                                <li>1,000원</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <ul>
+                                <li>7</li>
+                                <li class="left">김연경</li>
+                                <li>배구</li>
+                                <li>2021.08.01</li>
+                                <li>1,000원</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <ul>
+                                <li>8</li>
+                                <li class="left">김연경</li>
+                                <li>배구</li>
+                                <li>2021.08.01</li>
+                                <li>1,000원</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <ul>
+                                <li>9</li>
+                                <li class="left">김연경</li>
+                                <li>배구</li>
+                                <li>2021.08.01</li>
+                                <li>1,000원</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <ul>
+                                <li>10</li>
+                                <li class="left">김연경</li>
+                                <li>배구</li>
+                                <li>2021.08.01</li>
+                                <li>1,000원</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <ul>
+                                <li>11</li>
+                                <li class="left">김연경</li>
+                                <li>배구</li>
+                                <li>2021.08.01</li>
+                                <li>1,000원</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <ul>
+                                <li>12</li>
+                                <li class="left">김연경</li>
+                                <li>배구</li>
+                                <li>2021.08.01</li>
+                                <li>1,000원</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <ul>
+                                <li>13</li>
+                                <li class="left">김연경</li>
+                                <li>배구</li>
+                                <li>2021.08.01</li>
+                                <li>1,000원</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <ul>
+                                <li>14</li>
+                                <li class="left">김연경</li>
+                                <li>배구</li>
+                                <li>2021.08.01</li>
+                                <li>1,000원</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <ul>
+                                <li>15</li>
+                                <li class="left">김연경</li>
+                                <li>배구</li>
+                                <li>2021.08.01</li>
+                                <li>1,000원</li>
+                            </ul>
+                        </li>
+    
+                        <li>
+                            <ul>
+                                <li>16</li>
+                                <li class="left">김연경</li>
+                                <li>배구</li>
+                                <li>2021.08.01</li>
+                                <li>1,000원</li>
+                            </ul>
+                        <li>                                        
+                    </ul>
+                </li>
+    			
+                <li>
+                    <div id="divPaging">
+                        <div>◀</div>
+                        <div><b>1</b></div>
+                        <div>2</div>
+                        <div>3</div>
+                        <div>4</div>
+                        <div>5</div>
+                        <div>▶</div>
+                    </div>
+                </li>
+    
+            </ul>
+        </div>
+   
 		<section>
 			<div id="back-btn">
 				<button>마이 페이지로</button>
 			</div>
-		</section>	
+		</section>
 	</main>
 
 

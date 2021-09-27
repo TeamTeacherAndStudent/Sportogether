@@ -8,31 +8,31 @@
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
   <!-- Vendor CSS Files -->
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-  <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
-  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="../assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="../assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="../assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="../assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
   <!-- Template Main CSS File -->
-  <link href="assets/css/style.css" rel="stylesheet">
+  <link href="../assets/css/style.css" rel="stylesheet">
   
   <style>
-  	#main-title{
-  		margin-top : 2%;
-  		width : 100%;
-  		height : 100px;
-  		background-color :#165992;
-		padding: 3%;	
-  	}
-  			#main-title h1{
-  				color : white;
-  				/* margin-left: 15%; */
-  				font-weight : bolder;
-  				line-height : 50px;
-  				text-align : center;
-  			}
+#main-title {
+	margin-top: 2%;
+	width: 100%;
+	height: 100px;
+	padding: 1.5%;
+}
+
+#main-title h1 {
+	color: #1d284b;
+	/* margin-left: 15%; */
+	font-weight: bolder;
+	line-height: 50px;
+	text-align: center;
+}
   	#main-content{
   		/* margin-top : 5%; */
   		margin-left : 15%;
@@ -51,55 +51,75 @@
   		border-radius : 10px;
   		background-color : white;
   		letter-spacing : 1px;
+  		justify-content: center;
   		display:flex;
-  		
   	}
   	
   		.content{
   			height : 100%;
-  			width : 60%;
+			width: 60%;
   			margin : 20px;
   			letter-spacing : 1px;
   			align-items : center;
   			line-height : 1.5em;
   			color : #165992;
-  			float:left;
-
+			float : left;
+			align : left;
   		}
   		.side{
   			height : 100%;
-  			width : 35%;
-  			float:left;
-  			justify-content: center;
-			vertical-align : middle;
+  			width: 30%;
+			margin : 20px;
+			float:left;
+			align : right;
   		}
   			.side-top{
-  			height : 80%
+  			height : 70%;
   			width : 100%;
-  			align-items: center;
+  			/* align-items: center; */
   			}
   				#photo{
-  					margin : 2%;
-  					width : 200px;
-  					height : 300px;
+  					/* margin : 1%; */
+  					width : inherit;
+  					height : 75%;
   					border : 1px solid black;
   				}
-  				.side-top>button{
+  				.side-top> button{
   					margin : 2%;
-  					text-align : center;
+  					float: right;
+  					
   				}
   			.button{
   				height : 20%; 
-  				margin : 5%;
-  				text-align : right;
+  				margin : 2%;
+  				text-aligh: right;
+  				float: right;
   			}
 
-  			button{
-  				border-radius : 10px;
-  				background-color :  rgb(58, 121, 191);
-				color : white;
-  				border-style : none;
-  			}
+button{
+  	background-color :  #1d284b;
+	color : white;
+  	border-style : none;
+  	font-family: "Raleway", sans-serif;
+  	font-weight: 600;
+  	font-size: 14px;
+  	letter-spacing: 1px;
+ 	display: inline-block;
+  	padding: 12px 32px;
+  	border-radius: 5px;
+  	transition: 0.3s;
+  	line-height: 1;
+  	-webkit-animation-delay: 0.8s;
+  	animation-delay: 0.8s;
+  	margin-top: 6px;
+  	border: 2px solid #1d284b;
+}
+
+button:hover{
+  background: #006fbe;
+  color: #fff;
+  text-decoration: none;
+}
   </style>
 </head>
 <body>
@@ -154,11 +174,13 @@
 						이메일 : <input type="email"> <br><br>
 						전화번호 : <input type="text" > <br>
 					</div>
-					<div class="side">
+
+ 					<div class="side">
 						<div class="side-top">
 							<div id="photo"></div>
 							<button>변경하기</button>
 						</div>
+						<br>
 						<div class="button">
 							<button>회원탈퇴</button>
 							<button>수정</button>
