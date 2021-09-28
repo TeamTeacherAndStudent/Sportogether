@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>나의 스크랩</title>
+<meta charset="utf-8" />
+<title>마이 스크랩</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 
 <!-- Google Fonts -->
 <link
@@ -25,6 +26,11 @@
 <!-- Template Main CSS File -->
 <link href="../assets/css/style.css" rel="stylesheet">
 
+<!-- Link Swiper's CSS -->
+<link rel="stylesheet"
+	href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+
+<!-- Demo styles -->
 <style>
 #main-title {
 	margin-top: 2%;
@@ -50,17 +56,57 @@
 	justify-content: center;
 	vertical-align: middle;
 }
-/*스크랩 게시물*/
-//
-font
 
- 
+/*       body {
+        background: #eee;
+        font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+        font-size: 14px;
+        color: #000;
+        margin: 0;
+        padding: 0;
+      } */
+.swiper {
+	width: 100%;
+	height: 500px;
+	margin: 20px auto;
+}
 
-stuff
+.swiper-slide {
+	text-align: center;
+	font-size: 18px;
+	background: #fff;
+	/* Center slide text vertically */
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-pack: center;
+	-ms-flex-pack: center;
+	-webkit-justify-content: center;
+	justify-content: center;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	-webkit-align-items: center;
+	align-items: center;
+}
 
+.append-buttons {
+	text-align: center;
+	margin-top: 20px;
+}
 
+.append-buttons a {
+	display: inline-block;
+	border: 1px solid #007aff;
+	color: #007aff;
+	text-decoration: none;
+	padding: 4px 10px;
+	border-radius: 4px;
+	margin: 0 10px;
+	font-size: 13px;
+}
 
-
+/* 카드 */
 @import
 	url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,200,300,600,700,900)
 	;
@@ -68,8 +114,8 @@ stuff
 //
 colour stuff
  @white: #ffffff ; @lightBG: #dce1df ; @salmon: #ff6666 ; @teal: #0096a0 
-	; @tealMid: #0ebac7 ; @tealContrast: #33ffff ; @tealShade:	#007c85 ; @darkGrey: #4f585e 
-	; body {
+	 ; @tealMid: #0ebac7 ; @tealContrast: #33ffff ; @tealShade:	#007c85 ; @darkGrey: #4f585e 
+	 ; body {
 	background: @lightBG;
 	color: @darkGrey;
 	font-family: 'Source Sans Pro', sans-serif;
@@ -139,8 +185,6 @@ h2 {
 
 }
 }
-
-
 div.card-description {
 	padding: 0 15px 10px;
 	position: relative;
@@ -217,7 +261,6 @@ div.flap1 {
 }
 
 }
-
 h2 a {
 	text-decoration: none;
 	color: black;
@@ -255,7 +298,9 @@ button:hover {
 }
 </style>
 </head>
+
 <body>
+
 	<!-- ======= Header ======= -->
 	<header id="header" class="fixed-top">
 		<div
@@ -289,187 +334,123 @@ button:hover {
 	</header>
 	<!-- End Header -->
 
-	<!-- === Main ===  -->
 	<main>
 		<section>
 			<div id="main-title">
 				<h1>My 스크랩</h1>
 			</div>
 		</section>
-
-
-
 		<section>
 			<div id="main-content">
-				<div class="cards">
-
-					<div class="card">
-						<div class="card__image-holder">
-							<img class="card__image"
-								src="https://source.unsplash.com/300x225/?wave" alt="wave" />
+				<!-- Swiper -->
+				<div class="swiper">
+					<div class="swiper-wrapper">
+						<div class="swiper-slide">
+							<div class="card">
+								<div class="card__image-holder">
+									<img class="card__image"
+										src="https://source.unsplash.com/300x225/?beach" alt="beach" />
+								</div>
+								<div class="card-title">
+									<h2>
+										<a href="#"><small>배구 입문자들을 위한 꿀팁!</small></a>
+									</h2>
+								</div>
+								<div class="card-flap flap1"></div>
+							</div>
 						</div>
-						<div class="card-title">
-							<h2>
-								<a href="#"><small>배구 입문자들을 위한 꿀팁!</small></a>
-							</h2>
+						<div class="swiper-slide">
+							<div class="card">
+								<div class="card__image-holder">
+									<img class="card__image"
+										src="https://source.unsplash.com/300x225/?beach" alt="beach" />
+								</div>
+								<div class="card-title">
+									<h2>
+										<a href="#"><small>배구 입문자들을 위한 꿀팁!</small></a>
+									</h2>
+								</div>
+								<div class="card-flap flap1"></div>
+							</div>
 						</div>
-						<div class="card-flap flap1">
-							<div class="card-description">This grid is an attempt to
-								make something nice that works on touch devices. Ignoring hover
-								states when they're not available etc.</div>
+						<div class="swiper-slide">
+							<div class="card">
+								<div class="card__image-holder">
+									<img class="card__image"
+										src="https://source.unsplash.com/300x225/?beach" alt="beach" />
+								</div>
+								<div class="card-title">
+									<h2>
+										<a href="#"><small>배구 입문자들을 위한 꿀팁!</small></a>
+									</h2>
+								</div>
+								<div class="card-flap flap1"></div>
+							</div>
 						</div>
-					</div>
-
-					<div class="card">
-						<div class="card__image-holder">
-							<img class="card__image"
-								src="https://source.unsplash.com/300x225/?beach" alt="beach" />
+						<div class="swiper-slide">
+							<div class="card">
+								<div class="card__image-holder">
+									<img class="card__image"
+										src="https://source.unsplash.com/300x225/?beach" alt="beach" />
+								</div>
+								<div class="card-title">
+									<h2>
+										<a href="#"><small>배구 입문자들을 위한 꿀팁!</small></a>
+									</h2>
+								</div>
+								<div class="card-flap flap1"></div>
+							</div>
 						</div>
-						<div class="card-title">
-							<h2>
-								<a href="#"><small>배구 입문자들을 위한 꿀팁!</small></a>
-							</h2>
+						<div class="swiper-slide">
+							<div class="card">
+								<div class="card__image-holder">
+									<img class="card__image"
+										src="https://source.unsplash.com/300x225/?beach" alt="beach" />
+								</div>
+								<div class="card-title">
+									<h2>
+										<a href="#"><small>배구 입문자들을 위한 꿀팁!</small></a>
+									</h2>
+								</div>
+								<div class="card-flap flap1"></div>
+							</div>
 						</div>
-						<div class="card-flap flap1">
-							<div class="card-description">This grid is an attempt to
-								make something nice that works on touch devices. Ignoring hover
-								states when they're not available etc.</div>
-						</div>
-					</div>
-
-					<div class="card">
-						<div class="card__image-holder">
-							<img class="card__image"
-								src="https://source.unsplash.com/300x225/?mountain"
-								alt="mountain" />
-						</div>
-						<div class="card-title">
-							<h2>
-								<a href="#"><small>배구 입문자들을 위한 꿀팁!</small></a>
-							</h2>
-						</div>
-						<div class="card-flap flap1">
-							<div class="card-description">This grid is an attempt to
-								make something nice that works on touch devices. Ignoring hover
-								states when they're not available etc.</div>
-						</div>
-					</div>
-
-					<div class="card">
-						<div class="card__image-holder">
-							<img class="card__image"
-								src="https://source.unsplash.com/300x225/?field" alt="field" />
-						</div>
-						<div class="card-title">
-							<h2>
-								<a href="#"><small>배구 입문자들을 위한 꿀팁!</small></a>
-							</h2>
-						</div>
-						<div class="card-flap flap1">
-							<div class="card-description">This grid is an attempt to
-								make something nice that works on touch devices. Ignoring hover
-								states when they're not available etc.</div>
-						</div>
-					</div>
-
-					<div class="card">
-						<div class="card__image-holder">
-							<img class="card__image"
-								src="https://source.unsplash.com/300x225/?water" alt="water" />
-						</div>
-						<div class="card-title">
-							<h2>
-								<a href="#"><small>배구 입문자들을 위한 꿀팁!</small></a>
-							</h2>
-						</div>
-						<div class="card-flap flap1">
-							<div class="card-description">This grid is an attempt to
-								make something nice that works on touch devices. Ignoring hover
-								states when they're not available etc.</div>
-						</div>
-					</div>
-
-					<div class="card">
-						<div class="card__image-holder">
-							<img class="card__image"
-								src="https://source.unsplash.com/300x225/?river" alt="river" />
-						</div>
-						<div class="card-title">
-							<h2>
-								<a href="#"><small>배구 입문자들을 위한 꿀팁!</small></a>
-							</h2>
-						</div>
-						<div class="card-flap flap1">
-							<div class="card-description">This grid is an attempt to
-								make something nice that works on touch devices. Ignoring hover
-								states when they're not available etc.</div>
+						<div class="swiper-slide">
+							<div class="card">
+								<div class="card__image-holder">
+									<img class="card__image"
+										src="https://source.unsplash.com/300x225/?beach" alt="beach" />
+								</div>
+								<div class="card-title">
+									<h2>
+										<a href="#"><small>배구 입문자들을 위한 꿀팁!</small></a>
+									</h2>
+								</div>
+								<div class="card-flap flap1"></div>
+							</div>
 						</div>
 					</div>
-
-					<div class="card">
-						<div class="card__image-holder">
-							<img class="card__image"
-								src="https://source.unsplash.com/300x225/?kite" alt="kite" />
-						</div>
-						<div class="card-title">
-							<h2>
-								<a href="#"><small>배구 입문자들을 위한 꿀팁!</small></a>
-							</h2>
-						</div>
-						<div class="card-flap flap1">
-							<div class="card-description">This grid is an attempt to
-								make something nice that works on touch devices. Ignoring hover
-								states when they're not available etc.</div>
-						</div>
-					</div>
-
-					<div class="card">
-						<div class="card__image-holder">
-							<img class="card__image"
-								src="https://source.unsplash.com/300x225/?underwater"
-								alt="underwater" />
-						</div>
-						<div class="card-title">
-							<h2>
-								<a href="#"><small>배구 입문자들을 위한 꿀팁!</small></a>
-							</h2>
-						</div>
-						<div class="card-flap flap1">
-							<div class="card-description">This grid is an attempt to
-								make something nice that works on touch devices. Ignoring hover
-								states when they're not available etc.</div>
-						</div>
-					</div>
-
-					<div class="card">
-						<div class="card__image-holder">
-							<img class="card__image"
-								src="https://source.unsplash.com/300x225/?desert" alt="desert" />
-						</div>
-						<div class="card-title">
-							<h2>
-								<a href="#"><small>배구 입문자들을 위한 꿀팁!</small></a>
-							</h2>
-						</div>
-						<div class="card-flap flap1">
-							<div class="card-description">This grid is an attempt to
-								make something nice that works on touch devices. Ignoring hover
-								states when they're not available etc.</div>
-						</div>
-					</div>
-
+					<br> <br>
+					<!-- Add Pagination -->
+					<div class="swiper-pagination"></div>
+					<!-- Add Arrows -->
+					<div class="swiper-button-next"></div>
+					<div class="swiper-button-prev"></div>
 				</div>
 			</div>
+			<p class="append-buttons">
+				<a href="#" class="prepend-2-slides">이전</a> <a href="#"
+					class="slide-1"> 1</a> <a href="#" class="slide-250"> 250</a> <a
+					href="#" class="slide-500"> 500</a> <a href="#"
+					class="append-slide">다음</a>
+			</p>
 		</section>
 		<section>
 			<div id="back-btn">
 				<button>마이 페이지</button>
 			</div>
 		</section>
-
 	</main>
-
-
 
 	<!-- footer 옆으로 넘어감 방지 -->
 	<div style="clear: both;"></div>
@@ -523,53 +504,73 @@ button:hover {
 	<script src="assets/js/jquery-1.12.3.min.js"></script>
 	<script src="assets/js/jquery.counterup.min.js"></script>
 	<script src="assets/js/waypoints.min.js"></script>
+	<!-- Swiper JS -->
+	<script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
 
-
+	<!-- Initialize Swiper -->
 	<script>
-$(document).ready(function(){
-	  var zindex = 10;
-	  
-	  $("div.card").click(function(e){
-	    e.preventDefault();
+      let appendNumber = 600;
+      let prependNumber = 1;
+      const swiper = new Swiper('.swiper', {
+        slidesPerView: 3,
+        centeredSlides: true,
+        spaceBetween: 30,
+        pagination: {
+          el: '.swiper-pagination',
+          type: 'fraction',
+        },
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        },
+        virtual: {
+          slides: (function () {
+            const slides = [];
+            for (var i = 0; i < 600; i += 1) {
+              slides.push('Slide ' + (i + 1));
+            }
+            return slides;
+          })(),
+        },
+      });
 
-	    var isShowing = false;
+      document
+        .querySelector('.slide-1')
+        .addEventListener('click', function (e) {
+          e.preventDefault();
+          swiper.slideTo(0, 0);
+        });
 
-	    if ($(this).hasClass("show")) {
-	      isShowing = true
-	    }
+      document
+        .querySelector('.slide-250')
+        .addEventListener('click', function (e) {
+          e.preventDefault();
+          swiper.slideTo(249, 0);
+        });
 
-	    if ($("div.cards").hasClass("showing")) {
-	      // a card is already in view
-	      $("div.card.show")
-	        .removeClass("show");
+      document
+        .querySelector('.slide-500')
+        .addEventListener('click', function (e) {
+          e.preventDefault();
+          swiper.slideTo(499, 0);
+        });
 
-	      if (isShowing) {
-	        // this card was showing - reset the grid
-	        $("div.cards")
-	          .removeClass("showing");
-	      } else {
-	        // this card isn't showing - get in with it
-	        $(this)
-	          .css({zIndex: zindex})
-	          .addClass("show");
+      document
+        .querySelector('.prepend-2-slides')
+        .addEventListener('click', function (e) {
+          e.preventDefault();
+          swiper.virtual.prependSlide([
+            'Slide ' + --prependNumber,
+            'Slide ' + --prependNumber,
+          ]);
+        });
 
-	      }
-
-	      zindex++;
-
-	    } else {
-	      // no cards in view
-	      $("div.cards")
-	        .addClass("showing");
-	      $(this)
-	        .css({zIndex:zindex})
-	        .addClass("show");
-
-	      zindex++;
-	    }
-	    
-	  });
-	});
-</script>
+      document
+        .querySelector('.append-slide')
+        .addEventListener('click', function (e) {
+          e.preventDefault();
+          swiper.virtual.appendSlide('Slide ' + ++appendNumber);
+        });
+    </script>
 </body>
 </html>
