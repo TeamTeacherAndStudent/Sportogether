@@ -1,12 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%-- +페이징 처리/ 테이블 정렬 css/ tr하나 클릭시 후원사이트로 이동  --%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>관리자 종목 관리</title>
-  <!-- Google Fonts -->
+<!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
   <!-- Vendor CSS Files -->
@@ -19,75 +18,82 @@
 
   <!-- Template Main CSS File -->
   <link href="../assets/css/style.css" rel="stylesheet">
+  <!-- jQuery  CDN -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <style>
-  		/*제목*/
+  /*제목*/
 	h1{
 	    vertical-align:middle;
 	    line-height:30px;
    		color: rgb(140, 158, 91);
 	    text-align: center;
 	}
-		.ulTable {
-		margin-top:10px;
-		text-align: center;
-		list-style: none;
-	}
-	
-	.ulTable > li:first-child > ul > li {
-		list-style: none;
-		background-color:#c9c9c9;
-		font-weight:bold;
-		text-align:center;
-		height: 35px;
-		line-height: 35px;
-		font-size : 16px;
-	}
-	
-	.ulTable > li > ul {
-		list-style: none;
-		clear:both;
-		padding:0px auto;
-		position:relative;
-		min-width:50px;
-	}
-	.ulTable > li > ul > li {
-		float:left;
-		font-size:12pt;
-		border-bottom:1px solid #ededed;
-		vertical-align:baseline;
+	select{
+		width: 150px;
 		height: 30px;
-		line-height: 30px;
+		text-align : center;
+		margin-right: 5px;
 	}
-	.ulTable > li > ul > li:first-child                {width:20%;} /*체크박스 열 크기*/
-	.ulTable > li > ul > li:first-child +li            {width:20%;} /*종목 번호 열 크기*/
-	.ulTable > li > ul > li:first-child +li+li         {width:30%;} /*종목분류 열 크기*/
-	.ulTable > li > ul > li:first-child +li+li+li      {width:30%;} /*종목이름 열 크기*/
-	
-	#divPaging {
-		clear:both;
-		margin:0 auto;
-		width:220px;
-		height:50px;
+	.Name-input {
+		margin-right: 5px;
 	}
-	
-	#divPaging > div {
-		float:left;
-		width: 30px;
-		margin:0 auto;
-		text-align:center;
+    form{
+    	border: 1px solid #f5f5f5;
+    	padding : 30px;
+    }
+	button:hover{
+	  background: #006fbe;
+	  color: #fff;
+	  text-decoration: none;
 	}
-	/*버튼 css*/
-	.manageBtn{
-		margin-top : 10px;
-		margin-left: 3px;
-		margin-right: 3px;
-		text-align : right;
-	}
-	.Btn{
-		font-family: "Raleway", sans-serif;
+  /*파일 업로드 버튼 css*/
+  	.input-file-button{
+	    font-family: "Raleway", sans-serif;
 	    font-weight: 600;
 	    font-size: 14px;
 	    border-style : none;
+	    margin-top: 6px;
+	    margin-left : 10px;
+  		padding: 12px 32px;
+	    border-radius: 5px;
+	    border: 2px solid #1d284b;
+	    transition: 0.3s;
+	    line-height: 1;
+  		background-color: #1d284b;
+  		color : white;
+  		cursor: pointer;
+  		width: 150px;
+	    letter-spacing: 1px;
+  	}
+  	#input-file{
+  		display: none;
+  	}
+  	/* 파일명 upload */
+	input.upload-name {
+	    display: inline-block;
+	    padding: 12px 32px;  /* label의 패딩값과 일치 */
+	    font-size: inherit;
+	    font-family: inherit;
+	    line-height: normal;
+	    vertical-align: middle;
+	    background-color: #f5f5f5;
+	    border: 1px solid #ebebeb;
+	   	width : 660px;
+	   	height: 38px;
+	}
+  	/*등록버튼 라인 버튼들*/
+  	#back-btn{
+	  	margin-top : 10px;
+		margin-left: 3px;
+		margin-right: 3px;
+		text-align : right;
+  	}
+  	.Btn{
+  		font-family: "Raleway", sans-serif;
+	    font-weight: 600;
+	    font-size: 14px;
+	    border-style : none;
+	    margin-top: 6px;
 	    margin-left : 10px;
   		padding: 12px 32px;
 	    border-radius: 5px;
@@ -101,7 +107,6 @@
   		color : white;
   	}
   </style>
-  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
 	<!-- ======= Header ======= -->
@@ -129,68 +134,44 @@
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav>
       <!--navbar 메뉴 -->
-     </div>
- 	</header><!-- End Header -->
- 	<br><br>
- 	<main id="main">
-  		<section id="supportManage">
-      		<div class="container">
-	       		<h1>종목 관리</h1><br><br>
-	       		<div class="">
-		       		<ul class="ulTable">
-	        			<li>
-							<ul>
-								<li><input type="checkbox" name="" value="all" id="chk_all"></li>
-								<li>No</li>
-								<li>종목 분류</li>
-								<li>종목 이름</li>
-							</ul>
-						</li>
-						<li>
-							<ul>
-								<li><input type="checkbox" name="" value="vallyball" class="one-chk"></li>
-								<li>1</li>
-								<li>구기</li>
-								<li>배구</li>
-							</ul>
-						</li>
-						<li>
-							<ul>
-								<li><input type="checkbox" name="" value="soccor" class="one-chk"></li>
-								<li>2</li>
-								<li>구기</li>
-								<li>축구</li>
-							</ul>
-						</li>
-						<li>
-							<ul>
-								<li><input type="checkbox" name="" value="baseball" class="one-chk"></li>
-								<li>3</li>
-								<li>구기</li>
-								<li>야구</li>
-							</ul>
-						</li>
-					</ul>
-					<br><br>
-					<div id="divPaging">
-						<div>◀</div>
-						<div><b>1</b></div>
-						<div>2</div>
-						<div>3</div>
-						<div>4</div>
-						<div>5</div>
-						<div>▶</div>
-					</div>
-					<div class="manageBtn">
-						<button id="enrollBtn" class="Btn">종목등록</button>
-						<button id="deleteBtn" class="Btn" onclick="deleteAction()">삭제</button>
-					</div>
+    </div>
+  </header><!-- End Header -->
+  <br><br>
+  <main id="main">
+	<section id="sportsManage">
+			<div class="container">
+				<h1>종목 등록 </h1><br>
+				<div class="">
+					<form action ="../Sports/sportsDetail.jsp" method="post" name="sportEnroll" target="_self">
+						<br>
+						<select name="sports">
+							<option value="">종목 분류</option>
+							<!-- 종목 소분류 긁어오기 optgroup label-->
+							<option value="">구기 종목</option>
+							<option value="">기타</option>
+						</select>
+						<input type="text" class="Name-input" placeholder="기타입력" size="20" required>
+						<!-- 이름값도 넘겨주기 -->
+						<input type="text" class="Name-input" placeholder=" 종목 이름 입력" size="55" required><br><br>
+						<textarea id="sports_enroll" name="sport_enroll" cols="100" rows="30" placeholder=" 내용을 입력하세요."></textarea><br>
+						<hr>
+						<div class="file-upload">
+							<input type="text" class="upload-name" readonly>
+							<label class="input-file-button" for="input-file">파일 업로드</label>
+							<input type="file" id="input-file"><!-- 파일버튼 숨김 -->
+						</div>
+					</form>
+					<!-- 버튼 숨김(등록시 수정안보이게/ 수정시 등록 안보이게 정렬 -->
+						<div id="back-btn">
+								<button class="Btn">미리보기</button>
+								<input type="submit" value="등록" class="Btn">
+								<input type="reset" value="취소" onclick="location.href='Admin_Main.jsp'" class="Btn">
+						</div>
 				</div>
 			</div>
-		</section>
-	</main>
-	<br><br><br>
-<!-- ======= Footer ======= -->
+	</section>  
+  </main>
+  <!-- ======= Footer ======= -->
   <footer id="footer">
     <div class="container">
       <h3>SPORTOGETHER</h3>
@@ -221,26 +202,15 @@
   </footer>
 <!-- End Footer -->
 <!-- Vendor JS Files -->
-	<script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script src="../assets/vendor/bootstrap/js/bootstr-ap.bundle.min.js"></script>
 	<script>
-	//	function deleteAction() {
-	//		location.href="";
-	//		//삭제 servlet으로 이동 > DAO
-	//	}
-	
-		$(document).on('click','#chk_all',function(){
-			if($('#chk_all').is(':checked')){
-				$('.one-chk').prop('checked',true);
-			}else{
-				$('.one-chk').prop('checked',false);
-			}
-		});
-		$(document).on('click','one-chk',function(){
-			if($('input[class=one-chk]:checked').length==$('one-chk').legth){
-				$('#chk_all').prop('checked',true);
-			}else{
-				$('#chk_all').prop('checked',false);
-			}
+	//파일 경로 무조건 C:\fakepath\
+		$(function(){
+			$('.upload-name').val('파일선택');
+			$('#input-file').change(function(){
+				var filename = $(this).val();
+				$('.upload-name').val(filename);
+			});
 		});
 	</script>
 </body>

@@ -94,7 +94,7 @@
 		height: 40px;
 		width: 250px;
 		margin: 0 auto;
-		vertical-align: center;
+		align-items: center;
 	}
 	.searchBtn{
 		font-family: "Raleway", sans-serif;
@@ -174,21 +174,21 @@
 							<li>2021.09.28</li>
 						</ul>
 					</li>
-				</ul><br><br>
-				<div id="divPaging">
-					<div>◀</div>
-					<div><b>1</b></div>
-					<div>2</div>
-					<div>3</div>
-					<div>4</div>
-					<div>5</div>
-					<div>▶</div>
-				</div>
-				<div class="row justify-content-center">
-					<div id="search-field">
-						<input type="text" class="search" placeholder="ID,닉네임 검색" name="usersearch">
-						<button class="searchBtn">search</button>
-					</div>
+				</ul>
+			</div><br><br>
+			<div id="divPaging">
+				<div>◀</div>
+				<div><b>1</b></div>
+				<div>2</div>
+				<div>3</div>
+				<div>4</div>
+				<div>5</div>
+				<div>▶</div>
+			</div>
+			<div class="row justify-content-center">
+				<div id="search-field">
+					<input type="text" class="search" placeholder="ID,닉네임 검색" name="usersearch">
+					<button class="searchBtn">search</button>
 				</div>
 			</div>
 		</section>
