@@ -22,31 +22,39 @@
   <!-- Template Main CSS File -->
   <link href="../assets/css/style.css" rel="stylesheet">
   <style>
-    h1 {
-    	font-size : 22px;
-    	font-weight : bold;
-    }
+		 #main-contents{
+		    width: 100%;
+		}
+    /*제목*/
+		h1{
+		    vertical-align:middle;
+		    line-height:30px;
+	   		color: rgb(140, 158, 91);
+		    text-align: center;
+		}	
+		
     .card {
     	height: 400px;
 		width: 350px;
 		border-radius: 15px;
 		display: inline-block;
-		margin-top: 50px;
-		margin-left: 50px;
-		margin-bottom: 50px;
+		margin-top: 30px;
+		margin-left: 30px;
+		margin-bottom: 30px;
 		position: relative;
 		box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 		overflow: hidden;
     }
-    card-header {
+    .card-header {
 		-webkit-transition: 0.5s; /*사파리 & 크롬*/
 	    -moz-transition: 0.5s;  /*파이어폭스*/
 	    -ms-transition: 0.5s;	/*인터넷 익스플로러*/
 	    -o-transition: 0.5s;  /*오페라*/
 	    transition: 0.5s;
 		width: 100%;
-		height: 600px;
+		height: 900px;
 		border-radius: 15px 15px 0 0;
+		text-align : center;
 	}
 	.card:hover .card-header  {
 		opacity: 0.8;
@@ -72,7 +80,7 @@
   	<header id="header" class="fixed-top">
     <div class="container d-flex align-items-center justify-content-between">
 		<!-- 여기에 로고 사진 추가 -->
-      <h1 class="logo"><a href="index.html"> Sportogether </a></h1>
+      <h1 class="logo"><a href="../index.html"> Sportogether </a></h1>
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
@@ -97,69 +105,81 @@
   </header><!-- End Header -->
   <br><br><br>
   <section id="main-contents">
-  <h1>관리자 전용 메인 페이지</h1>
- 	<div class="row">
- 		<div class="col-lg-4 col-md-4 col-xs-4 col-sm-4">
-		<a href="reposted_page.jsp">
-			<div class="card">
-				<div class="card-header">
-					<h1>신고 게시물/댓글/응원댓글 목록</h1>
-				</div>
-				<div class="card-body">
-				
-				</div>
+  	<h1>관리자 전용 메인</h1><br><br>
+  	<div class="container">
+	 	<div class="row">
+	 		<div class="col-lg-4 col-md-4 col-xs-4 col-sm-4">
+				<a href="reposted_page.jsp">
+					<div class="card">
+						<div class="card-header">
+							<h3>신고글 목록</h3>
+						</div>
+						<div class="card-body">
+						
+						</div>
+					</div>
+				</a>
 			</div>
-		</a>
-		<a href="support_approval.jsp">
-			<div class="card">
-				<div class="card-header">
-					<h1>승인 대기 캠페인 목록</h1>
-				</div>
-				<div class="card-body">
-				
-				</div>
+			<div class="col-lg-4 col-md-4 col-xs-4 col-sm-4">
+				<a href="support_approval.jsp">
+					<div class="card">
+						<div class="card-header">
+							<h3>승인 대기 캠페인 목록</h3>
+						</div>
+						<div class="card-body">
+						
+						</div>
+					</div>
+				</a>
 			</div>
-		</a>
-		<a href="support_delete.jsp">
-			<div class="card">
-				<div class="card-header">
-					<h1>캠페인 관리</h1>
-				</div>
-				<div class="card-body">
-				
-				</div>
+			<div class="col-lg-4 col-md-4 col-xs-4 col-sm-4">
+				<a href="campaign_delete.jsp">
+					<div class="card">
+						<div class="card-header">
+							<h3>캠페인 관리</h3>
+						</div>
+						<div class="card-body">
+						
+						</div>
+					</div>
+				</a>
 			</div>
-		</a>
-		<a href="member_manage.jsp">
-			<div class="card">
-				<div class="card-header">
-					<h1>회원 관리</h1>
-				</div>
-				<div class="card-body">
-				
-				</div>
+			<div class="col-lg-4 col-md-4 col-xs-4 col-sm-4">
+				<a href="member_manage.jsp">
+					<div class="card">
+						<div class="card-header">
+							<h3>회원 관리</h3>
+						</div>
+						<div class="card-body">
+						
+						</div>
+					</div>
+				</a>
 			</div>
-		</a>
-		<a href="support_manage.jsp">
-			<div class="card">
-				<div class="card-header">
-					<h1>후원 결제 관리</h1>
-				</div>
-				<div class="card-body">
-				
-				</div>
+			<div class="col-lg-4 col-md-4 col-xs-4 col-sm-4">
+				<a href="support_manage.jsp">
+					<div class="card">
+						<div class="card-header">
+							<h3>후원 결제 관리</h3>
+						</div>
+						<div class="card-body">
+						
+						</div>
+					</div>
+				</a>
 			</div>
-		</a>
-		<a href="sports_manage.jsp">
-			<div class="card">
-				<div class="card-header">
-					<h1>종목 관리</h1>
-				</div>
-				<div class="card-body">
-				
-				</div>
+			<div class="col-lg-4 col-md-4 col-xs-4 col-sm-4">
+				<a href="sports_manage.jsp">
+					<div class="card">
+						<div class="card-header">
+							<h3>종목 관리</h3>
+						</div>
+						<div class="card-body">
+						
+						</div>
+					</div>
+				</a>
 			</div>
-		</a>
 		</div>
 	</div>
   </section>

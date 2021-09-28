@@ -18,36 +18,89 @@
 
   <!-- Template Main CSS File -->
   <link href="../assets/css/style.css" rel="stylesheet">
+  <!-- jQuery  CDN -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <style>
-  /*파일 첨부 버튼 css*/
+  /*제목*/
+	h1{
+	    vertical-align:middle;
+	    line-height:30px;
+   		color: rgb(140, 158, 91);
+	    text-align: center;
+	}
+	select{
+		width: 200px;
+		height: 30px;
+		text-align : center;
+		margin-right : 8px;
+	}
+    form{
+    	border: 1px solid #f5f5f5;
+    	padding : 30px;
+    }
+	button:hover{
+	  background: #006fbe;
+	  color: #fff;
+	  text-decoration: none;
+	}
+  /*파일 업로드 버튼 css*/
   	.input-file-button{
-  		padding : 6px 10px;
+	    font-family: "Raleway", sans-serif;
+	    font-weight: 600;
+	    font-size: 14px;
+	    border-style : none;
+	    margin-top: 6px;
+	    margin-left : 10px;
+  		padding: 12px 32px;
+	    border-radius: 5px;
+	    border: 2px solid #1d284b;
+	    transition: 0.3s;
+	    line-height: 1;
   		background-color: #1d284b;
-  		border-radius : 4px;
   		color : white;
   		cursor: pointer;
   		width: 150px;
+	    letter-spacing: 1px;
   	}
   	#input-file{
-  		visibility : hidden;
+  		display: none;
   	}
   	/* 파일명 upload */
-	.file-upload.upload-name {
+	input.upload-name {
 	    display: inline-block;
-	    padding: 6px 10px;  /* label의 패딩값과 일치 */
+	    padding: 12px 32px;  /* label의 패딩값과 일치 */
 	    font-size: inherit;
 	    font-family: inherit;
 	    line-height: normal;
 	    vertical-align: middle;
 	    background-color: #f5f5f5;
 	    border: 1px solid #ebebeb;
-	   	width : 300px;
-	   	height: 30px;
+	   	width : 660px;
+	   	height: 38px;
 	}
+  	/*등록버튼 라인 버튼들*/
+  	#back-btn{
+	  	margin-top : 10px;
+		margin-left: 3px;
+		margin-right: 3px;
+		text-align : right;
+  	}
   	.Btn{
-  		padding : 6px 10px;
+  		font-family: "Raleway", sans-serif;
+	    font-weight: 600;
+	    font-size: 14px;
+	    border-style : none;
+	    margin-top: 6px;
+	    margin-left : 10px;
+  		padding: 12px 32px;
+	    border-radius: 5px;
+	    border: 2px solid #1d284b;
+	    transition: 0.3s;
+	    line-height: 1;
   		background-color: #1d284b;
-  		border-radius : 4px;
+  		cursor: pointer;
+  		width: 150px;
+	    letter-spacing: 1px;
   		color : white;
   	}
   </style>
@@ -57,7 +110,7 @@
   	<header id="header" class="fixed-top">
     <div class="container d-flex align-items-center justify-content-between">
 		<!-- 여기에 로고 사진 추가 -->
-      <h1 class="logo"><a href="index.html"> Sportogether </a></h1>
+      <h1 class="logo"><a href="../index.html"> Sportogether </a></h1>
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
@@ -85,25 +138,32 @@
 	<section id="sportsManage">
 			<div class="container">
 				<div class="section-title">
-					<h2>종목 관리 </h2>
+					<h1>종목 관리 </h1><br>
 					<div class="">
 						<form action ="" method="post">
-							<h4>종목 등록 및 수정</h4><br>
+							<br>
 							<select name="sports">
 								<option value="">종목소분류</option>
 								<!-- 종목 소분류 긁어오기 optgroup label-->
 								<option value="">구기종목</option>
 							</select>
 							<!-- 이름값도 넘겨주기 -->
-							<input type="text" placeholder="종목 이름 입력" size="30"><br><br>
-							<textarea id="sports_enroll" name="sport_enroll" cols="100" rows="20" placeholder=" 내용을 입력하세요."></textarea><br>
+							<input type="text" placeholder=" 종목 이름 입력" size="73"><br><br>
+							<textarea id="sports_enroll" name="sport_enroll" cols="100" rows="30" placeholder=" 내용을 입력하세요."></textarea><br>
+							<hr>
 							<div class="file-upload">
-								<input type="text" class="upload-name" value="파일선택" readonly="readonly">
+								<input type="text" class="upload-name" readonly="readonly">
 								<label class="input-file-button" for="input-file">파일 업로드</label>
-								<input type="file" id="input-file"><hr><br><br><!-- 파일버튼 숨김 -->
+								<input type="file" id="input-file"><!-- 파일버튼 숨김 -->
 							</div>
-							<button class="Btn">미리보기</button> <input type="submit" value="등록하기" class="Btn"> <input type="reset" value="취소" onclick="location.href='Admin_Main.jsp'" class="Btn">
 						</form>
+						<!-- 버튼 숨김(등록시 수정안보이게/ 수정시 등록 안보이게 정렬 -->
+							<div id="back-btn">
+									<button class="Btn">미리보기</button>
+									<input type="submit" value="등록" class="Btn">
+									<input type="submit" value="수정" class="Btn">
+									<input type="reset" value="취소" onclick="location.href='Admin_Main.jsp'" class="Btn">
+							</div>
 					</div>
 				</div>
 			</div>
@@ -142,27 +202,14 @@
 <!-- Vendor JS Files -->
 	<script src="../assets/vendor/bootstrap/js/bootstr-ap.bundle.min.js"></script>
 	<script>
+	//파일 경로 무조건 C:\fakepath\
 		$(function(){
 			$('.upload-name').val('파일선택');
-			$('.input-file').change(function(){
+			$('#input-file').change(function(){
 				var filename = $(this).val();
-				$('.upload-name').val();
+				$('.upload-name').val(filename);
 			});
 		});
-			/* 	var fileTarget = $('.file-upload#input-file');
-				fileTarget.on('change', function(){
-					if(window.FileReader){ //modern browser
-						var filename = $(this)[0].files[0].name;
-					}else { //old IE
-						var filename = $(this).val().split('/').pop().split('\\').pop(); //파일명 추출
-					}
-					// 추출한 파일명 삽입
-			          $(this).siblings('.upload-name').val(filename);
-			     })
-			 })    
-			     */
-		
-		
 	</script>
 </body>
 </html>

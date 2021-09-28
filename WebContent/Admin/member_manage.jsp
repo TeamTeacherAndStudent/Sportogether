@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>멤버 관리</title>
+<title>관리자 회원 관리</title>
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
@@ -23,6 +23,96 @@
   <link href="../assets/css/style.css" rel="stylesheet">
 
 <style>
+  		/*제목*/
+	h1{
+	    vertical-align:middle;
+	    line-height:30px;
+   		color: rgb(140, 158, 91);
+	    text-align: center;
+	}
+		.ulTable {
+		margin-top:10px;
+		text-align: center;
+		list-style: none;
+	}
+	
+	.ulTable > li:first-child > ul > li {
+		list-style: none;
+		background-color:#c9c9c9;
+		font-weight:bold;
+		text-align:center;
+		height: 35px;
+		line-height: 35px;
+		font-size : 15px;
+	}
+	
+	.ulTable > li > ul {
+		list-style: none;
+		clear:both;
+		padding:0px auto;
+		position:relative;
+		min-width:50px;
+	}
+	.ulTable > li > ul > li {
+		height: 40px;
+		line-height:40px;
+		float:left;
+		font-size:10pt;
+		border-bottom:1px solid #ededed;
+		vertical-align:baseline;
+	}
+	.ulTable > li > ul > li:first-child                {width:10%;} /*No 열 크기*/
+	.ulTable > li > ul > li:first-child +li            {width:30%;} /*아이디 열 크기*/
+	.ulTable > li > ul > li:first-child +li+li         {width:30%;} /*닉네임 열 크기*/
+	.ulTable > li > ul > li:first-child +li+li+li      {width:30%;} /*가입일 열 크기*/
+	
+	#divPaging {
+		clear:both;
+		margin:0 auto;
+		width:220px;
+		height:50px;
+	}
+	
+	#divPaging > div {
+		float:left;
+		width: 30px;
+		margin:0 auto;
+		text-align:center;
+	}
+	input{
+		text-align:center;
+		float: left;
+	}
+	#search-field{
+		margin-left: 3px;
+		margin-right: 3px;
+		margin:0 auto;
+		text-align:center;
+		align-items: center;
+	}
+	input.search{
+		height: 40px;
+		width: 250px;
+		margin: 0 auto;
+		vertical-align: center;
+	}
+	.searchBtn{
+		font-family: "Raleway", sans-serif;
+	    font-weight: 600;
+	    font-size: 14px;
+	    border-style : none;
+	    margin-left : 10px;
+  		padding: 12px 32px;
+	    border-radius: 5px;
+	    border: 2px solid #1d284b;
+	    transition: 0.3s;
+	    line-height: 1;
+  		background-color: #1d284b;
+  		cursor: pointer;
+  		width: 150px;
+	    letter-spacing: 1px;
+  		color : white;
+	}
 </style>
 </head>
 <body>
@@ -30,7 +120,7 @@
   	<header id="header" class="fixed-top">
     <div class="container d-flex align-items-center justify-content-between">
 		<!-- 여기에 로고 사진 추가 -->
-      <h1 class="logo"><a href="index.html"> Sportogether </a></h1>
+      <h1 class="logo"><a href="../index.html"> Sportogether </a></h1>
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
@@ -57,40 +147,54 @@
   <main id="main">
 		<section id="membermanage">
 <!-- 모든 값을 출력해준다 memberDTO list로 불러와서 selectAllMember() -->
-		<div class="container">
-			<div class="section-title">
-			<h2> 회원 목록 </h2><br>
-					<table id="table"  width="90%">
-						<tr>
-							<th>회원번호</th>
-							<th>아이디</th>
-							<th>닉네임</th>
-							<th>가입일</th>
-						</tr>
-						<!-- 아이디 클릭시 회원 정보 상세조회*user_detail.jsp -->
-						<%-- 링크연결 user_detail.jsp --%>
-						<%-- 검색값을 출력하기 위해 일괄처리를 사용한다. --%>
-						<tr>
-							<td>1</td>
-							<td>admin</td>
-							<td>관리자</td>
-							<td>2021.10.09</td>
-						</tr>
-						<tr>
-							<td>1</td>
-							<td>admin</td>
-							<td>관리자</td>
-							<td>2021.10.09</td>
-						</tr>
-					</table>
-				<br>
-				<input type="text" class="search" placeholder="ID,닉네임 검색" name="usersearch">
+			<div class="container">
+				<h1>회원 관리</h1><br><br>
+				<ul class="ulTable">
+					<li>
+						<ul>
+							<li>회원번호</li>
+							<li>아이디</li>
+							<li>닉네임</li>
+							<li>가입일</li>
+						</ul>
+					</li>
+					<li>
+						<ul>
+							<li>1</li>
+							<li>admin</li>
+							<li>관리자</li>
+							<li>2021.09.28</li>
+						</ul>
+					</li>
+					<li>
+						<ul>
+							<li>1</li>
+							<li>admin</li>
+							<li>관리자</li>
+							<li>2021.09.28</li>
+						</ul>
+					</li>
+				</ul><br><br>
+				<div id="divPaging">
+					<div>◀</div>
+					<div><b>1</b></div>
+					<div>2</div>
+					<div>3</div>
+					<div>4</div>
+					<div>5</div>
+					<div>▶</div>
+				</div>
+				<div class="row justify-content-center">
+					<div id="search-field">
+						<input type="text" class="search" placeholder="ID,닉네임 검색" name="usersearch">
+						<button class="searchBtn">search</button>
+					</div>
+				</div>
 			</div>
-		</div>
 		</section>
 	</main>
-	<br><br><br><br>
-	<!-- ======= Footer ======= -->
+	<br><br><br>
+<!-- ======= Footer ======= -->
   <footer id="footer">
     <div class="container">
       <h3>SPORTOGETHER</h3>
@@ -118,11 +222,9 @@
         Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
       </div>
     </div>
-  </footer><!-- End Footer -->
-  
- 
-  <!-- Vendor JS Files -->
-	<script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-	
+  </footer>
+<!-- End Footer -->
+<!-- Vendor JS Files -->
+	<script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

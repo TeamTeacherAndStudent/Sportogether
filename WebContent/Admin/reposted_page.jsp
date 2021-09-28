@@ -37,17 +37,9 @@
    		color: rgb(140, 158, 91);
 	    text-align: center;
 	}
-	/*탭 메뉴 글씨 디자인*/
-	.subtitle{
-		text-align: center;
-		vertical-align:middle;
-	    line-height:30px;
-	    font-size:14pt;
-   		color: rgb(140, 158, 91);
-	}
 /*탭관련 css*/
 	.container{
-				margin: 0 auto;
+		margin: 0 auto;
 	}
 	ul, li{
 		list-style: none;
@@ -60,6 +52,8 @@
 	  padding: 0px;
 	  text-align: center;
 	  list-style: none;
+	  font-weight:bold;
+	  font-size: 18px;
 	}
 	ul.tabs li{
 	  background: none;
@@ -77,7 +71,7 @@
 	.tab-content{
 	  display: none;
 	  background-color: #ededed;
-	  padding: 15px;
+	  padding: 20px;
 	}
 	
 	.tab-content.current{
@@ -93,7 +87,9 @@
 	.ulTable > li:first-child > ul > li {
 		background-color:#c9c9c9;
 		font-weight:bold;
+		font-size: 15px;
 		text-align:center;
+		width: 40px;
 	}
 	
 	.ulTable > li > ul {
@@ -108,12 +104,12 @@
 		border-bottom:1px solid #ededed;
 		vertical-align:baseline;
 	}
+	
 	.ulTable > li > ul > li:first-child                {width:10%;} /*No 열 크기*/
-	.ulTable > li > ul > li:first-child +li            {width:35%;} /*제목 열 크기*/
-	.ulTable > li > ul > li:first-child +li+li         {width:20%;} /*작성일 열 크기*/
-	.ulTable > li > ul > li:first-child +li+li+li      {width:15%;} /*작성자 열 크기*/
-	.ulTable > li > ul > li:first-child +li+li+li+li   {width:10%;} /*추천수 열 크기*/
-	.ulTable > li > ul > li:first-child +li+li+li+li+li{width:10%;} /*조회수 열 크기*/
+	.ulTable > li > ul > li:first-child +li            {width:40%;} /*제목 열 크기*/
+	.ulTable > li > ul > li:first-child +li+li         {width:20%;} /*작성자 열 크기*/
+	.ulTable > li > ul > li:first-child +li+li+li      {width:20%;} /*날짜 열 크기*/
+	.ulTable > li > ul > li:first-child +li+li+li+li   {width:10%;} /*신고수 열 크기*/
 	
 	#divPaging {
 		clear:both;
@@ -133,12 +129,24 @@
 
 </head>
 <body>
+	<script>
+		$(document).ready(function(){
+			$("tab-1").show();
+			$('ul.tabs li').click(function(){
+		    	var tab_id = $(this).attr('data-tab');
+			    $('ul.tabs li').removeClass('current');
+		   		$('.tab-content').removeClass('current');
+		    	$(this).addClass('current');
+		 		$("#"+tab_id).addClass('current');
+		  	})
+		})
+	</script>
 	
 	<!-- ======= Header ======= -->
   	<header id="header" class="fixed-top">
     <div class="container d-flex align-items-center justify-content-between">
 		<!-- 여기에 로고 사진 추가 -->
-      <h1 class="logo"><a href="index.html"> Sportogether </a></h1>
+      <h1 class="logo"><a href="../index.html"> Sportogether </a></h1>
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
@@ -172,79 +180,102 @@
 		      		<li class="tab-link" data-tab="tab-2">신고 댓글 </li>
 		      		<li class="tab-link" data-tab="tab-3">신고 응원글</li>
 	   			</ul>
-  					<!-- 페이징 처리 -->
-  					<!-- 회원 클릭시 회원 detail페이지/게시물 제목 클릭시 게시물 상세 조회 -->
-  					<div id="tab-1" class="tab-content">
-	        		<ul class ="ulTable">
-	   					<li>
-	   						<h3 class="subtitle">신고 게시물</h3>
-	   						<ul>
-	   							<li>No</li>
-	   							<li>제목</li>
-	   							<li>작성자</li>
-	   							<li>날짜</li>
-	   							<li>신고수</li>
-	   						</ul>
-	   					</li>
-	   					<li>
-	   						<ul>
-	   							<li>1</li>
-	   							<li>불법주정차</li>
-	   							<li>car</li>
-	   							<li>2021-09-27</li>
-	   							<li>5</li>
-	   						</ul>
-	   					</li>
-	   				</ul>
-        		</div>
-        		<div id="tab-2" class="tab-content">
-	        		<ul class ="ulTable">
-	   					<li>
-	   						<h3 class="subtitle">신고 댓글</h3>
-	   						<ul>
-	   							<li>No</li>
-	   							<li>댓글내용</li>
-	   							<li>작성자</li>
-	   							<li>날짜</li>
-	   							<li>신고수</li>
-	   						</ul>
-	   					</li>
-	   					<li>
-	   						<ul>
-	   							<li>1</li>
-	   							<li>2</li>
-	   							<li>3</li>
-	   							<li>4</li>
-	   							<li>5</li>
-	   						</ul>
-	   					</li>
-	   				</ul>
-        		</div>
-        		<div id="tab-3" class="tab-content">
-	        		<ul class ="ulTable">
-	   					<li>
-		   					<h3 class="subtitle">신고 응원글</h3>
-		   					<ul>
-	   							<li>No</li>
-	   							<li>응원글 내용</li>
-	   							<li>작성자</li>
-	   							<li>날짜</li>
-	   							<li>신고수</li>
-		   					</ul>
-		   				</li>
-		   			</ul>
-   				</div>
-	   				<div id="divPaging">
-						<div>◀</div>
-						<div><b>1</b></div>
-						<div>2</div>
-						<div>3</div>
-						<div>4</div>
-						<div>5</div>
-						<div>▶</div>
-					</div>
-   				</div>
-        </section>
+ 					<!-- 회원 클릭시 회원 detail페이지/게시물 제목 클릭시 게시물 상세 조회 -->
+ 					<div id="tab-1" class="tab-content currnet">
+        		<ul class ="ulTable">
+   					<li>
+   						<ul>
+   							<li>No</li>
+   							<li>제목</li>
+   							<li>작성자</li>
+   							<li>날짜</li>
+   							<li>신고수</li>
+   						</ul>
+   					</li>
+   					<li>
+   						<ul>
+   							<li>1</li>
+   							<li>불법주정차</li>
+   							<li>car</li>
+   							<li>2021-09-27</li>
+   							<li>5</li>
+   						</ul>
+   					</li>
+   				</ul><br><br>
+   				<div id="divPaging">
+					<div>◀</div>
+					<div><b>1</b></div>
+					<div>2</div>
+					<div>3</div>
+					<div>4</div>
+					<div>5</div>
+					<div>▶</div>
+				</div>
+       		</div>
+       		<div id="tab-2" class="tab-content">
+        		<ul class ="ulTable">
+   					<li>
+   						<ul>
+   							<li>No</li>
+   							<li>댓글내용</li>
+   							<li>작성자</li>
+   							<li>날짜</li>
+   							<li>신고수</li>
+   						</ul>
+   					</li>
+   					<li>
+   						<ul>
+   							<li>1</li>
+   							<li>2</li>
+   							<li>3</li>
+   							<li>4</li>
+   							<li>5</li>
+   						</ul>
+   					</li>
+   				</ul><br><br>
+   				<div id="divPaging">
+					<div>◀</div>
+					<div><b>1</b></div>
+					<div>2</div>
+					<div>3</div>
+					<div>4</div>
+					<div>5</div>
+					<div>▶</div>
+				</div>
+			</div>
+       		<div id="tab-3" class="tab-content">
+        		<ul class ="ulTable">
+   					<li>
+	   					<ul>
+   							<li>No</li>
+   							<li>응원글 내용</li>
+   							<li>작성자</li>
+   							<li>날짜</li>
+   							<li>신고수</li>
+	   					</ul>
+	   				</li>
+	   				<li>
+	   					<ul>
+   							<li>No</li>
+   							<li>응원글 내용</li>
+   							<li>작성자</li>
+   							<li>날짜</li>
+   							<li>신고수</li>
+	   					</ul>
+	   				</li>
+	   			</ul><br><br>
+   				<div id="divPaging">
+					<div>◀</div>
+					<div><b>1</b></div>
+					<div>2</div>
+					<div>3</div>
+					<div>4</div>
+					<div>5</div>
+					<div>▶</div>
+				</div>
+  			</div>
+   		</div>
+     </section>
   </main>
   <br><br>
   <!-- ======= Footer ======= -->
@@ -280,16 +311,5 @@
 <!-- Vendor JS Files -->
 	<script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 	
-	<script>
-		$(function(){
-			$('ul.tabs li').click(function(){
-		    	var tab_id = $(this).attr('data-tab');
-			    $('ul.tabs li').removeClass('current');
-		   		$('.tab-content').removeClass('current');
-		    	$(this).addClass('current');
-		 		$("#"+tab_id).addClass('current');
-		  	})
-		});
-	</script>
 </body>
 </html>

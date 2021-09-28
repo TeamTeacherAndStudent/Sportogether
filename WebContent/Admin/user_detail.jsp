@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>관리자 - 회원 상세 페이지</title>
+<title>관리자 회원 상세</title>
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
@@ -60,10 +60,9 @@
  	<main id="main">
   		<section id="member-manage">
       		<div class="container">
-        		<div class="section-title">
-        		<h2>회원 관리</h2>
+        		<h1>회원 관리</h1><br><br>
 					<form>
-						<legend>[ 회원 정보 ]</legend>
+						<legend> 회원 정보 </legend>
 						<ul>
 							<li>아이디</li>
 							<li>닉네임</li>
@@ -74,7 +73,6 @@
 					<button id="removeBtn" onclick="onRemoveClick()">회원탈퇴</button>
 					<button id="statusBtn" onclick="onStatusClick();">선수등록</button>
 					<a href="member_manage.jsp"><button id="backBtn">뒤로가기</button></a>
-				</div>
 			</div>
 		</section>
 	</main>

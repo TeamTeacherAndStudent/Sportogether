@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>관리자용 후원 결제 관리</title>
+<title>관리자 후원 결제 관리</title>
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
@@ -19,13 +19,75 @@
 
   <!-- Template Main CSS File -->
   <link href="../assets/css/style.css" rel="stylesheet">
+  <style>
+  		/*제목*/
+	h1{
+	    vertical-align:middle;
+	    line-height:30px;
+   		color: rgb(140, 158, 91);
+	    text-align: center;
+	}
+		.ulTable {
+		margin-top:10px;
+		text-align: center;
+		list-style: none;
+	}
+	
+	.ulTable > li:first-child > ul > li {
+		list-style: none;
+		background-color:#c9c9c9;
+		font-weight:bold;
+		text-align:center;
+		height: 40px;
+		line-height: 40px;
+		font-size : 15px;
+	}
+	
+	.ulTable > li > ul {
+		list-style: none;
+		clear:both;
+		padding:0px auto;
+		position:relative;
+		min-width:50px;
+	}
+	.ulTable > li > ul > li {
+		float:left;
+		font-size:10pt;
+		border-bottom:1px solid #ededed;
+		vertical-align:baseline;
+	}
+	.ulTable > li > ul > li:first-child                {width:10%;} /*No 열 크기*/
+	.ulTable > li > ul > li:first-child +li            {width:15%;} /*아이디 열 크기*/
+	.ulTable > li > ul > li:first-child +li+li         {width:10%;} /*선수이름 열 크기*/
+	.ulTable > li > ul > li:first-child +li+li+li      {width:35%;} /*후원금액 열 크기*/
+	.ulTable > li > ul > li:first-child +li+li+li+li   {width:15%;} /*후원 종목 열 크기*/
+	.ulTable > li > ul > li:first-child +li+li+li+li+li{width:15%;} /*후원일 열 크기*/
+	
+	#divPaging {
+		clear:both;
+		margin:0 auto;
+		width:220px;
+		height:50px;
+	}
+	
+	#divPaging > div {
+		float:left;
+		width: 30px;
+		margin:0 auto;
+		text-align:center;
+	}
+	.link {
+		text-align: right;
+		margin-right: 100px;
+	}
+  </style>
 </head>
 <body>
 	<!-- ======= Header ======= -->
   	<header id="header" class="fixed-top">
     <div class="container d-flex align-items-center justify-content-between">
 		<!-- 여기에 로고 사진 추가 -->
-      <h1 class="logo"><a href="index.html"> Sportogether </a></h1>
+      <h1 class="logo"><a href="../index.html"> Sportogether </a></h1>
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
@@ -52,36 +114,43 @@
  	<main id="main">
   		<section id="supportManage">
       		<div class="container">
-        		<div class="section-title">
-        		<h2>후원 결제 관리</h2>
-  					<div class="row">
-						<table>
-							<tr>
-								<th>회원번호</th>
-								<th>후원 아이디</th>
-								<th>후원 선수</th>
-								<th>후원 금액</th>
-								<th>후원 종목</th>
-								<th>후원일</th>
-							</tr>
-							<tr>
-								<td>1</td>
-								<td>admin</td>
-								<td>김연경</td>
-								<td>10,000</td>
-								<td>배구</td>
-								<td>2021.09.26</td>
-							</tr>
-						</table>
-					</div>
-					<br>
-					<!-- 페이징처리 추가 -->
-					<!-- 링크를 오른쪽 하단에 재배치 -->
-					<div class="link">
-						<a href = "support_chart.html">종목별 비율 차트 보기</a><br>
-						<a href = "../Admin_Main.jsp">메인으로 가기</a>
-					</div>
-				</div>
+	       		<h1>후원 결제 관리</h1><br><br>
+	       		<ul class="ulTable">
+        			<li>
+						<ul>
+							<li>회원번호</li>
+							<li>후원 아이디</li>
+							<li>후원 선수</li>
+							<li>후원 금액</li>
+							<li>후원 종목</li>
+							<li>후원일</li>
+						</ul>
+					</li>
+					<li>
+						<ul>
+							<li>1</li>
+							<li>admin</li>
+							<li>김연경</li>
+							<li>10,000</li>
+							<li>배구</li>
+							<li>2021.09.26</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+			<br>
+			<div id="divPaging">
+				<div>◀</div>
+				<div><b>1</b></div>
+				<div>2</div>
+				<div>3</div>
+				<div>4</div>
+				<div>5</div>
+				<div>▶</div>
+			</div>
+			<!-- 링크를 오른쪽 하단에 재배치 -->
+			<div class="link">
+				<a href = "support_chart.html">종목별 비율 차트 보기</a><br>
 			</div>
 		</section>
 	</main>

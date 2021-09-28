@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>캠페인 관리</title>
+<title>관리자 캠페인 관리</title>
 <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
@@ -18,13 +18,69 @@
 
   <!-- Template Main CSS File -->
   <link href="../assets/css/style.css" rel="stylesheet">
+	<style>
+	 		/*제목*/
+	h1{
+	    vertical-align:middle;
+	    line-height:30px;
+   		color: rgb(140, 158, 91);
+	    text-align: center;
+	}
+	.ulTable {
+		margin-top:10px;
+		text-align: center;
+		list-style: none;
+	}
+	
+	.ulTable > li:first-child > ul > li {
+		list-style: none;
+		background-color:#c9c9c9;
+		font-weight:bold;
+		text-align:center;
+		height: 30px;
+		line-height: 30px;
+		font-size : 15px;
+	}
+	
+	.ulTable > li > ul {
+		list-style: none;
+		clear:both;
+		padding:0px auto;
+		position:relative;
+		min-width:50px;
+	}
+	.ulTable > li > ul > li {
+		float:left;
+		font-size:10pt;
+		border-bottom:1px solid #ededed;
+		vertical-align:baseline;
+	}
+	.ulTable > li > ul > li:first-child                {width:10%;} /*캠페인 번호 열 크기*/
+	.ulTable > li > ul > li:first-child +li            {width:30%;} /*캠페인 이름크기*/
+	.ulTable > li > ul > li:first-child +li+li         {width:30%;} /*선수이름 열 크기*/
+	.ulTable > li > ul > li:first-child +li+li+li      {width:30%;} /*캠페인 게시일자 열 크기*/
+	
+	#divPaging {
+		clear:both;
+		margin:0 auto;
+		width:220px;
+		height:50px;
+	}
+	
+	#divPaging > div {
+		float:left;
+		width: 30px;
+		margin:0 auto;
+		text-align:center;
+	}
+	</style>
 </head>
 <body>
 	<!-- ======= Header ======= -->
   	<header id="header" class="fixed-top">
     <div class="container d-flex align-items-center justify-content-between">
 		<!-- 여기에 로고 사진 추가 -->
-      <h1 class="logo"><a href="index.html"> Sportogether </a></h1>
+      <h1 class="logo"><a href="../index.html"> Sportogether </a></h1>
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
@@ -52,26 +108,35 @@
 	 <main id="main">
 		<section id="supportDelete">
 			<div class="container">
-				<div class="section-title">
-					<div class="row">
-					<h2>캠페인 관리</h2>
-					<table>
-						<tr>
-							<th>캠페인 번호</th>
-							<th>캠페인 이름</th>
-							<th>작성자</th>
-							<th>캠페인 게시일자</th>
-						</tr>
-  <!-- 캠페인 상세페이지 받아서 관리자일때 버튼만 추가하기 (슬라이드 54-55)-->
-						<tr>
-							<td>1</td>
-							<td>제빵 배이커리</td>
-							<td>김연경</td>
-							<td>2021/09/27</td>
-						</tr>
-					</table>
-					</div>
-				</div>
+				<h1>캠페인 관리</h1><br><br>
+				<ul class="ulTable">
+       			<li>
+					<ul>
+						<li>번호</li>
+						<li>캠페인 이름</li>
+						<li>작성자</li>
+						<li>캠페인 게시일자</li>
+					</ul>
+				</li>
+				<li>
+					<ul>
+						<li>1</li>
+						<li>제빵 배이커리</li>
+						<li>김연경</li>
+						<li>2021/09/27</li>
+					</ul>
+				</li>
+				</ul>
+			</div>
+			<br>
+			<div id="divPaging">
+				<div>◀</div>
+				<div><b>1</b></div>
+				<div>2</div>
+				<div>3</div>
+				<div>4</div>
+				<div>5</div>
+				<div>▶</div>
 			</div>
 		</section>
 	</main>

@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>캠페인 승인 관리</title>
+<title>관리자 캠페인 승인 관리</title>
 <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
@@ -18,7 +18,89 @@
 
   <!-- Template Main CSS File -->
   <link href="../assets/css/style.css" rel="stylesheet">
-
+	<style>
+	 /*제목*/
+		h1{
+		    vertical-align:middle;
+		    line-height:30px;
+	   		color: rgb(140, 158, 91);
+		    text-align: center;
+		}
+		.ulTable {
+			margin-top:10px;
+			text-align: center;
+			list-style: none;
+		}
+	
+		.ulTable > li:first-child > ul > li {
+			list-style: none;
+			background-color:#c9c9c9;
+			font-weight:bold;
+			text-align:center;
+			line-height: 40px;
+			font-size : 15px;
+			height: 40px;
+			padding: 0 10px;
+		}
+		
+		.ulTable > li > ul {
+			list-style: none;
+			clear:both;
+			padding:0px auto;
+			position:relative;
+			min-width:50px;
+		}
+		.ulTable > li > ul > li {
+			float:left;
+			font-size:10pt;
+			border-bottom:1px solid #ededed;
+			vertical-align:baseline;
+			height: 40px;
+			display: block;
+			padding: 10px;
+		}
+		.ulTable > li > ul > li:first-child                {width:10%;} /*No 열 크기*/
+		.ulTable > li > ul > li:first-child +li            {width:40%;} /*캠페인 제목 이름크기*/
+		.ulTable > li > ul > li:first-child +li+li         {width:20%;} /*작성자 열 크기*/
+		.ulTable > li > ul > li:first-child +li+li+li      {width:20%;} /*날짜 게시일자 열 크기*/
+		.ulTable > li > ul > li:first-child +li+li+li+li   {width:10%;} /*승인여부 열 크기*/
+		
+		#divPaging {
+			clear:both;
+			margin:0 auto;
+			width:220px;
+			height:50px;
+		}
+		
+		#divPaging > div {
+			float:left;
+			width: 30px;
+			margin:0 auto;
+			text-align:center;
+		}
+		.ulTable > li > ul > li:last-child {
+			list-style: none;
+			text-align:center;
+			font-size : 15px;
+			padding: 0 0 0 0;
+		}
+		.approvalBtn {
+			font-family: "Raleway", sans-serif;
+		    font-weight: 600;
+		    font-size: 12px;
+		    border-style : none;
+		    margin-top: 2px;
+	  		padding: 7px 7px;
+		    border-radius: 5px;
+		    border: 1px solid #1d284b;
+		    transition: 0.3s;
+	  		background-color: #1d284b;
+	  		cursor: pointer;
+	  		width: 50px;
+		    letter-spacing: 1px;
+	  		color : white;
+		}
+	</style>
 </head>
 <body>
 	<!-- ======= Header ======= -->
@@ -53,25 +135,55 @@
 	 <main id="main">
 		<section id="memberManage">
 			<div class="container">
-				<div class="section-title">
-					<h2> 승인 대기 캠페인 목록 </h2><br>
-						<table id="table"  width="90%">
-							<tr>
-								<th>No</th>
-								<th>제목</th>
-								<th>작성자</th>
-								<th>날짜</th>
-								<th>승인여부</th>
-							</tr>
-							<tr>
-								<td>1</td>
-								<td>제빵자격증으로 베이커리를 내려합니다</td>
-								<td>김연경</td>
-								<td>2021.10.09</td>
-								<td><button class="approvalBtn" onclick="onApprovalClick();">승인</button>
-							</tr>
-						</table>
-						<!-- 페이징 처리 -->
+					<h1>승인 대기 캠페인 목록</h1><br><br>
+					<ul class="ulTable">
+					<li>
+						<ul>
+							<li>No</li>
+							<li>제목</li>
+							<li>작성자</li>
+							<li>날짜</li>
+							<li>승인여부</li>
+						</ul>
+					</li>
+					<li>
+						<ul>
+							<li>No</li>
+							<li>제목</li>
+							<li>작성자</li>
+							<li>날짜</li>
+							<li><button class="approvalBtn" onclick="onApprovalClick();">승인</button></li>
+						</ul>
+					</li>
+					<li>
+						<ul>
+							<li>No</li>
+							<li>제목</li>
+							<li>작성자</li>
+							<li>날짜</li>
+							<li><button class="approvalBtn" onclick="onApprovalClick();">승인</button></li>
+						</ul>
+					</li>
+					<li>
+						<ul>
+							<li>No</li>
+							<li>제목</li>
+							<li>작성자</li>
+							<li>날짜</li>
+							<li><button class="approvalBtn" onclick="onApprovalClick();">승인</button></li>
+						</ul>
+					</li>
+				</ul>
+				<!-- 페이징 처리 -->
+				<br><br>
+				<div id="divPaging">
+					<div>◀</div>
+					<div><b>1</b></div>
+					<div>2</div>
+					<div>3</div>
+					<div>4</div>
+					<div>5</div>
+					<div>▶</div>
 				</div>
 			</div>
 		</section>
