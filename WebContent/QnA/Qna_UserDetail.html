@@ -22,6 +22,8 @@
 
 <!-- Template Main CSS File -->
 <link href="../assets/css/style.css" rel="stylesheet">
+
+<script src="https://code.jquery.com/jquery-latest.min.js"></script>
 <title>1:1 문의 상세페이지</title>
 <style>
 #main-title {
@@ -124,6 +126,36 @@ button:hover {
 #reply-btn{
 	padding: 10px 25px;
 }
+.pop-layer .pop-container {
+	padding: 20px 25px;
+}
+
+.pop-laeyr p.ctxt {
+	color: #666;
+	line-height: 25px;
+}
+
+.pop-layer .btn-r {
+	width: 100%;
+	margin: 10px 0 20px;
+	padding-top: 10px;
+	border-top: 1px solid #ddd;
+	text-align: right;
+}
+
+.pop-layer {
+	display: none;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 410px;
+	height: auto;
+	background-color: #fff;
+	border: 5px solid #3571B5;
+	z-index: 10;
+}
+
+
 </style>
 
 </head>
@@ -217,11 +249,24 @@ button:hover {
 		</div>
 		<section>
 			<div id="back-btn">
-				<a href="#"><button>삭제</button></a> <a
+				<a href="#layer" class="check-btn"><button>삭제</button></a> <a
 					href="Qna_UserMain.html"><button>목록</button></a>
 			</div>
 		</section>
 
+		<div id="layer" class="pop-layer">
+			<div class="pop-container">
+				<div class="pop-conts">
+					<!-- 내용 -->
+					<p class="ctxt mb20">정말로 삭제하시겠습니까?</p>
+					<div class="btn-r">
+						<a href="#" class="btn-layerClose"><button>삭제</button></a> <a
+							href="#" class="btn-layerClose"><button>취소</button></a>
+					</div>
+					<!--  // 내용 끝 -->
+				</div>
+			</div>
+		</div>
 
 	</main>
 
@@ -276,6 +321,45 @@ button:hover {
 	<script src="assets/js/jquery-1.12.3.min.js"></script>
 	<script src="assets/js/jquery.counterup.min.js"></script>
 	<script src="assets/js/waypoints.min.js"></script>
+		<!-- 삭제 경고창 -->
+	<script>
+	$(".check-btn").click(function(){
+        var $href = $(this).attr("href");
+        layer_popup($href);
+    });
+    function layer_popup(el){
 
+        var $el = $(el);    //레이어의 id를 $el 변수에 저장
+        var isDim = $el.prev().hasClass("dimBg"); //dimmed 레이어를 감지하기 위한 boolean 변수
+
+        isDim ? $(".dim-layer").fadeIn() : $el.fadeIn();
+
+        var $elWidth = ~~($el.outerWidth()),
+            $elHeight = ~~($el.outerHeight()),
+            docWidth = $(document).width(),
+            docHeight = $(document).height();
+
+        // 화면의 중앙에 레이어를 띄운다.
+        if ($elHeight < docHeight || $elWidth < docWidth) {
+            $el.css({
+                marginTop: -$elHeight /2,
+                marginLeft: -$elWidth/2
+            })
+        } else {
+            $el.css({top: 0, left: 0});
+        }
+
+        $el.find("a.btn-layerClose").click(function(){
+            isDim ? $(".dim-layer").fadeOut() : $el.fadeOut(); // 닫기 버튼을 클릭하면 레이어가 닫힌다.
+            return false;
+        });
+
+        $(".layer .dimBg").click(function(){
+            $(".dim-layer").fadeOut();
+            return false;
+        });
+
+    }
+	</script>
 </body>
 </html>

@@ -22,6 +22,8 @@
 
 <!-- Template Main CSS File -->
 <link href="../assets/css/style.css" rel="stylesheet">
+
+<script src="https://code.jquery.com/jquery-latest.min.js"></script>
 <title>1:1 문의 상세페이지</title>
 <style>
 #main-title {
@@ -112,17 +114,47 @@ button:hover {
 	text-decoration: none;
 }
 
-.qna-reply{
+.qna-reply {
 	margin-left: 10%;
-	margin-right : 0%;
+	margin-right: 0%;
 	justify-content: center;
-	
 }
-#reply{
-	width : 88%;
+
+#reply {
+	width: 88%;
 }
-#reply-btn{
+
+#reply-btn {
 	padding: 10px 25px;
+}
+
+.pop-layer .pop-container {
+	padding: 20px 25px;
+}
+
+.pop-laeyr p.ctxt {
+	color: #666;
+	line-height: 25px;
+}
+
+.pop-layer .btn-r {
+	width: 100%;
+	margin: 10px 0 20px;
+	padding-top: 10px;
+	border-top: 1px solid #ddd;
+	text-align: right;
+}
+
+.pop-layer {
+	display: none;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 410px;
+	height: auto;
+	background-color: #fff;
+	border: 5px solid #3571B5;
+	z-index: 10;
 }
 </style>
 
@@ -194,34 +226,49 @@ button:hover {
 					</tr>
 				</tbody>
 			</table>
-			<br><br>
+			<br>
+			<br>
 			<table class="p-table">
 				<tr>
-						<td colspan="3"><h5><b> 댓글 </b> </h5></td>
-					</tr>
-					
-					<tr>
-						
-						<td>관리자</td>
-						<td>회원님들의 의견에 따라 진위여부 확인중에 있습니다. 감사합니다.</td>
-						<td><pre> 2021-09-26 04:45:23</pre> </td>
-					</tr>
+					<td colspan="3"><h5>
+							<b> 댓글 </b>
+						</h5></td>
+				</tr>
+
+				<tr>
+
+					<td>관리자</td>
+					<td>회원님들의 의견에 따라 진위여부 확인중에 있습니다. 감사합니다.</td>
+					<td><pre> 2021-09-26 04:45:23</pre></td>
+				</tr>
 			</table>
 			<br>
-			
-				<div class="qna-reply">
-					<input type="text" id="reply" placeholder="댓글을 입력해주세요" maxlength="10">
-					&nbsp;&nbsp;&nbsp;&nbsp;
-					<button id="reply-btn">등록</button>
-				</div>
+
+			<div class="qna-reply">
+				<input type="text" id="reply" placeholder="댓글을 입력해주세요"
+					maxlength="10"> &nbsp;&nbsp;&nbsp;&nbsp;
+				<button id="reply-btn">등록</button>
+			</div>
 		</div>
 		<section>
 			<div id="back-btn">
-				<a href="#"><button>삭제</button></a> <a
+				<a href="#layer" class="check-btn"><button>삭제</button></a> <a
 					href="Qna_AdminMain.html"><button>목록</button></a>
 			</div>
 		</section>
-
+		<div id="layer" class="pop-layer">
+			<div class="pop-container">
+				<div class="pop-conts">
+					<!-- 내용 -->
+					<p class="ctxt mb20">정말로 삭제하시겠습니까?</p>
+					<div class="btn-r">
+						<a href="#" class="btn-layerClose"><button>삭제</button></a> <a
+							href="#" class="btn-layerClose"><button>취소</button></a>
+					</div>
+					<!--  // 내용 끝 -->
+				</div>
+			</div>
+		</div>
 
 	</main>
 
@@ -243,8 +290,7 @@ button:hover {
 				<option value="http://www.kahperd.or.kr/">한국체육학회</option>
 				<option
 					value="https://www.sports.re.kr/front/main/main.do?menu_seq=0">한국정책과학원</option>
-			</select> <br>
-			<br>
+			</select> <br> <br>
 			<div class="copyright">
 				&copy; Copyright <strong><span>SPORTOGETHER</span></strong>. All
 				Rights Reserved
@@ -276,6 +322,45 @@ button:hover {
 	<script src="assets/js/jquery-1.12.3.min.js"></script>
 	<script src="assets/js/jquery.counterup.min.js"></script>
 	<script src="assets/js/waypoints.min.js"></script>
+	<!-- 삭제 경고창 -->
+	<script>
+	$(".check-btn").click(function(){
+        var $href = $(this).attr("href");
+        layer_popup($href);
+    });
+    function layer_popup(el){
 
+        var $el = $(el);    //레이어의 id를 $el 변수에 저장
+        var isDim = $el.prev().hasClass("dimBg"); //dimmed 레이어를 감지하기 위한 boolean 변수
+
+        isDim ? $(".dim-layer").fadeIn() : $el.fadeIn();
+
+        var $elWidth = ~~($el.outerWidth()),
+            $elHeight = ~~($el.outerHeight()),
+            docWidth = $(document).width(),
+            docHeight = $(document).height();
+
+        // 화면의 중앙에 레이어를 띄운다.
+        if ($elHeight < docHeight || $elWidth < docWidth) {
+            $el.css({
+                marginTop: -$elHeight /2,
+                marginLeft: -$elWidth/2
+            })
+        } else {
+            $el.css({top: 0, left: 0});
+        }
+
+        $el.find("a.btn-layerClose").click(function(){
+            isDim ? $(".dim-layer").fadeOut() : $el.fadeOut(); // 닫기 버튼을 클릭하면 레이어가 닫힌다.
+            return false;
+        });
+
+        $(".layer .dimBg").click(function(){
+            $(".dim-layer").fadeOut();
+            return false;
+        });
+
+    }
+	</script>
 </body>
 </html>
