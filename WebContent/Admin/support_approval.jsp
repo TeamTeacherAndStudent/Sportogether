@@ -60,10 +60,10 @@
 			padding: 10px;
 		}
 		.ulTable > li > ul > li:first-child                {width:10%;} /*No 열 크기*/
-		.ulTable > li > ul > li:first-child +li            {width:40%;} /*캠페인 제목 이름크기*/
+		.ulTable > li > ul > li:first-child +li            {width:30%;} /*캠페인 제목 이름크기*/
 		.ulTable > li > ul > li:first-child +li+li         {width:20%;} /*작성자 열 크기*/
-		.ulTable > li > ul > li:first-child +li+li+li      {width:20%;} /*날짜 게시일자 열 크기*/
-		.ulTable > li > ul > li:first-child +li+li+li+li   {width:10%;} /*승인여부 열 크기*/
+		.ulTable > li > ul > li:first-child +li+li+li      {width:25%;} /*날짜 게시일자 열 크기*/
+		.ulTable > li > ul > li:first-child +li+li+li+li   {width:15%;} /*승인여부 열 크기*/
 		
 		#divPaging {
 			clear:both;
@@ -185,6 +185,7 @@
 					<div>5</div>
 					<div>▶</div>
 				</div>
+				
 			</div>
 		</section>
 	</main>
@@ -230,6 +231,7 @@
 			console.log("아니오");
 		}
 	}
+	
 	</script>
 </body>
 </html>

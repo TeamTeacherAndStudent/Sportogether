@@ -37,6 +37,9 @@
 	.Name-input {
 		margin-right: 5px;
 	}
+	#etc-field{
+		display : none;
+	}
     form{
     	border: 1px solid #f5f5f5;
     	padding : 30px;
@@ -80,6 +83,9 @@
 	    border: 1px solid #ebebeb;
 	   	width : 660px;
 	   	height: 38px;
+	}
+	.text{
+		text-align:center;
 	}
   	/*등록버튼 라인 버튼들*/
   	#back-btn{
@@ -141,16 +147,17 @@
 	<section id="sportsManage">
 			<div class="container">
 				<h1>종목 등록 </h1><br>
-				<div class="">
+				<div id="form">
+				<div class="text">
 					<form action ="../Sports/sportsDetail.jsp" method="post" name="sportEnroll" target="_self">
 						<br>
 						<select name="sports">
-							<option value="">종목 분류</option>
+							<option value="">종목분류</option>
 							<!-- 종목 소분류 긁어오기 optgroup label-->
-							<option value="">구기 종목</option>
-							<option value="">기타</option>
+							<option value="">구기</option>
+							<option value="etc">기타</option>
 						</select>
-						<input type="text" class="Name-input" placeholder="기타입력" size="20" required>
+						<input type="text" id="etc-field" class="Name-input" placeholder="기타입력" size="20" required>
 						<!-- 이름값도 넘겨주기 -->
 						<input type="text" class="Name-input" placeholder=" 종목 이름 입력" size="55" required><br><br>
 						<textarea id="sports_enroll" name="sport_enroll" cols="100" rows="30" placeholder=" 내용을 입력하세요."></textarea><br>
@@ -161,6 +168,7 @@
 							<input type="file" id="input-file"><!-- 파일버튼 숨김 -->
 						</div>
 					</form>
+					</div>
 					<!-- 버튼 숨김(등록시 수정안보이게/ 수정시 등록 안보이게 정렬 -->
 						<div id="back-btn">
 								<button class="Btn">미리보기</button>
@@ -211,6 +219,14 @@
 				var filename = $(this).val();
 				$('.upload-name').val(filename);
 			});
+		});
+		$("select[name=sports]").change(function(){
+				var selectVal = $(this).val();
+				if(selectVal == 'etc'){
+					$('#etc-field').css({
+						"display" : 'inline-block'
+					});
+				}
 		});
 	</script>
 </body>

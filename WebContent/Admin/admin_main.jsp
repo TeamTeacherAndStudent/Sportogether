@@ -45,6 +45,24 @@
 		box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 		overflow: hidden;
     }
+    #repostedcard{
+    	background-color: #3be8b0;
+    }
+    #approvalcard{
+    	background-color: #007fdb;
+    }
+    #campaigncard{
+    	background-color: #6a67ce;
+    }
+    #membercard{
+    	background-color: #ffb900;
+    }
+    #paycard{
+    	background-color: #fc636b;
+    }
+    #sportscard{
+    	background-color: #832561;
+    }
     .card-header {
 		-webkit-transition: 0.5s; /*사파리 & 크롬*/
 	    -moz-transition: 0.5s;  /*파이어폭스*/
@@ -52,18 +70,16 @@
 	    -o-transition: 0.5s;  /*오페라*/
 	    transition: 0.5s;
 		width: 100%;
-		height: 900px;
+		height: 1500px;
 		border-radius: 15px 15px 0 0;
 		text-align : center;
+		color: white;
+		position: absolute;
+		top: 50%;
 	}
 	.card:hover .card-header  {
 		opacity: 0.8;
 	}
-    .card-body {
-    	background-image : url("");
-		background-size: 100% 280px;
-		background-repeat: no-repeat;	
-    }
     
     .card:hover {
     	opacity: 1;
@@ -109,73 +125,55 @@
   	<div class="container">
 	 	<div class="row">
 	 		<div class="col-lg-4 col-md-4 col-xs-4 col-sm-4">
-				<a href="reposted_page.jsp">
-					<div class="card">
+				<a href="reposted_manage.jsp">
+					<div id="repostedcard" class="card">
 						<div class="card-header">
 							<h3>신고글 목록</h3>
-						</div>
-						<div class="card-body">
-						
 						</div>
 					</div>
 				</a>
 			</div>
 			<div class="col-lg-4 col-md-4 col-xs-4 col-sm-4">
 				<a href="support_approval.jsp">
-					<div class="card">
+					<div id="approvalcard" class="card">
 						<div class="card-header">
 							<h3>승인 대기 캠페인 목록</h3>
-						</div>
-						<div class="card-body">
-						
 						</div>
 					</div>
 				</a>
 			</div>
 			<div class="col-lg-4 col-md-4 col-xs-4 col-sm-4">
 				<a href="campaign_delete.jsp">
-					<div class="card">
+					<div id="campaigncard" class="card">
 						<div class="card-header">
 							<h3>캠페인 관리</h3>
-						</div>
-						<div class="card-body">
-						
 						</div>
 					</div>
 				</a>
 			</div>
 			<div class="col-lg-4 col-md-4 col-xs-4 col-sm-4">
 				<a href="member_manage.jsp">
-					<div class="card">
+					<div id="membercard" class="card">
 						<div class="card-header">
 							<h3>회원 관리</h3>
-						</div>
-						<div class="card-body">
-						
 						</div>
 					</div>
 				</a>
 			</div>
 			<div class="col-lg-4 col-md-4 col-xs-4 col-sm-4">
 				<a href="support_manage.jsp">
-					<div class="card">
+					<div id="paycard" class="card">
 						<div class="card-header">
 							<h3>후원 결제 관리</h3>
-						</div>
-						<div class="card-body">
-						
 						</div>
 					</div>
 				</a>
 			</div>
 			<div class="col-lg-4 col-md-4 col-xs-4 col-sm-4">
 				<a href="sports_manage.jsp">
-					<div class="card">
+					<div  id="sportscard"  class="card">
 						<div class="card-header">
 							<h3>종목 관리</h3>
-						</div>
-						<div class="card-body">
-						
 						</div>
 					</div>
 				</a>

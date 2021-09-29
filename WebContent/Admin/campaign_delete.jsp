@@ -54,11 +54,14 @@
 		font-size:10pt;
 		border-bottom:1px solid #ededed;
 		vertical-align:baseline;
+		height: 35px;
+		line-height: 35px;
 	}
-	.ulTable > li > ul > li:first-child                {width:10%;} /*캠페인 번호 열 크기*/
-	.ulTable > li > ul > li:first-child +li            {width:30%;} /*캠페인 이름크기*/
-	.ulTable > li > ul > li:first-child +li+li         {width:30%;} /*선수이름 열 크기*/
-	.ulTable > li > ul > li:first-child +li+li+li      {width:30%;} /*캠페인 게시일자 열 크기*/
+	.ulTable > li > ul > li:first-child                  {width:10%;} /*체크박스 열 크기*/
+	.ulTable > li > ul > li:first-child +li              {width:10%;} /*캠페인 번호 열 크기*/
+	.ulTable > li > ul > li:first-child +li+li           {width:30%;} /*캠페인 이름크기*/
+	.ulTable > li > ul > li:first-child +li+li+li        {width:30%;} /*선수이름 열 크기*/
+	.ulTable > li > ul > li:first-child +li+li+li+li     {width:20%;} /*캠페인 게시일자 열 크기*/
 	
 	#divPaging {
 		clear:both;
@@ -73,6 +76,44 @@
 		margin:0 auto;
 		text-align:center;
 	}
+	.Btn{
+		font-family: "Raleway", sans-serif;
+	    font-weight: 600;
+	    font-size: 14px;
+	    border-style : none;
+	    margin-left : 5px;
+  		padding: 11px 32px;
+	    border-radius: 5px;
+	    border: 2px solid #1d284b;
+	    transition: 0.3s;
+	    line-height: 1;
+  		background-color: #1d284b;
+  		cursor: pointer;
+  		width: 150px;
+	    letter-spacing: 1px;
+  		color : white;
+	}
+	.Btn{
+		font-family: "Raleway", sans-serif;
+	    font-weight: 600;
+	    font-size: 14px;
+	    border-style : none;
+	    margin-left : 5px;
+  		padding: 11px 32px;
+	    border-radius: 5px;
+	    border: 2px solid #1d284b;
+	    transition: 0.3s;
+	    line-height: 1;
+  		background-color: #1d284b;
+  		cursor: pointer;
+  		width: 150px;
+	    letter-spacing: 1px;
+  		color : white;
+  		position: relative;
+  		float: right;
+  		margin-right: 100px;
+	}
+	
 	</style>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
@@ -113,6 +154,7 @@
 				<ul class="ulTable">
        			<li>
 					<ul>
+						<li><input type="checkbox" name="" value="all" id="chk_all"></li>
 						<li>번호</li>
 						<li>캠페인 이름</li>
 						<li>작성자</li>
@@ -121,6 +163,16 @@
 				</li>
 				<li>
 					<ul>
+						<li><input type="checkbox" name="" value="vallyball" class="one-chk"></li>
+						<li>1</li>
+						<li>제빵 배이커리</li>
+						<li>김연경</li>
+						<li>2021/09/27</li>
+					</ul>
+				</li>
+				<li>
+					<ul>
+						<li><input type="checkbox" name="" value="vallyball" class="one-chk"></li>
 						<li>1</li>
 						<li>제빵 배이커리</li>
 						<li>김연경</li>
@@ -139,6 +191,7 @@
 				<div>5</div>
 				<div>▶</div>
 			</div>
+			<button id="removeBtn" class="Btn" onclick="onRemoveClick()">회원탈퇴</button>
 		</section>
 	</main>
   <!-- ======= Footer ======= -->
@@ -173,5 +226,29 @@
 <!-- End Footer -->
 <!-- Vendor JS Files -->
 	<script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script>
+	function onRemoveClick(){
+		var removecheck = window.confirm("캠페인을 삭제하겠습니까?");
+		if(removecheck) {
+			console.log("네");
+		}else {
+			console.log("아니오");
+		}
+	}
+	$(document).on('click','#chk_all',function(){
+		if($('#chk_all').is(':checked')){
+			$('.one-chk').prop('checked',true);
+		}else{
+			$('.one-chk').prop('checked',false);
+		}
+	});
+	$(document).on('click','one-chk',function(){
+		if($('input[class=one-chk]:checked').length==$('one-chk').legth){
+			$('#chk_all').prop('checked',true);
+		}else{
+			$('#chk_all').prop('checked',false);
+		}
+	});
+	</script>
 </body>
 </html>

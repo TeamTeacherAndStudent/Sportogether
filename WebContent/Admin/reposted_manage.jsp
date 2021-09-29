@@ -38,6 +38,9 @@
 	    text-align: center;
 	}
 /*탭관련 css*/
+	.tab-content.currnet{
+		display: block;
+	}
 	.container{
 		margin: 0 auto;
 	}
@@ -183,7 +186,7 @@
 		      		<li class="tab-link" data-tab="tab-3">신고 응원글</li>
 	   			</ul>
  					<!-- 회원 클릭시 회원 detail페이지/게시물 제목 클릭시 게시물 상세 조회 -->
- 				<div id="tab-1" class="tab-content currnet">
+ 				<div id="tab-1" class="tab-content current">
 	        		<ul class ="ulTable">
 	   					<li>
 	   						<ul>

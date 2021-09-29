@@ -77,8 +77,7 @@
 		text-align:center;
 	}
 	.link {
-		text-align: right;
-		margin-right: 100px;
+		text-align: center;
 	}
   </style>
 </head>

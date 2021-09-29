@@ -61,10 +61,12 @@
 		border-bottom:1px solid #ededed;
 		vertical-align:baseline;
 	}
-	.ulTable > li > ul > li:first-child                {width:10%;} /*No 열 크기*/
-	.ulTable > li > ul > li:first-child +li            {width:30%;} /*아이디 열 크기*/
-	.ulTable > li > ul > li:first-child +li+li         {width:30%;} /*닉네임 열 크기*/
-	.ulTable > li > ul > li:first-child +li+li+li      {width:30%;} /*가입일 열 크기*/
+	.ulTable > li > ul > li:first-child                {width:10%;} /*체크박스 열 크기*/
+	.ulTable > li > ul > li:first-child +li            {width:10%;} /*No 열 크기*/
+	.ulTable > li > ul > li:first-child +li+li         {width:20%;} /*아이디 열 크기*/
+	.ulTable > li > ul > li:first-child +li+li+li      {width:20%;} /*닉네임 열 크기*/
+	.ulTable > li > ul > li:first-child +li+li+li+li   {width:20%;} /*가입일 열 크기*/
+	
 	
 	#divPaging {
 		clear:both;
@@ -79,30 +81,37 @@
 		margin:0 auto;
 		text-align:center;
 	}
-	input{
-		text-align:center;
-		float: left;
+	#liSearchOption {clear:both;}
+	#liSearchOption > div {
+	    margin:0 auto; 
+	    margin-top: 30px; 
+	    width:auto; 
+	    height:100px;
+	
 	}
-	#search-field{
+	/* #search-field{
 		margin-left: 3px;
 		margin-right: 3px;
 		margin:0 auto;
 		text-align:center;
 		align-items: center;
+	} */
+	#selSearchOption{
+		height: 38px;
+		width: 120px;
 	}
-	input.search{
-		height: 40px;
-		width: 250px;
-		margin: 0 auto;
-		align-items: center;
+	#txtKeyWord {
+		width: 180px;
+		height: 38px;
+		margin-top: 2px;
 	}
-	.searchBtn{
+	.Btn{
 		font-family: "Raleway", sans-serif;
 	    font-weight: 600;
 	    font-size: 14px;
 	    border-style : none;
-	    margin-left : 10px;
-  		padding: 12px 32px;
+	    margin-left : 5px;
+  		padding: 11px 32px;
 	    border-radius: 5px;
 	    border: 2px solid #1d284b;
 	    transition: 0.3s;
@@ -112,6 +121,10 @@
   		width: 150px;
 	    letter-spacing: 1px;
   		color : white;
+	}
+	#removeBtn {
+		position: relative;
+		left: 300px;
 	}
 </style>
 </head>
@@ -152,6 +165,7 @@
 				<ul class="ulTable">
 					<li>
 						<ul>
+							<li><input type="checkbox" name="" value="all" id="chk_all"></li>
 							<li>회원번호</li>
 							<li>아이디</li>
 							<li>닉네임</li>
@@ -160,37 +174,48 @@
 					</li>
 					<li>
 						<ul>
+							<li><input type="checkbox" name="" value="vallyball" class="one-chk"></li>
 							<li>1</li>
 							<li>admin</li>
-							<li>관리자</li>
+							<li><a href="member_detail.jsp">관리자</a></li>
 							<li>2021.09.28</li>
 						</ul>
 					</li>
 					<li>
 						<ul>
+							<li><input type="checkbox" name="" value="vallyball" class="one-chk"></li>
 							<li>1</li>
 							<li>admin</li>
-							<li>관리자</li>
+							<li><a href="member_detail.jsp">관리자</a></li>
 							<li>2021.09.28</li>
 						</ul>
+					</li><br><br>
+					<li>
+						<div id="divPaging">
+							<div>◀</div>
+							<div><b>1</b></div>
+							<div>2</div>
+							<div>3</div>
+							<div>4</div>
+							<div>5</div>
+							<div>▶</div>
+						</div>
 					</li>
+					<li>
+							<button id="removeBtn" class="Btn" onclick="onRemoveClick()">회원탈퇴</button>
+					</li><br><br><br>
+					<li id='liSearchOption'>
+	                    <div>
+	                        <select id='selSearchOption' >
+	                            <option value='nick'>닉네임</option>
+	                            <option value='id'>아이디</option>
+	                        </select>
+	                        <input id='txtKeyWord' />
+	                        <input class="Btn" type='button' value='검색'/>
+	                    </div>
+		            </li>
 				</ul>
 			</div><br><br>
-			<div id="divPaging">
-				<div>◀</div>
-				<div><b>1</b></div>
-				<div>2</div>
-				<div>3</div>
-				<div>4</div>
-				<div>5</div>
-				<div>▶</div>
-			</div>
-			<div class="row justify-content-center">
-				<div id="search-field">
-					<input type="text" class="search" placeholder="ID,닉네임 검색" name="usersearch">
-					<button class="searchBtn">search</button>
-				</div>
-			</div>
 		</section>
 	</main>
 	<br><br><br>
@@ -226,5 +251,30 @@
 <!-- End Footer -->
 <!-- Vendor JS Files -->
 	<script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+		<script>
+		function onRemoveClick(){
+			var removecheck = window.confirm("회원을 탈퇴시키겠습니까?");
+			if(removecheck) {
+				console.log("네");
+			}else {
+				console.log("아니오");
+			}
+		}
+		$(document).on('click','#chk_all',function(){
+			if($('#chk_all').is(':checked')){
+				$('.one-chk').prop('checked',true);
+			}else{
+				$('.one-chk').prop('checked',false);
+			}
+		});
+		$(document).on('click','one-chk',function(){
+			if($('input[class=one-chk]:checked').length==$('one-chk').legth){
+				$('#chk_all').prop('checked',true);
+			}else{
+				$('#chk_all').prop('checked',false);
+			}
+		});
+	</script>
 </body>
 </html>
