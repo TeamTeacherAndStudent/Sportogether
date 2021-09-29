@@ -99,14 +99,14 @@
 	    font-size: 14px;
 	    border-style : none;
 	    margin-left : 5px;
-  		padding: 11px 32px;
+  		padding: 12px 12px;
 	    border-radius: 5px;
 	    border: 2px solid #1d284b;
 	    transition: 0.3s;
 	    line-height: 1;
   		background-color: #1d284b;
   		cursor: pointer;
-  		width: 150px;
+  		width: 80px;
 	    letter-spacing: 1px;
   		color : white;
   		position: relative;
@@ -191,7 +191,7 @@
 				<div>5</div>
 				<div>▶</div>
 			</div>
-			<button id="removeBtn" class="Btn" onclick="onRemoveClick()">회원탈퇴</button>
+			<button id="removeBtn" class="Btn" onclick="onRemoveClick()">삭제</button>
 		</section>
 	</main>
   <!-- ======= Footer ======= -->
