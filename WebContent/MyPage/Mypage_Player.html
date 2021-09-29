@@ -59,7 +59,7 @@ table.p-table {
 }
 
 table.p-table th {
-	width: 500px;
+	width: 900px;
 	padding: 10px;
 	font-weight: bold;
 	vertical-align: top;
@@ -69,7 +69,7 @@ table.p-table th {
 }
 
 table.p-table td {
-	width: 500px;
+	width: 900px;
 	padding: 10px;
 	vertical-align: top;
 	border-bottom: 1px solid #ccc;
@@ -79,13 +79,12 @@ table.p-table td {
 table.p-table tr:nth-child(2) {
 	height: 500px;
 }
-/* table.p-table tr:nth-child(3) button{
-	font-size: 1.1em;
-	border-radius : 10px;
-  	background-color :  rgb(58, 121, 191);
-	color : white;
-  	border-style : none;
-} */
+
+.p-table tr:nth-child(4) td {
+	text-align: right;
+	justify-contnet: space-between;
+}
+
 button {
 	background-color: #1d284b;
 	color: white;
@@ -112,16 +111,16 @@ button:hover {
 }
 
 /* 파일명 upload-name  */
-input .upload-name {
-	diplay: inline-block;
+.upload-name {
+	display: inline-block;
 	padding: 12px 32px; /* label의 패딩값과 일치 */
-	font-size: inheirt;
+	font-size: inherit;
 	font-family: inherit;
 	line-height: normal;
 	vertical-align: middle;
 	background-color: #f5f5f5;
 	border: 1px solid #ebebeb;
-	width: 600px;
+	width: 660px;
 	height: 38px;
 }
 
@@ -193,41 +192,40 @@ input .upload-name {
 		</section>
 
 
-		
+
 		<section>
 			<div id="main-content">
 				<table class="p-table">
 					<thead>
 						<tr>
-							<th scope="cols" colspan="6">선수인증</th>
+							<th scope="cols">선수인증</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
-							<td colspan="6">이메일 : admin@kh.com</td>
+							<td>이메일 : admin@kh.com</td>
 						</tr>
 						<tr>
-							<td colspan="6"><textarea rows="20"
-									style="width: 100%; border: 0;"
+							<td><textarea rows="20" style="width: 100%; border: 0;"
 									placeholder="선수인증에 관한 증빙 자료를 첨부하셔야 합니다. 따로 문의사항이 있다면 내용에 기입하셔서 문의주세요."></textarea>
 							</td>
 						</tr>
 						<tr>
-							<td colspan="5">
+							<td>
 								<!-- &nbsp;&nbsp;첨부파일 &nbsp;&nbsp; &nbsp;&nbsp;<input type="file"> -->
-								<input type="text" class="upload-name" readonly="readonly">
+								<input type="text" class="upload-name" readonly="readonly">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								<label class="input-file-button" for="input-file"> 파일
 									업로드</label> <input type="file" id="input-file"> <!-- 파일 버튼 숨김 -->
 							</td>
 
-							<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								&nbsp;&nbsp;&nbsp;&nbsp;
+						</tr>
+						<tr>
+							<td>
 								<button>등록</button>&nbsp;&nbsp;&nbsp;&nbsp;
 								<button>취소</button>
 							</td>
 						</tr>
+
 
 					</tbody>
 				</table>
@@ -238,7 +236,17 @@ input .upload-name {
 		</section>
 
 	</main>
-
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
 
 
 	<!-- footer 옆으로 넘어감 방지 -->
@@ -261,8 +269,7 @@ input .upload-name {
 				<option value="http://www.kahperd.or.kr/">한국체육학회</option>
 				<option
 					value="https://www.sports.re.kr/front/main/main.do?menu_seq=0">한국정책과학원</option>
-			</select> <br>
-			<br>
+			</select> <br> <br>
 			<div class="copyright">
 				&copy; Copyright <strong><span>SPORTOGETHER</span></strong>. All
 				Rights Reserved
