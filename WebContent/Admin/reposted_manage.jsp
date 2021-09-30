@@ -44,6 +44,7 @@
 	.container{
 		margin: 0 auto;
 	}
+	
 	ul, li{
 		list-style: none;
 		text-align: center;

@@ -27,10 +27,10 @@
   <script src="../assets/js/main.js"></script>
   <script src = "../assets/js/waypoints.min.js"></script>
   
-  <!-- Quill js Editor 메인 라이브러리-->
-  <script src="//cdn.quilljs.com/1.3.6/quill.min.js"></script>
-  <!-- Quill 테마 css -->
-  <link href="//cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+  <!-- jQuery  CDN -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+  
 	<!-- 추가 -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <title>자유게시판</title>
@@ -138,7 +138,7 @@
       <nav id="navbar" class="navbar">
         <ul>
           <li><a class="active" href="../Sports/sportsList.jsp">종목</a></li>
-          <li><a href="freeboard.html">자유게시판</a></li>
+          <li><a href="Board/board_main.jsp">자유게시판</a></li>
           <li><a href="support.html">후원</a></li>
           <li><input type="search" placeholder="검색" size="5"></li>
           <li class="dropdown"><a href="#"><span>SIDE MENU</span> <i class="bi bi-chevron-down"></i></a>
@@ -161,7 +161,7 @@
         <div class="container">
 		  <h2 class="box">게시판 글쓰기</h2>
 		  <div id="form">
-			<form action ="../Sports/sportsDetail.jsp" method="post" name="sportEnroll" target="_self">
+			<form action ="" method="post" name="sportEnroll">
 				 <select name="sportsName">
       					<option value="">종목선택</option>
       					<option value="">배구</option>
@@ -172,23 +172,23 @@
       					<option value="">사이클</option>
       					<option value="">기타</option>
 			      </select>
-			      <input type="text" id="title" class="fomr-control" maxlength="50" pattern=".{4,50}" placeholder="제목입력(4-50)" size="100" required>
+			      <input type="text" id="title" maxlength="50" pattern=".{4,50}" placeholder="제목입력(4-50)" size="100" required>
 			      <br><br>
 				<textarea class="form-control" rows="30" cols="70" id="content"
 				    name="content" placeholder="내용 작성"></textarea>
-			    <div id="quillEditor"></div>
+			    <div id="editor"></div>
 				<div id="image_container"></div><br>
 				<div class="file-upload">
 					<input type="text" class="upload-name" readonly>
 					<label class="input-file-button" for="input-file">파일 업로드</label>
 					<input type="file" id="input-file" multiple="multiple"><!-- 파일버튼 숨김 -->
 				</div>
-			</form>
 			</div>
 			<br><br>
-		    <button id="previewBtn" class="Btn">미리보기</button>
-		    <input type="submit" value="등록" class="Btn">
-		    <a href="board_main.html"><input type="reset" value="취소" class="Btn"></a>
+			    <button id="previewBtn" class="Btn">미리보기</button>
+			    <input type="submit" value="등록" class="Btn" onClick="onEnrollClick();">
+			    <a href="board_main.jsp"><input type="reset" value="취소" class="Btn"></a>
+			</form>
 		</div>
    </main><br><br><br>
   <!-- ======= Footer ======= -->
@@ -221,15 +221,22 @@
     </div>
 </footer>
 <script>
+//등록 클릭이벤트
+	function onEnrollClick() {
+		var enrollResult = window.confirm("게시판 등록을 하시겠습니까?");
+		if(enrollResult) {
+			console.log("Yes!");
+		}else{
+			console.log("No~");
+		}
+	}
 	//파일 경로 무조건 C:\fakepath\
 	//지금 작동안함
-		$(document).ready(function(){
-			$('.upload-name').val('파일선택');
-			$('#input-file').change(function(){
-				var filename = $(this).val();
-				$('.upload-name').val(filename);
-			});
-		});
+	$(function(){
+		$('#input-file').change(function(){
+	 		var filename = $(this).val();
+	 		$('.upload-name').val(filename);
+	});
 	//이미지 미리보기
 	function setDetailImage(event){
 			for(var image of event.target.files){

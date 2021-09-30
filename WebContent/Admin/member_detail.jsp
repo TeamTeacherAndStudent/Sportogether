@@ -36,7 +36,7 @@
 }
 
 #main-title h1 {
-	color: #1d284b;
+	color: rgb(140, 158, 91);
 	/* margin-left: 15%; */
 	font-weight: bolder;
 	line-height: 50px;
@@ -118,7 +118,7 @@ button {
 	font-size: 14px;
 	letter-spacing: 1px;
 	display: inline-block;
-	padding: 12px 20px;
+	padding: 12px 10px;
 	border-radius: 5px;
 	transition: 0.3s;
 	line-height: 1;
@@ -160,7 +160,7 @@ function onStatusClick(){
 			class="container d-flex align-items-center justify-content-between">
 			<!-- 여기에 로고 사진 추가 -->
 			<h1 class="logo">
-				<a href="index.html"> Sportogether </a>
+				<a href="../index.html"> Sportogether </a>
 			</h1>
 			<!-- Uncomment below if you prefer to use an image logo -->
 			<!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
@@ -191,7 +191,7 @@ function onStatusClick(){
 	<main>
 		<section>
 			<div id="main-title">
-				<h1>회원 상세</h1>
+				<h1>회원 조회</h1>
 			</div>
 		</section>
 
@@ -216,7 +216,6 @@ function onStatusClick(){
 						</div>
 						<br>
 						<div class="button">
-						<!-- <button id="removeBtn" onclick="onRemoveClick()">회원탈퇴</button> -->
 							<button id="statusBtn" onclick="onStatusClick();">선수등록</button>
 					<a href="member_manage.jsp"><button id="backBtn">뒤로가기</button></a>
 						</div>

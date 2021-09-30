@@ -28,6 +28,7 @@
 	    vertical-align:middle;
 	    line-height:30px;
    		color: rgb(140, 158, 91);
+   		font-weight: bold;
 	    text-align: center;
 	}
 		.ulTable {

@@ -20,6 +20,7 @@
   <link href="../assets/css/style.css" rel="stylesheet">
   <!-- jQuery  CDN -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
   <style>
   /*제목*/
 	h1{
