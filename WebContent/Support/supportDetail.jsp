@@ -249,9 +249,9 @@
 			</div>
 			<div class="col-md-1">
 				<!-- 관리자 캠페인 삭제 버튼 -->
-					<div id = "spt-delete">
-						<button type="button" id="" class="btn btn-default"> 캠페인 삭제</button>
-					</div>
+<!-- 					<div id = "spt-delete"> -->
+<!-- 						<button type="button" id="" class="btn btn-default"> 캠페인 삭제</button> -->
+<!-- 					</div> -->
 			</div>
 			
 		</div>
