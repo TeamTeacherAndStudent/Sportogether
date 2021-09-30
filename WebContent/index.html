@@ -28,10 +28,17 @@
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
   <style>
-    #count{
+   h2{
+  		 color: rgb(140, 158, 91);
+	    font-weight: bold;
+   }
+    .day-count{
     width: 100%;
-    text-align: center;
-    
+    text-align: left;
+    font-weight: bold;
+    }
+    #search{
+    	margin-left: 30px;
     }
   </style>
 
@@ -45,20 +52,35 @@
 <body>
 <script>
 	//d-day 자바스크립트
-	var dday = new Date("November 30, 2020, 0:00:00").getTime();
-
+	var Eventdday = new Date("November 30, 2023, 0:00:00").getTime();
+	
 	setInterval(function() {
 	  var today = new Date().getTime();
-	  var gap = dday - today;
+	  var gap = Eventdday - today;
 	  var day = Math.ceil(gap / (1000 * 60 * 60 * 24));
 	  var hour = Math.ceil((gap % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
 	  var min = Math.ceil((gap % (1000 * 60 * 60)) / (1000 * 60));
 	  var sec = Math.ceil((gap % (1000 * 60)) / 1000);
 
-	  document.getElementById("count").innerHTML = "D-DAY까지 " + day + "일 " + hour + "시간 " + min + "분 " + sec + "초 남았습니다.";
+	  document.getElementById("Eventcount1").innerHTML = "전국체전 D-day : " + day + "일 " + hour + "시간 " + min + "분 " + sec + "초";
 	}, 1000);
  	
-          	
+ 	var Eventdday2 = new Date("July 26, 2024, 0:00:00").getTime();
+		setInterval(function() {
+		  var today = new Date().getTime();
+		  var gap = Eventdday2 - today;
+		  var day = Math.ceil(gap / (1000 * 60 * 60 * 24));
+		  var hour = Math.ceil((gap % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+		  var min = Math.ceil((gap % (1000 * 60 * 60)) / (1000 * 60));
+		  var sec = Math.ceil((gap % (1000 * 60)) / 1000);
+  
+		document.getElementById("Eventcount2").innerHTML = "2024년 파리올림픽 D-day : " + day + "일 " + hour + "시간 " + min + "분 " + sec + "초";
+	}, 1000);
+	   
+	$(".counter").counterUp({
+		delay: 20,
+		time : 2000
+	});
 </script>
 
   <!-- ======= Header ======= -->
@@ -74,7 +96,7 @@
           <li><a class="active" href="sports.html">종목</a></li>
           <li><a href="freeboard.html">자유게시판</a></li>
           <li><a href="support.html">후원</a></li>
-          <li><input type="search" placeholder="검색" size="5"></li>
+          <li><input type="search" placeholder="검색" size="10" id="search"></li>
           <li class="dropdown"><a href="#"><span>SIDE MENU</span> <i class="bi bi-chevron-down"></i></a>
           <ul>
              <li><a href="notice.html">공지사항</a></li>     
@@ -126,24 +148,21 @@
 
     <!-- =======Section ======= -->
     <section id="about" class="about">
-    <div id="count">
-    	<div>
-    	<ul>
-    		<li>전국체전 D-100</li>
-    		<li>2025 파리 올림픽 D-490</li>
-    	</ul>
-    	</div>
-    </div>
-    <div class="container">
+   		 <div class="container">
 	<!--Start of counter-->
       <section id="counter">
+	   		 <div class="day-count">
+			    	<div id="Eventcount1"></div>
+			    	<div id="Eventcount2"></div>
+			 </div>
+	    </div><br><br>
           <div class="counter_img_overlay">
               <div class="container">
                   <div class="row">
                       <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                          <div class="counter_header">
-                              <h2>통계</h2>
-                          </div>
+                               <div class="section-title">
+						          <h2>통계</h2>
+						        </div>
                       </div>
                       <!--End of col-md-12-->
                   </div>
@@ -291,12 +310,6 @@
   <script src = "assets/js/jquery-1.12.3.min.js"></script>
   <script src = "assets/js/jquery.counterup.min.js"></script>
   <script src = "assets/js/waypoints.min.js"></script>
-<script>
-	$(".counter").counterUp({
-			delay: 20,
-			time : 2000
-	});
-</script>
 </body>
 
 </html>

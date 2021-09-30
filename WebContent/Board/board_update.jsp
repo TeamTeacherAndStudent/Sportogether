@@ -171,9 +171,9 @@
       					<option value="">사이클</option>
       					<option value="">기타</option>
 			      </select>
-			     <input type="text" id="title" class="form-control" maxlength="50" pattern=".{4,50}" placeholder="제목을 입력해주세요." size="100" required>
+			     <input type="text" id="title" maxlength="50" pattern=".{4,50}" placeholder="제목을 입력해주세요." size="70" required>
 			      <br><br>
-			    <textarea class="form-control" rows="30" cols="70" id="editor"
+			    <textarea rows="30" cols="100" id="editor"
    				 name="content" placeholder="내용을 작성해주세요."></textarea>
 				<div id="image_container"></div><br>
 				<div class="file-upload">
@@ -184,8 +184,8 @@
 			</div>
 			<br><br>
 			    <button id="previewBtn" class="Btn">미리보기</button>
-			    <input type="submit" value="등록" class="Btn" onClick="onEnrollClick();">
-			    <a href="board_main.jsp"><input type="reset" value="취소" class="Btn"></a>
+			    <input type="submit" value="수정" class="Btn" onClick="onEnrollClick();">
+			    <input type="reset" value="취소" class="Btn">
 			</form>
 		</div>
    </main><br><br><br>
@@ -238,23 +238,6 @@
 				$('.upload-name').val(filename);
 			});
 		});
-	//이미지 미리보기
-	function setThumbnail(event) { 
-		var reader = new FileReader();
-		reader.onload = function(event) {
-			var img = document.createElement("img");
-			img.setAttribute("src", event.target.result);
-			document.querySelector("div#image_container").appendChild(img);
-		}; 
-		reader.readAsDataURL(event.target.files[0]);
-	}
-
-	//에디터
-	  ClassicEditor
-        .create( document.querySelector( '#editor' ) )
-        .catch( error => {
-            console.error( error );
-        } );
 </script>
 </body>
 </html>

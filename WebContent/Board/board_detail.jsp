@@ -250,11 +250,12 @@
 
 <script>
 	function onLikeChange(){
-		$('#likeBtn').addClass('like');
-		if($(this).attr("checked", true)){
-				$(this).removeClass('like');
-		}else if($(this).attr("checked", false)){
-				$(this).addClass('like');
+		$("#likeBtn").addClass('like');
+		console.log($("#likeBtn").attr("class"));
+		if($("#likeBtn").attr('class') == 'like'){
+			$(this).removeClass('like');
+		}else{ 
+			$(this).addClass('like');
 		}
 		
 		/* var likeClick = document.getElementById("likeBtn")
