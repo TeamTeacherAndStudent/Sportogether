@@ -2,400 +2,512 @@
 <html>
 <head>
 <meta charset="UTF-8">
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+<!-- Google Fonts -->
+<link
+	href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+	rel="stylesheet">
 
-  <!-- Vendor CSS Files -->
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-  <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
-  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+<!-- Vendor CSS Files -->
+<link href="../assets/vendor/bootstrap/css/bootstrap.min.css"
+	rel="stylesheet">
+<link href="../assets/vendor/bootstrap-icons/bootstrap-icons.css"
+	rel="stylesheet">
+<link href="../assets/vendor/boxicons/css/boxicons.min.css"
+	rel="stylesheet">
+<link href="../assets/vendor/glightbox/css/glightbox.min.css"
+	rel="stylesheet">
+<link href="../assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+<link href="../assets/vendor/swiper/swiper-bundle.min.css"
+	rel="stylesheet">
 
-  <!-- Template Main CSS File -->
-  <link href="assets/css/style.css" rel="stylesheet">
-  <style>
-  #main{
-    width: 100%;
-    height: 800px;
-}
-.box{
-    color: rgb(140, 158, 91);
-}
-#h1-img{
-    width: 50px;
-    height: 50px;
-    position: relative;
-    top: 10px;
-}
-h2{
-  padding: 5px 10px;
-  border-bottom:1px solid #848484;
-  border-left:8px solid #848484;
+<!-- Template Main CSS File -->
+<link href="../assets/css/style.css" rel="stylesheet">
+<style>
+#main-title {
+	margin-top: 2%;
+	width: 100%;
+	height: 100px;
+	padding: 1.5%;
 }
 
-
-ul, li{ 
-    list-style:none;
-    text-align:center;
-    padding:0;
-    margin:0;
+#main-title h1 {
+	color: #1d284b;
+	/* margin-left: 15%; */
+	font-weight: bolder;
+	line-height: 50px;
+	text-align: center;
 }
 
-#mainWrapper{
-    width: 950px;
-    margin: 0 auto; 
+h2 {
+	padding: 5px 10px;
+	border-bottom: 1px solid #848484;
+	border-left: 8px solid #848484;
 }
 
-#mainWrapper > ul > li:first-child {
-    text-align: center;
-    font-size:14pt;
-    height:40px;
-    vertical-align:middle;
-    line-height:30px;
+ul, li {
+	list-style: none;
+	text-align: center;
+	padding: 0;
+	margin: 0;
 }
 
-#ulTable {margin-top:10px;}
+#mainWrapper {
+	width: 950px;
+	margin: auto;
+	justify-content: center;
+	vertical-align: middle;
+	align-items: center;
 
-
-#ulTable > li:first-child > ul > li {
-    background-color:#c9c9c9;
-    font-weight:bold;
-    text-align:center;
 }
 
-#ulTable > li > ul {
-    clear:both;
-    padding:0px auto;
-    position:relative;
-    min-width:50px;
+#mainWrapper>ul>li:first-child {
+	text-align: center;
+	font-size: 14pt;
+	height: 40px;
+	vertical-align: middle;
+	line-height: 30px;
 }
-#ulTable > li > ul > li { 
-    float:left;
-    font-size:10pt;
-    border-bottom:1px solid silver;
-    vertical-align:baseline;
-}    
 
-#ulTable > li > ul > li:first-child                {width:10%;} /*No 열 크기*/
-#ulTable > li > ul > li:first-child +li            {width:35%;} /*제목 열 크기*/
-#ulTable > li > ul > li:first-child +li+li         {width:20%;} /*작성일 열 크기*/
-#ulTable > li > ul > li:first-child +li+li+li      {width:15%;} /*작성자 열 크기*/
-#ulTable > li > ul > li:first-child +li+li+li+li   {width:10%;} /*추천수 열 크기*/
-#ulTable > li > ul > li:first-child +li+li+li+li+li{width:10%;} /*조회수 열 크기*/
+#ulTable {
+	margin-top: 10px;
+}
+
+#ulTable ul {
+width : 100%;
+} 
+#ulTable>li:first-child>ul>li {
+	background: #165992;
+	color: #fff;
+	font-weight: bold;
+	text-align: center;
+}
+
+#ulTable>li>ul {
+	clear: both;
+	padding: 0px auto;
+	position: relative;
+	min-width: 50px;
+}
+
+#ulTable>li>ul>li {
+	float: left;
+	font-size: 10pt;
+	border-bottom: 1px solid silver;
+	vertical-align: baseline;
+}
+
+#ulTable>li>ul>li:first-child {
+	width: 10%;
+} /*No 열 크기*/
+#ulTable>li>ul>li:first-child+li {
+	width: 30%;
+} /*제목 열 크기*/
+#ulTable>li>ul>li:first-child+li+li {
+	width: 25%;
+} /*작성일 열 크기*/
+#ulTable>li>ul>li:first-child+li+li+li {
+	width: 15%;
+} /*작성자 열 크기*/
+#ulTable>li>ul>li:first-child+li+li+li+li {
+	width: 10%;
+} /*추천수 열 크기*/
+#ulTable>li>ul>li:first-child+li+li+li+li+li {
+	width: 10%;
+} /*조회수 열 크기*/
 
 #divPaging {
-      clear:both; 
-    margin:0 auto; 
-    width:220px; 
-    height:50px;
+	clear: both;
+	margin: 0 auto;
+	padding : 20px;
+	width: 250px;
+	height: 50px;
 }
 
-#divPaging > div {
-    float:left;
-    width: 30px;
-    margin:0 auto;
-    text-align:center;
+#divPaging>div {
+	float: left;
+	width: 30px;
+	margin: 0 auto;
+	text-align: center;
 }
 
-#liSearchOption {clear:both;}
-#liSearchOption > div {
-    margin:0 auto; 
-    margin-top: 30px; 
-    width:auto; 
-    height:100px;
+#liSearchOption {
+	clear: both;
+}
 
+#liSearchOption>div {
+	margin: 0 auto;
+	margin-top: 30px;
+	width: auto;
+	height: 100px;
 }
 
 .left {
-    text-align : left;
+	text-align: left;
 }
-#button-div1{
-    position: relative;
-    left: 450px;
-    bottom: 15px;
+
+#button-div1 {
+	position: relative;
+	left: 450px;
+	bottom: 15px;
 }
-#box1{
-margin: 0px;
-float: right;
+
+
+#divPaging>div {
+	float: left; 
+	width: 30px;
+	margin: 0 auto;
+	text-align: center;
 }
-  </style>
-<title>공지사항 ListPage</title>
+
+#back-btn {
+	margin-left: 25%;
+	margin-right: 20%;
+	text-align: right;
+}
+
+button {
+	background-color: #1d284b;
+	color: white;
+	border-style: none;
+	font-family: "Raleway", sans-serif;
+	font-weight: 600;
+	font-size: 14px;
+	letter-spacing: 1px;
+	display: inline-block;
+	padding: 12px 32px;
+	border-radius: 5px;
+	transition: 0.3s;
+	line-height: 1;
+	-webkit-animation-delay: 0.8s;
+	animation-delay: 0.8s;
+	margin-top: 6px;
+	border: 2px solid #1d284b;
+}
+
+button:hover {
+	background: #006fbe;
+	color: #fff;
+	text-decoration: none;
+}
+
+#search-btn{
+	background-color: #1d284b;
+	color: white;
+	border-style: none;
+	font-family: "Raleway", sans-serif;
+	font-weight: 600;
+	font-size: 14px;
+	letter-spacing: 1px;
+	display: inline-block;
+	padding: 9px 20px;
+	border-radius: 5px;
+	transition: 0.3s;
+	line-height: 1;
+	-webkit-animation-delay: 0.8s;
+	animation-delay: 0.8s;
+	margin-top: 6px;
+	border: 2px solid #1d284b;
+}
+
+#search-btn:hover{
+	background: #006fbe;
+	color: #fff;
+	text-decoration: none;
+}
+</style>
+<title>공지사항</title>
 </head>
 
 <body>
- <header id="header" class="fixed-top">
-    <div class="container d-flex align-items-center justify-content-between">
-<!-- 여기에 로고 사진 추가 -->
-      <h1 class="logo"><a href="index.html"> Sportogether </a></h1>
-      <!-- Uncomment below if you prefer to use an image logo -->
-      <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+	<header id="header" class="fixed-top">
+		<div
+			class="container d-flex align-items-center justify-content-between">
+			<!-- 여기에 로고 사진 추가 -->
+			<h1 class="logo">
+				<a href="index.html"> Sportogether </a>
+			</h1>
+			<!-- Uncomment below if you prefer to use an image logo -->
+			<!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
-      <nav id="navbar" class="navbar">
-        <ul>
-          <li><a class="active" href="sports.html">종목</a></li>
-          <li><a href="freeboard.html">자유게시판</a></li>
-          <li><a href="support.html">후원</a></li>
-          <li><input type="search" placeholder="검색" size="5"></li>
-          <li class="dropdown"><a href="#"><span>SIDE MENU</span> <i class="bi bi-chevron-down"></i></a>
-          <ul>
-             <li><a href="notice.html">공지사항</a></li>     
-             <li><a href="myinfo.html">마이페이지</a></li>
-             <li><a href="qna.html">1:1문의</a></li>
-          </ul>
-          </li>
-        </ul>
-        <i class="bi bi-list mobile-nav-toggle"></i>
-      </nav><!-- .navbar -->
+			<nav id="navbar" class="navbar">
+				<ul>
+					<li><a class="active" href="sports.html">종목</a></li>
+					<li><a href="freeboard.html">자유게시판</a></li>
+					<li><a href="support.html">후원</a></li>
+					<li><input type="search" placeholder="검색" size="5"></li>
+					<li class="dropdown"><a href="#"><span>SIDE MENU</span> <i
+							class="bi bi-chevron-down"></i></a>
+						<ul>
+							<li><a href="notice.html">공지사항</a></li>
+							<li><a href="myinfo.html">마이페이지</a></li>
+							<li><a href="qna.html">1:1문의</a></li>
+						</ul></li>
+				</ul>
+				<i class="bi bi-list mobile-nav-toggle"></i>
+			</nav>
+			<!-- .navbar -->
 
-    </div>
-  </header><!-- End Header -->
+		</div>
+	</header>
+	<!-- End Header -->
 
-<br><br><br><br>
-    <main id="main">
-        <div id="mainWrapper">
-            <ul>
-                <li>
-                    <h1 class="box">공지사항</h1>
+	<!--  === Main ===  -->
+	<main id="main">
+		<section>
+			<div id="main-title">
+				<h1>공지사항</h1>
+			</div>
+		</section>
 
-           
-                    <ul id ="ulTable">
-                        <li>
-                            <ul>
-                                <li>No</li>
-                                <li>제목</li>
-                                <li>작성일</li>
-                                <li>작성자</li>
-                                <li>조회수</li>
-                            </ul>
-                        </li>
-                        <li>
-                            <ul>
-                                <li>1</li>
-                                <li class="left">1번째 공지사항</li>
-                                <li>2021.08.01</li>
-                                <li>관리자</li>
-                                <li>15</li>
-                            </ul>
-                        </li>
-    
-                        <li>
-                            <ul>
-                                <li>2</li>
-                                <li class="left">2번째 공지사항</li>
-                                <li>2021.08.02</li>
-                                <li>관리자</li>
-                                <li>10</li>
-                            </ul>
-                        </li>
-    
-                        <li>
-                            <ul>
-                                <li>3</li>
-                                <li class="left">3번째 공지사항</li>
-                                <li>2021.08.02</li>
-                                <li>관리자</li>
-                                <li>1</li>
-                            </ul>
-                        </li>
-                        <li>
-                            <ul>
-                                <li>4</li>
-                                <li class="left">4번째 공지사항</li>
-                                <li>2021.08.03</li>
-                                <li>관리자</li>
-                                <li>15</li>
-                            </ul>
-                        </li>
-                        <li>
-                            <ul>
-                                <li>5</li>
-                                <li class="left">5번째 공지사항</li>
-                                <li>2021.08.10</li>
-                                <li>관리자</li>
-                                <li>4</li>
-                            </ul>
-                        </li>
-                        <li>
-                            <ul>
-                                <li>6</li>
-                                <li class="left">6번째 공지사항</li>
-                                <li>2021.08.11</li>
-                                <li>관리자</li>
-                                <li>5</li>
-                            </ul>
-                        </li>
-                        <li>
-                            <ul>
-                                <li>7</li>
-                                <li class="left">7번째 공지사항</li>
-                                <li>2021.08.12</li>
-                                <li>관리자</li>
-                                <li>15</li>
-                            </ul>
-                        </li>
-                        <li>
-                            <ul>
-                                <li>8</li>
-                                <li class="left">8번째 공지사항</li>
-                                <li>2021.08.13</li>
-                                <li>관리자</li>
-                                <li>20</li>
-                            </ul>
-                        </li>
-                        <li>
-                            <ul>
-                                <li>9</li>
-                                <li class="left">9번째 공지사항</li>
-                                <li>2021.08.13</li>
-                                <li>관리자</li>
-                                <li>10</li>
-                            </ul>
-                        </li>
-                        <li>
-                            <ul>
-                                <li>10</li>
-                                <li class="left">10번째 공지사항</li>
-                                <li>2021.08.14</li>
-                                <li>관리자</li>
-                                <li>11</li>
-                            </ul>
-                        </li>
-                        <li>
-                            <ul>
-                                <li>11</li>
-                                <li class="left">11번째 공지사항</li>
-                                <li>2021.08.14</li>
-                                <li>관리자</li>
-                                <li>12</li>
-                            </ul>
-                        </li>
-                        <li>
-                            <ul>
-                                <li>12</li>
-                                <li class="left">12번째 공지사항</li>
-                                <li>2021.08.15</li>
-                                <li>관리자</li>
-                                <li>0</li>
-                            </ul>
-                        </li>
-                        <li>
-                            <ul>
-                                <li>13</li>
-                                <li class="left">13번째 공지사항</li>
-                                <li>2021.08.17</li>
-                                <li>관리자</li>
-                                <li>50</li>
-                            </ul>
-                        </li>
-                        <li>
-                            <ul>
-                                <li>14</li>
-                                <li class="left">14번째 공지사항</li>
-                                <li>2021.08.20</li>
-                                <li>관리자</li>
-                                <li>20</li>
-                            </ul>
-                        </li>
-                        <li>
-                            <ul>
-                                <li>15</li>
-                                <li class="left">15번째 공지사항</li>
-                                <li>2021.08.25</li>
-                                <li>관리자</li>
-                                <li>2</li>
-                            </ul>
-                        </li>
-    
-                        <li>
-                            <ul>
-                                <li>16</li>
-                                <li class="left">16번째 공지사항</li>
-                                <li>2021.08.30</li>
-                                <li>관리자</li>
-                                <li>3</li>
-                            </ul>
-                        <li>                                        
-                    </ul>
-                </li>
-    
-                <li>
-                    <div id="divPaging">
-                        <div>◀</div>
-                        <div><b>1</b></div>
-                        <div>2</div>
-                        <div>3</div>
-                        <div>4</div>
-                        <div>5</div>
-                        <div>▶</div>
-                        <a href="boardWrite.html"><input id="button-div1" type="button" value="글쓰기"></a>
-                    </div>
-                </li>
-    
-                <li id='liSearchOption'>
-                    <div>
-                        <select id='selSearchOption' >
-                            <option value='A'>제목+내용</option>
-                            <option value='T'>제목</option>
-                            <option value='C'>내용</option>
-                        </select>
-                        <input id='txtKeyWord' />
-                        <input type='button' value='검색'/>
-                    </div>
-                    </li>
-            </ul>
-        </div>
-    </main>
+		<div id="mainWrapper">
+			<ul>
+				<li>
+					<ul id="ulTable">
+						<li>
+							<ul>
+								<li>No</li>
+								<li>제목</li>
+								<li>작성일</li>
+								<li>작성자</li>
+								<li>조회수</li>
+							</ul>
+						</li>
+						<li>
+							<ul>
+								<li>1</li>
+								<li class="left">1번째 공지사항</li>
+								<li>2021.08.01</li>
+								<li>관리자</li>
+								<li>15</li>
+							</ul>
+						</li>
 
-   <footer id="footer">
-    <div class="container">
-      <h3>SPORTOGETHER</h3>
-      <!-- 넣을 말 추가 -->
-      <p>모두 모아 그리고 모두 모여 함께 즐깁시다.</p>
-      <select name="sitezip" onchange="if(this.value) window.open(this.value);">
-      	<option value="">관련 사이트 바로가기</option>
-      	<option value="https://www.sports.or.kr/index.do">대한체육회</option>
-      	<option value="https://www.kspo.or.kr/kspo/main/main.do">국민체육진흥공단</option>
-      	<option value="https://www.koreanpc.kr/index.do">대한장애인체육회</option>
-      	<option value="https://www.gb.go.kr/2021sports/sports.html">전국체육대회</option>
-      	<option value="http://k-scf.co.kr/">한국체육지도자연맹</option>
-      	<option value="http://www.kahperd.or.kr/">한국체육학회</option>
-      	<option value="https://www.sports.re.kr/front/main/main.do?menu_seq=0">한국정책과학원</option>
-      </select>
-      <br><br>
-      <div class="copyright">
-        &copy; Copyright <strong><span>SPORTOGETHER</span></strong>. All Rights Reserved
-      </div>
-      <div class="credits">
-        <!-- All the links in the footer should remain intact. -->
-        <!-- You can delete the links only if you purchased the pro version. -->
-        <!-- Licensing information: https://bootstrapmade.com/license/ -->
-        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/family-multipurpose-html-bootstrap-template-free/ -->
-        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-      </div>
-    </div>
-  </footer><!-- End Footer -->
+						<li>
+							<ul>
+								<li>2</li>
+								<li class="left">2번째 공지사항</li>
+								<li>2021.08.02</li>
+								<li>관리자</li>
+								<li>10</li>
+							</ul>
+						</li>
 
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+						<li>
+							<ul>
+								<li>3</li>
+								<li class="left">3번째 공지사항</li>
+								<li>2021.08.02</li>
+								<li>관리자</li>
+								<li>1</li>
+							</ul>
+						</li>
+						<li>
+							<ul>
+								<li>4</li>
+								<li class="left">4번째 공지사항</li>
+								<li>2021.08.03</li>
+								<li>관리자</li>
+								<li>15</li>
+							</ul>
+						</li>
+						<li>
+							<ul>
+								<li>5</li>
+								<li class="left">5번째 공지사항</li>
+								<li>2021.08.10</li>
+								<li>관리자</li>
+								<li>4</li>
+							</ul>
+						</li>
+						<li>
+							<ul>
+								<li>6</li>
+								<li class="left">6번째 공지사항</li>
+								<li>2021.08.11</li>
+								<li>관리자</li>
+								<li>5</li>
+							</ul>
+						</li>
+						<li>
+							<ul>
+								<li>7</li>
+								<li class="left">7번째 공지사항</li>
+								<li>2021.08.12</li>
+								<li>관리자</li>
+								<li>15</li>
+							</ul>
+						</li>
+						<li>
+							<ul>
+								<li>8</li>
+								<li class="left">8번째 공지사항</li>
+								<li>2021.08.13</li>
+								<li>관리자</li>
+								<li>20</li>
+							</ul>
+						</li>
+						<li>
+							<ul>
+								<li>9</li>
+								<li class="left">9번째 공지사항</li>
+								<li>2021.08.13</li>
+								<li>관리자</li>
+								<li>10</li>
+							</ul>
+						</li>
+						<li>
+							<ul>
+								<li>10</li>
+								<li class="left">10번째 공지사항</li>
+								<li>2021.08.14</li>
+								<li>관리자</li>
+								<li>11</li>
+							</ul>
+						</li>
+						<li>
+							<ul>
+								<li>11</li>
+								<li class="left">11번째 공지사항</li>
+								<li>2021.08.14</li>
+								<li>관리자</li>
+								<li>12</li>
+							</ul>
+						</li>
+						<li>
+							<ul>
+								<li>12</li>
+								<li class="left">12번째 공지사항</li>
+								<li>2021.08.15</li>
+								<li>관리자</li>
+								<li>0</li>
+							</ul>
+						</li>
+						<li>
+							<ul>
+								<li>13</li>
+								<li class="left">13번째 공지사항</li>
+								<li>2021.08.17</li>
+								<li>관리자</li>
+								<li>50</li>
+							</ul>
+						</li>
+						<li>
+							<ul>
+								<li>14</li>
+								<li class="left">14번째 공지사항</li>
+								<li>2021.08.20</li>
+								<li>관리자</li>
+								<li>20</li>
+							</ul>
+						</li>
+						<li>
+							<ul>
+								<li>15</li>
+								<li class="left">15번째 공지사항</li>
+								<li>2021.08.25</li>
+								<li>관리자</li>
+								<li>2</li>
+							</ul>
+						</li>
 
-  <!-- Vendor JS Files -->
-  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-  <script src="assets/vendor/php-email-form/validate.js"></script>
-  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-  
-  <!-- Template Main JS File -->
-  <script src="assets/js/main.js"></script>
-  <script src = "assets/js/jquery-1.12.3.min.js"></script>
-  <script src = "assets/js/jquery.counterup.min.js"></script>
-  <script src = "assets/js/waypoints.min.js"></script>
-<script>
-	$(".counter").counterUp({
-			delay: 20,
-			time : 2000
-	});
-</script>
+						<li>
+							<ul>
+								<li>16</li>
+								<li class="left">16번째 공지사항</li>
+								<li>2021.08.30</li>
+								<li>관리자</li>
+								<li>3</li>
+							</ul>
+						<li>
+					</ul>
+				</li>
+				
+				<li>
+					<div id="divPaging">
+						<div>◀</div>
+						<div>
+							<b>1</b>
+						</div>
+						<div>2</div>
+						<div>3</div>
+						<div>4</div>
+						<div>5</div>
+						<div>▶</div>
+
+					</div>
+				</li>
+			</ul>
+		</div>
+
+		<div id="back-btn">
+			<a href="notice_write.html"><button>글쓰기</button></a>
+		</div>
+
+		<section>
+			<ul>
+				<li id='liSearchOption'>
+					<div>
+						<select id='selSearchOption'>
+							<option value='A'>제목+내용</option>
+							<option value='T'>제목</option>
+							<option value='C'>내용</option>
+						</select> <input id='txtKeyWord' /> <input type='button' id="search-btn" value='검색' />
+					</div>
+				</li>
+			</ul>
+		</section>
+	</main>
+
+	<!-- footer 옆으로 넘어감 방지 -->
+	<div style="clear: both;"></div>
+	<footer id="footer">
+		<div class="container">
+			<h3>SPORTOGETHER</h3>
+			<!-- 넣을 말 추가 -->
+			<p>모두 모아 그리고 모두 모여 함께 즐깁시다.</p>
+			<select name="sitezip"
+				onchange="if(this.value) window.open(this.value);">
+				<option value="">관련 사이트 바로가기</option>
+				<option value="https://www.sports.or.kr/index.do">대한체육회</option>
+				<option value="https://www.kspo.or.kr/kspo/main/main.do">국민체육진흥공단</option>
+				<option value="https://www.koreanpc.kr/index.do">대한장애인체육회</option>
+				<option value="https://www.gb.go.kr/2021sports/sports.html">전국체육대회</option>
+				<option value="http://k-scf.co.kr/">한국체육지도자연맹</option>
+				<option value="http://www.kahperd.or.kr/">한국체육학회</option>
+				<option
+					value="https://www.sports.re.kr/front/main/main.do?menu_seq=0">한국정책과학원</option>
+			</select> <br> <br>
+			<div class="copyright">
+				&copy; Copyright <strong><span>SPORTOGETHER</span></strong>. All
+				Rights Reserved
+			</div>
+			<div class="credits">
+				<!-- All the links in the footer should remain intact. -->
+				<!-- You can delete the links only if you purchased the pro version. -->
+				<!-- Licensing information: https://bootstrapmade.com/license/ -->
+				<!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/family-multipurpose-html-bootstrap-template-free/ -->
+				Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+			</div>
+		</div>
+	</footer>
+	<!-- End Footer -->
+
+	<a href="#"
+		class="back-to-top d-flex align-items-center justify-content-center"><i
+		class="bi bi-arrow-up-short"></i></a>
+
+	<!-- Vendor JS Files -->
+	<script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script src="../assets/vendor/glightbox/js/glightbox.min.js"></script>
+	<script src="../assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+	<script src="../assets/vendor/php-email-form/validate.js"></script>
+	<script src="../assets/vendor/swiper/swiper-bundle.min.js"></script>
+
+	<!-- Template Main JS File -->
+	<script src="../assets/js/main.js"></script>
+	<script src="../assets/js/jquery-1.12.3.min.js"></script>
+	<script src="../assets/js/jquery.counterup.min.js"></script>
+	<script src="../assets/js/waypoints.min.js"></script>
+
 </body>
 </html>

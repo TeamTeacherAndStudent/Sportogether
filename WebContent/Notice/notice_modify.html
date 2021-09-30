@@ -2,8 +2,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>마이페이지</title>
-
 <!-- Google Fonts -->
 <link
 	href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
@@ -25,6 +23,16 @@
 <!-- Template Main CSS File -->
 <link href="../assets/css/style.css" rel="stylesheet">
 
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-latest.min.js"></script>
+
+<title>공지사항 수정</title>
+
 <style>
 #main-title {
 	margin-top: 2%;
@@ -35,71 +43,35 @@
 
 #main-title h1 {
 	color: #1d284b;
+	/* margin-left: 15%; */
 	font-weight: bolder;
 	line-height: 50px;
 	text-align: center;
 }
 
 #main-content {
+	/* margin-top : 5%; */
 	margin-left: 15%;
 	margin-right: 15%;
 	margint-bottom: 15%;
-	vertical-align: middle;
+	/* display: flex; */
 	justify-content: center;
+	vertical-align: middle;
 }
 
-.floor {
-	vertical-align: middle;
-	justify-content: center;
-	margin: 5%;
-	display: flex;
+#maindiv {
+	width: 70%;
+	height: 70%;
 }
 
-.mybox {
+#but {
 	float: left;
-	height: 400px;
-	width: 350px;
-	border-radius: 15px;
-	margin: 5%;
-	justify-content: center;
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0
-		rgba(0, 0, 0, 0.19);
 }
 
-.title {
-	margin: 15px;
-	padding: 3%;
-	height: 50px;
-	text-align: left;
-	font-size: 35px;
-	font-weight: bolder;
-	color: #1d284b;
-	letter-spacing: 1px;
-	line-height: 50px;
-	-webkit-transition: 0.5s; /*사파리 & 크롬*/
-	-moz-transition: 0.5s; /*파이어폭스*/
-	-ms-transition: 0.5s; /*인터넷 익스플로러*/
-	-o-transition: 0.5s; /*오페라*/
-	transition: 0.5s;
-	border-radius: 15px 15px 0 0;
-}
-
-.content {
-	height: 50%;
-	padding: 25px;
-	letter-spacing: 1px;
-	align-items: center;
-	line-height: 30px;
-	color: #165992;
-}
-
-.button {
-	margin: 15px;
-	padding: 1%;
-	font-size: 20px;
+#back-btn {
+	margin-left: 5%;
+	margin-right: 1%;
 	text-align: right;
-	line-height: 35px;
-	letter-spacing: 1px;
 }
 
 button {
@@ -126,16 +98,46 @@ button:hover {
 	color: #fff;
 	text-decoration: none;
 }
+
+.pop-layer .pop-container {
+	padding: 20px 25px;
+}
+
+.pop-laeyr p.ctxt {
+	color: #666;
+	line-height: 25px;
+}
+
+.pop-layer .btn-r {
+	width: 100%;
+	margin: 10px 0 20px;
+	padding-top: 10px;
+	border-top: 1px solid #ddd;
+	text-align: right;
+}
+
+.pop-layer {
+	display: none;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 410px;
+	height: auto;
+	background-color: #fff;
+	border: 5px solid #3571B5;
+	z-index: 10;
+}
 </style>
+
 </head>
+
 <body>
-	<!-- ======= Header ======= -->
 	<header id="header" class="fixed-top">
 		<div
 			class="container d-flex align-items-center justify-content-between">
 			<!-- 여기에 로고 사진 추가 -->
 			<h1 class="logo">
-				<a href="index.html"> Sportogether </a>
+				<a href="../index.html"> Sportogether </a>
 			</h1>
 			<!-- Uncomment below if you prefer to use an image logo -->
 			<!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
@@ -143,15 +145,15 @@ button:hover {
 			<nav id="navbar" class="navbar">
 				<ul>
 					<li><a class="active" href="sports.html">종목</a></li>
-					<li><a href="freeboard.html">자유게시판</a></li>
-					<li><a href="support.html">후원</a></li>
+					<li><a href="../Board/freeboard_main.html">자유게시판</a></li>
+					<li><a href="../Support/support_main.html">후원</a></li>
 					<li><input type="search" placeholder="검색" size="5"></li>
 					<li class="dropdown"><a href="#"><span>SIDE MENU</span> <i
 							class="bi bi-chevron-down"></i></a>
 						<ul>
-							<li><a href="notice.html">공지사항</a></li>
-							<li><a href="myinfo.html">마이페이지</a></li>
-							<li><a href="qna">1:1문의</a></li>
+							<li><a href="../Notice/notice_main.html">공지사항</a></li>
+							<li><a href="../MyPage/Mypage_main.html">마이페이지</a></li>
+							<li><a href="../QnA/qna_main.html">1:1문의</a></li>
 						</ul></li>
 				</ul>
 				<i class="bi bi-list mobile-nav-toggle"></i>
@@ -162,94 +164,61 @@ button:hover {
 	</header>
 	<!-- End Header -->
 
-	<!-- === Main ===  -->
-	<main>
-		<!-- 텍스트가 안나온다..? -->
+
+
+	<main id="main">
 		<section>
 			<div id="main-title">
-				<h1>My Page</h1>
+				<h1>공지사항 수정</h1>
 			</div>
 		</section>
+
+
 		<div id="main-content">
-			<!-- 프로필, 후원 내역 -->
+			<form action="Notice/notice_detial.html" method="post" id="notice">
+				<div class="form-group">
+
+					<br> <label for="title">제목</label>
+					<!-- placeholder 속성 입력한 데이터가 없는 경우 배경으로 나타난다.실제적으로 입력을 100자까지로 지정 -->
+					<!-- required 속성을 설정하면 필수입력 사항이된다. -->
+					<!-- pattern 속성을 이용한 정규표현식으로 데이터의 유효성 검사를 할 수 있다. -->
+					<input type="text" class="form-control" id="title"
+						placeholder="제목 입력(4-100)" name="title" maxlength="100"
+						required="required" pattern=".{4,100}">
+				</div>
+				<div class="form-group">
+					<label for="content">내용</label>
+					<!--  여러줄의 데이터를 입력하고 하고자 할때 textarea 태그를 사용한다. -->
+					<!--  textarea 안에 있는 모든 글자는 그대로 나타난다. 공백문자, tag, enter -->
+					<textarea class="form-control" rows="20" id="content"
+						name="content" placeholder="내용 작성"></textarea>
+				</div>
+			</form>
 			<section>
-				<div class="floor">
-					<div class="mybox">
-						<div class="title">프로필</div>
-						<div class="content">
-							<!-- 회원 정보 공간 -->
-							닉네임 : 홍길동 <br> 전화번호 : 010-1234-5678 <br> 이메일 :
-							iei@naver.com <br>
-						</div>
-						<div class="button">
-							<a href="Mypage_Modify.html"><button>수정</button></a>
-						</div>
-					</div>
-					<div class="mybox">
-						<div class="title">후원내역</div>
-						<div class="content">
-							<!-- 회원 정보 공간 -->
-							김연경 (배구) : 1000원
-						</div>
-						<div class="button">
-							<a href="Mypage_Support.html"><button>더보기</button></a>
-						</div>
-					</div>
-				</div>
-			
-			<!-- 선수인증, 활동차트 -->
-			
-				<div class="floor">
-					<div class="mybox">
-						<div class="title">선수 인증</div>
-						<div class="content">
-							<!-- 회원 정보 공간 -->
-							* 선수인 경우 인증 가능
-						</div>
-						<div class="button">
-							<a href="Mypage_Player.html"><button>인증</button></a>
-						</div>
-					</div>
-					<div class="mybox">
-						<div class="title">활동 차트</div>
-						<div class="content">
-							<!-- 회원 정보 공간 -->
-							방문 횟수 : 10회 <br> 주요 후원 종목 : 배구
-						</div>
-						<div class="button">
-							<a href="Mypage_Chart.html"><button>더보기</button></a>
-						</div>
-					</div>
-				</div>
-			
-			<!-- 내가 쓴 게시글, 스크랩 내역 -->
-			
-				<div class="floor">
-					<div class="mybox">
-						<div class="title">내가 쓴 게시글</div>
-						<div class="content"></div>
-						<div class="button">
-							<a href="Mypage_Mypost.html"><button>보기</button></a>
-						</div>
-					</div>
-					<div class="mybox">
-						<div class="title">나의 스크랩 내역</div>
-						<div class="content"></div>
-						<div class="button">
-							<a href="Mypage_Scrap.html"><button>보기</button></a>
-						</div>
-					</div>
+				<div id="back-btn">
+					<button>수정</button>
+					<a href="#layer" class="check-btn"><button>삭제</button></a> <a
+						href="notice_main.html"><button>목록</button></a>
 				</div>
 			</section>
+
+			<div id="layer" class="pop-layer">
+				<div class="pop-container">
+					<div class="pop-conts">
+						<!-- 내용 -->
+						<p class="ctxt mb20">정말로 삭제하시겠습니까?</p>
+						<div class="btn-r">
+							<a href="#" class="btn-layerClose"><button>삭제</button></a> <a
+								href="#" class="btn-layerClose"><button>취소</button></a>
+						</div>
+						<!--  // 내용 끝 -->
+					</div>
+				</div>
+			</div>
 		</div>
 	</main>
-
-
-
 	<!-- footer 옆으로 넘어감 방지 -->
 	<div style="clear: both;"></div>
-
-	<!-- ======= Footer ======= -->
 	<footer id="footer">
 		<div class="container">
 			<h3>SPORTOGETHER</h3>
@@ -299,5 +268,45 @@ button:hover {
 	<script src="assets/js/jquery.counterup.min.js"></script>
 	<script src="assets/js/waypoints.min.js"></script>
 
+	<!-- 삭제 경고창 -->
+	<script>
+	$(".check-btn").click(function(){
+        var $href = $(this).attr("href");
+        layer_popup($href);
+    });
+    function layer_popup(el){
+
+        var $el = $(el);    //레이어의 id를 $el 변수에 저장
+        var isDim = $el.prev().hasClass("dimBg"); //dimmed 레이어를 감지하기 위한 boolean 변수
+
+        isDim ? $(".dim-layer").fadeIn() : $el.fadeIn();
+
+        var $elWidth = ~~($el.outerWidth()),
+            $elHeight = ~~($el.outerHeight()),
+            docWidth = $(document).width(),
+            docHeight = $(document).height();
+
+        // 화면의 중앙에 레이어를 띄운다.
+        if ($elHeight < docHeight || $elWidth < docWidth) {
+            $el.css({
+                marginTop: -$elHeight /2,
+                marginLeft: -$elWidth/2
+            })
+        } else {
+            $el.css({top: 0, left: 0});
+        }
+
+        $el.find("a.btn-layerClose").click(function(){
+            isDim ? $(".dim-layer").fadeOut() : $el.fadeOut(); // 닫기 버튼을 클릭하면 레이어가 닫힌다.
+            return false;
+        });
+
+        $(".layer .dimBg").click(function(){
+            $(".dim-layer").fadeOut();
+            return false;
+        });
+
+    }
+	</script>
 </body>
 </html>

@@ -2,8 +2,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>마이페이지</title>
-
 <!-- Google Fonts -->
 <link
 	href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
@@ -24,7 +22,7 @@
 
 <!-- Template Main CSS File -->
 <link href="../assets/css/style.css" rel="stylesheet">
-
+<title>공지사항 상세페이지</title>
 <style>
 #main-title {
 	margin-top: 2%;
@@ -35,71 +33,58 @@
 
 #main-title h1 {
 	color: #1d284b;
+	/* margin-left: 15%; */
 	font-weight: bolder;
 	line-height: 50px;
 	text-align: center;
 }
 
 #main-content {
+	/* margin-top : 5%; */
 	margin-left: 15%;
 	margin-right: 15%;
 	margint-bottom: 15%;
+	/* display: flex; */
+	justify-content: center;
 	vertical-align: middle;
-	justify-content: center;
 }
 
-.floor {
-	vertical-align: middle;
-	justify-content: center;
-	margin: 5%;
-	display: flex;
+table.p-table {
+	border-collapse: separate;
+	border-spacing: 1px;
+	line-height: 1.5;
+	/* margin: 20px 10px; */
 }
 
-.mybox {
-	float: left;
-	height: 400px;
-	width: 350px;
-	border-radius: 15px;
-	margin: 5%;
-	justify-content: center;
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0
-		rgba(0, 0, 0, 0.19);
+table.p-table th {
+	width: 700px;
+	padding: 10px;
+	font-weight: bold;
+	vertical-align: top;
+	color: #fff;
+	background: #165992;
+	text-align: center;
 }
 
-.title {
-	margin: 15px;
-	padding: 3%;
-	height: 50px;
-	text-align: left;
-	font-size: 35px;
-	font-weight: bolder;
-	color: #1d284b;
-	letter-spacing: 1px;
-	line-height: 50px;
-	-webkit-transition: 0.5s; /*사파리 & 크롬*/
-	-moz-transition: 0.5s; /*파이어폭스*/
-	-ms-transition: 0.5s; /*인터넷 익스플로러*/
-	-o-transition: 0.5s; /*오페라*/
-	transition: 0.5s;
-	border-radius: 15px 15px 0 0;
+table.p-table td {
+	padding: 10px;
+	vertical-align: top;
+	border-bottom: 1px solid #ccc;
+	background: #fff;
 }
 
-.content {
-	height: 50%;
-	padding: 25px;
-	letter-spacing: 1px;
-	align-items: center;
-	line-height: 30px;
-	color: #165992;
+table.p-table td:nth-child(1) {
+	width: 10%;
 }
 
-.button {
-	margin: 15px;
-	padding: 1%;
-	font-size: 20px;
+table.p-table td:nth-child(2) {
+	width: 90%;
+}
+
+#back-btn {
+	margin-left: 10%;
+	margin-right: 10%;
 	text-align: right;
-	line-height: 35px;
-	letter-spacing: 1px;
 }
 
 button {
@@ -127,15 +112,16 @@ button:hover {
 	text-decoration: none;
 }
 </style>
+
 </head>
+
 <body>
-	<!-- ======= Header ======= -->
 	<header id="header" class="fixed-top">
 		<div
 			class="container d-flex align-items-center justify-content-between">
 			<!-- 여기에 로고 사진 추가 -->
 			<h1 class="logo">
-				<a href="index.html"> Sportogether </a>
+				<a href="../index.html"> Sportogether </a>
 			</h1>
 			<!-- Uncomment below if you prefer to use an image logo -->
 			<!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
@@ -143,15 +129,15 @@ button:hover {
 			<nav id="navbar" class="navbar">
 				<ul>
 					<li><a class="active" href="sports.html">종목</a></li>
-					<li><a href="freeboard.html">자유게시판</a></li>
-					<li><a href="support.html">후원</a></li>
+					<li><a href="../Board/freeboard_main.html">자유게시판</a></li>
+					<li><a href="../Support/support_main.html">후원</a></li>
 					<li><input type="search" placeholder="검색" size="5"></li>
 					<li class="dropdown"><a href="#"><span>SIDE MENU</span> <i
 							class="bi bi-chevron-down"></i></a>
 						<ul>
-							<li><a href="notice.html">공지사항</a></li>
-							<li><a href="myinfo.html">마이페이지</a></li>
-							<li><a href="qna">1:1문의</a></li>
+							<li><a href="../Notice/notice_main.html">공지사항</a></li>
+							<li><a href="../MyPage/Mypage_main.html">마이페이지</a></li>
+							<li><a href="../QnA/qna_main.html">1:1문의</a></li>
 						</ul></li>
 				</ul>
 				<i class="bi bi-list mobile-nav-toggle"></i>
@@ -162,94 +148,51 @@ button:hover {
 	</header>
 	<!-- End Header -->
 
-	<!-- === Main ===  -->
-	<main>
-		<!-- 텍스트가 안나온다..? -->
+
+
+	<main id="main">
 		<section>
 			<div id="main-title">
-				<h1>My Page</h1>
+				<h1>공지사항</h1>
 			</div>
 		</section>
 		<div id="main-content">
-			<!-- 프로필, 후원 내역 -->
-			<section>
-				<div class="floor">
-					<div class="mybox">
-						<div class="title">프로필</div>
-						<div class="content">
-							<!-- 회원 정보 공간 -->
-							닉네임 : 홍길동 <br> 전화번호 : 010-1234-5678 <br> 이메일 :
-							iei@naver.com <br>
-						</div>
-						<div class="button">
-							<a href="Mypage_Modify.html"><button>수정</button></a>
-						</div>
-					</div>
-					<div class="mybox">
-						<div class="title">후원내역</div>
-						<div class="content">
-							<!-- 회원 정보 공간 -->
-							김연경 (배구) : 1000원
-						</div>
-						<div class="button">
-							<a href="Mypage_Support.html"><button>더보기</button></a>
-						</div>
-					</div>
-				</div>
-			
-			<!-- 선수인증, 활동차트 -->
-			
-				<div class="floor">
-					<div class="mybox">
-						<div class="title">선수 인증</div>
-						<div class="content">
-							<!-- 회원 정보 공간 -->
-							* 선수인 경우 인증 가능
-						</div>
-						<div class="button">
-							<a href="Mypage_Player.html"><button>인증</button></a>
-						</div>
-					</div>
-					<div class="mybox">
-						<div class="title">활동 차트</div>
-						<div class="content">
-							<!-- 회원 정보 공간 -->
-							방문 횟수 : 10회 <br> 주요 후원 종목 : 배구
-						</div>
-						<div class="button">
-							<a href="Mypage_Chart.html"><button>더보기</button></a>
-						</div>
-					</div>
-				</div>
-			
-			<!-- 내가 쓴 게시글, 스크랩 내역 -->
-			
-				<div class="floor">
-					<div class="mybox">
-						<div class="title">내가 쓴 게시글</div>
-						<div class="content"></div>
-						<div class="button">
-							<a href="Mypage_Mypost.html"><button>보기</button></a>
-						</div>
-					</div>
-					<div class="mybox">
-						<div class="title">나의 스크랩 내역</div>
-						<div class="content"></div>
-						<div class="button">
-							<a href="Mypage_Scrap.html"><button>보기</button></a>
-						</div>
-					</div>
-				</div>
-			</section>
+			<table class="p-table">
+				<thead>
+					<tr>
+						<th scope="cols">제목</th>
+						<th scope="cols">금일(2019-02-18) 사이트 접속 에러에 대한 안내
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>작성일</td>
+						<td>2021-09-25 04:45:23</td>
+					</tr>
+					<tr>
+						<td>글쓴이</td>
+						<td>관리자</td>
+					</tr>
+					<tr>
+						<td colspan="2">초창기에는 이들 코스의 구획도 골프장의 넓이에 따라 달랐으며, 홀의 수도 일정하지
+							않았다. 즉 홀 수가 27∼72개인 경우도 있는 등 통일되지 않았는데, 1764년 스코틀랜드의
+							세인트앤드루스(Saint Andrews)에서 18개로 개조되었고, 이것이 모델이 되어 현재의 모든 코스 단위는
+							18홀로 고정되었다. 이때부터 골프의 기술적 수준이 스코어에 의해 기록에 남게 되었다.</td>
+					</tr>
+				</tbody>
+			</table>
 		</div>
+		<section>
+			<div id="back-btn">
+				 <a href="notice_List.html"><button>목록</button></a>
+			</div>
+		</section>
+
+
 	</main>
-
-
 
 	<!-- footer 옆으로 넘어감 방지 -->
 	<div style="clear: both;"></div>
-
-	<!-- ======= Footer ======= -->
 	<footer id="footer">
 		<div class="container">
 			<h3>SPORTOGETHER</h3>
@@ -266,7 +209,8 @@ button:hover {
 				<option value="http://www.kahperd.or.kr/">한국체육학회</option>
 				<option
 					value="https://www.sports.re.kr/front/main/main.do?menu_seq=0">한국정책과학원</option>
-			</select> <br> <br>
+			</select> <br>
+			<br>
 			<div class="copyright">
 				&copy; Copyright <strong><span>SPORTOGETHER</span></strong>. All
 				Rights Reserved
@@ -298,6 +242,11 @@ button:hover {
 	<script src="assets/js/jquery-1.12.3.min.js"></script>
 	<script src="assets/js/jquery.counterup.min.js"></script>
 	<script src="assets/js/waypoints.min.js"></script>
-
+	<script>
+	$(".counter").counterUp({
+			delay: 20,
+			time : 2000
+	});
+</script>
 </body>
 </html>
