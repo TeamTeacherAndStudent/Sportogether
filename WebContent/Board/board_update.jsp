@@ -35,6 +35,12 @@
 <title>자유게시판 수정</title>
   
   <style>
+     .ck.ck-editor{
+     	max-width: 100%;
+     	text-align: center;
+     }
+     .ck.ck-editor-editable{
+     }
 	  #main{
 	    width: 100%;
 	  }
@@ -219,9 +225,15 @@
     </div>
 </footer>
 <script>
+		ClassicEditor
+		.create( document.querySelector( '#editor' ) )
+		.catch( error => {
+		    console.error( error );
+		});
+		
 //등록 클릭이벤트
 	function onEnrollClick() {
-		var enrollResult = window.confirm("게시판 등록을 하시겠습니까?");
+		var enrollResult = window.confirm("글이 수정되었습니다.");
 		if(enrollResult) {
 			console.log("Yes!");
 		}else{

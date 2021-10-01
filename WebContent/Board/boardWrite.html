@@ -35,7 +35,7 @@
 <title>자유게시판</title>
   
   <style>
-	
+		
 	  #main{
 	    width: 100%;
 	  }
@@ -174,13 +174,8 @@
 			      </select>
 			      <input type="text" id="title" maxlength="50" pattern=".{4,50}" placeholder="제목입력(4-50)" size="100" required>
 			      <br><br>
-			    <!-- 	  <textarea class="form-control" rows="5" id="editor"
-    					name="content" placeholder="내용을 작성하세요."></textarea>
-				-->
-				<h1>Classic editor</h1>
-				    <div id="editor">
-				        <p>This is some sample content.</p>
-				    </div>
+			    <textarea class="form-control" id="editor"
+  					name="content" placeholder="내용을 작성하세요."></textarea>
 				<div id="image_container"></div><br>
 				<div class="file-upload">
 					<input type="text" class="upload-name" readonly>
@@ -229,7 +224,7 @@
          .create( document.querySelector( '#editor' ) )
          .catch( error => {
              console.error( error );
-         } );
+         });
 //등록 클릭이벤트
 	function onEnrollClick() {
 		var enrollResult = window.confirm("게시판 등록을 하시겠습니까?");
@@ -244,6 +239,7 @@
 		$('#input-file').change(function(){
 	 		var filename = $(this).val();
 	 		$('.upload-name').val(filename);
+		});
 	});
 		
 </script>

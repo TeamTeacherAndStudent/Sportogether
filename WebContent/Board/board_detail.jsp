@@ -250,13 +250,13 @@
 
 <script>
 	function onLikeChange(){
-		$("#likeBtn").addClass('like');
-		console.log($("#likeBtn").attr("class"));
-		if($("#likeBtn").attr('class') == 'like'){
-			$(this).removeClass('like');
-		}else{ 
-			$(this).addClass('like');
-		}
+		$("#likeBtn").toggleClass('like');
+// 		console.log($("#likeBtn").attr("class"));
+// 		if($("#likeBtn").attr('class') == 'like'){
+// 			$(this).removeClass('like');
+// 		}else{ 
+// 			$(this).addClass('like');
+// 		}
 		
 		/* var likeClick = document.getElementById("likeBtn")
 		if(likeClick) {
