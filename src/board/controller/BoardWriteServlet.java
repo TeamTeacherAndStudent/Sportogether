@@ -7,20 +7,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import board.model.service.BoardService;
-import board.model.vo.Board;
-
 /**
- * Servlet implementation class BoardDetailServlet
+ * Servlet implementation class BoardWriteServlet
  */
-@WebServlet("/board/detail")
-public class BoardDetailServlet extends HttpServlet {
+@WebServlet("/board/write")
+public class BoardWriteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BoardDetailServlet() {
+    public BoardWriteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,17 +26,8 @@ public class BoardDetailServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int boardNo = Integer.parseInt(request.getParameter("boardNo"));
-		Board boardOne = new BoardService().printOneByNo(boardNo);
-		
-		if(boardOne != null) {
-			//성공하면 디테일
-			request.setAttribute("boardOne",boardOne); //service에서 와서 출력
-			// Reply set해줌
-			request.getRequestDispatcher("Board/board_detail.jsp").forward(request, response);;
-		}else {
-			request.getRequestDispatcher("/WEB-INF/board/boardError.html").forward(request, response);
-		}
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
