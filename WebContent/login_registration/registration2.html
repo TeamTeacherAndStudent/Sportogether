@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>회원가입</title>
+
+<!-- jQuery CDN -->
+   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+   
+
+<!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+   <!-- Vendor CSS Files -->
+  <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="../assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="../assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="../assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+
+
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+  <!-- Template Main CSS File -->
+  <link href="../assets/css/style.css" rel="stylesheet">
+
+    
+
+  <style>
+  	.reg-main{
+		margin-top : 5%;  
+  	}
+  	.formtest{
+  		align:center;
+  	}
+  	#certification{
+  		
+  		align:center;
+  	}
+  </style>
+  
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+ 
+</head>
+<body>
+<script>
+	// 비밀번호 확인
+	 		 
+	$(function(){
+		 $("#alert-success1").css("display", "none");
+	 	 $("#alert-danger1").css("display", "none"); 
+	 	 $("#pw-check").keyup(function(){ 
+			 
+	 		 var pwd1=$("#user-pw").val();
+			 var pwd2=$("#pw-check").val(); 
+				if(pwd1 != "" || pwd2 != ""){ 
+					if(pwd1 == pwd2){ 
+						$("#alert-success1").css("display", "block"); 
+						$("#alert-danger1").css("display", "none"); 
+					}else{ 
+						$("#alert-success1").css("display", "none"); 
+						$("#alert-danger1").css("display", "block"); 
+					} 
+				} 
+		});
+	 });
+
+</script>
+ <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top">
+    <div class="container d-flex align-items-center justify-content-between">
+<!-- 여기에 로고 사진 추가 -->
+      <h1 class="logo"><a href="index.html"> Sportogether </a></h1>
+      <!-- Uncomment below if you prefer to use an image logo -->
+      <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a class="active" href="sports.html">종목</a></li>
+          <li><a href="freeboard.html">자유게시판</a></li>
+          <li><a href="support.html">후원</a></li>
+          <li><input type="search" placeholder="검색" size="5"></li>
+          <li class="dropdown"><a href="#"><span>SIDE MENU</span> <i class="bi bi-chevron-down"></i></a>
+          <ul>
+             <li><a href="notice.html">공지사항</a></li>     
+             <li><a href="myinfo.html">마이페이지</a></li>
+             <li><a href="qna">1:1문의</a></li>
+          </ul>
+          </li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+
+    </div>
+  </header><!-- End Header -->
+ 
+<!-- 회원가입 -->
+<div class = reg-main>
+	<section class="container">
+		<div><h2>회원가입</h2></div>
+		<div class = "row">
+			<div class="col-md-3 visible"></div>
+			<div class= " col-md-6">
+				<div class="container px-5 my-5">
+				    <form  class="was-validated"  action="" method="post">
+				        <div class="mb-3">
+				            <label class="form-label" for="user-id">아이디</label>
+				            <input  class="form-control" id="user-id" name="user-id" type="text" placeholder="아이디"  autocomplete = "off" required minLength="5" maxLength="14" pattern="^[0-9a-zA-Z]+$"/>
+				            <div class="invalid-feedback"  >영어 소문자, 대문자, 숫자를 이용해 아이디를 입력해주세요 (5~14자리)</div>
+				          
+				            
+				        </div>
+				        <div class="mb-3">
+				            <label class="form-label" for="user-pw">비밀번호</label>
+				            <input class="form-control" id="user-pw" name="user-pw" type="password" placeholder="비밀번호" required minLength="6" maxLength="14" pattern="^[0-9a-zA-Z]+$"/>
+				            <div class="invalid-feedback" >영어 소문자, 대문자, 숫자를 이용해 비밀번호를 입력해주세요 (6~14자리)</div>
+				           
+				        </div>
+				         <div class="mb-3">
+				            <label class="form-label" for="pw-check">비밀번호 확인</label>
+				            <input class="form-control" id="pw-check" type="password" placeholder="비밀번호 재입력"  required minLength="6" maxLength="14" pattern="^[0-9a-zA-Z]+$"/>
+				            <div class="invalid-feedback" >비밀번호를 한 번 더 입력해주세요</div>
+				            <div class="alert alert-success" id="alert-success1"> 비밀번호가 일치합니다.</div>
+				            <div class="alert alert-danger" id="alert-danger1"> 비밀번호가 불일치합니다.</div>
+				        </div>
+				        <div class="mb-3">
+				            <label class="form-label" for="user-name">이름</label>
+				            <input class="form-control" id="user-name" name="user-name" type="text" autocomplete = "off" placeholder="이름" required minLength="2" maxLength="14" pattern="^[가-힣]+$"/>
+				            <div class="invalid-feedback" >이름을 입력해주세요</div>
+				        </div>
+				        <div class="mb-3">
+				            <label class="form-label" for="user-nickname">닉네임</label>
+				            <input class="form-control" id="user-nickname" name="user-nickname" type="text"  autocomplete = "off" placeholder="닉네임" required minLength="2" maxLength="8" pattern="^[a-z가-힣]+$"/>
+				            <div class="invalid-feedback" >영 소문자, 한글을 이용해 닉네임을 입력해주세요(2~8자리)</div>
+				        </div>
+				        <div class="mb-3">
+				            <label class="form-label" for="user-birth">생년월일</label>
+				            <input class="form-control" id="user-birth" name="user-birth" type="date" placeholder="생년월일" required />
+				            <div class="invalid-feedback" >생년월일을 선택해주세요</div>
+				        </div>
+				        <div class="mb-3">
+				            <label class="form-label d-block">성별</label>
+				            <div class="form-check form-check-inline">
+				                <input class="form-check-input" id="남자" type="radio" name="user-gender" required />
+				                <label class="form-check-label" for="남자">남자</label>
+				            </div>
+				            <div class="form-check form-check-inline">
+				                <input class="form-check-input" id="여자" type="radio" name="성별" required />
+				                <label class="form-check-label" for="여자">여자</label>
+				            </div>
+				            <div class="invalid-feedback" >성별을 선택해주세요</div>
+				        </div>
+				        <div class="mb-3">
+				            <label class="form-label" for="휴대전화">휴대전화</label>
+				            <input class="form-control" id="휴대전화" name = "user-phone" type="text" placeholder="휴대전화" required minLength="10" maxLength="11" pattern="^[0-9]+$"/>
+				            <div class="invalid-feedback" >핸드폰 번호를 숫자로만 입력해주세요</div>
+				        </div>
+				        <div class="mb-3">
+				            <label class="form-label" for="emailAddress">이메일 주소</label>
+				            <input class="form-control" id="emailAddress" name = "user-email" type="email" placeholder="Email Address" required  />
+				            <div class="invalid-feedback" feedback="emailAddress:required">이메일 주소를 입력해주세요</div>
+				            <div class="invalid-feedback" feedback="emailAddress:email">이메일 형식이 유효하지 않습니다</div>
+								<!--  이메일  정규 표현식 -->
+<!-- 								pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$" -->
+				        </div>
+				        <div class="mb-3">
+				            <label class="form-label d-block">개인정보수집이용동의(필수)</label>
+				            <div class="form-check">
+				                <input class="form-check-input" id="개인정보수집이용동의" type="checkbox" name="개인정보수집이용동의필수" required />
+				                <label class="form-check-label" for="개인정보수집이용동의">개인정보수집이용동의</label>
+				            </div>
+				            <div class="invalid-feedback" data-sb-feedback="개인정보수집이용동의필수:required">필수 선택 항목입니다</div>
+				        </div>
+				        <div class="mb-3">
+				            <label class="form-label d-block">마케팅이용약관동의 (선택)</label>
+				            <div class="form-check form-check-inline">
+				                <input class="form-check-input" id="마케팅이용약관동의" type="checkbox" name="마케팅이용약관동의선택"  />
+				                <label class="form-check-label" for="마케팅이용약관동의">마케팅이용약관동의</label>
+				            </div>
+				        </div>
+				 
+				        <div>
+				        	<input type="submit" class= "btn btn-primary btn-lg" value ="회원가입">
+				        
+				        </div>
+				    </form>
+				</div>
+				
+				
+			</div>
+		</div>
+	</section>
+</div>
+
+    
+
+   
+
+  
+ <!-- ======= Footer ======= -->
+  <footer id="footer">
+    <div class="container">
+      <h3>SPORTOGETHER</h3>
+      <!-- 넣을 말 추가 -->
+      <p>모두 모아 그리고 모두 모여 함께 즐깁시다.</p>
+      <select name="sitezip" onchange="if(this.value) window.open(this.value);">
+      	<option value="">관련 사이트 바로가기</option>
+      	<option value="https://www.sports.or.kr/index.do">대한체육회</option>
+      	<option value="https://www.kspo.or.kr/kspo/main/main.do">국민체육진흥공단</option>
+      	<option value="https://www.koreanpc.kr/index.do">대한장애인체육회</option>
+      	<option value="https://www.gb.go.kr/2021sports/sports.html">전국체육대회</option>
+      	<option value="http://k-scf.co.kr/">한국체육지도자연맹</option>
+      	<option value="http://www.kahperd.or.kr/">한국체육학회</option>
+      	<option value="https://www.sports.re.kr/front/main/main.do?menu_seq=0">한국정책과학원</option>
+      </select>
+      <br><br>
+      <div class="copyright">
+        &copy; Copyright <strong><span>SPORTOGETHER</span></strong>. All Rights Reserved
+      </div>
+      <div class="credits">
+        <!-- All the links in the footer should remain intact. -->
+        <!-- You can delete the links only if you purchased the pro version. -->
+        <!-- Licensing information: https://bootstrapmade.com/license/ -->
+        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/family-multipurpose-html-bootstrap-template-free/ -->
+        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+      </div>
+    </div>
+  </footer>
+  <!-- End Footer -->
+   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+  
+  <!-- Vendor JS Files -->
+  <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="../assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="../assets/vendor/php-email-form/validate.js"></script>
+  <script src="../assets/vendor/swiper/swiper-bundle.min.js"></script>
+  
+  <!-- Template Main JS File -->
+  <script src="../assets/js/main.js"></script>
+  <script src = "../assets/js/jquery-1.12.3.min.js"></script>
+  <script src = "../assets/js/jquery.counterup.min.js"></script>
+  <script src = "../assets/js/waypoints.min.js"></script>
+  
+ 
+<!--   <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script> -->
+
+
+ 
+</body>
+</html>

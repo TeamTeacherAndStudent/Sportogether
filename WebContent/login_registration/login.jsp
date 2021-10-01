@@ -17,7 +17,8 @@
 
   <!-- Template Main CSS File -->
   <link href="../assets/css/style.css" rel="stylesheet">
-  
+  <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+  <script src="https://kit.fontawesome.com/a9dc1781b1.js" crossorigin="anonymous"></script>
   <style>
   	#formtest{
   		margin-top:5%;
@@ -29,10 +30,13 @@
   	}
   	.login-input{
 		margin : 8px; 	
+		
+		
   	}
    </style>
 </head>
 <body>
+
  <!-- ======= Header ======= -->
   <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center justify-content-between">
@@ -66,10 +70,10 @@
 	<section class="container">
 		<div>
 			<div id = "formtest">
-			<h3>SIGN UP</h3><br>
+			<span style="font-size : 6em;"><i class="far fa-user"></span></i><br>
 				<form action = "" method="post">
-					<input class = "login-input" type="text" name = "user-id" placeholder ="ID"><br>
-					<input class = "login-input" type="password" name = "user-pw" placeholder ="PASSWORD"><br>
+						<input class = "login-input" id = "floatingInput" autocomplete="off" type="text" name = "user-id" placeholder ="ID"><br>
+						<input class = "login-input" id = "floatingPassword" autocomplete="off" type="password" name = "user-pw" placeholder ="PASSWORD"><br>
 					<a href="#" style="font-size:12px;" class="link-secondary">ID 찾기</a>
 					<a href="#" style="font-size:12px;" class="link-secondary">PW 찾기</a><br>
 					<a href="#" style="font-size:18px;" id = "registration" class="link-secondary">회원가입</a><br><br>
@@ -136,6 +140,6 @@
   <script src = "../assets/js/jquery-1.12.3.min.js"></script>
   <script src = "../assets/js/jquery.counterup.min.js"></script>
   <script src = "../assets/js/waypoints.min.js"></script>
-  
+
 </body>
 </html>
