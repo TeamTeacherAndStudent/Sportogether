@@ -35,5 +35,4 @@ public class Scrap {
 	public String toString() {
 		return "Scrap [boardNo=" + boardNo + ", boardContents=" + boardContents + ", userId=" + userId + "]";
 	}
-	
 }

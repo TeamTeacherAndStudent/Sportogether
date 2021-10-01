@@ -12,7 +12,7 @@ public class BoardDAO {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		String query = "INSERT INTO BOARD VALUES(SEQ_BOARD.NEXTVAL, ?, ?, ?, ?, DEFAULT, ?, ?)";
-		
+		//쿼리문 순서 꼭 지키기
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(2, board.getBoardTitle());
@@ -22,7 +22,6 @@ public class BoardDAO {
 			pstmt.setDate(6, board.getBoardEnrollDate());
 			pstmt.setInt(7, board.getBoardCount());
 			pstmt.setInt(8, board.getBoardLike());
-			
 			result = pstmt.executeUpdate();
 		}catch(SQLException e) {
 				e.printStackTrace();

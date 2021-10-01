@@ -12,7 +12,7 @@ public class Board {
 	private Date boardEnrollDate;
 	private int boardCount;
 	private int boardLike;
-//	private String boardFile; //파일
+	private List<BoardFile> files; //파일
 	private List<BoardReply> replies; //댓글:toString  x
 	
 	public Board() {}	
@@ -95,13 +95,13 @@ public class Board {
 		this.boardLike = boardLike;
 	}
 
-//	public String getBoardFile() {
-//		return boardFile;
-//	}
-//
-//	public void setBoardFile(String boardFile) {
-//		this.boardFile = boardFile;
-//	}
+	public List<BoardFile> getFiles() {
+		return files;
+	}
+	
+	public void setFiles(List<BoardFile> files) {
+		this.files = files;
+	}
 
 	public List<BoardReply> getReplies() {
 		return replies;

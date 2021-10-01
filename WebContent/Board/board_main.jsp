@@ -1,6 +1,9 @@
+<!-- 임ㅊ포트, model.vo랑 list -->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<!-- 선언 List<Board> bList = (List<Board>)request.getAttribute("bList")
+		String pageNavi = (String)request.getAttribute("pageNavi");
+		 -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -192,7 +195,7 @@
            			<br>
                     <ul id ="ulTable">
                         <li>
-                            <ul>
+                        	<ul>
                                 <li>No</li>
                                 <li>종목</li>
                                 <li>제목</li>
@@ -200,6 +203,16 @@
                                 <li>작성자</li>
                                 <li>조회수</li>
                                 <li>추천수</li>
+                            </ul>
+                            <!-- <li>< bOne.getBoardNo() ></li>
+                            	 <li>< bOne.getSportsName() ></li>
+								 <li><a href="board_detail?boardNo=< = bOne.getBoardNo() >">
+								 < bOne.getBoardTitle() ></a></li>
+								 <li><= nOne.getboardEnrollDate() ></li>
+								 <li><= bOne.getUserId() ></li>
+								 <li><= bOne.getBoardCount() ></li>
+								 <li><= bOne.getBoardLike() ></li>	
+							-->
                             </ul>
                         </li>
                     </ul>

@@ -1,13 +1,13 @@
 package board.model.vo;
 
-public class Like {
+public class BoardLike {
 	private int boardNo;
 	private String userId;
 	private int likeCount;
 	
-	public Like() {};
+	public BoardLike() {};
 	
-	public Like(int boardNo, String userId, int likeCount) {
+	public BoardLike(int boardNo, String userId, int likeCount) {
 		super();
 		this.boardNo = boardNo;
 		this.userId = userId;
