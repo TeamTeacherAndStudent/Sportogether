@@ -100,6 +100,9 @@
   	hr{
   	
   	}
+  	 #search{
+		   margin-left: 30px;
+		}
   </style>
 <title>자유게시판</title>
 </head>
@@ -107,20 +110,21 @@
 <body>
 
  <header id="header" class="fixed-top">
-    <div class="container d-flex align-items-center justify-content-between">
-<!-- 여기에 로고 사진 추가 -->
-      <h1 class="logo"><a href="../index.html"> Sportogether </a></h1>
-      <nav id="navbar" class="navbar">
+     <div class="container d-flex align-items-center justify-content-between">
+		<!-- 여기에 로고 사진 추가 -->
+     	<h1 class="logo"><a href="../index.html"> Sportogether </a></h1>
+       <nav id="navbar" class="navbar">
         <ul>
           <li><a class="active" href="../Sports/sportsList.jsp">종목</a></li>
-          <li><a href="board_main.jsp">자유게시판</a></li>
+          <li><a href="../Board/board_main.jsp">자유게시판</a></li>
           <li><a href="../Support/support_main.jsp">후원</a></li>
-          <li><input type="search" placeholder="검색" size="5"></li>
+          <li><input type="search" placeholder="검색" size="10" id="search"></li>
+            <li><a href="../login_registration/login.jsp">Login</a></li>
           <li class="dropdown"><a href="#"><span>SIDE MENU</span> <i class="bi bi-chevron-down"></i></a>
           <ul>
-             <li><a href="../Notice/noticelist.html">공지사항</a></li>     
-             <li><a href="../MyPage/Mypage_Main">마이페이지</a></li>
-             <li><a href="">1:1문의</a></li>
+             <li><a href="../Notice/notice_main.jsp">공지사항</a></li>     
+             <li><a href="../MyPage/Mypage_Main.html">마이페이지</a></li>
+             <li><a href="../QnA/Qna_UserMain.html">1:1문의</a></li>
           </ul>
           </li>
         </ul>

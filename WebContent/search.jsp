@@ -24,6 +24,9 @@
 	 #main-contents{
 	    width: 100%;
 	}
+	 #search{
+    	margin-left: 30px;
+    }
     /*제목*/
 		h1{
 		    vertical-align:middle;
@@ -37,8 +40,7 @@
 		    font-weight: 600;
 		    font-size: 14px;
 		    border-style : none;
-		    margin-top: 6px;
-		    margin-left : 10px;
+		    margin-left : 5px;
 	  		padding: 12px 10px;
 		    border-radius: 5px;
 		    border: 1px solid;
@@ -50,55 +52,81 @@
 		    letter-spacing: 1px;
 	  		color : white;
 	  	}
-		
+		input {
+		 width : 100%;
+		 text-align: center;
+		 line-height: 33px;
+		}
+		.searchbox{
+			width : 60%;
+			height: 500px;
+		}
+		#boardlist-search {
+			background-color: red;
+			text-align: center;
+		}
+		#supportlist-search{
+			text-align: center;
+			background-color: blue;
+		}		
   </style>
 </head>
 <body>
 	<!-- ======= Header ======= -->
-  	<header id="header" class="fixed-top">
+  <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center justify-content-between">
-		<!-- 여기에 로고 사진 추가 -->
-      <h1 class="logo"><a href="../index.html"> Sportogether </a></h1>
-      <!-- Uncomment below if you prefer to use an image logo -->
-      <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
-
+      <h1 class="logo"><a href="index.html"> Sportogether </a></h1>
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a class="active" href="sports.html">종목</a></li>
-          <li><a href="freeboard.html">자유게시판</a></li>
-          <li><a href="support.html">후원</a></li>
-          <li><input type="search" placeholder="검색" size="5"></li>
+          <li><a class="active" href="Sports/sportsList.jsp">종목</a></li>
+          <li><a href="Board/board_main.jsp">자유게시판</a></li>
+          <li><a href="Support/support_main.jsp">후원</a></li>
+          <li><input type="search" placeholder="검색" size="10" id="search"></li>
+       	  <li><a href="login_registration/login.jsp">Login</a></li>
           <li class="dropdown"><a href="#"><span>SIDE MENU</span> <i class="bi bi-chevron-down"></i></a>
           <ul>
-             <li><a href="notice.html">공지사항</a></li>     
-             <li><a href="adminPage.html">관리자 페이지</a></li>
-             <li><a href="qna">1:1문의</a></li>
+             <li><a href="Notice/notice_main.jsp">공지사항</a></li>     
+             <li><a href="MyPage/Mypage_Main.html">마이페이지</a></li>
+             <li><a href="QnA/Qna_UserMain.html">1:1문의</a></li>
           </ul>
           </li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
-      </nav>
-      <!--navbar 메뉴 -->
+      </nav><!-- .navbar -->
+
     </div>
   </header><!-- End Header -->
+
   <br><br><br>
   <section id="main-contents">
   	<h1>검색</h1><br><br>
-  	<div class="container">
-	 	<div class="row">
-	 		<form action="" method="post">
-				<div class="col-md-6">
+	<form action="" method="post">
+	  	<div class="container">
+		 	<div class="row">
+				<div class="col-md-10">
 					<input type="text" class="input-field" placeholder="Search" name="searchWord" />
 				</div>
-				<div class="col-md-6">
+				<div class="col-md-2">
 					<input type="submit" class="Btn" value="검색">
 					<span class="board-search">
 				</span>
 				</div>
-			</form>
-	 	</div>
-	</div>
-  </section>
+		 	</div>
+		</div>
+	</form>
+ 	<div id="boardlist-search" class="searchbox">
+ 		<div class="board-url">
+ 		</div>
+ 		<div class="search-contents">
+ 		</div>
+ 	</div>
+ 	<div id="supportlist-search" class="searchbox">
+ 		<div class="support-url">
+ 		</div>
+ 		<div class="search-contents">
+ 		</div>
+ 	</div>
+	 </section>
   <br><br><br>
 	  <!-- ======= Footer ======= -->
   <footer id="footer">
