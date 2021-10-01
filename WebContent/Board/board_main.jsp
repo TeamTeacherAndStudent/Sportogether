@@ -202,18 +202,6 @@
                                 <li>추천수</li>
                             </ul>
                         </li>
-                    	<% for(Board bOne : bList) {%>
-                        <li>
-                            <ul>
-                                <li><%= bOne.getBoardNo() %></li>
-                                <li><%= bOne.getSportsName() %></li>
-                                <li><a href="board_detail?boardNo=<%= bOne.getBoardNo() %>"><%= bOne.getBoardTitle() %></a></li>
-                                <li><%= bOne.getBoardEnrollDate() %></li>
-                                <li><%= bOne.getUserId() %></li>
-                                <li><%= bOne.getBoardCount() %></li>
-                                <li><%= bOne.getBoardLike() %></li>
-                            </ul>
-                        </li>
                     </ul>
                 </li>
                 <li>
