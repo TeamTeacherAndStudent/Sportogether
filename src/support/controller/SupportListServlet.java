@@ -1,11 +1,18 @@
 package support.controller;
 
 import java.io.IOException;
+import java.util.List;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import support.model.service.SupportService;
+import support.model.vo.PageData;
+import support.model.vo.Support;
 
 /**
  * Servlet implementation class SupportListServlet
@@ -25,8 +32,24 @@ public class SupportListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		int currentPage = 0;
+		String getCurrentPage = request.getParameter("currentPage");
+		if(getCurrentPage == null) {
+			currentPage = 1;
+		}else {
+			currentPage = Integer.parseInt(getCurrentPage);
+		}
+		PageData pageData = new SupportService().printAllSupport(currentPage);
+		List<Support> sList = pageData.getSupportList();
+		if(!sList.isEmpty()) {
+			request.setAttribute("sList", sList);
+			request.setAttribute("pageNavi",pageData.getPageNavi());
+			request.getRequestDispatcher("")
+			.forward(request, response);
+		}else {
+			RequestDispatcher view = request.getRequestDispatcher("");
+			view.forward(request, response);
+		}
 	}
 
 	/**

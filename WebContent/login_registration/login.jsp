@@ -71,7 +71,7 @@
 		<div>
 			<div id = "formtest">
 			<span style="font-size : 6em;"><i class="far fa-user"></span></i><br>
-				<form action = "" method="post">
+				<form action = "/member/login" method="post">
 						<input class = "login-input" id = "floatingInput" autocomplete="off" type="text" name = "user-id" placeholder ="ID"><br>
 						<input class = "login-input" id = "floatingPassword" autocomplete="off" type="password" name = "user-pw" placeholder ="PASSWORD"><br>
 					<a href="#" style="font-size:12px;" class="link-secondary">ID 찾기</a>
