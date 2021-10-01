@@ -95,4 +95,26 @@ public class NoticeService {
 		return result;
 	}
 
+	//공지수정
+	public int modifyNotice(Notice notice) {
+		int result = 0;
+		Connection conn = null;
+		try {
+			//연결생성
+			conn = jdbcTemplate.createConnection();
+			result = new NoticeDAO().updateNotice(conn,notice);
+			if(result>0) {
+				JDBCTemplate.commit(conn);
+			}else {
+				JDBCTemplate.rollback(conn);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(conn);
+		}
+		return result;
+	}
+
 }

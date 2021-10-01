@@ -23,7 +23,7 @@ public class NoticeWriteServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//페이지이동용
-		request.getRequestDispatcher("Notice_Write.html").forward(request,response);
+		request.getRequestDispatcher("/Notice/Notice_Write.html").forward(request,response);
 	}
 
 

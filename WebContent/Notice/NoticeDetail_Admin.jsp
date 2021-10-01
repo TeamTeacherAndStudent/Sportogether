@@ -34,6 +34,10 @@
 
 <title>공지사항 상세페이지</title>
 <style>
+#search {
+	margin-left: 30px;
+}
+
 #main-title {
 	margin-top: 2%;
 	width: 100%;
@@ -121,6 +125,7 @@ button:hover {
 	color: #fff;
 	text-decoration: none;
 }
+
 .pop-layer .pop-container {
 	padding: 20px 25px;
 }
@@ -159,21 +164,20 @@ button:hover {
 			<h1 class="logo">
 				<a href="../index.html"> Sportogether </a>
 			</h1>
-			<!-- Uncomment below if you prefer to use an image logo -->
-			<!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
-
 			<nav id="navbar" class="navbar">
 				<ul>
-					<li><a class="active" href="sports.html">종목</a></li>
-					<li><a href="../Board/freeboard_main.html">자유게시판</a></li>
-					<li><a href="../Support/support_main.html">후원</a></li>
-					<li><input type="search" placeholder="검색" size="5"></li>
+					<li><a class="active" href="../Sports/sportsList.jsp">종목</a></li>
+					<li><a href="../Board/board_main.jsp">자유게시판</a></li>
+					<li><a href="../Support/support_main.jsp">후원</a></li>
+					<li><input type="search" placeholder="검색" size="10"
+						id="search"></li>
+					<li><a href="../login_registration/login.jsp">Login</a></li>
 					<li class="dropdown"><a href="#"><span>SIDE MENU</span> <i
 							class="bi bi-chevron-down"></i></a>
 						<ul>
-							<li><a href="../Notice/notice_main.html">공지사항</a></li>
-							<li><a href="../MyPage/Mypage_main.html">마이페이지</a></li>
-							<li><a href="../QnA/qna_main.html">1:1문의</a></li>
+							<li><a href="../Notice/notice_main.jsp">공지사항</a></li>
+							<li><a href="../MyPage/Mypage_Main.html">마이페이지</a></li>
+							<li><a href="../QnA/Qna_UserMain.html">1:1문의</a></li>
 						</ul></li>
 				</ul>
 				<i class="bi bi-list mobile-nav-toggle"></i>
@@ -217,9 +221,9 @@ button:hover {
 		</div>
 		<section>
 			<div id="back-btn">
-				<a href="#layer" class="check-btn"><button>삭제</button></a> <a
-					href="notice_modify.html"><button>수정</button></a> <a
-					href="/notice/list"><button>목록</button></a>
+				<a href="#layer" class="check-btn"><button>삭제</button></a> 
+				<a href="/notice/modify?noticeNo=<%=noticeOne.getNoticeNo()%>"><button>수정</button></a> 
+				<a href="/notice/list"><button>목록</button></a>
 			</div>
 		</section>
 			<div id="layer" class="pop-layer">
@@ -228,8 +232,9 @@ button:hover {
 						<!-- 내용 -->
 						<p class="ctxt mb20">정말로 삭제하시겠습니까?</p>
 						<div class="btn-r">
-							<a href="/notice/remove?noticeNo=<%=noticeOne.getNoticeNo() %>" class="btn-layerClose"><button>삭제</button></a> <a
-								href="#" class="btn-layerClose"><button type="reset">취소</button></a>
+						
+							<a href="/notice/remove?noticeNo=<%=noticeOne.getNoticeNo()%>" ><button class="btn-layerClose" onclick="deleteNotice()">삭제</button></a> <a
+								href="#" class="btn-layerClose"><button >취소</button></a>
 						</div>
 						<!--  // 내용 끝 -->
 					</div>

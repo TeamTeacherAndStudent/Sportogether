@@ -191,4 +191,24 @@ public class NoticeDAO {
 	
 		return result;
 	}
+
+	//공지수정
+	public int updateNotice(Connection conn, Notice notice) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "UPDATE NOTICE SET NOTICE_TITLE=?, NOTICE_CONTENTS=? WHERE NOTICE_NO=?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, notice.getNoticeTitle());
+			pstmt.setString(2, notice.getNoticeContents());
+			pstmt.setInt(3, notice.getNoticeNo());
+			//쿼리문실행
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
 }
