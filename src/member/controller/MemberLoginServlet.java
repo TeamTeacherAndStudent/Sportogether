@@ -47,9 +47,12 @@ public class MemberLoginServlet extends HttpServlet {
 			//세션
 			HttpSession session = request.getSession();
 			session.setAttribute("userId", member.getUserId());
-			response.sendRedirect(""); //성공시 메인 페이지로 이동 
+			session.setAttribute("userCode",member.getUserCode());
+			session.setAttribute("userPlayer", member.getUserPlayer());
+			
+			response.sendRedirect("/index.html"); //성공시 메인 페이지로 이동 
 		}else { 
-			response.sendRedirect("");//실패시 ( 임시로만든 에러 페이지 ) 로 이동
+			response.sendRedirect("/login_registration/loginError.html");//실패시 ( 임시로만든 에러 페이지 ) 로 이동
 		}
 		
 	}
