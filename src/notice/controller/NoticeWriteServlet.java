@@ -22,6 +22,12 @@ public class NoticeWriteServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//페이지이동용
+		request.getRequestDispatcher("Notice_Write.html").forward(request,response);
+	}
+
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//한글인코딩
 		request.setCharacterEncoding("UTF-8");
 		String title = request.getParameter("notice-title");
@@ -43,14 +49,8 @@ public class NoticeWriteServlet extends HttpServlet {
 			//작성 성공 > NoticeList로 이동(noticeList.jsp로 이동)
 			response.sendRedirect("/notice/list");
 		}else {
-			request.getRequestDispatcher("/WEB-INF/view/notice/serviceFailed.html").forward(request, response);
+			request.getRequestDispatcher("/Notice/ServiceFailed.html").forward(request, response);
 		}
-	}
-
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
 	}
 
 }

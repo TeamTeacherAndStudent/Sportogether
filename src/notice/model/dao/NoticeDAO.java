@@ -36,7 +36,7 @@ public class NoticeDAO {
 	public List<Notice> selectAllNotice(Connection conn, int currentPage) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String query = "SELECT * FROM (SELECT ROW_NUMBER() OVER(ORDER BY NOTICE_NO DESC) AS NUM, NOTICE_NO, NOTICE_TITLE, NOTICE_CONTENTS, NOTICE_WRITER,NOTICE_DATE, NOTICE_COUNT FROM NOTICE) WHERE NUM BETWEEN ? AND ? ";
+		String query = "SELECT * FROM (SELECT ROW_NUMBER() OVER(ORDER BY NOTICE_NO DESC) AS NUM, NOTICE_NO, NOTICE_TITLE, NOTICE_CONTENTS, NOTICE_WRITER, NOTICE_DATE, NOTICE_COUNT FROM NOTICE) WHERE NUM BETWEEN ? AND ? ";
 		List<Notice> nList = null;
 		
 		try {
@@ -143,5 +143,52 @@ public class NoticeDAO {
 		}
 		
 		return totalValue;
+	}
+
+	//상세조회
+	public Notice selectOneByNo(Connection conn, int noticeNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Notice noticeOne = null;
+		String query = "SELECT * FROM NOTICE WHERE NOTICE_NO = ?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, noticeNo);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				noticeOne = new Notice();
+				noticeOne.setNoticeNo(rset.getInt("NOTICE_NO"));
+				noticeOne.setNoticeTitle(rset.getString("NOTICE_TITLE"));
+				noticeOne.setNoticeContents(rset.getString("NOTICE_CONTENTS"));
+				noticeOne.setNoticeWriter(rset.getString("NOTICE_WRITER"));
+				noticeOne.setNoticeDate(rset.getDate("NOTICE_DATE"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return noticeOne;
+	}
+
+	
+	//공지삭제
+	public int deleteNotice(Connection conn, int noticeNo) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "DELETE FROM NOTICE WHERE NOTICE_NO=?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, noticeNo);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+	
+		return result;
 	}
 }

@@ -279,23 +279,25 @@ button:hover {
 								<li>조회수</li>
 							</ul>
 						</li>
-						<% for(Notice nOne : nList) {%>
+						
+	 					<% for(Notice nOne : nList) {%>
 						<li>
 							<ul>
 								<li><%= nOne.getNoticeNo() %></li>
-								<li class="left"><a href="/notice/detail?noticeNo=<%=nOne.getNoticeNo() %>"><%=nOne.getNoticeTitle() %></a></li>
+								<li class="left"><a href="/notice/detail?noticeNo=<%=nOne.getNoticeNo()%>"><%=nOne.getNoticeTitle()%></a></li>
 								<li><%= nOne.getNoticeDate() %></li>
 								<li><%= nOne.getNoticeWriter() %></li>
 								<li><%= nOne.getNoticeCount() %></li>
 							</ul>
 						</li>
-						<%} %>
-						<li>
+						<%} %> 
+						
 					</ul>
 				</li>
 				
 				<li>
 					<div id="divPaging">
+					<%= pageNavi %>
 <!-- 						<div>◀</div>
 						<div>
 							<b>1</b>
@@ -313,7 +315,7 @@ button:hover {
 		</div>
 
 		<div id="back-btn">
-			<a href="notice_write.html"><button>글쓰기</button></a>
+			<a href="/notice/write"><button>글쓰기</button></a>
 		</div>
 
 		<section>

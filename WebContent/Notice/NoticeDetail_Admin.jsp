@@ -1,7 +1,14 @@
+<%@page import="notice.model.vo.Notice"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+	Notice noticeOne = (Notice)request.getAttribute("noticeOne");
+%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+<title>공지사항 상세페이지(관리자)</title>
 <!-- Google Fonts -->
 <link
 	href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
@@ -22,6 +29,9 @@
 
 <!-- Template Main CSS File -->
 <link href="../assets/css/style.css" rel="stylesheet">
+
+<script src="https://code.jquery.com/jquery-latest.min.js"></script>
+
 <title>공지사항 상세페이지</title>
 <style>
 #main-title {
@@ -111,12 +121,38 @@ button:hover {
 	color: #fff;
 	text-decoration: none;
 }
+.pop-layer .pop-container {
+	padding: 20px 25px;
+}
+
+.pop-laeyr p.ctxt {
+	color: #666;
+	line-height: 25px;
+}
+
+.pop-layer .btn-r {
+	width: 100%;
+	margin: 10px 0 20px;
+	padding-top: 10px;
+	border-top: 1px solid #ddd;
+	text-align: right;
+}
+
+.pop-layer {
+	display: none;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 410px;
+	height: auto;
+	background-color: #fff;
+	border: 5px solid #3571B5;
+	z-index: 10;
+}
 </style>
-
 </head>
-
 <body>
-	<header id="header" class="fixed-top">
+<header id="header" class="fixed-top">
 		<div
 			class="container d-flex align-items-center justify-content-between">
 			<!-- 여기에 로고 사진 추가 -->
@@ -161,33 +197,44 @@ button:hover {
 				<thead>
 					<tr>
 						<th scope="cols">제목</th>
-						<th scope="cols">금일(2019-02-18) 사이트 접속 에러에 대한 안내
+						<th scope="cols"><%=noticeOne.getNoticeTitle() %></th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
 						<td>작성일</td>
-						<td>2021-09-25 04:45:23</td>
+						<td><%=noticeOne.getNoticeDate() %></td>
 					</tr>
 					<tr>
 						<td>글쓴이</td>
-						<td>관리자</td>
+						<td><%=noticeOne.getNoticeWriter() %></td>
 					</tr>
 					<tr>
-						<td colspan="2">초창기에는 이들 코스의 구획도 골프장의 넓이에 따라 달랐으며, 홀의 수도 일정하지
-							않았다. 즉 홀 수가 27∼72개인 경우도 있는 등 통일되지 않았는데, 1764년 스코틀랜드의
-							세인트앤드루스(Saint Andrews)에서 18개로 개조되었고, 이것이 모델이 되어 현재의 모든 코스 단위는
-							18홀로 고정되었다. 이때부터 골프의 기술적 수준이 스코어에 의해 기록에 남게 되었다.</td>
+						<td colspan="2"><%= noticeOne.getNoticeContents() %></td>
 					</tr>
 				</tbody>
 			</table>
 		</div>
 		<section>
 			<div id="back-btn">
-				 <a href="notice_List.html"><button>목록</button></a>
+				<a href="#layer" class="check-btn"><button>삭제</button></a> <a
+					href="notice_modify.html"><button>수정</button></a> <a
+					href="/notice/list"><button>목록</button></a>
 			</div>
 		</section>
-
+			<div id="layer" class="pop-layer">
+				<div class="pop-container">
+					<div class="pop-conts">
+						<!-- 내용 -->
+						<p class="ctxt mb20">정말로 삭제하시겠습니까?</p>
+						<div class="btn-r">
+							<a href="/notice/remove?noticeNo=<%=noticeOne.getNoticeNo() %>" class="btn-layerClose"><button>삭제</button></a> <a
+								href="#" class="btn-layerClose"><button type="reset">취소</button></a>
+						</div>
+						<!--  // 내용 끝 -->
+					</div>
+				</div>
+			</div>
 
 	</main>
 
@@ -242,11 +289,46 @@ button:hover {
 	<script src="assets/js/jquery-1.12.3.min.js"></script>
 	<script src="assets/js/jquery.counterup.min.js"></script>
 	<script src="assets/js/waypoints.min.js"></script>
+
+	<!-- 삭제 경고창 -->
 	<script>
-	$(".counter").counterUp({
-			delay: 20,
-			time : 2000
-	});
-</script>
+	$(".check-btn").click(function(){
+        var $href = $(this).attr("href");
+        layer_popup($href);
+    });
+    function layer_popup(el){
+
+        var $el = $(el);    //레이어의 id를 $el 변수에 저장
+        var isDim = $el.prev().hasClass("dimBg"); //dimmed 레이어를 감지하기 위한 boolean 변수
+
+        isDim ? $(".dim-layer").fadeIn() : $el.fadeIn();
+
+        var $elWidth = ~~($el.outerWidth()),
+            $elHeight = ~~($el.outerHeight()),
+            docWidth = $(document).width(),
+            docHeight = $(document).height();
+
+        // 화면의 중앙에 레이어를 띄운다.
+        if ($elHeight < docHeight || $elWidth < docWidth) {
+            $el.css({
+                marginTop: -$elHeight /2,
+                marginLeft: -$elWidth/2
+            })
+        } else {
+            $el.css({top: 0, left: 0});
+        }
+
+        $el.find("a.btn-layerClose").click(function(){
+            isDim ? $(".dim-layer").fadeOut() : $el.fadeOut(); // 닫기 버튼을 클릭하면 레이어가 닫힌다.
+            return false;
+        });
+
+        $(".layer .dimBg").click(function(){
+            $(".dim-layer").fadeOut();
+            return false;
+        });
+
+    }
+	</script>
 </body>
 </html>
