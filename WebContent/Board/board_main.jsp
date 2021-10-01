@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -197,56 +198,26 @@
                                 <li>제목</li>
                                 <li>작성일</li>
                                 <li>작성자</li>
-                                <li>추천수</li>
                                 <li>조회수</li>
+                                <li>추천수</li>
                             </ul>
                         </li>
+                    	<% for(Board bOne : bList) {%>
                         <li>
                             <ul>
-                                <li>1</li>
-                                <li>배구</li>
-                                <li><a href="board_detail.jsp">배구좋죠</a></li>
-                                <li>2021.08.01</li>
-                                <li>서광팔</li>
-                                <li>15</li>
-                                <li>15</li>
-                            </ul>
-                        </li>
-    
-                        <li>
-                            <ul>
-                                <li>2</li>
-                                <li>배구</li>
-                                <li>배구좋죠</li>
-                                <li>2021.08.02</li>
-                                <li>나대물</li>
-                                <li>10</li>
-                                <li>10</li>
-                            </ul>
-                        </li>
-    
-                        <li>
-                            <ul>
-                                <li>3</li>
-                                <li>배구</li>
-                                <li>배구좋죠</li>
-                                <li>2021.08.02</li>
-                                <li>마풍강</li>
-                                <li>1</li>
-                                <li>1</li>
+                                <li><%= bOne.getBoardNo() %></li>
+                                <li><%= bOne.getSportsName() %></li>
+                                <li><a href="board_detail?boardNo=<%= bOne.getBoardNo() %>"><%= bOne.getBoardTitle() %></a></li>
+                                <li><%= bOne.getBoardEnrollDate() %></li>
+                                <li><%= bOne.getUserId() %></li>
+                                <li><%= bOne.getBoardCount() %></li>
+                                <li><%= bOne.getBoardLike() %></li>
                             </ul>
                         </li>
                     </ul>
                 </li>
                 <li>
                     <div id="divPaging">
-                        <div>◀</div>
-                        <div><b>1</b></div>
-                        <div>2</div>
-                        <div>3</div>
-                        <div>4</div>
-                        <div>5</div>
-                        <div>▶</div>
                     </div>
                 </li>
                 <a href="boardWrite.html"><input id="writeBtn" class="Btn" type="button" value="글작성"></a>

@@ -58,15 +58,21 @@
 		 line-height: 33px;
 		}
 		.searchbox{
-			width : 60%;
-			height: 500px;
+	    	width : 100%;
+			height: 800px;
+			margin-top : 15px;
+			text-align: center;
+		  	display: flex;
+			justify-content: center;
 		}
 		#boardlist-search {
+			height: 400px;
 			background-color: red;
-			text-align: center;
+			display: inline-block;
 		}
 		#supportlist-search{
-			text-align: center;
+			height: 400px;
+			display: inline-block;
 			background-color: blue;
 		}		
   </style>
@@ -114,19 +120,23 @@
 		 	</div>
 		</div>
 	</form>
- 	<div id="boardlist-search" class="searchbox">
- 		<div class="board-url">
- 		</div>
- 		<div class="search-contents">
- 		</div>
- 	</div>
- 	<div id="supportlist-search" class="searchbox">
- 		<div class="support-url">
- 		</div>
- 		<div class="search-contents">
+ 	<div class="searchbox">
+ 		<div id="boardlist-search">
+ 			<div class="board-url">
+ 			</div>
+ 			<div class="search-contents">
+ 			</div>
  		</div>
  	</div>
-	 </section>
+ 	<div class="searchbox">
+ 		<div id="supportlist-search">
+ 			<div class="support-url">
+ 			</div>
+ 			<div class="search-contents">
+ 			</div>
+ 		</div>
+ 	</div>
+</section>
   <br><br><br>
 	  <!-- ======= Footer ======= -->
   <footer id="footer">

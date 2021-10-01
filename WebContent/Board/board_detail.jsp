@@ -141,10 +141,10 @@
 					<div class="text">
 						<form action ="" method="post" name="sportEnroll" target="_self">
 							<fieldset>
-							<input type="text" id="category" class="input-field" size="10">
-							<input type="text" id="title" class="input-field" size="50">
+							<div id="category"class="input-field"></div>
+							<div id="title" class="input-field"></div>
 							<div id="writeInf" class="input-field">
-								작성자  
+								작성자
 								날짜 
 								조회수 
 								추천 	
