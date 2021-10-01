@@ -28,10 +28,25 @@ public class Member {
 			this.userEmail = userEmail;
 			this.userEnrollDate = userEnrollDate;
 		}
-
+		
+		//가입일을 제외한 생성자
 		public String getUserId() {
 			return userId;
 		}
+		public Member(String userId, String userNickName, String userName, String userPw, Date userBirthDate,
+				String userGender, int userPhone, String userEmail) {
+			super();
+			this.userId = userId;
+			this.userNickName = userNickName;
+			this.userName = userName;
+			this.userPw = userPw;
+			this.userBirthDate = userBirthDate;
+			this.userGender = userGender;
+			this.userPhone = userPhone;
+			this.userEmail = userEmail;
+		}
+
+
 		public void setUserId(String userId) {
 			this.userId = userId;
 		}
