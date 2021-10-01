@@ -65,7 +65,6 @@ ul, li {
 	justify-content: center;
 	vertical-align: middle;
 	align-items: center;
-
 }
 
 #mainWrapper>ul>li:first-child {
@@ -81,8 +80,9 @@ ul, li {
 }
 
 #ulTable ul {
-width : 100%;
-} 
+	width: 100%;
+}
+
 #ulTable>li:first-child>ul>li {
 	background: #165992;
 	color: #fff;
@@ -122,11 +122,10 @@ width : 100%;
 #ulTable>li>ul>li:first-child+li+li+li+li+li {
 	width: 10%;
 } /*조회수 열 크기*/
-
 #divPaging {
 	clear: both;
 	margin: 0 auto;
-	padding : 20px;
+	padding: 20px;
 	width: 250px;
 	height: 50px;
 }
@@ -159,9 +158,8 @@ width : 100%;
 	bottom: 15px;
 }
 
-
 #divPaging>div {
-	float: left; 
+	float: left;
 	width: 30px;
 	margin: 0 auto;
 	text-align: center;
@@ -198,7 +196,7 @@ button:hover {
 	text-decoration: none;
 }
 
-#search-btn{
+#search-btn {
 	background-color: #1d284b;
 	color: white;
 	border-style: none;
@@ -217,10 +215,14 @@ button:hover {
 	border: 2px solid #1d284b;
 }
 
-#search-btn:hover{
+#search-btn:hover {
 	background: #006fbe;
 	color: #fff;
 	text-decoration: none;
+}
+
+#search {
+	margin-left: 30px;
 }
 </style>
 <title>공지사항(관리자)</title>
@@ -231,23 +233,22 @@ button:hover {
 			class="container d-flex align-items-center justify-content-between">
 			<!-- 여기에 로고 사진 추가 -->
 			<h1 class="logo">
-				<a href="index.html"> Sportogether </a>
+				<a href="../index.html"> Sportogether </a>
 			</h1>
-			<!-- Uncomment below if you prefer to use an image logo -->
-			<!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
-
 			<nav id="navbar" class="navbar">
 				<ul>
-					<li><a class="active" href="sports.html">종목</a></li>
-					<li><a href="freeboard.html">자유게시판</a></li>
-					<li><a href="support.html">후원</a></li>
-					<li><input type="search" placeholder="검색" size="5"></li>
+					<li><a class="active" href="../Sports/sportsList.jsp">종목</a></li>
+					<li><a href="../Board/board_main.jsp">자유게시판</a></li>
+					<li><a href="../Support/support_main.jsp">후원</a></li>
+					<li><input type="search" placeholder="검색" size="10"
+						id="search"></li>
+					<li><a href="../login_registration/login.jsp">Login</a></li>
 					<li class="dropdown"><a href="#"><span>SIDE MENU</span> <i
 							class="bi bi-chevron-down"></i></a>
 						<ul>
-							<li><a href="notice.html">공지사항</a></li>
-							<li><a href="myinfo.html">마이페이지</a></li>
-							<li><a href="qna.html">1:1문의</a></li>
+							<li><a href="../Notice/notice_main.jsp">공지사항</a></li>
+							<li><a href="../MyPage/Mypage_Main.html">마이페이지</a></li>
+							<li><a href="../QnA/Qna_UserMain.html">1:1문의</a></li>
 						</ul></li>
 				</ul>
 				<i class="bi bi-list mobile-nav-toggle"></i>
@@ -279,23 +280,25 @@ button:hover {
 								<li>조회수</li>
 							</ul>
 						</li>
-						<% for(Notice nOne : nList) {%>
+						
+	 					<% for(Notice nOne : nList) {%>
 						<li>
 							<ul>
 								<li><%= nOne.getNoticeNo() %></li>
-								<li class="left"><a href="/notice/detail?noticeNo=<%=nOne.getNoticeNo() %>"><%=nOne.getNoticeTitle() %></a></li>
+								<li class="left"><a href="/notice/detail?noticeNo=<%=nOne.getNoticeNo()%>"><%=nOne.getNoticeTitle()%></a></li>
 								<li><%= nOne.getNoticeDate() %></li>
 								<li><%= nOne.getNoticeWriter() %></li>
 								<li><%= nOne.getNoticeCount() %></li>
 							</ul>
 						</li>
-						<%} %>
-						<li>
+						<%} %> 
+						
 					</ul>
 				</li>
 				
 				<li>
 					<div id="divPaging">
+					<%= pageNavi %>
 <!-- 						<div>◀</div>
 						<div>
 							<b>1</b>
@@ -311,12 +314,12 @@ button:hover {
 				</li>
 			</ul>
 		</div>
-
+	<section>
 		<div id="back-btn">
-			<a href="notice_write.html"><button>글쓰기</button></a>
+			<a href="/notice/write"><button>글쓰기</button></a>
 		</div>
-
-		<section>
+	</section>
+<!-- 		<section>
 			<ul>
 				<li id='liSearchOption'>
 					<div>
@@ -328,7 +331,7 @@ button:hover {
 					</div>
 				</li>
 			</ul>
-		</section>
+		</section> -->
 	</main>
 
 	<!-- footer 옆으로 넘어감 방지 -->

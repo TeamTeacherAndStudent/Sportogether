@@ -1,3 +1,9 @@
+<%@page import="notice.model.vo.Notice"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+	Notice notice = (Notice)request.getAttribute("notice");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,9 +35,15 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<title>공지사항 작성</title>
+<script src="https://code.jquery.com/jquery-latest.min.js"></script>
+
+<title>공지사항 수정</title>
 
 <style>
+#search{
+   margin-left: 30px;
+}
+    
 #main-title {
 	margin-top: 2%;
 	width: 100%;
@@ -56,8 +68,6 @@
 	justify-content: center;
 	vertical-align: middle;
 }
-
-
 
 #maindiv {
 	width: 70%;
@@ -98,38 +108,61 @@ button:hover {
 	color: #fff;
 	text-decoration: none;
 }
+
+.pop-layer .pop-container {
+	padding: 20px 25px;
+}
+
+.pop-laeyr p.ctxt {
+	color: #666;
+	line-height: 25px;
+}
+
+.pop-layer .btn-r {
+	width: 100%;
+	margin: 10px 0 20px;
+	padding-top: 10px;
+	border-top: 1px solid #ddd;
+	text-align: right;
+}
+
+.pop-layer {
+	display: none;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 410px;
+	height: auto;
+	background-color: #fff;
+	border: 5px solid #3571B5;
+	z-index: 10;
+}
 </style>
 
 </head>
-
 <body>
-	<header id="header" class="fixed-top">
+<header id="header" class="fixed-top">
 		<div
 			class="container d-flex align-items-center justify-content-between">
 			<!-- 여기에 로고 사진 추가 -->
-			<h1 class="logo">
-				<a href="../index.html"> Sportogether </a>
-			</h1>
-			<!-- Uncomment below if you prefer to use an image logo -->
-			<!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
-
-			<nav id="navbar" class="navbar">
-				<ul>
-					<li><a class="active" href="sports.html">종목</a></li>
-					<li><a href="../Board/freeboard_main.html">자유게시판</a></li>
-					<li><a href="../Support/support_main.html">후원</a></li>
-					<li><input type="search" placeholder="검색" size="5"></li>
-					<li class="dropdown"><a href="#"><span>SIDE MENU</span> <i
-							class="bi bi-chevron-down"></i></a>
-						<ul>
-							<li><a href="../Notice/notice_main.html">공지사항</a></li>
-							<li><a href="../MyPage/Mypage_main.html">마이페이지</a></li>
-							<li><a href="../QnA/qna_main.html">1:1문의</a></li>
-						</ul></li>
-				</ul>
-				<i class="bi bi-list mobile-nav-toggle"></i>
-			</nav>
-			<!-- .navbar -->
+			<h1 class="logo"><a href="../index.html"> Sportogether </a></h1>
+       <nav id="navbar" class="navbar">
+        <ul>
+          <li><a class="active" href="../Sports/sportsList.jsp">종목</a></li>
+          <li><a href="../Board/board_main.jsp">자유게시판</a></li>
+          <li><a href="../Support/support_main.jsp">후원</a></li>
+          <li><input type="search" placeholder="검색" size="10" id="search"></li>
+            <li><a href="../login_registration/login.jsp">Login</a></li>
+          <li class="dropdown"><a href="#"><span>SIDE MENU</span> <i class="bi bi-chevron-down"></i></a>
+          <ul>
+             <li><a href="../Notice/notice_main.jsp">공지사항</a></li>     
+             <li><a href="../MyPage/Mypage_Main.html">마이페이지</a></li>
+             <li><a href="../QnA/Qna_UserMain.html">1:1문의</a></li>
+          </ul>
+          </li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
 
 		</div>
 	</header>
@@ -140,13 +173,13 @@ button:hover {
 	<main id="main">
 		<section>
 			<div id="main-title">
-				<h1>공지사항 작성</h1>
+				<h1>공지사항 수정</h1>
 			</div>
 		</section>
 
 
 		<div id="main-content">
-			<form action="/notice/write" method="post" id="notice">
+			<form action="/notice/modify" method="post" id="notice">
 				<div class="form-group">
 
 					<br> <label for="title">제목</label>
@@ -154,25 +187,42 @@ button:hover {
 					<!-- required 속성을 설정하면 필수입력 사항이된다. -->
 					<!-- pattern 속성을 이용한 정규표현식으로 데이터의 유효성 검사를 할 수 있다. -->
 					<input type="text" class="form-control" id="title"
-						placeholder="제목 입력(4-100)" name="notice-title" maxlength="100"
+						placeholder="제목 입력(4-100)" name="notice-title" value="<%=notice.getNoticeTitle()%>" maxlength="100"
 						required="required" pattern=".{4,100}">
 				</div>
 				<div class="form-group">
 					<label for="content">내용</label>
 					<!--  여러줄의 데이터를 입력하고 하고자 할때 textarea 태그를 사용한다. -->
 					<!--  textarea 안에 있는 모든 글자는 그대로 나타난다. 공백문자, tag, enter -->
-					<textarea class="form-control" rows="20" id="content"
-						name="notice-content" placeholder="내용 작성"></textarea>
+					<textarea class="form-control" rows="20" id="content" name="notice-content" placeholder="내용 작성">
+						<%=notice.getNoticeContents()%>
+					</textarea>
 				</div>
-				<section>
-					<div id="back-btn">
-						<a href="javascript:preview()"><button>미리보기</button></a>
-						<button type="submit">등록</button>
-						<button type="reset">취소</button>
-					</div>
-				</section>
-
+			<section>
+				<input type="hidden" name="noticeNo" value="<%=notice.getNoticeNo()%>">
+				<div id="back-btn">
+					<button type="submit">수정완료</button>
+					<!-- <a href="#layer" class="check-btn"><button>삭제</button></a> --> 
+					<a href="#"><button type="reset">취소</button></a>
+				</div>
+			</section>
 			</form>
+
+
+<!-- 			<div id="layer" class="pop-layer">
+				<div class="pop-container">
+					<div class="pop-conts">
+						내용
+						<p class="ctxt mb20">정말로 삭제하시겠습니까?</p>
+						<div class="btn-r">
+							<a href="#" class="btn-layerClose"><button>삭제</button></a> <a
+								href="#" class="btn-layerClose"><button>취소</button></a>
+						</div>
+						 // 내용 끝
+					</div>
+				</div>
+			</div> -->
+			
 		</div>
 	</main>
 	<!-- footer 옆으로 넘어감 방지 -->
@@ -193,8 +243,7 @@ button:hover {
 				<option value="http://www.kahperd.or.kr/">한국체육학회</option>
 				<option
 					value="https://www.sports.re.kr/front/main/main.do?menu_seq=0">한국정책과학원</option>
-			</select> <br>
-			<br>
+			</select> <br> <br>
 			<div class="copyright">
 				&copy; Copyright <strong><span>SPORTOGETHER</span></strong>. All
 				Rights Reserved
@@ -227,12 +276,45 @@ button:hover {
 	<script src="assets/js/jquery.counterup.min.js"></script>
 	<script src="assets/js/waypoints.min.js"></script>
 
-	<!-- 미리보기  -->
+	<!-- 삭제 경고창 -->
 	<script>
-	function preview(){
-		document.getElementById("notice").attr("action","preview.do");
-		document.getElemenetById("notice").submit();
-	}
+	$(".check-btn").click(function(){
+        var $href = $(this).attr("href");
+        layer_popup($href);
+    });
+    function layer_popup(el){
+
+        var $el = $(el);    //레이어의 id를 $el 변수에 저장
+        var isDim = $el.prev().hasClass("dimBg"); //dimmed 레이어를 감지하기 위한 boolean 변수
+
+        isDim ? $(".dim-layer").fadeIn() : $el.fadeIn();
+
+        var $elWidth = ~~($el.outerWidth()),
+            $elHeight = ~~($el.outerHeight()),
+            docWidth = $(document).width(),
+            docHeight = $(document).height();
+
+        // 화면의 중앙에 레이어를 띄운다.
+        if ($elHeight < docHeight || $elWidth < docWidth) {
+            $el.css({
+                marginTop: -$elHeight /2,
+                marginLeft: -$elWidth/2
+            })
+        } else {
+            $el.css({top: 0, left: 0});
+        }
+
+        $el.find("a.btn-layerClose").click(function(){
+            isDim ? $(".dim-layer").fadeOut() : $el.fadeOut(); // 닫기 버튼을 클릭하면 레이어가 닫힌다.
+            return false;
+        });
+
+        $(".layer .dimBg").click(function(){
+            $(".dim-layer").fadeOut();
+            return false;
+        });
+
+    }
 	</script>
 </body>
 </html>

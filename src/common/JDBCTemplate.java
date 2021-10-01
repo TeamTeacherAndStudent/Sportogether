@@ -32,9 +32,9 @@ public class JDBCTemplate {
 	
 	//연결 생성
 	public Connection createConnection() throws SQLException {
-		String url = "jdbc:oracle:thin:@local:1521:XE";
-		String user = "SPOTOEGETHER";
-		String password = "SPOTOEGETHER";
+		String url = "jdbc:oracle:thin:@sonof.iptime.org:8521:XE";
+		String user = "SPOTOGETHER";
+		String password = "SPOTOGETHER";
 		Connection conn = DriverManager.getConnection(url, user, password);
 		conn.setAutoCommit(false);
 		return conn;
