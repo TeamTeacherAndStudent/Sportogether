@@ -1,9 +1,13 @@
+<%@page import="qna.model.vo.QnAReply"%>
+<%@page import="java.util.List"%>
 <%@page import="qna.model.vo.QnA"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
 	QnA qnaOne = (QnA)request.getAttribute("qnaOne");
+	/* List<QnAReply> list = (List<QnAReply>)request.getAttribute("list"); */
 %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -135,7 +139,7 @@ button:hover {
 	width: 88%;
 }
 
-#reply-btn {
+#reply-btn, #deleteReply-Btn {
 	padding: 10px 25px;
 }
 
@@ -233,25 +237,31 @@ button:hover {
 			</table>
 			<br><br>
 			<!-- 댓글 -->
-			<table class="p-table">
-				<tr>
-						<td colspan="3"><h5><b> 댓글 </b> </h5></td>
+			<!-- 댓글출력 -->
+			 <table class="p-table">
+					<tr>
+						<td colspan="4"><h5><b> 댓글 </b> </h5></td>
+					</tr>
+					<c:forEach items="${qnaOne.replies}" var="reply">
+					<tr>
+						<td>${reply.userId}</td>
+						<td>${reply.qnaReplyContents}</td>
+						<td><pre>${reply.qnaReplyDate}</pre> </td>
+						<td><a href="/qnaReply/remove?qnaNo=${reply.qnaNo}&qnaReplyNo=${reply.qnaReplyNo}" class="check-btn" id="deleteReply-Btn"><button>삭제</button></a></td>
 					</tr>
 					
-					<tr>
-						
-						<td>관리자</td>
-						<td>회원님들의 의견에 따라 진위여부 확인중에 있습니다. 감사합니다.</td>
-						<td><pre> 2021-09-26 04:45:23</pre> </td>
-					</tr>
-			</table>
+					</c:forEach>
+			</table>  
 			<br>
-			
+			<!-- 댓글입력 -->
+			 <form action="/qnaReply/write" method="post">
 				<div class="qna-reply">
-					<input type="text" id="reply" placeholder="댓글을 입력해주세요" maxlength="10">
+					<input type="text" id="reply" name="replyContents" placeholder="댓글을 입력해주세요" maxlength="10">
 					&nbsp;&nbsp;&nbsp;&nbsp;
-					<button id="reply-btn">등록</button>
+					<input type="hidden" name="qnaNo" value="<%=qnaOne.getQnaNo() %>">
+					<button id="reply-btn" type="submit">등록</button>
 				</div>
+			</form> 
 		</div>
 		<section>
 			<div id="back-btn">

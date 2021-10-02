@@ -10,6 +10,7 @@ import java.util.List;
 
 import common.JDBCTemplate;
 import qna.model.vo.QnA;
+import qna.model.vo.QnAReply;
 
 public class QnADAO {
 
@@ -87,7 +88,7 @@ public class QnADAO {
 			}
 		}
 		if(needNext) {
-			sb.append("<a href='/notice/list?currentPage=" + (endNavi+1) + "'> ▶ </a>");
+			sb.append("<a href='/qna/list?currentPage=" + (endNavi+1) + "'> ▶ </a>");
 		}
 		return sb.toString();
 	}
@@ -135,5 +136,119 @@ public class QnADAO {
 		
 		return result;
 	}
+
+	public QnA selectOneByNo(Connection conn, int qnaNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		QnA qnaOne = null;
+		String query = "SELECT * FROM QNA WHERE QNA_NO = ?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, qnaNo);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				qnaOne = new QnA();
+				qnaOne.setQnaNo(rset.getInt("QNA_NO"));
+				qnaOne.setUserId(rset.getString("USER_ID"));
+				qnaOne.setQnaTitle(rset.getString("QNA_TITLE"));
+				qnaOne.setQnaContents(rset.getString("QNA_CONTENTS"));
+				qnaOne.setQnaDate(rset.getDate("QNA_DATE"));
+				qnaOne.setQnaAns(rset.getString("QNA_ANS"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return qnaOne;
+	}
+
+	public int deleteQna(Connection conn, int qnaNo) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "DELETE FROM QNA WHERE QNA_NO = ?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, qnaNo);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+
+	//댓글등록
+	public int insertQnaReply(Connection conn, int qnaNo, String replyContents, String userId) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "INSERT INTO QNA_REPLY VALUES(SEQ_QNAREPLY.NEXTVAL, ?, ?, DEFAULT, ?)";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, qnaNo);
+			pstmt.setString(2, replyContents);
+			pstmt.setString(3, userId);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+	
+	//댓글조회
+	public List<QnAReply> selectAllQnAReply(Connection conn, int qnaNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = "SELECT * FROM QNA_REPLY WHERE QNA_NO = ?";
+		List<QnAReply> list = null;
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, qnaNo);
+			list = new ArrayList<QnAReply>();
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				QnAReply reply = new QnAReply();
+				reply.setQnaReplyNo(rset.getInt("QNA_REPLY_NO"));
+				reply.setQnaNo(rset.getInt("QNA_NO"));
+				reply.setQnaReplyContents(rset.getString("QNA_REPLY_CONTENTS"));
+				reply.setQnaReplyDate(rset.getDate("QNA_REPLY_DATE"));
+				reply.setUserId(rset.getString("USER_ID"));
+				list.add(reply);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+			JDBCTemplate.close(rset);
+		}
+		return list;
+	}
+
+	//댓글 삭제
+	public int deleteQnaReplyOne(Connection conn, int replyNo) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "DELETE FROM QNA_REPLY WHERE QNA_REPLY_NO=?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, replyNo);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+	
+	
+
+	
 
 }
