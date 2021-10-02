@@ -56,12 +56,14 @@
 		border-bottom:1px solid #ededed;
 		vertical-align:baseline;
 	}
-	.ulTable > li > ul > li:first-child                {width:10%;} /*No 열 크기*/
-	.ulTable > li > ul > li:first-child +li            {width:15%;} /*아이디 열 크기*/
-	.ulTable > li > ul > li:first-child +li+li         {width:10%;} /*선수이름 열 크기*/
-	.ulTable > li > ul > li:first-child +li+li+li      {width:35%;} /*후원금액 열 크기*/
-	.ulTable > li > ul > li:first-child +li+li+li+li   {width:15%;} /*후원 종목 열 크기*/
-	.ulTable > li > ul > li:first-child +li+li+li+li+li{width:15%;} /*후원일 열 크기*/
+	.ulTable > li > ul > li:first-child             	      {width:10%;} /*후원No 열 크기*/
+	.ulTable > li > ul > li:first-child +li            		  {width:10%;} /*캠페인No 열 크기*/
+	.ulTable > li > ul > li:first-child +li+li        		  {width:10%;} /*종목 열 크기*/
+	.ulTable > li > ul > li:first-child +li+li+li     		  {width:10%;} /*후원자 열 크기*/
+	.ulTable > li > ul > li:first-child +li+li+li+li   		  {width:10%;} /*선수이름 열 크기*/
+	.ulTable > li > ul > li:first-child +li+li+li+li+li		  {width:20%;} /*후원금액 열 크기*/
+	.ulTable > li > ul > li:first-child +li+li+li+li+li+li    {width:10%;} /*걸제수단 열 크기*/
+	.ulTable > li > ul > li:first-child +li+li+li+li+li+li+li {width:15%;} /*후원일 열 크기*/
 	
 	#divPaging {
 		clear:both;
@@ -118,21 +120,25 @@
 	       		<ul class="ulTable">
         			<li>
 						<ul>
-							<li>회원번호</li>
-							<li>후원 아이디</li>
-							<li>후원 선수</li>
-							<li>후원 금액</li>
-							<li>후원 종목</li>
-							<li>후원일</li>
+							<li>후원No</li>
+							<li>캠페인No</li>
+							<li>후원종목</li>
+							<li>후원자</li>
+							<li>후원선수</li>
+							<li>후원금액</li>
+							<li>결제수단</li>
+							<li>결제일</li>
 						</ul>
 					</li>
 					<li>
 						<ul>
 							<li>1</li>
+							<li>1</li>
+							<li>배구</li>
 							<li>admin</li>
 							<li>김연경</li>
 							<li>10,000</li>
-							<li>배구</li>
+							<li>카카오페이</li>
 							<li>2021.09.26</li>
 						</ul>
 					</li>

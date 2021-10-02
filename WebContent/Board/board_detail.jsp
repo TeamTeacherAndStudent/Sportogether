@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -139,22 +140,21 @@
   			<fieldset>
 	  			<div id="form">
 					<div class="text">
-						<form action ="" method="post" name="sportEnroll" target="_self">
-							<fieldset>
-							<input type="text" id="category" class="input-field" size="10">
-							<input type="text" id="title" class="input-field" size="50">
+							<div id="category"class="input-field">${requestScope.boardOne.sportsName }</div>
+							<div id="title" class="input-field">${requestScope.boardOne.boardTitle }</div>
 							<div id="writeInf" class="input-field">
-								작성자  
-								날짜 
-								조회수 
-								추천 	
-							</div></fieldset><br>
-							<textarea id="content" name="boardContent" cols="100" rows="30"></textarea><br>
+								작성자 : ${requestScope.boardOne.userId }<br>
+								날짜  : ${requestScope.boardOne.boardEnrollDate }<br>
+								조회수 : ${requestScope.boardOne.boardCount } <br>
+								추천수 : ${requestScope.boardOne.boardLike }
+							</div><br>
+							<div id="content">
+								${requestScope.boardOne.boardContents }
+							</div><br>
 							<hr>
 							<div class="file-download">
-							첨부파일 자리
+								${requestScope.boardOne.files }
 							</div><br><hr>
-						</form>
 					</div>
 				</div>
 			</fieldset>
@@ -164,57 +164,42 @@
                         <button id="repostedBtn" class="Btn" onclick="onRepostedContentClick();">게시글신고</button>
 					</div><br><br>
 	                <div id="BtnZip">
-	                 	 <a href=""><button type="button" id="list" class="Btn">수정</button></a>
+	                 	 <button type="button" id="list" class="Btn" onclick="onModifyClick();">수정</button>
 	                 	 <button type="button" id="list" class="Btn" onclick="onRemoveClick();">삭제</button>
-	                 	 <a href="board_main.jsp"><button type="button" id="list" class="Btn">목록</button></a>
+	                 	 <button type="button" id="list" class="Btn" onclick="location.href='/board/list'">목록</button>
 					</div>
 				<br><br>
 				<div class="reply">
 					<div class="row">
 					<!-- 버튼 숨김(등록시 수정안보이게/ 수정시 등록 안보이게 정렬 -->
-						<form action="" method="post">
-	                      	<h3 class="subtitle">댓글<h3></h3><hr><br>
-	                        <div class="replyEnroll">
-	                           	<input type="text" name="replyContents" id="comment" placeholder="댓글을 입력해주세요." maxlength="500" size="100">
-								<input type="submit" value="등록" class="Btn">
-	                        </div>
+	                   <h3 class="subtitle">댓글<h3></h3><hr><br>
+						<form action="/boardReply/write" method="post">
+		                        <div class="replyEnroll">
+		                           	<input type="text" name="replyContents" id="comment" placeholder="댓글을 입력해주세요." maxlength="500" size="100">
+									<input type="hidden" name="noticeNo" value="${boardOne.boardNo}">
+									<input type="submit" value="등록" class="Btn">
+		                        </div>
 						</form><br><br>
+					<c:forEach items="${boardOne.replies }" var ="reply"> <!-- 반복문 -->
 					<div class="col-md-1">
                     	<div class="replyContents">
-                    		작성자
+                    		작성자  ${requestScope.boardReply.boardReplyUserId }
                     	</div>
                     </div>
     				<div class="col-md-11">            
                   	  <div class="replyDate">
-                    	2021/09/30 12:00:03
-                    	</div>
+                   		${requestScope.boardReply.boardReplyDate }
+                      </div>
                     </div>
                    	<div class="col-md-10">
 	                    <div class="replyContent">
-	                    	<p>댓글내용</p>
+	                    	<p>${requestScope.boardReplyContents }</p>
 	                    </div>
                     </div>
                     <div class="col-md-2">
-                    	<a href="" id="repostedReply" onclick="onRepostedClick();">신고</a>
-					</div><hr>
-					<div class="col-md-1">
-                    	<div class="replyContents">
-                    		작성자
-                    	</div>
-                    </div>
-    				<div class="col-md-11">            
-                  	  <div class="replyDate">
-                    	2021/09/30 12:00:03
-                    	</div>
-                    </div>
-                   	<div class="col-md-10">
-	                    <div class="replyContent">
-	                    	<p>댓글내용</p>
-	                    </div>
-                    </div>
-                    <div class="col-md-2">
-                    	<a href="" id="repostedReply" onclick="onRepostedClick();">신고</a>
-					</div><hr>
+                    	<a href="/boardReply/reposted?boardNo=${BoardReply.boardNo }&boardReplyNo=${BoardReply.boardReplyNo }" id="repostedReply" onclick="onRepostedClick();">신고</a>
+					</div>
+					</c:forEach>
 				</div>
 			</div>
 		</div>
@@ -255,48 +240,54 @@
 <script>
 	function onLikeChange(){
 		$("#likeBtn").toggleClass('like');
-// 		console.log($("#likeBtn").attr("class"));
-// 		if($("#likeBtn").attr('class') == 'like'){
-// 			$(this).removeClass('like');
-// 		}else{ 
-// 			$(this).addClass('like');
+// 		if($(this).attr('class') == 'like'){
+//        좋아요 메인에 보여주장
+//		}else{ 
+//	    	취소하장
 // 		}
-		
-		/* var likeClick = document.getElementById("likeBtn")
-		if(likeClick) {
-			likeClick.style.backgroundColor = "#FF6666";
-			likeClick.style.border = "1px solid #1d284b";
-		}else{
-			
-		} */
 	}
+	
 	function onScrapChange(){
-		var scrapClick = document.getElementById("scrapBtn");
-		scrapClick.style.backgroundColor="#FFFF66";
-		scrapClick.style.color = "#1d284b";
+		//로그인되어있나 물어봐
+		$("#scrapBtn").toggleClass('scrap');
+//		if($(this).attr('class') == 'scrap'){
+	//      마이페이지 세션으로 넘어가서 마이스크랩목록에 보여지게 하기
+//			${sessionScope.Mypage.myScarap}
+//		}else{ 
+//         그냥 상세조회페이지
+// 		}
 	}
 	function onRepostedContentClick(){
 		var repostedChk = window.confirm("해당 게시물을 신고하겠습니까?");
+		//로그인 되어있나 물어봐
 		if(repostedChk) {
-			console.log("Y");
+			window.alert("게시물이 신고되었습니다");
+			//관리자 신고에 들어가자
 		}else{
-			console.log("N");
+			window.location.reload();//새로고침
 		}
 	}
 	function onRepostedClick(){
 		var repostedChk = window.confirm("해당 댓글을 신고하겠습니까?");
+		//로그인 물어봐
 		if(repostedChk) {
-			console.log("Y");
+			window.alert("댓글이 신고되었습니다");
 		}else{
-			console.log("N");
+			window.location.reload();//새로고침
 		}
+	}
+	function onModifyClick(){
+		//로그인 되어있나 물어보기
+		window.location.href="/board/modify?boardNo='${requestScope.boardOne.boardNo }'"
 	}
 	function onRemoveClick(){
 		var removeChk = window.confirm("해당 글을 삭제하시겠습니까?");
+		//로그인 되어있나 물어보기
 		if(removeChk) {
-			console.log("Y");
+			window.alert("글이 삭제되었습니다");
+			window.location.href="/board/remove?boardNo='${requestScope.boardOne.boardNo }'";
 		}else{
-			console.log("N");
+			window.location.reload();//새로고침
 		}
 	}
 </script>
