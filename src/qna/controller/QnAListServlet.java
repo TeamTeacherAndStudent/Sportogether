@@ -1,11 +1,18 @@
 package qna.controller;
 
 import java.io.IOException;
+import java.util.List;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import qna.model.service.QnAService;
+import qna.model.vo.PageData;
+import qna.model.vo.QnA;
 
 /**
  * Servlet implementation class QnAListServlet
@@ -14,27 +21,34 @@ import javax.servlet.http.HttpServletResponse;
 public class QnAListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-    /**
-     * Default constructor. 
-     */
     public QnAListServlet() {
-        // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		int currentPage = 0;
+		String getCurrentPage = request.getParameter("currentPage");
+		if(getCurrentPage == null) {
+			currentPage = 1;
+		}else {
+			currentPage = Integer.parseInt(getCurrentPage);
+		}
+		
+		PageData pageData = new QnAService().printAllList(currentPage);
+		List<QnA> qList = pageData.getQnaList();
+		if(!qList.isEmpty()) {
+			request.setAttribute("qList", qList);
+			request.setAttribute("pageNavi", pageData.getPageNavi());
+			//관리자/사용자 화면 어떻게 구분?
+			request.getRequestDispatcher("/QnA/Qna_UserMain.jsp").forward(request, response);
+		}else {
+			RequestDispatcher view = request.getRequestDispatcher("/QnA/Qna_Error.html");
+			view.forward(request, response);
+		}
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+	
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
 	}
 
 }

@@ -1,7 +1,16 @@
+<%@page import="qna.model.vo.QnA"%>
+<%@page import="java.util.List"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<% 
+	List<QnA> qList = (List<QnA>)request.getAttribute("qList");
+	String pageNavi = (String)request.getAttribute("pageNavi");
+%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+<title>1:1문의 목록</title>
 <!-- Google Fonts -->
 <link
 	href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
@@ -23,19 +32,7 @@
 <!-- Template Main CSS File -->
 <link href="../assets/css/style.css" rel="stylesheet">
 
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<title>1:1 문의 작성</title>
-
 <style>
-#search {
-	margin-left: 30px;
-}
-
 #main-title {
 	margin-top: 2%;
 	width: 100%;
@@ -56,23 +53,98 @@
 	margin-left: 15%;
 	margin-right: 15%;
 	margint-bottom: 15%;
-	/* display: flex; */
+	display: flex;
 	justify-content: center;
 	vertical-align: middle;
 }
 
-#maindiv {
-	width: 70%;
-	height: 70%;
+h2 {
+	padding: 5px 10px;
+	border-bottom: 1px solid #848484;
+	border-left: 8px solid #848484;
 }
 
-#but {
+ul, li {
+	list-style: none;
+	text-align: center;
+	padding: 0;
+	margin: 0;
+}
+
+#mainWrapper {
+	width: 950px;
+	margin: auto;
+	justify-content: center;
+	vertical-align: middle;
+	align-items: center;
+}
+
+#mainWrapper>ul>li:first-child {
+	text-align: center;
+	font-size: 14pt;
+	height: 40px;
+	vertical-align: middle;
+	line-height: 30px;
+}
+
+#ulTable {
+	margin-top: 10px;
+}
+
+#ulTable>li:first-child>ul>li {
+	background: #165992;
+	color: #fff;
+	font-weight: bold;
+	text-align: center;
+}
+
+#ulTable>li>ul {
+	clear: both;
+	padding: 0px auto;
+	position: relative;
+	min-width: 50px;
+}
+
+#ulTable>li>ul>li {
 	float: left;
+	font-size: 10pt;
+	border-bottom: 1px solid silver;
+	vertical-align: baseline;
+}
+
+#ulTable>li>ul>li:first-child {
+	width: 10%;
+} /*No 열 크기*/
+#ulTable>li>ul>li:first-child+li {
+	width: 45%;
+} /*제목 열 크기*/
+#ulTable>li>ul>li:first-child+li+li {
+	width: 15%;
+} /*작성일 열 크기*/
+#ulTable>li>ul>li:first-child+li+li+li {
+	width: 15%;
+} /*작성자 열 크기*/
+#ulTable>li>ul>li:first-child+li+li+li+li {
+	width: 15%;
+} /*추천수 열 크기*/
+#divPaging {
+	clear: both;
+	margin: 0 auto;
+	padding: 20px;
+	width: 250px;
+	height: 50px;
+}
+
+#divPaging>div {
+	float: left;
+	width: 30px;
+	margin: 0 auto;
+	text-align: center;
 }
 
 #back-btn {
-	margin-left: 5%;
-	margin-right: 1%;
+	margin-left: 25%;
+	margin-right: 25%;
 	text-align: right;
 }
 
@@ -100,11 +172,14 @@ button:hover {
 	color: #fff;
 	text-decoration: none;
 }
+
+#search {
+	margin-left: 30px;
+}
 </style>
-
 </head>
-
 <body>
+<!-- ======= Header ======= -->
 	<header id="header" class="fixed-top">
 		<div
 			class="container d-flex align-items-center justify-content-between">
@@ -136,47 +211,73 @@ button:hover {
 	</header>
 	<!-- End Header -->
 
-
-
+	<!-- === Main ===  -->
 	<main id="main">
 		<section>
 			<div id="main-title">
-				<h1>1:1 문의 작성</h1>
+				<h1>1:1 문의 내역</h1>
 			</div>
 		</section>
 
+		<div id="mainWrapper">
+			<ul>
+				<li>
+					<ul id="ulTable">
+						<li>
+							<ul>
+								<li>No</li>
+								<li>제목</li>
+								<li>작성일</li>
+								<li>작성자</li>
+								<li>답변대기</li>
+							</ul>
+						</li>
+						
+						<% for(QnA qOne : qList) {%>
+						<li>
+							<ul>
+								<li><%=qOne.getQnaNo() %></li>
+								<li class="left"><a href="/qna/detail?qnaNo=<%=qOne.getQnaNo()%>"><%=qOne.getQnaTitle()%></a></li>
+								<li><%=qOne.getQnaDate() %></li>
+								<li><%=qOne.getUserId() %></li>
+								<li><%=qOne.getQnaAns()%></li>
+							</ul>
+						</li>
+						<%} %>
+					</ul>
+				</li>
 
-		<div id="main-content">
-			<form action="/qna/write" method="post" id="notice">
-				<div class="form-group">
-
-					<br> <label for="title">제목</label>
-					<!-- placeholder 속성 입력한 데이터가 없는 경우 배경으로 나타난다.실제적으로 입력을 100자까지로 지정 -->
-					<!-- required 속성을 설정하면 필수입력 사항이된다. -->
-					<!-- pattern 속성을 이용한 정규표현식으로 데이터의 유효성 검사를 할 수 있다. -->
-					<input type="text" class="form-control" id="title"
-						placeholder="제목 입력(4-100)" name="qna-title" maxlength="100"
-						required="required" pattern=".{4,100}">
-				</div>
-				<div class="form-group">
-					<label for="content">내용</label>
-					<!--  여러줄의 데이터를 입력하고 하고자 할때 textarea 태그를 사용한다. -->
-					<!--  textarea 안에 있는 모든 글자는 그대로 나타난다. 공백문자, tag, enter -->
-					<textarea class="form-control" rows="20" id="content"
-						name="qna-content" placeholder="내용 작성"></textarea>
-				</div>
-				<section>
-					<div id="back-btn">
-						<button type="submit">등록</button>
-						<button type="reset">취소</button>
+				<li>
+					<div id="divPaging">
+					<%= pageNavi %>
+<!-- 						<div>◀</div>
+						<div>
+							<b>1</b>
+						</div>
+						<div>2</div>
+						<div>3</div>
+						<div>4</div>
+						<div>5</div>
+						<div>▶</div> -->
 					</div>
-				</section>
+				</li>
 
-			</form>
+			</ul>
 		</div>
+		
+		<section>
+			<div id="back-btn">
+				<a href="/qna/write"><button>글쓰기</button></a>
+			</div>
+		</section>
 	</main>
+
+
+
 	<!-- footer 옆으로 넘어감 방지 -->
 	<div style="clear: both;"></div>
+
+	<!-- ======= Footer ======= -->
 	<footer id="footer">
 		<div class="container">
 			<h3>SPORTOGETHER</h3>
@@ -226,7 +327,5 @@ button:hover {
 	<script src="assets/js/jquery-1.12.3.min.js"></script>
 	<script src="assets/js/jquery.counterup.min.js"></script>
 	<script src="assets/js/waypoints.min.js"></script>
-
-
 </body>
 </html>
