@@ -37,13 +37,21 @@ public class MemberService {
 	} 
 	
 	
-	//Login 
+	//로그인
 	//login page에서 id와 pw를 받아와 해당하는 회원 정보를  DB에서 가져와
 	//세션에 저장( 아이디, 닉네임, 선수여부, 관리자여부 )
 	public Member printOneLogin(String userId, String userPw) {
-		
-		
-		return null;
+		Member member = null;
+		Connection conn = null;
+		try {
+			conn = jdbcTemplate.createConnection();
+			member = new MemberDAO().selectOneLogin(conn, userId, userPw);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(conn);
+		}
+		return member;
 	}
 
 }

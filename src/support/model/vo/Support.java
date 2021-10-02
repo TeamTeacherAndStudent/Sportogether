@@ -15,7 +15,7 @@ public class Support {
 	private String sportsCategory;
 	private String supportFileName;
 	private String supportFilePath;
-	private String supportFileSize;
+	private Long supportFileSize;
 	private String supportApproval;
 	private Timestamp supportRegDate;
 	private Date supportEndDate;
@@ -126,11 +126,11 @@ public class Support {
 		this.supportFilePath = supportFilePath;
 	}
 
-	public String getSupportFileSize() {
+	public Long getSupportFileSize() {
 		return supportFileSize;
 	}
 
-	public void setSupportFileSize(String supportFileSize) {
+	public void setSupportFileSize(Long supportFileSize) {
 		this.supportFileSize = supportFileSize;
 	}
 
