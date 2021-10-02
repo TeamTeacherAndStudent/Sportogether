@@ -6,7 +6,8 @@ import java.util.List;
 
 import board.model.dao.BoardDAO;
 import board.model.vo.Board;
-import board.model.vo.BoardFile;
+import board.model.vo.FileData;
+import board.model.vo.PageData;
 import board.model.vo.BoardReply;
 import common.JDBCTemplate;
 
@@ -41,7 +42,7 @@ public class BoardService {
 	public Board printOneByNo(int boardNo) {
 		Board boardOne = null;
 		Connection conn = null;
-		List<BoardFile> fileList = null;
+		List<FileData> fileList = null;
 		List<BoardReply>replyList  = null;
 		BoardDAO bDao = new BoardDAO();
 		
@@ -59,6 +60,24 @@ public class BoardService {
 		}
 		return boardOne;
 	}
+	
+	public PageData printAllBoard(int currentPage) {
+		PageData pd = new PageData();
+		Connection conn = null;
+		BoardDAO bDAO = new BoardDAO();
+		
+		try {
+			conn = jdbcTemplate.createConnection();
+			pd.setBoardList(bDAO.selectAllBoard(conn, currentPage));
+			pd.setPageNavi(bDAO.getPageNavi(conn, currentPage));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(conn);
+		}
+		return pd;
+	}
+	
 	
 	public int modifyBoard(Board board) {
 		int result = 0;
@@ -88,7 +107,6 @@ public class BoardService {
 			conn = jdbcTemplate.createConnection();
 			result = new BoardDAO().deleteBoard(conn, boardNo);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally {
 			jdbcTemplate.close(conn);
@@ -115,6 +133,7 @@ public class BoardService {
 		}
 		return result;
 	}
+	
 	public int removeBoardReplyOne(int replyNo) {
 		Connection conn = null;
 		int result = 0;
@@ -128,6 +147,25 @@ public class BoardService {
 		}
 		return result;
 	}
-
 	
+	public PageData printSearchBoard(String searchKeyword, int currentPage) {
+		Connection conn = null;
+		List<Board> bList = null;
+		String searchPageNavi = null;
+		PageData pd = new PageData();
+		BoardDAO  nDAO = new BoardDAO();
+		
+		try {
+			conn = jdbcTemplate.createConnection();
+			bList = new BoardDAO().selectSearchBoard(conn, searchKeyword, currentPage);
+			searchPageNavi = nDAO.getSearchPageNavi(conn, searchKeyword, currentPage);
+			pd.setBoardList(bList);
+			pd.setPageNavi(searchPageNavi);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(conn);
+		}
+		return pd;
+	}
 }

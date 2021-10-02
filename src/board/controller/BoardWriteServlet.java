@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import board.model.service.BoardService;
 import board.model.vo.Board;
-import board.model.vo.BoardFile;
+import board.model.vo.FileData;
 
 /**
  * Servlet implementation class BoardWriteServlet

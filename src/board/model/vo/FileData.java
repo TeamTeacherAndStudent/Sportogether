@@ -2,25 +2,31 @@ package board.model.vo;
 
 import java.sql.Timestamp;
 
-public class BoardFile {
+public class FileData {
+	private int fileNo;
 	private int boardNo;
 	private String fileName;
 	private String filePath;
 	private long fileSize;
-	private String fileUser;
-	private Timestamp uploadTime;
 	
-	public BoardFile() {};
+	public FileData() {};
 	
-	public BoardFile(int boardNo, String fileName, String filePath, long fileSize, String fileUser,
-			Timestamp uploadTime) {
+	public FileData(int fileNo, int boardNo, String fileName, String filePath, long fileSize) {
 		super();
+		this.fileNo = fileNo;
 		this.boardNo = boardNo;
 		this.fileName = fileName;
 		this.filePath = filePath;
 		this.fileSize = fileSize;
-		this.fileUser = fileUser;
-		this.uploadTime = uploadTime;
+	}
+	
+
+	public int getFileNo() {
+		return fileNo;
+	}
+
+	public void setFileNo(int fileNo) {
+		this.fileNo = fileNo;
 	}
 
 	public int getBoardNo() {
@@ -55,26 +61,9 @@ public class BoardFile {
 		this.fileSize = fileSize;
 	}
 
-	public String getFileUser() {
-		return fileUser;
-	}
-
-	public void setFileUser(String fileUser) {
-		this.fileUser = fileUser;
-	}
-
-	public Timestamp getUploadTime() {
-		return uploadTime;
-
-	}
-	public void setUploadTime(Timestamp uploadTime) {
-		this.uploadTime = uploadTime;
-	}
-
 	@Override
 	public String toString() {
-		return "BoardFile [boardNo=" + boardNo + ", fileName=" + fileName + ", filePath=" + filePath + ", fileSize="
-				+ fileSize + ", fileUser=" + fileUser + ", uploadTime=" + uploadTime + "]";
+		return "FileData [fileNo=" + fileNo + ", boardNo=" + boardNo + ", fileName=" + fileName + ", filePath="
+				+ filePath + ", fileSize=" + fileSize + "]";
 	}
-	
 }
