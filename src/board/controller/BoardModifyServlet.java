@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import board.model.service.BoardService;
+import board.model.vo.Board;
+
 /**
  * Servlet implementation class BoardModifyServlet
  */
@@ -26,16 +29,33 @@ public class BoardModifyServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		int boardNo = Integer.parseInt(request.getParameter("boardNo"));
+		Board boardOne = new BoardService().printOneByNo(boardNo);
+		request.setAttribute("board", boardOne);
+		request.getRequestDispatcher("/Board/boad_modify.jsp").forward(request, response);;
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+	 //한글 인코딩
+		request.setCharacterEncoding("UTF-8");
+		String Title = request.getParameter("boardTitle");
+		String Contents = request.getParameter("boardContents");
+		//첨부파일수정
+		int boardNo = Integer.parseInt(request.getParameter("boardNo"));
+		Board board = new Board();
+		board.setBoardTitle(Title);
+		board.setBoardContents(Contents);
+		//첨부파일
+		board.setBoardNo(boardNo);
+		int result = new BoardService().modifyBoard(board);
+		if(result > 0) {
+			response.sendRedirect("/Board/board_main.jsp");
+		}else {
+			request.getRequestDispatcher("/Board/boardError.html");
+		}
 	}
 
 }

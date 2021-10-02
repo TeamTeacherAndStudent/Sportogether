@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import board.model.service.BoardService;
+
 /**
  * Servlet implementation class BoardReplyDeleteServlet
  */
@@ -26,8 +28,15 @@ public class BoardReplyDeleteServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		int replyNo = Integer.parseInt(request.getParameter("replyNo"));
+		int boardNo = Integer.parseInt(request.getParameter("boardNo"));
+		String replyContents = request.getParameter("replyContents");
+		int result = new BoardService().removeBoardReplyOne(replyNo);
+		if(result > 0) {
+			response.sendRedirect("/board/detail?boardNo="+boardNo);
+		}else {
+			request.getRequestDispatcher("Board/boardError.html").forward(request, response);
+		}
 	}
 
 	/**
