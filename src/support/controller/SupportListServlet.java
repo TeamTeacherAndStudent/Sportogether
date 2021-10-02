@@ -43,6 +43,7 @@ public class SupportListServlet extends HttpServlet {
 		List<Support> sList = pageData.getSupportList();
 		if(!sList.isEmpty()) {
 			request.setAttribute("sList", sList);
+			
 			request.setAttribute("pageNavi",pageData.getPageNavi());
 			request.getRequestDispatcher("/Support/support_main.jsp")
 			.forward(request, response);

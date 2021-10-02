@@ -63,7 +63,7 @@ public class SupportWriteServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		//upload 경로?
 		String uploadFilePath = request.getServletContext().getRealPath("upload");
-		System.out.println("업로드 리얼 패스 : " + uploadFilePath);
+//		System.out.println("업로드 리얼 패스 : " + uploadFilePath);
 		int uploadFileLimit = 5*1024*1024; //최대 파일 크기 5mb
 		String encType = "UTF-8";
 		MultipartRequest multi = new MultipartRequest(request, uploadFilePath, uploadFileLimit, encType, new DefaultFileRenamePolicy());
@@ -79,11 +79,8 @@ public class SupportWriteServlet extends HttpServlet {
 		Date supportEndDate = Date.valueOf(sptEndDate);
 		
 		//세션에서 id 가져오기..
-//		HttpSession session = request.getSession();
-//		String supportWriter = (String)session.getAttribute("user-id");
-		String supportWriter = "test1";
-		//변수 테스트
-		System.out.println(title + content + purpose + sportsCate + sptGoal);
+		HttpSession session = request.getSession();
+		String supportWriter = (String)session.getAttribute("user-id");
 	
 		//Support 객체에 정보 세팅..
 		Support spt = new Support();
@@ -124,6 +121,9 @@ public class SupportWriteServlet extends HttpServlet {
 		
 		//결과
 		if(result > 0) {
+			
+			//콘솔에 후원 성공 테스트
+			System.out.println("후원 등록 성공");
 			response.sendRedirect("/support/list");
 		}else {
 			request.getRequestDispatcher("/Support/supportError.html")

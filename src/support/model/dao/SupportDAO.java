@@ -10,6 +10,7 @@ import java.util.List;
 
 import common.JDBCTemplate;
 import support.model.vo.Support;
+import support.model.vo.SupportReply;
 
 public class SupportDAO {
 	// 후원 전체 조회
@@ -17,7 +18,7 @@ public class SupportDAO {
 		List<Support> sList = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String query = "";
+		String query = "SELECT * FROM(SELECT ROW_NUMBER() OVER(ORDER BY SUPPORT_NO DESC) AS NUM, SUPPORT_NO,SUPPORT_APPROVAL, SUPPORT_CATEGORY, USER_ID, END_DATE, POSTING_DATE,SUPPORT_TITLE,SUPPORT_PURPOSE,SUPPORT_CONTENTS,SUPPORT_GOAL,ACHIVED_RECORD,FILE_NAME,FILE_SIZE,FILE_PATH  FROM SUPPORT )WHERE NUM BETWEEN ? AND ?";
 		try {
 			pstmt = conn.prepareStatement(query);
 			
@@ -38,9 +39,9 @@ public class SupportDAO {
 				spt.setSupportContents(rset.getString("SUPPORT_CONTENTS"));
 				spt.setSupportGoal(rset.getInt("SUPPORT_GOAL"));
 				spt.setSupportAchived(rset.getInt("ACHIVED_RECORD"));
-				spt.setSportsCategory(rset.getString("SPORTS_CATEGORY"));
+				spt.setSportsCategory(rset.getString("SUPPORT_CATEGORY"));
 				spt.setSupportFileName(rset.getString("FILE_NAME"));
-				spt.setSupportFilePath(rset.getString("FILE_NAME"));
+				spt.setSupportFilePath(rset.getString("FILE_PATH"));
 				spt.setSupportFileSize(rset.getLong("FILE_SIZE"));
 				spt.setSupportApproval(rset.getString("SUPPORT_APPROVAL"));
 				spt.setSupportRegDate(rset.getTimestamp("POSTING_DATE"));
@@ -97,11 +98,11 @@ public class SupportDAO {
 			if(i == currentPage) {
 				sb.append(i + " ");
 			}else {
-				sb.append("<a href ='/notice/list?currentPage=" + i + "'>" + i + " </a>");
+				sb.append("<a href ='/support/list?currentPage=" + i + "'>" + i + " </a>");
 			}
 		}
 		if(needNext) {
-			sb.append("<a href='/notice/list?currentPage=" + (endNavi+1) + "'> [다음] </a>");
+			sb.append("<a href='/support/list?currentPage=" + (endNavi+1) + "'> [다음] </a>");
 		}
 		return sb.toString();
 		
@@ -116,7 +117,8 @@ public class SupportDAO {
 		
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, "Y");
+			//승인 여부 바꿔줘야함. 
+			pstmt.setString(1, "N");
 			rset = pstmt.executeQuery();
 			
 			if(rset.next()) {
@@ -158,6 +160,74 @@ public class SupportDAO {
 			JDBCTemplate.close(pstmt);
 		}
 		return result;
+	}
+	//만약 닉네임을 찾는 메소드를 하나 만든다면?
+	// 후원 상세 조회
+	public Support selectOneByNo(Connection conn, int supportNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Support spt = null;
+		String query = "SELECT * FROM SUPPORT WHERE SUPPORT_NO = ?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, supportNo);
+			rset = pstmt.executeQuery();
+			spt = new Support();
+			if(rset.next()) {
+				spt.setSupportNo(supportNo);
+				spt.setSupportTitle(rset.getString("SUPPORT_TITLE"));
+				spt.setSupportWriter(rset.getString("USER_ID"));
+				spt.setSupportPurpose(rset.getString("SUPPORT_PURPOSE"));
+				spt.setSupportContents(rset.getString("SUPPORT_CONTENTS"));
+				spt.setSupportGoal(rset.getInt("SUPPORT_GOAL"));
+				spt.setSupportAchived(rset.getInt("ACHIVED_RECORD"));
+				spt.setSportsCategory(rset.getString("SUPPORT_CATEGORY"));
+				spt.setSupportFileName(rset.getString("FILE_NAME"));
+				spt.setSupportFilePath(rset.getString("FILE_PATH"));
+				spt.setSupportFileSize(rset.getLong("FILE_SIZE"));
+				spt.setSupportApproval(rset.getString("SUPPORT_APPROVAL"));
+				spt.setSupportRegDate(rset.getTimestamp("POSTING_DATE"));
+				spt.setSupportEndDate(rset.getDate("END_DATE"));
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally  {
+			
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return spt;
+	}
+	// 후원 댓글 목록 가져오기
+	public List<SupportReply> selectReplayList(Connection conn, int supportNo) {
+		PreparedStatement pstmt = null;
+		String query = "SELECT * FROM SUPPORT_REPLY WHERE SUPPORT_NO = ?";
+		List<SupportReply> srList = null;
+		ResultSet rset = null;
+		try {
+			pstmt=conn.prepareStatement(query);
+			pstmt.setInt(1, supportNo);
+			rset=pstmt.executeQuery();
+			srList = new ArrayList<SupportReply>();
+			while(rset.next()) {
+				SupportReply sp = new SupportReply();
+				sp.setSupportReplyNo(rset.getInt("REPLY_NO"));
+				sp.setSupportNo(rset.getInt("SUPPORT_NO"));
+				sp.setSupportReplyContents(rset.getString("REPLY_CONTENTS"));
+				sp.setSupportReplyWriter(rset.getString("USER_ID"));
+				sp.setSupportReplyRegDate(rset.getTimestamp("REPLY_DATE"));
+				srList.add(sp);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return srList;
 	}
 	
 }

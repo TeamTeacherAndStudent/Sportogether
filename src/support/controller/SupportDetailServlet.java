@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import support.model.service.SupportService;
+import support.model.vo.Support;
+
 /**
  * Servlet implementation class SupportDetailServlet
  */
@@ -26,8 +29,17 @@ public class SupportDetailServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		//후원 상세 page
+		int supportNo = Integer.parseInt(request.getParameter("supportNo"));
+		Support spt = new SupportService().printOneByNo(supportNo);
+		
+		if(spt != null) {
+			request.setAttribute("supportOne", spt);
+			request.getRequestDispatcher("/Support/supportDetail.jsp").forward(request, response);
+		}else {
+			response.sendRedirect("/Support/supportError.html");
+		}
+	
 	}
 
 	/**

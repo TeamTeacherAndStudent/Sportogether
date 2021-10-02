@@ -51,7 +51,6 @@ public class MemberDAO {
 		Member member = null;
 		ResultSet rset = null;
 		String query = "SELECT * FROM MEMBER WHERE USER_ID = ? AND USER_PW = ?";
-		
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, userId);
@@ -59,7 +58,7 @@ public class MemberDAO {
 			rset = pstmt.executeQuery();
 			if(rset.next()) { 
 				member = new Member();
-				member.setUserId(rset.getString("USER_ID"));
+				member.setUserId(userId);
 				member.setUserNickName(rset.getString("USER_NICKNAME"));
 				member.setUserCode(rset.getString("USER_CODE"));
 				member.setUserPlayer(rset.getString("PLAYER"));

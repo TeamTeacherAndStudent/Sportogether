@@ -41,7 +41,6 @@ public class MemberLoginServlet extends HttpServlet {
 		
 		String userId = request.getParameter("user-id");
 		String userPw = request.getParameter("user-pw");
-		
 		Member member = new MemberService().printOneLogin(userId,userPw);
 		if(member != null) {
 			//세션

@@ -30,7 +30,7 @@ public class MemberLogoutServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		if(session != null) {
 			session.invalidate(); //세션 파괴, 세션정보를 다 파괴하기 때문에 로그인하지 않은 상태와 같게 된다.
-			response.sendRedirect("/index.jsp");
+			response.sendRedirect("/index.html");
 		}
 	}
 

@@ -2,11 +2,13 @@ package support.model.service;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.List;
 
 import common.JDBCTemplate;
 import support.model.dao.SupportDAO;
 import support.model.vo.PageData;
 import support.model.vo.Support;
+import support.model.vo.SupportReply;
 
 public class SupportService {
  
@@ -18,9 +20,10 @@ public class SupportService {
 	
 	// 후원 전체 목록 조회
 	public PageData printAllSupport(int currentPage) {
-		PageData pageData = null;
+		
 		Connection conn = null;
 		SupportDAO sDAO = new SupportDAO();
+		PageData pageData = new PageData();
 		try {
 			conn = jdbcTemplate.createConnection();
 			pageData.setPageNavi(sDAO.getPageNavi(conn, currentPage));
@@ -51,6 +54,25 @@ public class SupportService {
 		}
 		
 		return result;
+	}
+	// 후원 상세 조회 
+	public Support printOneByNo(int supportNo) {
+		Support spt = null;
+		SupportDAO sDAO = new SupportDAO();
+		List<SupportReply> srList = null;
+		Connection conn = null;
+		try {
+			conn = jdbcTemplate.createConnection();
+			spt = sDAO.selectOneByNo(conn, supportNo);
+			srList = sDAO.selectReplayList(conn, supportNo);
+			spt.setrList(srList);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(conn);
+		}
+		
+		return spt;
 	}
 
 }

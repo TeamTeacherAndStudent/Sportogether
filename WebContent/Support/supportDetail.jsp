@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -95,31 +96,31 @@
 			</div>
 			<div class="col-md-7">
 				<!-- 후원 제목 -->
-				<h3>제목이 들어갈지도</h3>
+				<h3>${requestScope.supportOne.supportTitle }</h3>
 				
 				<!-- 선수 이름 -->
 				
-				&nbsp;<h5>장 호동</h5><br>
+				&nbsp;<h5>${supportOne.supportWriter }</h5><br>
 				
-				<h5>소개</h5>
 				
-				<!-- 소개 -->
-				<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et</p>
+<!-- 				<h5>소개</h5> -->
+				
+<!-- 				<p>여기거 뭐더라?</p> -->
 				<br>
 				
 				<h5>목적</h5>
 				
 				<!-- 목적 -->
-				<p>Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus.</p>
+				<p>${supportOne.supportPurpose }</p>
 				
 				<!-- 본문 이미지 -->
 				<div class="row">
-					<img class="spt-img"  src="https://i.guim.co.uk/img/media/59c0eda6e9f9894522d7e0dc79d5eb41eb5b033c/117_43_2295_1378/master/2295.jpg?width=1200&quality=85&auto=format&fit=max&s=d4f083126fc87e1ba139ade3d51aa32b">
+					<img class="spt-img"  src="" alt = "...">
 				</div>
 				<br><br>
 				
 				<!-- 본문 -->
-				<p> 본문A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart. I am alone, and feel the charm of existence in this spot, which was created for the bliss of souls like mine. I am so happy, my dear friend, so absorbed in the exquisite sense of mere tranquil existence, that I neglect my talents. I should be incapable of drawing a single stroke at the present moment; and yet I feel that I never was a greater artist than now. When, while the lovely valley teems with vapour around me, and the meridian sun strikes the upper surface of the impenetrable foliage of my trees, and but a few stray gleams steal into the inner sanctuary,  Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc,</p>
+				<p>${supportOne.supportContents }</p>
 			</div>
 			<div class="col-md-1 visible">
 			</div>
@@ -128,20 +129,20 @@
 					<img src="data:image/png;base64,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">
 					
 					<!-- 목표 금액 -->
-					<h5> GOAL: 2,000,000 WON </h5> <br><br>
+					<h5> GOAL: ${supportOne.supportGoal } WON </h5> <br><br>
 					
 					<!-- 현재 모금액 -->
-					<h4>NOW : 1,000,000 WON </h4> <br><br>
+					<h4>NOW : ${supportOne.supportAchived } WON </h4> <br><br>
 					<div class="progress">
-						<div class="progress-bar bg-warning" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+						<div class="progress-bar bg-warning" role="progressbar" style="width: ${(support.supportAchived / support.supportGoal)*100 }% aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
 					</div>
 					
 					<!-- 달성률 % -->
-					<h6>50%</h6><br>
+					<h6>${(supportOne.supportAchived/ supportOne.supportGoal)*100 }</h6><br>
 					
 					<!-- 후원 버튼  -->
 					<div class="d-grid gap-2" >
-  						<button class="btn btn-primary" type="button">후원하기</button>
+  						<a href="#" class="btn btn-primary" >후원하기</a>
 					</div>
 					
 					<!-- sns 로고 -->
