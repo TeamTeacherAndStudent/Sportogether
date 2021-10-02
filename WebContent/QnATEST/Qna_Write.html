@@ -147,7 +147,7 @@ button:hover {
 
 
 		<div id="main-content">
-			<form action="/qna/write" method="post" id="notice">
+			<form action="../Notice/notice_detail.html" method="post" id="notice">
 				<div class="form-group">
 
 					<br> <label for="title">제목</label>
@@ -155,7 +155,7 @@ button:hover {
 					<!-- required 속성을 설정하면 필수입력 사항이된다. -->
 					<!-- pattern 속성을 이용한 정규표현식으로 데이터의 유효성 검사를 할 수 있다. -->
 					<input type="text" class="form-control" id="title"
-						placeholder="제목 입력(4-100)" name="qna-title" maxlength="100"
+						placeholder="제목 입력(4-100)" name="title" maxlength="100"
 						required="required" pattern=".{4,100}">
 				</div>
 				<div class="form-group">
@@ -163,7 +163,7 @@ button:hover {
 					<!--  여러줄의 데이터를 입력하고 하고자 할때 textarea 태그를 사용한다. -->
 					<!--  textarea 안에 있는 모든 글자는 그대로 나타난다. 공백문자, tag, enter -->
 					<textarea class="form-control" rows="20" id="content"
-						name="qna-content" placeholder="내용 작성"></textarea>
+						name="content" placeholder="내용 작성"></textarea>
 				</div>
 				<section>
 					<div id="back-btn">
