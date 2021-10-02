@@ -44,10 +44,10 @@ public class SupportListServlet extends HttpServlet {
 		if(!sList.isEmpty()) {
 			request.setAttribute("sList", sList);
 			request.setAttribute("pageNavi",pageData.getPageNavi());
-			request.getRequestDispatcher("")
+			request.getRequestDispatcher("/Support/support_main.jsp")
 			.forward(request, response);
 		}else {
-			RequestDispatcher view = request.getRequestDispatcher("");
+			RequestDispatcher view = request.getRequestDispatcher("/Support/supportError.html");
 			view.forward(request, response);
 		}
 	}
