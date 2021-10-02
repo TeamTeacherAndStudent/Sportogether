@@ -1,6 +1,7 @@
 package qna.model.vo;
 
 import java.sql.Date;
+import java.util.List;
 
 public class QnA {
 	private int qnaNo;
@@ -10,7 +11,22 @@ public class QnA {
 	private Date qnaDate;
 	private String qnaAns;
 	
+	//댓글 - 구조상 QNA에 포함되기 떄문에 어레이리스트를 포함시킴
+	private List<QnAReply> replies;
+	
 	public QnA() {}
+	
+
+	public List<QnAReply> getReplies() {
+		return replies;
+	}
+
+
+	public void setReplies(List<QnAReply> replies) {
+		this.replies = replies;
+	}
+
+
 
 	public int getQnaNo() {
 		return qnaNo;
