@@ -6,6 +6,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import board.model.service.BoardService;
 
 /**
  * Servlet implementation class BoardReplyWriteServlet
@@ -34,8 +37,17 @@ public class BoardReplyWriteServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		request.setCharacterEncoding("UTF-8");
+		//로그인한 자만 쓰기
+		HttpSession session = request.getSession();
+		String replyContents = request.getParameter("boardReplyContents");
+		int boardNo = Integer.parseInt(request.getParameter("boardNo"));
+		String userId = (String)session.getAttribute("userId");
+		int result = new BoardService().registerBoardReply(boardNo, replyContents, userId);
+		if(result > 0) {
+			response.sendRedirect("/board/detail?boardNo="+boardNo);
+		}else {
+			request.getRequestDispatcher("/Board/boardError.html").forward(request, response);
+		}
 	}
-
 }

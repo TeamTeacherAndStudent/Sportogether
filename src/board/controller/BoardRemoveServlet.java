@@ -7,6 +7,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.sun.corba.se.impl.protocol.giopmsgheaders.RequestMessage;
+
+import board.model.service.BoardService;
+
 /**
  * Servlet implementation class BoardRemoveServlet
  */
@@ -26,8 +30,14 @@ public class BoardRemoveServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		int boardNo = Integer.parseInt(request.getParameter("boardNo"));
+		int result = new BoardService().removeBoard(boardNo);
+		
+		if(result > 0) {
+			response.sendRedirect("/Board/board_main.jsp");
+		}else {
+			request.getRequestDispatcher("/Board/boardError.html").forward(request, response);
+		}
 	}
 
 	/**
