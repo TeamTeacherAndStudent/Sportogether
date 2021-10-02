@@ -44,6 +44,8 @@ public class MemberDAO {
 	}
 
 	// 로그인 
+	
+	// 아이디, 닉네임, 유저코드(관리자여부), 선수여부를 가져와 세션에 넣기
 	public Member selectOneLogin(Connection conn, String userId, String userPw) {
 		PreparedStatement pstmt = null;
 		Member member = null;
