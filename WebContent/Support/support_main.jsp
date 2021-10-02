@@ -274,8 +274,9 @@
   </table>
   <div>
   	<div class="button-wrap">
-  		
-  		<a id = "camp-btn" class="btn btn-light" href="#" role="button">캠페인만들기</a>
+  		<form action = "/support/write" method= "get">
+	  		<input type = "submit" value="글쓰기">
+  		</form>
   		
   	</div>
   	<br><br><br><br>

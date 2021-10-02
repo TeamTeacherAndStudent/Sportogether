@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import common.JDBCTemplate;
 import support.model.dao.SupportDAO;
 import support.model.vo.PageData;
+import support.model.vo.Support;
 
 public class SupportService {
  
@@ -30,6 +31,26 @@ public class SupportService {
 			JDBCTemplate.close(conn);
 		}
 		return pageData;
+	}
+	// 후원 게시물 등록
+	public int registerSupport(Support spt) {
+		int result = 0;
+		Connection conn = null;
+		try {
+			conn = jdbcTemplate.createConnection();
+			result = new SupportDAO().insertSupport(conn, spt);
+			if(result>0) {
+				JDBCTemplate.commit(conn);
+			}else {
+				JDBCTemplate.rollback(conn);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally { 
+			JDBCTemplate.close(conn);
+		}
+		
+		return result;
 	}
 
 }

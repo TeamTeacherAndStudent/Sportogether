@@ -131,5 +131,33 @@ public class SupportDAO {
 		
 		return totalValue;
 	}
+	// 후원 게시물 등록
+	public int insertSupport(Connection conn, Support spt) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = "INSERT INTO SUPPORT VALUES (SEQ_SPT_NO.NEXTVAL,DEFAULT,?,?,?,DEFAULT,?,?,?,?,?,?,?,? )";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, spt.getSportsCategory());
+			pstmt.setString(2,spt.getSupportWriter() );
+			pstmt.setDate(3,spt.getSupportEndDate());
+			pstmt.setString(4, spt.getSupportTitle());
+			pstmt.setString(5, spt.getSupportPurpose());
+			pstmt.setString(6, spt.getSupportContents());
+			pstmt.setInt(7, spt.getSupportGoal());
+			//모금액
+			pstmt.setInt(8, 0);
+			pstmt.setString(9, spt.getSupportFileName());
+			pstmt.setLong(10, spt.getSupportFileSize());
+			pstmt.setString(11, spt.getSupportFilePath());
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
 	
 }

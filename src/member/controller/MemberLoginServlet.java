@@ -46,10 +46,10 @@ public class MemberLoginServlet extends HttpServlet {
 		if(member != null) {
 			//세션
 			HttpSession session = request.getSession();
-			session.setAttribute("userId", member.getUserId());
-			session.setAttribute("userNickName",member.getUserNickName());
-			session.setAttribute("userCode",member.getUserCode());
-			session.setAttribute("userPlayer", member.getUserPlayer());
+			session.setAttribute("user-id", member.getUserId());
+			session.setAttribute("user-nickname",member.getUserNickName());
+			session.setAttribute("user-code",member.getUserCode());
+			session.setAttribute("user-player", member.getUserPlayer());
 			
 			response.sendRedirect("/index.html"); //성공시 메인 페이지로 이동 
 		}else { 

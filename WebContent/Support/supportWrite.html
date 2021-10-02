@@ -56,14 +56,11 @@
     <main id="main">
         <div class="container">
   <h2>후원 등록</h2>
-  <form action="boardDeteil.html" method="post">
+  <form action="/support/write" method="post" enctype="multipart/form-data" >
     <div class="form-group">
          
       <br>
       <label for="title">캠페인 제목</label>
-<!-- placeholder 속성 입력한 데이터가 없는 경우 배경으로 나타난다.실제적으로 입력을 100자까지로 지정 -->
-<!-- required 속성을 설정하면 필수입력 사항이된다. -->
-<!-- pattern 속성을 이용한 정규표현식으로 데이터의 유효성 검사를 할 수 있다. -->
       <input type="text" class="form-control" id="title"
        placeholder="제목 입력(4-100)" name="title"
        maxlength="100" required="required"
@@ -71,112 +68,49 @@
        <br>
        <label for="pupose">캠페인 목적</label><br>
         <input type="text" class="form-control" id="purpose"
-       placeholder="목적 입력(4-100)" name="title"
+       placeholder="목적 입력(4-100)" name="purpose"
        maxlength="100" required="required"
        pattern=".{4,200}">
        
-        <label for="int">내 소개</label>
-        <input type="text" class="form-control" id="int"
-       placeholder="내 소개 입력(4-100)" name="title"
-       maxlength="100" required="required"
-       pattern=".{4,200}">
+     
        <br>
-       <label for="writer">첨부파일</label>
-      <input type="text" class="form-control" id="writer"
-       placeholder="첨부 이미지 파일" name="writer">
-       <button type="submit" id="but1" class="btn btn-default">첨부파일</button>
+       <label>첨부파일</label>
+      <input type="file" class="form-control" id="writer"
+       placeholder="첨부 이미지 파일" name="img-file">
+      
     </div>
     <div class="form-group">
    <label for="content">내용</label>
-<!--  여러줄의 데이터를 입력하고 하고자 할때 textarea 태그를 사용한다. -->
-<!--  textarea 안에 있는 모든 글자는 그대로 나타난다. 공백문자, tag, enter -->
-   <textarea class="form-control" rows="5" id="content"
-    name="content" placeholder="내용 작성"></textarea>
+   <textarea class="form-control" rows="15" id="content"
+    name="content" placeholder="내용 작성" required></textarea>
  </div>
  <br>
     <div class="form-group">
         <select id="box1" name="sports">
       					<option value="">종목선택</option>
-      					<option value="">배구</option>
-      					<option value="">축구</option>
-      					<option value="">탁구</option>
-      					<option value="">승마</option>
-      					<option value="">농구</option>
-      					<option value="">사이클</option>
-      					<option value="">기계체조</option>
+      					<option value="배구">배구</option>
+      					<option value="축구">축구</option>
+      					<option value="탁구">탁구</option>
+      					<option value="승마">승마</option>
+      					<option value="농구">농구</option>
+      					<option value="사이클">사이클</option>
+      					<option value="기계체조">기계체조</option>
       </select><br>
       <br>
-        <label for="goal">목표 금액</label>
-        <input type="text" class="form-control" id="goal"
-       placeholder="후원 목표 금액 입력" name="title"
-       maxlength="50" required="required"
-       pattern=".{4,50}"><br>
+        <label for="goalmoney">목표 금액</label>
+        <input type="text" class="form-control" id="goalmoney"
+       placeholder="후원 목표 금액 입력" name="mokpyo"
+       maxlength="50" required pattern="^[0-9]+$"><br>
       
-      
-       <select id="box2" name="year">
-      					<option value="">년도</option>
-      					<option value="">2021</option>
-      					<option value="">2022</option>
-      					<option value="">2023</option>
-      					<option value="">2024</option>
-      					<option value="">2025</option>
-      					<option value="">2026</option>
-      					<option value="">2027</option>
-      </select>
-      
-      <select id="box3" name="month">
-      					<option value="">월</option>
-      					<option value="">1</option>
-      					<option value="">2</option>
-      					<option value="">3</option>
-      					<option value="">4</option>
-      					<option value="">5</option>
-      					<option value="">6</option>
-      					<option value="">7</option>
-      					<option value="">8</option>
-      					<option value="">9</option>
-      					<option value="">10</option>
-      					<option value="">11</option>
-      					<option value="">12</option>
-      </select>
-      
-      <select id="box4" name="day">
-      					<option value="">일</option>
-      					<option value="">1</option>
-      					<option value="">2</option>
-      					<option value="">3</option>
-      					<option value="">4</option>
-      					<option value="">5</option>
-      					<option value="">6</option>
-      					<option value="">7</option>
-      					<option value="">8</option>
-      					<option value="">9</option>
-      					<option value="">10</option>
-      					<option value="">11</option>
-      					<option value="">12</option>
-      					<option value="">13</option>
-      					<option value="">14</option>
-      					<option value="">15</option>
-      					<option value="">16</option>
-      					<option value="">17</option>
-      					<option value="">18</option>
-      					<option value="">19</option>
-      					<option value="">20</option>
-      					<option value="">21</option>
-      					<option value="">22</option>
-      					<option value="">23</option>
-      					<option value="">24</option>
-      					<option value="">25</option>
-      					<option value="">26</option>
-      					<option value="">27</option>
-      					<option value="">28</option>
-      					<option value="">29</option>
-      					<option value="">30</option>
-      					<option value="">31</option>
-      </select>
+       <div class="mb-3">
+			<label class="form-label" for="user-birth">종료일</label>
+			<input class="form-control" id="user-birth" name="end-date" type="date"  required />
+			<div class="invalid-feedback" >후원 종료일을 선택해주세요</div>
+		 </div>
+    
     </div>
-    <button type="submit" class="btn btn-default">미리보기</button>
-    <a href="boardDeteil.html"><button type="submit" class="btn btn-default">등록</button></a>
+   
+    <button type="submit" class="btn btn-default">등록</button>
     <button type="reset" class="btn btn-default">취소</button>
   </form>
 </div>
