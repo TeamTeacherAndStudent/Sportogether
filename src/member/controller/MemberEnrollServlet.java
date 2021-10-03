@@ -1,6 +1,7 @@
 package member.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 
@@ -57,9 +58,17 @@ public class MemberEnrollServlet extends HttpServlet {
 		int result = new MemberService().registerMember(member);
 		System.out.println(member.toString());
 		if(result > 0) {
-			response.sendRedirect("/index.html");
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter writer =response.getWriter();
+			writer.println("<script>alert('회원가입이 완료되었습니다.'); location.href='/index.html';</script>");
+			writer.flush();
+//			response.sendRedirect("/index.html");
 		}else {
-			response.sendRedirect("/login_registration/loginError.html");
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter writer =response.getWriter();
+			writer.println("<script>alert('회원가입이 실패하였습니다. 다시 시도해주세요.'); location.href='/login_registration/registration.html';</script>");
+			writer.flush();
+//			response.sendRedirect("/login_registration/loginError.html");
 		}
 	}
 

@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import support.model.service.SupportService;
+
 /**
  * Servlet implementation class SupportReplyRemove
  */
@@ -26,15 +28,21 @@ public class SupportReplyRemove extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		int supportNo = Integer.parseInt(request.getParameter("supportNo"));
+		int replyNo = Integer.parseInt(request.getParameter("replyNo"));
+		int result = new SupportService().removeSupportReply(replyNo);
+		if(result > 0) {
+			response.sendRedirect("/support/detail?supportNo="+supportNo);
+		}else {
+			request.getRequestDispatcher("/support/supportError.html");
+		}
+		
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

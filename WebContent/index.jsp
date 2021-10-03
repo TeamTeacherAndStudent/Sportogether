@@ -136,11 +136,11 @@
   <!-- ======= Header ======= -->
   <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center justify-content-between">
-      <h1 class="logo"><a href="index.jsp"> Sportogether </a></h1>
+      <h1 class="logo"><a href="/index.jsp"> Sportogether </a></h1>
       <nav id="navbar" class="navbar">
         <ul>
           <li><a class="active" href="/Sports/sportsList.jsp">종목</a></li>
-          <li><a href="Board/board_main.jsp">자유게시판</a></li>
+          <li><a href="/board/list">자유게시판</a></li>
           <li><a href="/support/list">후원</a></li>
           <li><input type="search" placeholder="검색" size="10" id="search"></li>
        	  <li>

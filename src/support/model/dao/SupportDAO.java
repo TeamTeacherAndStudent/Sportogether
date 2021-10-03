@@ -252,5 +252,23 @@ public class SupportDAO {
 		
 		return result;
 	}
+
+	public int deleteReply(Connection conn, int replyNo) {
+		PreparedStatement pstmt = null;
+		String query ="DELETE FROM SUPPORT_REPLY WHERE REPLY_NO = ?";
+		int result = 0;
+				try {
+					pstmt = conn.prepareStatement(query);
+					pstmt.setInt(1, replyNo);
+					result = pstmt.executeUpdate();
+					
+				} catch (SQLException e) {
+					e.printStackTrace();
+				} finally { 
+					JDBCTemplate.close(pstmt);
+				}
+				
+		return result;
+	}
 	
 }

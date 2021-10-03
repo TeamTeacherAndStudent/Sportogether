@@ -52,6 +52,9 @@
   	.replysubmit{
   		float: right;
   	}
+  	#search{
+    	margin-left: 30px;
+    }
   </style>
    <!-- 카카오 공유하기 사용을 위한 -->
   <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
@@ -61,23 +64,27 @@
 <body>
  <!-- ======= Header ======= -->
   <header id="header" class="fixed-top">
-    <div class="container d-flex align-items-center justify-content-between">
-<!-- 여기에 로고 사진 추가 -->
-      <h1 class="logo"><a href="index.html"> Sportogether </a></h1>
-      <!-- Uncomment below if you prefer to use an image logo -->
-      <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
-
+     <div class="container d-flex align-items-center justify-content-between">
+      <h1 class="logo"><a href="/index.jsp"> Sportogether </a></h1>
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a class="active" href="sports.html">종목</a></li>
-          <li><a href="freeboard.html">자유게시판</a></li>
-          <li><a href="support.html">후원</a></li>
-          <li><input type="search" placeholder="검색" size="5"></li>
+          <li><a class="active" href="/Sports/sportsList.jsp">종목</a></li>
+          <li><a href="/board/list">자유게시판</a></li>
+          <li><a href="/support/list">후원</a></li>
+          <li><input type="search" placeholder="검색" size="10" id="search"></li>
+       	  <li>
+       	  	<c:if test="${sessionScope.userId eq null }">
+       	 		 <a href="login_registration/login.jsp">Login</a>
+       	 	</c:if>
+       	 	<c:if test = "${sessionScope.userId ne null }">
+       	 		<a href="/member/logout">Logout</a>
+       	 	</c:if>
+       	  </li>
           <li class="dropdown"><a href="#"><span>SIDE MENU</span> <i class="bi bi-chevron-down"></i></a>
           <ul>
-             <li><a href="notice.html">공지사항</a></li>     
-             <li><a href="myinfo.html">마이페이지</a></li>
-             <li><a href="qna">1:1문의</a></li>
+             <li><a href="/notice/list">공지사항</a></li>     
+             <li><a href="../MyPage/MyPage_Main.jsp">마이페이지</a></li>
+             <li><a href="/qna/list">1:1문의</a></li>
           </ul>
           </li>
         </ul>
@@ -225,13 +232,18 @@
  							<td>${supportReply.supportReplyWriter}</td>
  							<td>${supportReply.supportReplyContents }</td>
  							<td>${supportReply.supportReplyRegDate }</td>
+ 							<td>
+ 								<c:if test="${sessionScope.userId eq supportReply.supportReplyWriter }">
+ 									<a href = "/supportReply/Remove?replyNo=${supportReply.supportReplyNo }&supportNo=${supportReply.supportNo}">삭제</a>
+ 								</c:if>
+ 							</td>
  							<td><a href="#">신고</a></td>
  						</tr>
  						</c:forEach>
  						
  						<tr>
  							<td colspan="4" align="center"> 
- 								<!-- 댓글 페이징.. -->
+ 								<!-- 댓글 페이징..??-->
  							</td>
  							
  						</tr>
