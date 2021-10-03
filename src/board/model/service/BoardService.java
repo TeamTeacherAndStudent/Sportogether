@@ -111,7 +111,7 @@ public class BoardService {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
-			jdbcTemplate.close(conn);
+			JDBCTemplate.close(conn);
 		}
 		return result;
 	}
@@ -231,9 +231,9 @@ public class BoardService {
 			conn = jdbcTemplate.createConnection();
 			result = new BoardDAO().removeLike(conn,boardNo);
 			if(result > 0) {
-				jdbcTemplate.commit(conn);
+				JDBCTemplate.commit(conn);
 			}else {
-				jdbcTemplate.rollback(conn);
+				JDBCTemplate.rollback(conn);
 			}
 		}catch (SQLException e) {
 			e.printStackTrace();

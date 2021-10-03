@@ -35,7 +35,6 @@ public class BoardDAO {
 				e.printStackTrace();
 		}finally {
 			JDBCTemplate.close(pstmt);
-			JDBCTemplate.close(conn);
 		}
 		return result;
 	}
@@ -65,9 +64,8 @@ public class BoardDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
-			JDBCTemplate.close(pstmt);
-			JDBCTemplate.close(conn);
 			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
 		}
 		return boardOne;
 	}
@@ -89,7 +87,6 @@ public class BoardDAO {
 			e.printStackTrace();
 		}finally {
 			JDBCTemplate.close(pstmt);
-			JDBCTemplate.close(conn);
 		}
 		return result;
 	}
@@ -108,7 +105,6 @@ public class BoardDAO {
 			e.printStackTrace();
 		}finally {
 			JDBCTemplate.close(pstmt);
-			JDBCTemplate.close(conn);
 		}
 		return result;
 	}
@@ -129,7 +125,6 @@ public class BoardDAO {
 			e.printStackTrace();
 		}finally {
 			JDBCTemplate.close(pstmt);
-			JDBCTemplate.close(conn);
 		}
 		return result;
 	}
@@ -147,7 +142,6 @@ public class BoardDAO {
 			e.printStackTrace();
 		}finally {
 			JDBCTemplate.close(pstmt);
-			JDBCTemplate.close(conn);
 		}
 		return result;
 	}
@@ -169,7 +163,6 @@ public class BoardDAO {
 			e.printStackTrace();
 		}finally {
 			JDBCTemplate.close(pstmt);
-			JDBCTemplate.close(conn);
 		}
 		return result;
 	}
@@ -188,7 +181,6 @@ public class BoardDAO {
 			e.printStackTrace();
 		}finally {
 			JDBCTemplate.close(pstmt);
-			JDBCTemplate.close(conn);
 		}
 		return result;
 	}
@@ -214,14 +206,13 @@ public class BoardDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
-			JDBCTemplate.close(pstmt);
-			JDBCTemplate.close(conn);
 			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
 		}
 		return fileList;
 	}
 
-	
+	// 자유게시판 댓글 리스트 조회
 	public List<BoardReply> selectAllBoardReply(Connection conn, int boardNo) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -245,9 +236,8 @@ public class BoardDAO {
 		}catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
-			JDBCTemplate.close(pstmt);
-			JDBCTemplate.close(conn);
 			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
 		}
 		return ReplyList;
 	}
@@ -292,10 +282,11 @@ public class BoardDAO {
 			sb.append("<a href = '/board/list?currentPage=" +(endNavi+1) +"'> [다음] </a>");
 		}
 			return sb.toString(); //String builder에 쌓음
+			
 			//두개넣을 pagedata선언
 	}
 
-
+	//전체  게시물 갯수 조회
 	private int totalCount(Connection conn) {
 			int totalValue = 0;
 			Statement stmt = null;
@@ -316,11 +307,12 @@ public class BoardDAO {
 				return totalValue;
 		}
 
-
+	//자유게시판 게시물 리스트(전체) 조회
+	
 	public List<Board> selectAllBoard(Connection conn, int currentPage) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String query ="SELECT * FROM (SELECT ROW_NUMBER()ORDER BY BOARD_NO DESC) AS NUM, BOARD_NO, SPORTS_NAME, BOARD_TITLE, BOARD_CONTENTS, USER_ID, BOARD_ENROLLDATE, BOARD_COUNT, BOARD_LIKE FROM FREEBOARD) WHERE NUM BETWEEN ? AND ?";
+		String query ="SELECT * FROM(SELECT ROW_NUMBER() OVER(ORDER BY BOARD_NO DESC) AS NUM, BOARD_NO, BOARD_TITLE, BOARD_CONTENTS, SPORTS_NAME, USER_ID, BOARD_ENROLLDATE, BOARD_COUNT, BOARD_LIKE FROM FREEBOARD) WHERE NUM BETWEEN ? AND ?";
 		List<Board> bList = null;
 		
 		try {
@@ -328,8 +320,8 @@ public class BoardDAO {
 			int viewCountPerPage = 10;
 			int start = currentPage * viewCountPerPage - (viewCountPerPage - 1); //end-9;
 			int end = currentPage * viewCountPerPage;
-			pstmt.setInt(1,  start);
-			pstmt.setInt(2,  end);
+			pstmt.setInt(1, start);
+			pstmt.setInt(2, end);
 			rset = pstmt.executeQuery();
 			bList = new ArrayList<Board>();
 		while(rset.next()) {
@@ -343,14 +335,13 @@ public class BoardDAO {
 			board.setBoardCount(rset.getInt("BOARD_COUNT"));
 			board.setBoardLike(rset.getInt("BOARD_LIKE"));
 			bList.add(board);
-			System.out.println(rset.getString("BOARD_CONTENTS"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
-			JDBCTemplate.close(pstmt);
-			JDBCTemplate.close(conn);
 			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		
 		}
 		return bList;
 	}
@@ -422,7 +413,6 @@ public class BoardDAO {
 			e.printStackTrace();
 		}finally {
 			JDBCTemplate.close(pstmt);
-			JDBCTemplate.close(conn);
 		}
 		return result;
 	}
@@ -439,7 +429,6 @@ public class BoardDAO {
 			e.printStackTrace();
 		}finally {
 			JDBCTemplate.close(pstmt);
-			JDBCTemplate.close(conn);
 		}
 		return result;
 	}
@@ -459,7 +448,6 @@ public class BoardDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
-			JDBCTemplate.close(conn);
 			JDBCTemplate.close(pstmt);
 		}
 		return result;
@@ -477,7 +465,6 @@ public class BoardDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
-			JDBCTemplate.close(conn);
 			JDBCTemplate.close(pstmt);
 		}
 		return result;
