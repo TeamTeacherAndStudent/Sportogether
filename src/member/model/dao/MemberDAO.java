@@ -58,7 +58,7 @@ public class MemberDAO {
 			rset = pstmt.executeQuery();
 			if(rset.next()) { 
 				member = new Member();
-				member.setUserId(userId);
+				member.setUserId(rset.getString("USER_ID"));
 				member.setUserNickName(rset.getString("USER_NICKNAME"));
 				member.setUserCode(rset.getString("USER_CODE"));
 				member.setUserPlayer(rset.getString("PLAYER"));

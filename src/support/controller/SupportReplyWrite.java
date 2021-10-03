@@ -6,6 +6,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import support.model.service.SupportService;
 
 /**
  * Servlet implementation class SupportReplyWrite
@@ -34,8 +37,20 @@ public class SupportReplyWrite extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		request.setCharacterEncoding("UTF-8");
+		int supportNo = Integer.parseInt(request.getParameter("supportNo"));
+		String supportReplyContents = request.getParameter("reply-contents");
+		HttpSession session = request.getSession();
+		String userId = (String) session.getAttribute("userId");
+		
+		int result = new SupportService().registerSupportReply(supportNo, userId, supportReplyContents);
+		if(result > 0) {
+			response.sendRedirect("/support/detail?supportNo="+supportNo);
+		}else {
+			request.getRequestDispatcher("/Support/supportError.html").forward(request, response);
+		}
+		
+	
 	}
 
 }

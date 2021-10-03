@@ -1,10 +1,13 @@
 package support.model.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -203,7 +206,7 @@ public class SupportDAO {
 	// 후원 댓글 목록 가져오기
 	public List<SupportReply> selectReplayList(Connection conn, int supportNo) {
 		PreparedStatement pstmt = null;
-		String query = "SELECT * FROM SUPPORT_REPLY WHERE SUPPORT_NO = ?";
+		String query = "SELECT * FROM SUPPORT_REPLY WHERE SUPPORT_NO = ? ORDER BY REPLY_NO DESC";
 		List<SupportReply> srList = null;
 		ResultSet rset = null;
 		try {
@@ -211,13 +214,15 @@ public class SupportDAO {
 			pstmt.setInt(1, supportNo);
 			rset=pstmt.executeQuery();
 			srList = new ArrayList<SupportReply>();
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 			while(rset.next()) {
 				SupportReply sp = new SupportReply();
 				sp.setSupportReplyNo(rset.getInt("REPLY_NO"));
 				sp.setSupportNo(rset.getInt("SUPPORT_NO"));
 				sp.setSupportReplyContents(rset.getString("REPLY_CONTENTS"));
 				sp.setSupportReplyWriter(rset.getString("USER_ID"));
-				sp.setSupportReplyRegDate(rset.getTimestamp("REPLY_DATE"));
+				
+				sp.setSupportReplyRegDate(formatter.format(rset.getTimestamp("REPLY_DATE")));
 				srList.add(sp);
 			}
 		} catch (SQLException e) {
@@ -228,6 +233,24 @@ public class SupportDAO {
 			JDBCTemplate.close(pstmt);
 		}
 		return srList;
+	}
+	//후원 응원 댓글 작성
+	public int insertReply(Connection conn, int supportNo, String userId, String supportReplyContents) {
+		PreparedStatement pstmt = null;
+		int result = 0 ;
+		String query = "INSERT INTO SUPPORT_REPLY VALUES(SEQ_SPT_REPLY_NO.NEXTVAL,?,DEFAULT,?,?)";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, supportNo);
+			pstmt.setString(2, supportReplyContents);
+			pstmt.setString(3, userId);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return result;
 	}
 	
 }

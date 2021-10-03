@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import support.model.service.SupportService;
 import support.model.vo.Support;
@@ -32,7 +33,9 @@ public class SupportDetailServlet extends HttpServlet {
 		//후원 상세 page
 		int supportNo = Integer.parseInt(request.getParameter("supportNo"));
 		Support spt = new SupportService().printOneByNo(supportNo);
-		
+//		HttpSession session = request.getSession();
+//		String useridtest = (String)session.getAttribute("userId");
+//		System.out.println(useridtest);
 		if(spt != null) {
 			request.setAttribute("supportOne", spt);
 			request.getRequestDispatcher("/Support/supportDetail.jsp").forward(request, response);

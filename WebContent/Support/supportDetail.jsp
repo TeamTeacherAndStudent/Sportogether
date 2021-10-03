@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>  
 <!DOCTYPE html>
 <html>
 <head>
@@ -48,6 +48,9 @@
   	<!-- 관리자 삭제 버튼 -->
   	#spt-delete{
  		 	display: none;
+  	}
+  	.replysubmit{
+  		float: right;
   	}
   </style>
    <!-- 카카오 공유하기 사용을 위한 -->
@@ -187,29 +190,50 @@
 			<div class = "col-md-8">
 				<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
   				  <li class="nav-item" role="presentation">
-				    <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Home</button>
+				    <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">응원댓글</button>
 				  </li>
 				  <li class="nav-item" role="presentation">
-				    <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Profile</button>
+				    <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">문의댓글</button>
 				  </li>
 				</ul>
 				
 				<div class="tab-content" id="pills-tabContent">
 					<!--  응원댓글 -->
 				  <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+				  	<div>
+				  		<form action = "/supportReply/write" method = "post">
+				  			<div>
+								<div class="input-group mb-3">
+						  			<input type = "hidden" name = "supportNo" value = ${supportOne.supportNo }>
+								  <input type="text" class="form-control" name = "reply-contents" placeholder="응원 댓글을 작성해보세요!" aria-label="Recipient's username" aria-describedby="button-addon2">
+								  <button class="btn btn-outline-secondary" type="submit" id="button-addon2">등록</button>
+								</div>
+				  			</div>
+				  		</form>
+				  	</div>
 				  	<table class="table table-hover">
  						<tr>
  							<th>작성자</th>
- 							<th >내용</th>
+ 							<th>내용</th>
  							<th>작성일</th>
  							<th></th>
  							
  						</tr>
+ 						<!--  EL/JSTL로 댓글 소환 -->
+ 						<c:forEach items = "${requestScope.supportOne.rList }" var = "supportReply">
  						<tr>
- 							<td>감자귀신</td>
- 							<td>김성모작가의 감나라 대추나라 드립이 떠오르네요.</td>
- 							<td>2021-09-21</td>
+ 							<td>${supportReply.supportReplyWriter}</td>
+ 							<td>${supportReply.supportReplyContents }</td>
+ 							<td>${supportReply.supportReplyRegDate }</td>
  							<td><a href="#">신고</a></td>
+ 						</tr>
+ 						</c:forEach>
+ 						
+ 						<tr>
+ 							<td colspan="4" align="center"> 
+ 								<!-- 댓글 페이징.. -->
+ 							</td>
+ 							
  						</tr>
 					</table>
 				  </div>

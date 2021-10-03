@@ -31,7 +31,7 @@ public class MemberLoginServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		request.getRequestDispatcher("/login_registration/login.jsp").forward(request, response);
 	}
 
 	/**
@@ -45,12 +45,12 @@ public class MemberLoginServlet extends HttpServlet {
 		if(member != null) {
 			//세션
 			HttpSession session = request.getSession();
-			session.setAttribute("user-id", member.getUserId());
-			session.setAttribute("user-nickname",member.getUserNickName());
-			session.setAttribute("user-code",member.getUserCode());
-			session.setAttribute("user-player", member.getUserPlayer());
-			
+			session.setAttribute("userId", member.getUserId());
+			session.setAttribute("userNickname",member.getUserNickName());
+			session.setAttribute("userCode",member.getUserCode());
+			session.setAttribute("userPlayer", member.getUserPlayer());
 			response.sendRedirect("/index.html"); //성공시 메인 페이지로 이동 
+			
 		}else { 
 			response.sendRedirect("/login_registration/loginError.html");//실패시 ( 임시로만든 에러 페이지 ) 로 이동
 		}
