@@ -118,9 +118,38 @@ public class SupportService {
 	public int reportSupportReply(int replyNo, String userId) {
 		int result = 0;
 		Connection conn = null;
+		try {
+			conn =jdbcTemplate.createConnection();
+			result = new SupportDAO().insertReportReply(conn, replyNo, userId);
+			if(result > 0) {
+				JDBCTemplate.commit(conn);
+			}else {
+				JDBCTemplate.rollback(conn);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(conn);
+		}
 		
 		
-		return 0;
+		return result;
+	}
+	//댓글 신고 전 확인
+	//현재 아이디가 해당 댓글에 이미 신고했는지 확인하는 메소드
+	public String beforeReportCheck(int replyNo, String userId) {
+		Connection conn = null;
+		String idCheck = null;
+		
+		try {
+			conn=jdbcTemplate.createConnection();
+			idCheck = new SupportDAO().selectBeforeReport(conn, replyNo, userId);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(conn);
+		}
+		return idCheck;
 	}
 
 }
