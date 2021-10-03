@@ -74,7 +74,7 @@
 	 			</a>
 	 		</div>
 	 		<div class="col-md-2">
-	 			<a href="#">
+	 			<a href="https://olympics.com/ko/sports/modern-pentathlon/" target="_black">
 		 			<div class="card" style= "border: 0px; text-align: center">
 		 				
 		 				<img src="https://olympics.com/images/static/sports/pictograms/modern-pentathlon.svg" class="card-img-top" alt="...">
@@ -85,7 +85,7 @@
 	 			</a>
 	 		</div>
 	 		<div class="col-md-2">
-	 			<a href="#">
+	 			<a href="https://olympics.com/ko/sports/artistic-gymnastics/">
 		 			<div class="card" style= "border: 0px; text-align: center">
 		 				
 		 				<img src="https://olympics.com/images/static/sports/pictograms/artistic-gymnastics.svg" class="card-img-top" alt="...">
@@ -96,7 +96,7 @@
 	 			</a>
 	 		</div>
 	 		<div class="col-md-2">
-	 			<a href="#" class="link" style = "text-decoration: none; size:10px;">
+	 			<a href="https://olympics.com/ko/sports/nordic-combined/" class="link" style = "text-decoration: none; size:10px;">
 		 			<div class="card" style= "border: 0px; text-align: center">
 		 				
 		 				<img src="https://olympics.com/images/static/sports/pictograms/nordic-combined.svg" class="card-img-top" alt="...">
@@ -107,7 +107,7 @@
 	 			</a>
 	 		</div>
 	 		<div class="col-md-2">
-	 			<a href="#">
+	 			<a href="https://olympics.com/ko/sports/basketball/">
 		 			<div class="card" style= "border: 0px; text-align: center">
 		 				
 		 				<img src="https://olympics.com/images/static/sports/pictograms/basketball.svg" class="card-img-top" alt="...">
@@ -118,7 +118,7 @@
 	 			</a>
 	 		</div>
 	 		<div class="col-md-2">
-	 			<a href="#">
+	 			<a href="https://olympics.com/ko/sports/3x3-basketball/">
 		 			<div class="card" style= "border: 0px; text-align: center">
 		 				
 		 				<img src="https://olympics.com/images/static/sports/pictograms/3x3-basketball.svg" class="card-img-top" alt="...">
@@ -129,7 +129,7 @@
 	 			</a>
 	 		</div>
 	 		<div class="col-md-2">
-	 			<a href="#">
+	 			<a href="https://olympics.com/ko/sports/diving/">
 		 			<div class="card" style= "border: 0px; text-align: center">
 		 				
 		 				<img src="https://olympics.com/images/static/sports/pictograms/diving.svg" class="card-img-top" alt="...">
@@ -140,7 +140,7 @@
 	 			</a>
 	 		</div>
 	 		<div class="col-md-2">
-	 			<a href="#">
+	 			<a href="https://olympics.com/ko/sports/rugby-sevens/">
 		 			<div class="card" style= "border: 0px; text-align: center">
 		 				
 		 				<img src="https://olympics.com/images/static/sports/pictograms/rugby-sevens.svg" class="card-img-top" alt="...">
@@ -151,7 +151,7 @@
 	 			</a>
 	 		</div>
 	 		<div class="col-md-2">
-	 			<a href="#">
+	 			<a href="https://olympics.com/ko/sports/wrestling/">
 		 			<div class="card" style= "border: 0px; text-align: center">
 		 				
 		 				<img src="https://olympics.com/images/static/sports/pictograms/wrestling.svg" class="card-img-top" alt="...">
@@ -162,7 +162,7 @@
 	 			</a>
 	 		</div>
 	 		<div class="col-md-2">
-	 			<a href="#">
+	 			<a href="https://olympics.com/ko/sports/roller-speed-skating/">
 		 			<div class="card" style= "border: 0px; text-align: center">
 		 				
 		 				<img src="https://olympics.com/images/static/sports/pictograms/roller-speed-skating.svg" class="card-img-top" alt="...">
@@ -173,7 +173,7 @@
 	 			</a>
 	 		</div>
 	 		<div class="col-md-2">
-	 			<a href="#">
+	 			<a href="https://olympics.com/ko/sports/luge/">
 		 			<div class="card" style= "border: 0px; text-align: center">
 		 				
 		 				<img src="https://olympics.com/images/static/sports/pictograms/luge.svg" class="card-img-top" alt="...">
@@ -184,7 +184,7 @@
 	 			</a>
 	 		</div>
 	 		<div class="col-md-2">
-	 			<a href="#">
+	 			<a href="https://olympics.com/ko/sports/rhythmic-gymnastics/">
 		 			<div class="card" style= "border: 0px; text-align: center">
 		 				
 		 				<img src="https://olympics.com/images/static/sports/pictograms/rhythmic-gymnastics.svg" class="card-img-top" alt="...">
@@ -195,7 +195,7 @@
 	 			</a>
 	 		</div>
 	 		<div class="col-md-2">
-	 			<a href="#">
+	 			<a href="https://olympics.com/ko/sports/marathon-swimming/">
 		 			<div class="card" style= "border: 0px; text-align: center">
 		 				
 		 				<img src="https://olympics.com/images/static/sports/pictograms/marathon-swimming.svg" class="card-img-top" alt="...">
@@ -206,7 +206,7 @@
 	 			</a>
 	 		</div>
 	 			<div class="col-md-2">
-	 			<a href="#">
+	 			<a href="https://olympics.com/ko/sports/biathlon/">
 		 			<div class="card" style= "border: 0px; text-align: center">
 		 				
 		 				<img src="https://olympics.com/images/static/sports/pictograms/biathlon.svg" class="card-img-top" alt="...">
@@ -217,7 +217,7 @@
 	 			</a>
 	 		</div>
 	 		<div class="col-md-2">
-	 			<a href="#">
+	 			<a href="https://olympics.com/ko/sports/volleyball/">
 		 			<div class="card" style= "border: 0px; text-align: center">
 		 				
 		 				<img src="https://olympics.com/images/static/sports/pictograms/volleyball.svg" class="card-img-top" alt="...">
@@ -228,7 +228,7 @@
 	 			</a>
 	 		</div>
 	 		<div class="col-md-2">
-	 			<a href="#">
+	 			<a href="https://olympics.com/ko/sports/badminton/">
 		 			<div class="card" style= "border: 0px; text-align: center">
 		 				
 		 				<img src="https://olympics.com/images/static/sports/pictograms/badminton.svg" class="card-img-top" alt="...">
@@ -239,7 +239,7 @@
 	 			</a>
 	 		</div>
 	 		<div class="col-md-2">
-	 			<a href="#">
+	 			<a href="https://olympics.com/ko/sports/boxing/">
 		 			<div class="card" style= "border: 0px; text-align: center">
 		 				
 		 				<img src="https://olympics.com/images/static/sports/pictograms/boxing.svg" class="card-img-top" alt="...">
@@ -250,7 +250,7 @@
 	 			</a>
 	 		</div>
 	 		<div class="col-md-2">
-	 			<a href="#">
+	 			<a href="https://olympics.com/ko/sports/bobsleigh/">
 		 			<div class="card" style= "border: 0px; text-align: center">
 		 				
 		 				<img src="https://olympics.com/images/static/sports/pictograms/bobsleigh.svg" class="card-img-top" alt="...">
@@ -262,7 +262,7 @@
 	 		</div>
 	 			
 	 			<div class="col-md-2">
-	 			<a href="#">
+	 			<a href="https://olympics.com/ko/sports/breaking/">
 		 			<div class="card" style= "border: 0px; text-align: center">
 		 				
 		 				<img src="https://olympics.com/images/static/sports/pictograms/breaking.svg" class="card-img-top" alt="...">
@@ -273,7 +273,7 @@
 	 			</a>
 	 		</div>
 	 		<div class="col-md-2">
-	 			<a href="#">
+	 			<a href="https://olympics.com/ko/sports/beach-handball/">
 		 			<div class="card" style= "border: 0px; text-align: center">
 		 				
 		 				<img src="https://olympics.com/images/static/sports/pictograms/beach-handball.svg" class="card-img-top" alt="...">
@@ -284,7 +284,7 @@
 	 			</a>
 	 		</div>
 	 		<div class="col-md-2">
-	 			<a href="#">
+	 			<a href="https://olympics.com/ko/sports/beach-volleyball/">
 		 			<div class="card" style= "border: 0px; text-align: center">
 		 				
 		 				<img src="https://olympics.com/images/static/sports/pictograms/beach-volleyball.svg" class="card-img-top" alt="...">
@@ -295,7 +295,7 @@
 	 			</a>
 	 		</div>
 	 		<div class="col-md-2">
-	 			<a href="#">
+	 			<a href="https://olympics.com/ko/sports/shooting/">
 		 			<div class="card" style= "border: 0px; text-align: center">
 		 				
 		 				<img src="https://olympics.com/images/static/sports/pictograms/shooting.svg" class="card-img-top" alt="...">
@@ -306,7 +306,7 @@
 	 			</a>
 	 		</div>
 	 		<div class="col-md-2">
-	 			<a href="#">
+	 			<a href="https://olympics.com/ko/sports/cycling-bmx-racing/">
 		 			<div class="card" style= "border: 0px; text-align: center">
 		 				
 		 				<img src="https://olympics.com/images/static/sports/pictograms/cycling-bmx-racing.svg" class="card-img-top" alt="...">
@@ -317,7 +317,7 @@
 	 			</a>
 	 		</div>
 	 		<div class="col-md-2">
-	 			<a href="#">
+	 			<a href="https://olympics.com/ko/sports/cycling-bmx-freestyle/">
 		 			<div class="card" style= "border: 0px; text-align: center">
 		 				
 		 				<img src="https://olympics.com/images/static/sports/pictograms/cycling-bmx-freestyle.svg" class="card-img-top" alt="...">
@@ -328,7 +328,7 @@
 	 			</a>
 	 		</div>
 	 		<div class="col-md-2">
-	 			<a href="#">
+	 			<a href="https://olympics.com/ko/sports/cycling-road/">
 		 			<div class="card" style= "border: 0px; text-align: center">
 		 				
 		 				<img src="https://olympics.com/images/static/sports/pictograms/cycling-road.svg" class="card-img-top" alt="...">
@@ -339,7 +339,7 @@
 	 			</a>
 	 		</div>
 	 		<div class="col-md-2">
-	 			<a href="#">
+	 			<a href="https://olympics.com/ko/sports/cycling-mountain-bike/">
 		 			<div class="card" style= "border: 0px; text-align: center">
 		 				
 		 				<img src="https://olympics.com/images/static/sports/pictograms/cycling-mountain-bike.svg" class="card-img-top" alt="...">
@@ -350,7 +350,7 @@
 	 			</a>
 	 		</div>
 	 		<div class="col-md-2">
-	 			<a href="#">
+	 			<a href="https://olympics.com/ko/sports/cycling-track/">
 		 			<div class="card" style= "border: 0px; text-align: center">
 		 				
 		 				<img src="https://olympics.com/images/static/sports/pictograms/cycling-track.svg" class="card-img-top" alt="...">
@@ -361,7 +361,7 @@
 	 			</a>
 	 		</div>
 	 		<div class="col-md-2">
-	 			<a href="#">
+	 			<a href="https://olympics.com/ko/sports/surfing/">
 		 			<div class="card" style= "border: 0px; text-align: center">
 		 				
 		 				<img src="https://olympics.com/images/static/sports/pictograms/surfing.svg" class="card-img-top" alt="...">
@@ -372,7 +372,7 @@
 	 			</a>
 	 		</div>
 	 			<div class="col-md-2">
-	 			<a href="#">
+	 			<a href="https://olympics.com/ko/sports/short-track-speed-skating/">
 		 			<div class="card" style= "border: 0px; text-align: center">
 		 				
 		 				<img src="https://olympics.com/images/static/sports/pictograms/short-track-speed-skating.svg" class="card-img-top" alt="...">
@@ -383,7 +383,7 @@
 	 			</a>
 	 		</div>
 	 		<div class="col-md-2">
-	 			<a href="#">
+	 			<a href="https://olympics.com/ko/sports/water-polo/">
 		 			<div class="card" style= "border: 0px; text-align: center">
 		 				
 		 				<img src="https://olympics.com/images/static/sports/pictograms/water-polo.svg" class="card-img-top" alt="...">
@@ -394,7 +394,7 @@
 	 			</a>
 	 		</div>
 	 		<div class="col-md-2">
-	 			<a href="#">
+	 			<a href="https://olympics.com/ko/sports/swimming/">
 		 			<div class="card" style= "border: 0px; text-align: center">
 		 				
 		 				<img src="https://olympics.com/images/static/sports/pictograms/volleyball.svg" class="card-img-top" alt="...">
@@ -405,7 +405,7 @@
 	 			</a>
 	 		</div>
 	 		<div class="col-md-2">
-	 			<a href="#">
+	 			<a href="https://olympics.com/ko/sports/snowboard/">
 		 			<div class="card" style= "border: 0px; text-align: center">
 		 				
 		 				<img src="https://olympics.com/images/static/sports/pictograms/snowboard.svg" class="card-img-top" alt="...">
@@ -416,7 +416,7 @@
 	 			</a>
 	 		</div>
 	 		<div class="col-md-2">
-	 			<a href="#">
+	 			<a href="https://olympics.com/ko/sports/skateboarding/">
 		 			<div class="card" style= "border: 0px; text-align: center">
 		 				
 		 				<img src="https://olympics.com/images/static/sports/pictograms/skateboarding.svg" class="card-img-top" alt="...">
@@ -427,7 +427,7 @@
 	 			</a>
 	 		</div>
 	 		<div class="col-md-2">
-	 			<a href="#">
+	 			<a href="https://olympics.com/ko/sports/skeleton/">
 		 			<div class="card" style= "border: 0px; text-align: center">
 		 				
 		 				<img src="https://olympics.com/images/static/sports/pictograms/skeleton.svg" class="card-img-top" alt="...">
@@ -438,7 +438,7 @@
 	 			</a>
 	 		</div>
 	 		<div class="col-md-2">
-	 			<a href="#">
+	 			<a href="https://olympics.com/ko/sports/ski-mountaineering/">
 		 			<div class="card" style= "border: 0px; text-align: center">
 		 				
 		 				<img src="https://olympics.com/images/static/sports/pictograms/ski-mountaineering.svg" class="card-img-top" alt="...">
@@ -449,7 +449,7 @@
 	 			</a>
 	 		</div>
 	 		<div class="col-md-2">
-	 			<a href="#">
+	 			<a href="https://olympics.com/ko/sports/ski-jumping/">
 		 			<div class="card" style= "border: 0px; text-align: center">
 		 				
 		 				<img src="https://olympics.com/images/static/sports/pictograms/ski-jumping.svg" class="card-img-top" alt="...">
@@ -460,7 +460,7 @@
 	 			</a>
 	 		</div>
 	 		<div class="col-md-2">
-	 			<a href="#">
+	 			<a href="https://olympics.com/ko/sports/sport-climbing/">
 		 			<div class="card" style= "border: 0px; text-align: center">
 		 				
 		 				<img src="https://olympics.com/images/static/sports/pictograms/sport-climbing.svg" class="card-img-top" alt="...">
@@ -471,7 +471,7 @@
 	 			</a>
 	 		</div>
 	 		<div class="col-md-2">
-	 			<a href="#">
+	 			<a href="https://olympics.com/ko/sports/speed-skating/">
 		 			<div class="card" style= "border: 0px; text-align: center">
 		 				
 		 				<img src="https://olympics.com/images/static/sports/pictograms/speed-skating.svg" class="card-img-top" alt="...">
@@ -482,7 +482,7 @@
 	 			</a>
 	 		</div>
 	 		<div class="col-md-2">
-	 			<a href="#">
+	 			<a href="https://olympics.com/ko/sports/equestrian/">
 		 			<div class="card" style= "border: 0px; text-align: center">
 		 				
 		 				<img src="https://olympics.com/images/static/sports/pictograms/equestrian.svg" class="card-img-top" alt="...">
@@ -493,7 +493,7 @@
 	 			</a>
 	 		</div>
 	 		<div class="col-md-2">
-	 			<a href="#">
+	 			<a href="https://olympics.com/ko/sports/artistic-swimming/">
 		 			<div class="card" style= "border: 0px; text-align: center">
 		 				
 		 				<img src="https://olympics.com/images/static/sports/pictograms/artistic-swimming.svg" class="card-img-top" alt="...">
@@ -504,7 +504,7 @@
 	 			</a>
 	 		</div>
 	 		<div class="col-md-2">
-	 			<a href="#">
+	 			<a href="https://olympics.com/ko/sports/ice-hockey/">
 		 			<div class="card" style= "border: 0px; text-align: center">
 		 				
 		 				<img src="https://olympics.com/images/static/sports/pictograms/ice-hockey.svg" class="card-img-top" alt="...">
@@ -515,7 +515,7 @@
 	 			</a>
 	 		</div>
 	 		<div class="col-md-2">
-	 			<a href="#">
+	 			<a href="https://olympics.com/ko/sports/acrobatic-gymnastics/">
 		 			<div class="card" style= "border: 0px; text-align: center">
 		 				
 		 				<img src="https://olympics.com/images/static/sports/pictograms/acrobatic-gymnastics.svg" class="card-img-top" alt="...">
@@ -526,7 +526,7 @@
 	 			</a>
 	 		</div>
 	 			<div class="col-md-2">
-	 			<a href="#">
+	 			<a href="https://olympics.com/ko/sports/alpine-skiing/">
 		 			<div class="card" style= "border: 0px; text-align: center">
 		 				
 		 				<img src="https://olympics.com/images/static/sports/pictograms/alpine-skiing.svg" class="card-img-top" alt="...">
@@ -537,7 +537,7 @@
 	 			</a>
 	 		</div>
 	 		<div class="col-md-2">
-	 			<a href="#">
+	 			<a href="https://olympics.com/ko/sports/baseball-softball/">
 		 			<div class="card" style= "border: 0px; text-align: center">
 		 				
 		 				<img src="https://olympics.com/images/static/sports/pictograms/baseball-softball.svg" class="card-img-top" alt="...">
@@ -548,7 +548,7 @@
 	 			</a>
 	 		</div>
 	 		<div class="col-md-2">
-	 			<a href="#">
+	 			<a href="https://olympics.com/ko/sports/archery/">
 		 			<div class="card" style= "border: 0px; text-align: center">
 		 				
 		 				<img src="https://olympics.com/images/static/sports/pictograms/archery.svg" class="card-img-top" alt="...">
@@ -559,7 +559,7 @@
 	 			</a>
 	 		</div>
 	 		<div class="col-md-2">
-	 			<a href="#">
+	 			<a href="https://olympics.com/ko/sports/weightlifting/">
 		 			<div class="card" style= "border: 0px; text-align: center">
 		 				
 		 				<img src="https://olympics.com/images/static/sports/pictograms/weightlifting.svg" class="card-img-top" alt="...">
@@ -570,7 +570,7 @@
 	 			</a>
 	 		</div>
 	 		<div class="col-md-2">
-	 			<a href="#">
+	 			<a href="https://olympics.com/ko/sports/sailing/">
 		 			<div class="card" style= "border: 0px; text-align: center">
 		 				
 		 				<img src="https://olympics.com/images/static/sports/pictograms/sailing.svg" class="card-img-top" alt="...">
@@ -581,7 +581,7 @@
 	 			</a>
 	 		</div>
 	 		<div class="col-md-2">
-	 			<a href="#">
+	 			<a href="https://olympics.com/ko/sports/judo/">
 		 			<div class="card" style= "border: 0px; text-align: center">
 		 				
 		 				<img src="https://olympics.com/images/static/sports/pictograms/judo.svg" class="card-img-top" alt="...">
@@ -592,7 +592,7 @@
 	 			</a>
 	 		</div>
 	 		<div class="col-md-2">
-	 			<a href="#">
+	 			<a href="https://olympics.com/ko/sports/athletics/">
 		 			<div class="card" style= "border: 0px; text-align: center">
 		 				
 		 				<img src="https://olympics.com/images/static/sports/pictograms/athletics.svg" class="card-img-top" alt="...">
@@ -603,7 +603,7 @@
 	 			</a>
 	 		</div>
 	 		<div class="col-md-2">
-	 			<a href="#">
+	 			<a href="https://olympics.com/ko/sports/rowing/">
 		 			<div class="card" style= "border: 0px; text-align: center">
 		 				
 		 				<img src="https://olympics.com/images/static/sports/pictograms/rowing.svg" class="card-img-top" alt="...">
@@ -614,7 +614,7 @@
 	 			</a>
 	 		</div>
 	 		<div class="col-md-2">
-	 			<a href="#">
+	 			<a href="https://olympics.com/ko/sports/football/">
 		 			<div class="card" style= "border: 0px; text-align: center">
 		 				
 		 				<img src="https://olympics.com/images/static/sports/pictograms/football.svg" class="card-img-top" alt="...">
@@ -625,7 +625,7 @@
 	 			</a>
 	 		</div>
 	 		<div class="col-md-2">
-	 			<a href="#">
+	 			<a href="https://olympics.com/ko/sports/canoe-kayak-slalom/">
 		 			<div class="card" style= "border: 0px; text-align: center">
 		 				
 		 				<img src="https://olympics.com/images/static/sports/pictograms/canoe-kayak-slalom.svg" class="card-img-top" alt="...">
@@ -636,7 +636,7 @@
 	 			</a>
 	 		</div>
 	 		<div class="col-md-2">
-	 			<a href="#">
+	 			<a href="https://olympics.com/ko/sports/canoe-kayak-flatwater/">
 		 			<div class="card" style= "border: 0px; text-align: center">
 		 				
 		 				<img src="https://olympics.com/images/static/sports/pictograms/canoe-kayak-flatwater.svg" class="card-img-top" alt="...">
@@ -647,7 +647,7 @@
 	 			</a>
 	 		</div>
 	 		<div class="col-md-2">
-	 			<a href="#">
+	 			<a href="https://olympics.com/ko/sports/karate/">
 		 			<div class="card" style= "border: 0px; text-align: center">
 		 				
 		 				<img src="https://olympics.com/images/static/sports/pictograms/karate.svg" class="card-img-top" alt="...">
@@ -658,7 +658,7 @@
 	 			</a>
 	 		</div>
 	 		<div class="col-md-2">
-	 			<a href="#">
+	 			<a href="https://olympics.com/ko/sports/curling/">
 		 			<div class="card" style= "border: 0px; text-align: center">
 		 				
 		 				<img src="https://olympics.com/images/static/sports/pictograms/curling.svg" class="card-img-top" alt="...">
@@ -669,7 +669,7 @@
 	 			</a>
 	 		</div>
 	 			<div class="col-md-2">
-	 			<a href="#">
+	 			<a href="https://olympics.com/ko/sports/cross-country-skiing/">
 		 			<div class="card" style= "border: 0px; text-align: center">
 		 				
 		 				<img src="https://olympics.com/images/static/sports/pictograms/cross-country-skiing.svg" class="card-img-top" alt="...">
@@ -680,7 +680,7 @@
 	 			</a>
 	 		</div>
 	 		<div class="col-md-2">
-	 			<a href="#">
+	 			<a href="https://olympics.com/ko/sports/table-tennis/">
 		 			<div class="card" style= "border: 0px; text-align: center">
 		 				
 		 				<img src="https://olympics.com/images/static/sports/pictograms/table-tennis.svg" class="card-img-top" alt="...">
@@ -691,7 +691,7 @@
 	 			</a>
 	 		</div>
 	 		<div class="col-md-2">
-	 			<a href="#">
+	 			<a href="https://olympics.com/ko/sports/taekwondo/">
 		 			<div class="card" style= "border: 0px; text-align: center">
 		 				
 		 				<img src="https://olympics.com/images/static/sports/pictograms/taekwondo.svg" class="card-img-top" alt="...">
@@ -702,7 +702,7 @@
 	 			</a>
 	 		</div>
 	 		<div class="col-md-2">
-	 			<a href="#">
+	 			<a href="https://olympics.com/ko/sports/tennis/">
 		 			<div class="card" style= "border: 0px; text-align: center">
 		 				
 		 				<img src="https://olympics.com/images/static/sports/pictograms/tennis.svg" class="card-img-top" alt="...">
@@ -713,7 +713,7 @@
 	 			</a>
 	 		</div>
 	 		<div class="col-md-2">
-	 			<a href="#">
+	 			<a href="https://olympics.com/ko/sports/triathlon/">
 		 			<div class="card" style= "border: 0px; text-align: center">
 		 				
 		 				<img src="https://olympics.com/images/static/sports/pictograms/triathlon.svg" class="card-img-top" alt="...">
@@ -724,7 +724,7 @@
 	 			</a>
 	 		</div>
 	 		<div class="col-md-2">
-	 			<a href="#">
+	 			<a href="https://olympics.com/ko/sports/trampoline-gymnastics/">
 		 			<div class="card" style= "border: 0px; text-align: center">
 		 				
 		 				<img src="https://olympics.com/images/static/sports/pictograms/trampoline-gymnastics.svg" class="card-img-top" alt="...">
@@ -735,7 +735,7 @@
 	 			</a>
 	 		</div>
 	 		<div class="col-md-2">
-	 			<a href="#">
+	 			<a href="https://olympics.com/ko/sports/fencing/">
 		 			<div class="card" style= "border: 0px; text-align: center">
 		 				
 		 				<img src="https://olympics.com/images/static/sports/pictograms/fencing.svg" class="card-img-top" alt="...">
@@ -746,7 +746,7 @@
 	 			</a>
 	 		</div>
 	 		<div class="col-md-2">
-	 			<a href="#">
+	 			<a href="https://olympics.com/ko/sports/futsal/">
 		 			<div class="card" style= "border: 0px; text-align: center">
 		 				
 		 				<img src="https://olympics.com/images/static/sports/pictograms/futsal.svg" class="card-img-top" alt="...">
@@ -757,7 +757,7 @@
 	 			</a>
 	 		</div>
 	 		<div class="col-md-2">
-	 			<a href="#">
+	 			<a href="https://olympics.com/ko/sports/freestyle-skiing/">
 		 			<div class="card" style= "border: 0px; text-align: center">
 		 				
 		 				<img src="https://olympics.com/images/static/sports/pictograms/freestyle-skiing.svg" class="card-img-top" alt="...">
@@ -768,7 +768,7 @@
 	 			</a>
 	 		</div>
 	 		<div class="col-md-2">
-	 			<a href="#">
+	 			<a href="https://olympics.com/ko/sports/figure-skating/">
 		 			<div class="card" style= "border: 0px; text-align: center">
 		 				
 		 				<img src="https://olympics.com/images/static/sports/pictograms/figure-skating.svg" class="card-img-top" alt="...">
@@ -779,7 +779,7 @@
 	 			</a>
 	 		</div>
 	 		<div class="col-md-2">
-	 			<a href="#">
+	 			<a href="https://olympics.com/ko/sports/hockey/">
 		 			<div class="card" style= "border: 0px; text-align: center">
 		 				
 		 				<img src="https://olympics.com/images/static/sports/pictograms/hockey.svg" class="card-img-top" alt="...">
@@ -790,7 +790,7 @@
 	 			</a>
 	 		</div>
 	 		<div class="col-md-2">
-	 			<a href="#">
+	 			<a href="https://olympics.com/ko/sports/handball/">
 		 			<div class="card" style= "border: 0px; text-align: center">
 		 				
 		 				<img src="https://olympics.com/images/static/sports/pictograms/handball.svg" class="card-img-top" alt="...">
