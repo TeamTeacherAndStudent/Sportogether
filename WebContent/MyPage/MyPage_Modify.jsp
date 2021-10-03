@@ -1,17 +1,10 @@
-<%@page import="notice.model.vo.Notice"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%
-	Notice noticeOne = (Notice)request.getAttribute("noticeOne");
-%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!-- 포맷태그 식별 태그라이브러리  -->
-<%@taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>공지사항 상세페이지(관리자)</title>
+<title>나의 정보 수정</title>
 <!-- Google Fonts -->
 <link
 	href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
@@ -33,14 +26,7 @@
 <!-- Template Main CSS File -->
 <link href="../assets/css/style.css" rel="stylesheet">
 
-<script src="https://code.jquery.com/jquery-latest.min.js"></script>
-
-<title>공지사항 상세페이지</title>
 <style>
-#search {
-	margin-left: 30px;
-}
-
 #main-title {
 	margin-top: 2%;
 	width: 100%;
@@ -61,47 +47,65 @@
 	margin-left: 15%;
 	margin-right: 15%;
 	margint-bottom: 15%;
-	/* display: flex; */
+	display: flex;
 	justify-content: center;
 	vertical-align: middle;
 }
 
-table.p-table {
-	border-collapse: separate;
-	border-spacing: 1px;
-	line-height: 1.5;
-	/* margin: 20px 10px; */
+.mybox {
+	width: 80%;
+	height: 500px;
+	border: 1px solid #165992;
+	border-radius: 10px;
+	background-color: white;
+	letter-spacing: 1px;
+	justify-content: center;
+	display: flex;
 }
 
-table.p-table th {
-	width: 700px;
-	padding: 10px;
-	font-weight: bold;
-	vertical-align: top;
-	color: #fff;
-	background: #165992;
-	text-align: center;
+.content {
+	height: 100%;
+	width: 60%;
+	margin: 20px;
+	letter-spacing: 1px;
+	align-items: center;
+	line-height: 1.5em;
+	color: #165992;
+	float: left;
+	align: left;
 }
 
-table.p-table td {
-	padding: 10px;
-	vertical-align: top;
-	border-bottom: 1px solid #ccc;
-	background: #fff;
+.side {
+	height: 100%;
+	width: 30%;
+	margin: 20px;
+	float: left;
+	align: right;
 }
 
-table.p-table td:nth-child(1) {
-	width: 10%;
+.side-top {
+	height: 70%;
+	width: 100%;
+	/* align-items: center; */
 }
 
-table.p-table td:nth-child(2) {
-	width: 90%;
+#photo {
+	/* margin : 1%; */
+	width: inherit;
+	height: 75%;
+	border: 1px solid black;
 }
 
-#back-btn {
-	margin-left: 10%;
-	margin-right: 10%;
-	text-align: right;
+.side-top>button {
+	margin: 2%;
+	float: right;
+}
+
+.button {
+	height: 20%;
+	margin: 2%;
+	text-aligh: right;
+	float: right;
 }
 
 button {
@@ -129,38 +133,23 @@ button:hover {
 	text-decoration: none;
 }
 
-.pop-layer .pop-container {
-	padding: 20px 25px;
+#withdraw {
+	background: #B2B2B2;
+	border: 2px solid #B2B2B2;
 }
 
-.pop-laeyr p.ctxt {
-	color: #666;
-	line-height: 25px;
+#withdraw:hover {
+	background: #DB4455;
 }
 
-.pop-layer .btn-r {
-	width: 100%;
-	margin: 10px 0 20px;
-	padding-top: 10px;
-	border-top: 1px solid #ddd;
-	text-align: right;
-}
-
-.pop-layer {
-	display: none;
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	width: 410px;
-	height: auto;
-	background-color: #fff;
-	border: 5px solid #3571B5;
-	z-index: 10;
+#search {
+	margin-left: 30px;
 }
 </style>
 </head>
 <body>
-<header id="header" class="fixed-top">
+	<!-- ======= Header ======= -->
+	<header id="header" class="fixed-top">
 		<div
 			class="container d-flex align-items-center justify-content-between">
 			<!-- 여기에 로고 사진 추가 -->
@@ -191,63 +180,55 @@ button:hover {
 	</header>
 	<!-- End Header -->
 
-
-
-	<main id="main">
+	<!-- === Main ===  -->
+	<main>
 		<section>
 			<div id="main-title">
-				<h1>공지사항</h1>
+				<h1>나의 정보 수정</h1>
 			</div>
 		</section>
-		<div id="main-content">
-			<table class="p-table">
-				<thead>
-					<tr>
-						<th scope="cols">제목</th>
-						<th scope="cols"><%=noticeOne.getNoticeTitle() %></th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>작성일</td>
-						<td><fmt:formatDate pattern = "yyyy-MM-dd hh:mm" value="${noticeOne.noticeDate}"/></td>
-					</tr>
-					<tr>
-						<td>글쓴이</td>
-						<td><%=noticeOne.getNoticeWriter() %></td>
-					</tr>
-					<tr>
-						<td colspan="2"><%= noticeOne.getNoticeContents() %></td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
+
+
+		<!-- section : 프로필 수정-->
 		<section>
-			<div id="back-btn">
-				<a href="#layer" class="check-btn"><button>삭제</button></a> 
-				<a href="/notice/modify?noticeNo=<%=noticeOne.getNoticeNo()%>"><button>수정</button></a> 
-				<a href="/notice/list"><button>목록</button></a>
-			</div>
-		</section>
-			<div id="layer" class="pop-layer">
-				<div class="pop-container">
-					<div class="pop-conts">
-						<!-- 내용 -->
-						<p class="ctxt mb20">정말로 삭제하시겠습니까?</p>
-						<div class="btn-r">
-						
-							<a href="/notice/remove?noticeNo=<%=noticeOne.getNoticeNo()%>" ><button class="btn-layerClose" onclick="deleteNotice()">삭제</button></a> <a
-								href="#" class="btn-layerClose"><button >취소</button></a>
+			<div id="main-content">
+				<div class="mybox">
+					<div class="content">
+						<!-- 회원 정보 공간 -->
+						아이디 : king2021 <br>
+						<br> 닉네임 : <input type="text" size=16> <br>
+						<br> 이름 : 홍길동 <br>
+						<br> 성별 : 남 <br>
+						<br> 생년월일 : 2000.08.20 <br>
+						<br> 비밀번호 : <input type="password"> <br>
+						<br> 재확인 : <input type="password"> <br>
+						<br> 이메일 : <input type="email"> <br>
+						<br> 전화번호 : <input type="text"> <br>
+					</div>
+
+					<div class="side">
+						<div class="side-top">
+							<div id="photo"></div>
+							<button>변경</button>
 						</div>
-						<!--  // 내용 끝 -->
+						<br>
+						<div class="button">
+							<button id="withdraw">회원탈퇴</button>
+							<button>수정</button>
+						</div>
 					</div>
 				</div>
 			</div>
+		</section>
 
 	</main>
 
+
+
 	<!-- footer 옆으로 넘어감 방지 -->
 	<div style="clear: both;"></div>
+
+	<!-- ======= Footer ======= -->
 	<footer id="footer">
 		<div class="container">
 			<h3>SPORTOGETHER</h3>
@@ -298,45 +279,5 @@ button:hover {
 	<script src="assets/js/jquery.counterup.min.js"></script>
 	<script src="assets/js/waypoints.min.js"></script>
 
-	<!-- 삭제 경고창 -->
-	<script>
-	$(".check-btn").click(function(){
-        var $href = $(this).attr("href");
-        layer_popup($href);
-    });
-    function layer_popup(el){
-
-        var $el = $(el);    //레이어의 id를 $el 변수에 저장
-        var isDim = $el.prev().hasClass("dimBg"); //dimmed 레이어를 감지하기 위한 boolean 변수
-
-        isDim ? $(".dim-layer").fadeIn() : $el.fadeIn();
-
-        var $elWidth = ~~($el.outerWidth()),
-            $elHeight = ~~($el.outerHeight()),
-            docWidth = $(document).width(),
-            docHeight = $(document).height();
-
-        // 화면의 중앙에 레이어를 띄운다.
-        if ($elHeight < docHeight || $elWidth < docWidth) {
-            $el.css({
-                marginTop: -$elHeight /2,
-                marginLeft: -$elWidth/2
-            })
-        } else {
-            $el.css({top: 0, left: 0});
-        }
-
-        $el.find("a.btn-layerClose").click(function(){
-            isDim ? $(".dim-layer").fadeOut() : $el.fadeOut(); // 닫기 버튼을 클릭하면 레이어가 닫힌다.
-            return false;
-        });
-
-        $(".layer .dimBg").click(function(){
-            $(".dim-layer").fadeOut();
-            return false;
-        });
-
-    }
-	</script>
 </body>
 </html>

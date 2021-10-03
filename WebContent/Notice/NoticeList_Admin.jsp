@@ -6,6 +6,9 @@
 	List<Notice> nList = (List<Notice>)request.getAttribute("nList");
 	String pageNavi = (String)request.getAttribute("pageNavi");
 %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!-- 포맷태그 식별 태그라이브러리  -->
+<%@taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -281,17 +284,28 @@ button:hover {
 							</ul>
 						</li>
 						
-	 					<% for(Notice nOne : nList) {%>
+<%-- 	 					<% for(Notice nOne : nList) {%>
 						<li>
 							<ul>
 								<li><%= nOne.getNoticeNo() %></li>
 								<li class="left"><a href="/notice/detail?noticeNo=<%=nOne.getNoticeNo()%>"><%=nOne.getNoticeTitle()%></a></li>
-								<li><%= nOne.getNoticeDate() %></li>
+								<li><fmt:formatDate pattern = "yyyy-MM-dd hh:mm" value="${noticeOne.noticeDate}"/></li>
 								<li><%= nOne.getNoticeWriter() %></li>
 								<li><%= nOne.getNoticeCount() %></li>
 							</ul>
 						</li>
-						<%} %> 
+						<%} %>  --%>
+						<c:forEach items="${requestScope.nList}" var="notice">
+						<li>
+							<ul>
+								<li>${notice.noticeNo}</li>
+								<li class="left"><a href="/notice/detail?noticeNo=${notice.noticeNo}">${notice.noticeTitle}</a></li>
+								<li><fmt:formatDate pattern = "yyyy-MM-dd hh:mm" value="${notice.noticeDate}"/></li>
+								<li>${notice.noticeWriter}</li>
+								<li>${notice.noticeCount}</li>
+							</ul>
+						</li>
+						</c:forEach>
 						
 					</ul>
 				</li>
