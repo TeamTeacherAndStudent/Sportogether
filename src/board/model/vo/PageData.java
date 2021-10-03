@@ -4,14 +4,25 @@ import java.util.List;
 
 public class PageData {
 	private List<Board> boardList;
+	private String type; //검색할때 유형
 	private String PageNavi;
 	
 	public PageData() {}
 
-	public PageData(List<Board> boardList, String pageNavi) {
+
+	public PageData(List<Board> boardList, String type, String pageNavi) {
 		super();
 		this.boardList = boardList;
+		this.type = type;
 		PageNavi = pageNavi;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 
 	public List<Board> getBoardList() {
@@ -32,7 +43,9 @@ public class PageData {
 
 	@Override
 	public String toString() {
-		return "PageData [boardList=" + boardList + ", PageNavi=" + PageNavi + "]";
-	};
+		return "PageData [boardList=" + boardList + ", type=" + type + ", PageNavi=" + PageNavi + "]";
+	}
+
+	
 
 }

@@ -1,30 +1,23 @@
-package board.controller;
+package admin.controller;
 
 import java.io.IOException;
-import java.util.List;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import board.model.service.BoardService;
-import board.model.vo.Board;
-import board.model.vo.FileData;
 
 /**
- * Servlet implementation class BoardWriteServlet
+ * Servlet implementation class SupportApprovalServlet
  */
-@WebServlet("/board/write")
-public class BoardWriteServlet extends HttpServlet {
+@WebServlet("/support/approval")
+public class SupportApprovalServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BoardWriteServlet() {
+    public SupportApprovalServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -41,24 +34,8 @@ public class BoardWriteServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-		String Title = request.getParameter("title");
-		String Contents = request.getParameter("contents");
-		HttpSession session = request.getSession();
-		String Writer= (String)session.getAttribute("userId");
-		
-		//board에 셋팅
-		Board board = new Board();
-		board.setBoardTitle(Title);
-		board.setBoardContents(Contents);
-		board.setUserId(Writer);
-		
-		int result = new BoardService().registerBoard(board);
-		if(result > 0) {
-			response.sendRedirect("/Board/board_main.jsp");
-		}else {
-			request.getRequestDispatcher("/Board/boardError.html").forward(request, response);
-		}
+		// TODO Auto-generated method stub
+		doGet(request, response);
 	}
 
 }

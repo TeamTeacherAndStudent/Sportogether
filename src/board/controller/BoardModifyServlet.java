@@ -1,6 +1,8 @@
 package board.controller;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -41,14 +43,12 @@ public class BoardModifyServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	 //한글 인코딩
 		request.setCharacterEncoding("UTF-8");
-		String Title = request.getParameter("boardTitle");
-		String Contents = request.getParameter("boardContents");
-		//첨부파일수정
+		String Title = request.getParameter("title");
+		String Contents = request.getParameter("contents");
 		int boardNo = Integer.parseInt(request.getParameter("boardNo"));
 		Board board = new Board();
 		board.setBoardTitle(Title);
 		board.setBoardContents(Contents);
-		//첨부파일
 		board.setBoardNo(boardNo);
 		int result = new BoardService().modifyBoard(board);
 		if(result > 0) {
