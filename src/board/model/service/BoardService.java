@@ -1,17 +1,16 @@
 package board.model.service;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 
 import board.model.dao.BoardDAO;
 import board.model.vo.Board;
 import board.model.vo.BoardLike;
+import board.model.vo.BoardReply;
 import board.model.vo.FileData;
 import board.model.vo.PageData;
 import board.model.vo.Scrap;
-import board.model.vo.BoardReply;
 import common.JDBCTemplate;
 
 public class BoardService {

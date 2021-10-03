@@ -1,9 +1,12 @@
-<!-- 임ㅊ포트, model.vo랑 list -->
+<%@page import="board.model.vo.Board"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!-- 선언 List<Board> bList = (List<Board>)request.getAttribute("bList")
+<%
+        List<Board> bList = (List<Board>)request.getAttribute("bList");
 		String pageNavi = (String)request.getAttribute("pageNavi");
-		 -->
+		 
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -204,16 +207,17 @@
                                 <li>조회수</li>
                                 <li>추천수</li>
                             </ul>
-                            <!-- <li>< bOne.getBoardNo() ></li>
-                            	 <li>< bOne.getSportsName() ></li>
-								 <li><a href="board_detail?boardNo=< = bOne.getBoardNo() >">
-								 < bOne.getBoardTitle() ></a></li>
-								 <li><= nOne.getboardEnrollDate() ></li>
-								 <li><= bOne.getUserId() ></li>
-								 <li><= bOne.getBoardCount() ></li>
-								 <li><= bOne.getBoardLike() ></li>	
-							-->
+                            <% for(Board bOne : bList) { %>
+                            <ul>
+                            	 <li><%=bOne.getBoardNo() %></li>
+                            	 <li><%=bOne.getSportsName() %></li>
+								 <li><a href="/board/detail?boardNo=<%=bOne.getBoardNo() %>"><%=bOne.getBoardTitle() %></a></li>
+								 <li><%=bOne.getBoardEnrollDate() %></li>
+								 <li><%=bOne.getUserId() %></li>
+								 <li><%=bOne.getBoardCount() %></li>
+								 <li><%=bOne.getBoardLike() %></li>					
                             </ul>
+							<% } %>  
                         </li>
                     </ul>
                 </li>
@@ -221,19 +225,22 @@
                     <div id="divPaging">
                     </div>
                 </li>
-                <a href="boardWrite.html"><input id="writeBtn" class="Btn" type="button" value="글작성"></a>
-    
+                <form action ="board/write">
+                	<input id="writeBtn" class="Btn" type="submit" value="글작성">
+                </form>
                 <li id='liSearchOption'>
                     <div>
+                  	<form action="/board/search" method="get">
                         <select id='selSearchOption' >
                             <option value='A'>제목+내용</option>
                             <option value='T'>제목</option>
                             <option value='C'>내용</option>
                         </select>
                         <input id='txtKeyWord' />
-                        <input type='button' value='검색' class="Btn"/>
+                        <input type='submit' value='검색' class="Btn"/>
                     </div>
                     </li>
+                 </form>
             </ul>
         </div>
     </main>

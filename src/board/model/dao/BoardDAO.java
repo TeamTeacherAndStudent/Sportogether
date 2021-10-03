@@ -300,7 +300,7 @@ public class BoardDAO {
 			int totalValue = 0;
 			Statement stmt = null;
 			ResultSet rset = null;
-			String query = "SELECT COUNT(*) AS TOTALCOUNT FROM BOARD";
+			String query = "SELECT COUNT(*) AS TOTALCOUNT FROM FREEBOARD";
 			try {
 				stmt = conn.createStatement();
 				rset = stmt.executeQuery(query);
@@ -320,7 +320,7 @@ public class BoardDAO {
 	public List<Board> selectAllBoard(Connection conn, int currentPage) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String query ="SELECT * FROM (SELECT ROW_NUMBER()ORDER BY BOARD_NO DESC) AS NUM, BOARD_NO, SPORTS_NAME, BOARD_TITLE, BOARD_CONTENTS, USER_ID, BOARD_ENROLLDATE, BOARD_COUNT FROM FREEBOARD) WHERE NUM BETWEEN ? AND ?";
+		String query ="SELECT * FROM (SELECT ROW_NUMBER()ORDER BY BOARD_NO DESC) AS NUM, BOARD_NO, SPORTS_NAME, BOARD_TITLE, BOARD_CONTENTS, USER_ID, BOARD_ENROLLDATE, BOARD_COUNT, BOARD_LIKE FROM FREEBOARD) WHERE NUM BETWEEN ? AND ?";
 		List<Board> bList = null;
 		
 		try {
@@ -341,7 +341,9 @@ public class BoardDAO {
 			board.setUserId(rset.getString("USER_ID"));
 			board.setBoardEnrollDate(rset.getDate("BOARD_ENROLLDATE"));
 			board.setBoardCount(rset.getInt("BOARD_COUNT"));
+			board.setBoardLike(rset.getInt("BOARD_LIKE"));
 			bList.add(board);
+			System.out.println(rset.getString("BOARD_CONTENTS"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
