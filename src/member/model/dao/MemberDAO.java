@@ -51,7 +51,6 @@ public class MemberDAO {
 		Member member = null;
 		ResultSet rset = null;
 		String query = "SELECT * FROM MEMBER WHERE USER_ID = ? AND USER_PW = ?";
-		
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, userId);

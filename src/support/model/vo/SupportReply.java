@@ -1,5 +1,6 @@
 package support.model.vo;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 
 public class SupportReply {
@@ -7,7 +8,7 @@ public class SupportReply {
 	private int supportNo;
 	private String supportReplyWriter;
 	private String supportReplyContents;
-	private Timestamp supportReplyRegDate;
+	private String supportReplyRegDate;
 	
 	//생성자
 	public SupportReply() {}
@@ -62,12 +63,12 @@ public class SupportReply {
 	}
 
 
-	public Timestamp getSupportReplyRegDate() {
+	public String getSupportReplyRegDate() {
 		return supportReplyRegDate;
 	}
 
 
-	public void setSupportReplyRegDate(Timestamp supportReplyRegDate) {
+	public void setSupportReplyRegDate(String supportReplyRegDate) {
 		this.supportReplyRegDate = supportReplyRegDate;
 	}
 	
