@@ -1,29 +1,27 @@
 package board.controller;
 
 import java.io.IOException;
-import java.util.List;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import board.model.service.BoardService;
-import board.model.vo.Board;
-import board.model.vo.PageData;
+import board.model.vo.BoardLike;
 
 /**
- * Servlet implementation class BoardSearchServlet
+ * Servlet implementation class LikeUpdateServlet
  */
-@WebServlet("/board/search")
-public class BoardSearchServlet extends HttpServlet {
+@WebServlet("/like/update")
+public class LikeUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BoardSearchServlet() {
+    public LikeUpdateServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -40,22 +38,20 @@ public class BoardSearchServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String searchKeyword = request.getParameter("searchKeyWord");
-		int currentPage = 1;
-		String currentPageVal = request.getParameter("currentPage");
-		if(currentPageVal != null) {
-			currentPage = Integer.parseInt(currentPageVal);
-		}
-		PageData pd = new BoardService().printSearchBoard(searchKeyword, currentPage);
-		List<Board> bList = pd.getBoardList();
-		if(!bList.isEmpty()) {
-			request.setAttribute("bList", bList);
-			request.setAttribute("pageNavi", pd.getPageNavi());
-			request.getRequestDispatcher("/Board/board_search.jsp").forward(request, response);
+		HttpSession session = request.getSession();
+		int boardNo = Integer.parseInt(request.getParameter("boardNo"));
+		int CountLike = Integer.parseInt(request.getParameter("likeCount"));
+		String userId = (String)session.getAttribute("userId");
+		BoardLike boardLike  = new BoardLike();
+		boardLike.setBoardNo(boardNo);
+		boardLike.setUserId(userId);
+		boardLike.setLikeCount(CountLike);
+		int result = new BoardService().updateLike(boardLike);
+		if(result> 0) {
+			response.sendRedirect("/board/detail?boardNo="+boardNo);
 		}else {
 			request.getRequestDispatcher("/Board/boardError.html").forward(request, response);
 		}
-		
+	
 	}
-
 }

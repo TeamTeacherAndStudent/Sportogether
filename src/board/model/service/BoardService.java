@@ -1,13 +1,16 @@
 package board.model.service;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 
 import board.model.dao.BoardDAO;
 import board.model.vo.Board;
+import board.model.vo.BoardLike;
 import board.model.vo.FileData;
 import board.model.vo.PageData;
+import board.model.vo.Scrap;
 import board.model.vo.BoardReply;
 import common.JDBCTemplate;
 
@@ -167,5 +170,107 @@ public class BoardService {
 			JDBCTemplate.close(conn);
 		}
 		return pd;
+	}
+
+	public int registerFileInfo(FileData fileData) {
+		Connection conn = null;
+		int result = 0;
+		try {
+			conn = jdbcTemplate.createConnection();
+			result = new BoardDAO().insertBoardFile(conn, fileData);
+			if(result > 0) {
+				JDBCTemplate.commit(conn);
+			}else {
+				JDBCTemplate.rollback(conn);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(conn);
+		}
+		return result;
+	}
+	
+	
+	public int removeFile(int boardNo, int fileNo) {
+		Connection conn = null;
+		int result = 0;
+		try {
+			conn = jdbcTemplate.createConnection();
+			result = new BoardDAO().deleteBoardFile(conn,fileNo, boardNo);
+			if(result > 0) {
+				JDBCTemplate.commit(conn);
+			}else {
+				JDBCTemplate.rollback(conn);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	public int updateLike(BoardLike boardLike) {
+		Connection conn = null;
+		int result = 0;
+		try {
+			conn = jdbcTemplate.createConnection();
+			result = new BoardDAO().updateLike(conn, boardLike);
+			if(result > 0) {
+				JDBCTemplate.commit(conn);
+			}else {
+				JDBCTemplate.rollback(conn);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	public int removeLike(int boardNo) {
+		Connection conn = null;
+		int result = 0;
+		
+		try {
+			conn = jdbcTemplate.createConnection();
+			result = new BoardDAO().removeLike(conn,boardNo);
+			if(result > 0) {
+				jdbcTemplate.commit(conn);
+			}else {
+				jdbcTemplate.rollback(conn);
+			}
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(conn);
+		}
+		return result;
+	}
+	public int updateScrap(Scrap scrap) {
+		Connection conn = null;
+		int result = 0;
+		
+		try {
+			conn = jdbcTemplate.createConnection();
+			result = new BoardDAO().updateScrap(conn, scrap);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(conn);
+		}
+		return result;
+	}
+	
+	//****여기 흠,,
+	public int removeScrap(int scrapNo) {
+		Connection conn = null;
+		int result = 0;
+		
+		try {
+			conn = jdbcTemplate.createConnection();
+			result = new BoardDAO().deleteScrap(conn, scrapNo);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(conn);
+		}
+		return result;
 	}
 }

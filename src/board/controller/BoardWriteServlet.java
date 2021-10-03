@@ -46,14 +46,12 @@ public class BoardWriteServlet extends HttpServlet {
 		String Title = request.getParameter("boardTitle");
 		String Contents = request.getParameter("boardContents");
 		String WriterNickName = (String)session.getAttribute("userId");
-		//파일업로드
 		
 		//board에 셋팅
 		Board board = new Board();
 		board.setBoardTitle(Title);
 		board.setBoardContents(Contents);
 		board.setUserId(WriterNickName);
-		//파일업로드
 		
 		int result = new BoardService().registerBoard(board);
 		if(result > 0) {

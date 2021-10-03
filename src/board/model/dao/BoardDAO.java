@@ -9,7 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import board.model.vo.Board;
+import board.model.vo.BoardLike;
 import board.model.vo.FileData;
+import board.model.vo.Scrap;
 import board.model.vo.BoardReply;
 import common.JDBCTemplate;
 
@@ -19,7 +21,6 @@ public class BoardDAO {
 		int result = 0;
 		String query = "INSERT INTO FREEBOARD VALUES(SEQ_BOARD.NEXTVAL, ?, ?, ?, (SELECT USER_NICKNAME FROM MEMBER WHERE USER_ID = '?') 'USER_NICKNAME', DEFAULT, ?, ?)";
 		//쿼리문 순서 꼭 지키기
-		//첨부파일 
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(2, board.getBoardTitle());
@@ -33,7 +34,8 @@ public class BoardDAO {
 		}catch(SQLException e) {
 				e.printStackTrace();
 		}finally {
-		     	JDBCTemplate.close(pstmt);
+			JDBCTemplate.close(pstmt);
+			JDBCTemplate.close(conn);
 		}
 		return result;
 	}
@@ -59,13 +61,12 @@ public class BoardDAO {
 				boardOne.setBoardEnrollDate(rset.getDate("BOARD_ENROLLDATE"));
 				boardOne.setBoardCount(rset.getInt("BOARD_COUNT"));
 				boardOne.setBoardLike(rset.getInt("BOARD_LIKE"));
-			  //  boardOne.setFiles(rset.get);
-			    //file OUTTER JOIN
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
 			JDBCTemplate.close(pstmt);
+			JDBCTemplate.close(conn);
 			JDBCTemplate.close(rset);
 		}
 		return boardOne;
@@ -88,6 +89,7 @@ public class BoardDAO {
 			e.printStackTrace();
 		}finally {
 			JDBCTemplate.close(pstmt);
+			JDBCTemplate.close(conn);
 		}
 		return result;
 	}
@@ -106,6 +108,7 @@ public class BoardDAO {
 			e.printStackTrace();
 		}finally {
 			JDBCTemplate.close(pstmt);
+			JDBCTemplate.close(conn);
 		}
 		return result;
 	}
@@ -126,6 +129,7 @@ public class BoardDAO {
 			e.printStackTrace();
 		}finally {
 			JDBCTemplate.close(pstmt);
+			JDBCTemplate.close(conn);
 		}
 		return result;
 	}
@@ -143,6 +147,7 @@ public class BoardDAO {
 			e.printStackTrace();
 		}finally {
 			JDBCTemplate.close(pstmt);
+			JDBCTemplate.close(conn);
 		}
 		return result;
 	}
@@ -164,24 +169,26 @@ public class BoardDAO {
 			e.printStackTrace();
 		}finally {
 			JDBCTemplate.close(pstmt);
+			JDBCTemplate.close(conn);
 		}
 		return result;
 	}
 	
 	
-	public int deleteBoardFile(Connection conn, int fileNo, String fileName) {
+	public int deleteBoardFile(Connection conn, int fileNo, int boardNo) {
 		int result = 0;
 		PreparedStatement pstmt = null;
-		String query = "DELETE FROM FREEBOARDFILE WHERE FILE_NO = ? AND FILE_NAME = ?";
+		String query = "DELETE FROM FREEBOARDFILE WHERE FILE_NO = ? AND BOARD_NO = ?";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, fileNo);
-			pstmt.setString(2, fileName);
+			pstmt.setInt(2, boardNo);
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
 			JDBCTemplate.close(pstmt);
+			JDBCTemplate.close(conn);
 		}
 		return result;
 	}
@@ -208,6 +215,7 @@ public class BoardDAO {
 			e.printStackTrace();
 		}finally {
 			JDBCTemplate.close(pstmt);
+			JDBCTemplate.close(conn);
 			JDBCTemplate.close(rset);
 		}
 		return fileList;
@@ -238,6 +246,8 @@ public class BoardDAO {
 			e.printStackTrace();
 		}finally {
 			JDBCTemplate.close(pstmt);
+			JDBCTemplate.close(conn);
+			JDBCTemplate.close(rset);
 		}
 		return ReplyList;
 	}
@@ -308,14 +318,49 @@ public class BoardDAO {
 
 
 	public List<Board> selectAllBoard(Connection conn, int currentPage) {
-		return null;
-
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query ="SELECT * FROM (SELECT ROW_NUMBER()ORDER BY BOARD_NO DESC) AS NUM, BOARD_NO, SPORTS_NAME, BOARD_TITLE, BOARD_CONTENTS, USER_ID, BOARD_ENROLLDATE, BOARD_COUNT FROM FREEBOARD) WHERE NUM BETWEEN ? AND ?";
+		List<Board> bList = null;
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			int viewCountPerPage = 10;
+			int start = currentPage * viewCountPerPage - (viewCountPerPage - 1); //end-9;
+			int end = currentPage * viewCountPerPage;
+			pstmt.setInt(1,  start);
+			pstmt.setInt(2,  end);
+			rset = pstmt.executeQuery();
+			bList = new ArrayList<Board>();
+		while(rset.next()) {
+			Board board = new Board();
+			board.setBoardNo(rset.getInt("BOARD_NO"));
+			board.setSportsName(rset.getString("SPORTS_NAME"));
+			board.setBoardTitle(rset.getString("BOARD_TITLE"));
+			board.setBoardContents(rset.getString("BOARD_CONTENTS"));
+			board.setUserId(rset.getString("USER_ID"));
+			board.setBoardEnrollDate(rset.getDate("BOARD_ENROLLDATE"));
+			board.setBoardCount(rset.getInt("BOARD_COUNT"));
+			bList.add(board);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+			JDBCTemplate.close(conn);
+			JDBCTemplate.close(rset);
+		}
+		return bList;
 	}
 
 
 	public String getSearchPageNavi(Connection conn, String searchKeyword, int currentPage) {
-		// TODO Auto-generated method stub
+
 		return null;
+	}
+	
+	public void searchTotalCount(Connection conn, String searchKeyword) {
+		
 	}
 
 
@@ -326,6 +371,7 @@ public class BoardDAO {
 		String query = "SELECT * FROM(\r\n" + 
 				"SELECT ROW_NUMBER() OVER(ORDER BY BOARD_NO DESC) AS NUM, BOARD_NO, BOARD_TITLE, BOARD_CONTENTS, USER_ID, \r\n" + 
 				"FROM FREEBOARD WHERE BOARD_TITLE LIKE ? OR BOARD_CONTENTS LIKE ?) WHERE NUM BETWEEN ? AND ?";  //"SELECT * FROM NOTICE WHERE NOTICE_SUBJECT LIKE ?";
+		//쿼리문 다시보기
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1,  "%" + searchKeyword + "%"); // LIKE 안에 들어가야 되므로 와일드 카드를 searchKeyword에 넣어준다
@@ -358,7 +404,80 @@ public class BoardDAO {
 		}
 		return bList;
 	}
-	
-	
-	//종목별 전체조회  - option을 통해 조회
+
+
+	public int updateLike(Connection conn, BoardLike boardLike) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = "INSERT INTO BOARD_LIKE VALUES(?, ?, ?)";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, boardLike.getBoardNo());
+			pstmt.setString(2, boardLike.getUserId());
+			pstmt.setInt(3, boardLike.getLikeCount());
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+			JDBCTemplate.close(conn);
+		}
+		return result;
+	}
+
+	public int removeLike(Connection conn, int boardNo) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "DELETE FROM BOARD_LIKE WHERE BOARD_NO = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1,  boardNo);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+			JDBCTemplate.close(conn);
+		}
+		return result;
+	}
+
+
+	public int updateScrap(Connection conn, Scrap scrap) {
+		PreparedStatement pstmt  = null;
+		int result = 0;
+		String query = "INSERT INTO SCRAP VALUES(?, ?, ?, ?)";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, scrap.getScrapNo());
+			pstmt.setInt(2, scrap.getBoardNo());
+			pstmt.setString(3, scrap.getUserId());
+			pstmt.setString(4, scrap.getBoardContents());
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(conn);
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+
+
+	public int deleteScrap(Connection conn, int scrapNo) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "DELETE FROM SCRAP WHERE SCRAP_NO = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, scrapNo);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(conn);
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
 }

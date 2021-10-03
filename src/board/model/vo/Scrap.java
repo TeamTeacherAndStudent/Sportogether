@@ -1,18 +1,33 @@
 package board.model.vo;
 
 public class Scrap {
+	private int scrapNo;
 	private int boardNo;
 	private String boardContents;
 	private String userId;
 	
 	public Scrap() {};
 
-	public Scrap(int boardNo, String boardContents, String userId) {
+	
+	public Scrap(int scrapNo, int boardNo, String boardContents, String userId) {
 		super();
+		this.scrapNo = scrapNo;
 		this.boardNo = boardNo;
 		this.boardContents = boardContents;
 		this.userId = userId;
 	}
+
+
+	public int getScrapNo() {
+		return scrapNo;
+	}
+
+
+	public void setScrapNo(int scrapNo) {
+		this.scrapNo = scrapNo;
+	}
+
+
 	public int getBoardNo() {
 		return boardNo;
 	}
@@ -31,8 +46,12 @@ public class Scrap {
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
+
+
 	@Override
 	public String toString() {
-		return "Scrap [boardNo=" + boardNo + ", boardContents=" + boardContents + ", userId=" + userId + "]";
+		return "Scrap [scrapNo=" + scrapNo + ", boardNo=" + boardNo + ", boardContents=" + boardContents + ", userId="
+				+ userId + "]";
 	}
+	
 }
