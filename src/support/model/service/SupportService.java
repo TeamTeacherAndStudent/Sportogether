@@ -95,5 +95,24 @@ public class SupportService {
 		
 		return result;
 	}
+	//후원 댓글 삭제
+	public int removeSupportReply(int replyNo) {
+		int result = 0;
+		Connection conn =null;
+		try {
+			conn = jdbcTemplate.createConnection();
+			result = new SupportDAO().deleteReply(conn, replyNo);
+			if(result > 0) {
+				JDBCTemplate.commit(conn);
+			}else {
+				JDBCTemplate.rollback(conn);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(conn);
+		}
+		return result;
+	}
 
 }
