@@ -34,7 +34,7 @@ public class BoardDetailServlet extends HttpServlet {
 		
 		if(boardOne != null) {
 			request.setAttribute("boardOne",boardOne); //service에서 와서 출력
-			request.getRequestDispatcher("Board/board_detail.jsp").forward(request, response);;
+			request.getRequestDispatcher("/Board/board_detail.jsp").forward(request, response);;
 		}else {
 			request.getRequestDispatcher("/WEB-INF/board/boardError.html").forward(request, response);
 		}
