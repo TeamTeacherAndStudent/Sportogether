@@ -1,8 +1,10 @@
 <%@page import="notice.model.vo.Notice"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	Notice noticeOne = (Notice)request.getAttribute("noticeOne");
+	List<Notice> nList = (List<Notice>)request.getAttribute("nList");
+	String pageNavi = (String)request.getAttribute("pageNavi");
 %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!-- 포맷태그 식별 태그라이브러리  -->
@@ -11,7 +13,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>공지사항 상세페이지(관리자)</title>
 <!-- Google Fonts -->
 <link
 	href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
@@ -32,15 +33,7 @@
 
 <!-- Template Main CSS File -->
 <link href="../assets/css/style.css" rel="stylesheet">
-
-<script src="https://code.jquery.com/jquery-latest.min.js"></script>
-
-<title>공지사항 상세페이지</title>
 <style>
-#search {
-	margin-left: 30px;
-}
-
 #main-title {
 	margin-top: 2%;
 	width: 100%;
@@ -56,51 +49,128 @@
 	text-align: center;
 }
 
-#main-content {
-	/* margin-top : 5%; */
-	margin-left: 15%;
-	margin-right: 15%;
-	margint-bottom: 15%;
-	/* display: flex; */
+h2 {
+	padding: 5px 10px;
+	border-bottom: 1px solid #848484;
+	border-left: 8px solid #848484;
+}
+
+ul, li {
+	list-style: none;
+	text-align: center;
+	padding: 0;
+	margin: 0;
+}
+
+#mainWrapper {
+	width: 950px;
+	margin: auto;
 	justify-content: center;
 	vertical-align: middle;
+	align-items: center;
 }
 
-table.p-table {
-	border-collapse: separate;
-	border-spacing: 1px;
-	line-height: 1.5;
-	/* margin: 20px 10px; */
+#mainWrapper>ul>li:first-child {
+	text-align: center;
+	font-size: 14pt;
+	height: 40px;
+	vertical-align: middle;
+	line-height: 30px;
 }
 
-table.p-table th {
-	width: 700px;
-	padding: 10px;
-	font-weight: bold;
-	vertical-align: top;
-	color: #fff;
+#ulTable {
+	margin-top: 10px;
+}
+
+#ulTable ul {
+	width: 100%;
+}
+
+#ulTable>li:first-child>ul>li {
 	background: #165992;
+	color: #fff;
+	font-weight: bold;
 	text-align: center;
 }
 
-table.p-table td {
-	padding: 10px;
-	vertical-align: top;
-	border-bottom: 1px solid #ccc;
-	background: #fff;
+#ulTable>li>ul {
+	clear: both;
+	padding: 0px auto;
+	position: relative;
+	min-width: 50px;
 }
 
-table.p-table td:nth-child(1) {
+#ulTable>li>ul>li {
+	float: left;
+	font-size: 10pt;
+	border-bottom: 1px solid silver;
+	vertical-align: baseline;
+}
+
+#ulTable>li>ul>li:first-child {
 	width: 10%;
+} /*No 열 크기*/
+#ulTable>li>ul>li:first-child+li {
+	width: 30%;
+} /*제목 열 크기*/
+#ulTable>li>ul>li:first-child+li+li {
+	width: 25%;
+} /*작성일 열 크기*/
+#ulTable>li>ul>li:first-child+li+li+li {
+	width: 15%;
+} /*작성자 열 크기*/
+#ulTable>li>ul>li:first-child+li+li+li+li {
+	width: 10%;
+} /*추천수 열 크기*/
+#ulTable>li>ul>li:first-child+li+li+li+li+li {
+	width: 10%;
+} /*조회수 열 크기*/
+#divPaging {
+	clear: both;
+	margin: 0 auto;
+	padding: 20px;
+	width: 250px;
+	height: 50px;
 }
 
-table.p-table td:nth-child(2) {
-	width: 90%;
+#divPaging>div {
+	float: left;
+	width: 30px;
+	margin: 0 auto;
+	text-align: center;
+}
+
+#liSearchOption {
+	clear: both;
+}
+
+#liSearchOption>div {
+	margin: 0 auto;
+	margin-top: 30px;
+	width: auto;
+	height: 100px;
+}
+
+.left {
+	text-align: left;
+}
+
+#button-div1 {
+	position: relative;
+	left: 450px;
+	bottom: 15px;
+}
+
+#divPaging>div {
+	float: left;
+	width: 30px;
+	margin: 0 auto;
+	text-align: center;
 }
 
 #back-btn {
-	margin-left: 10%;
-	margin-right: 10%;
+	margin-left: 25%;
+	margin-right: 20%;
 	text-align: right;
 }
 
@@ -129,38 +199,39 @@ button:hover {
 	text-decoration: none;
 }
 
-.pop-layer .pop-container {
-	padding: 20px 25px;
+#search-btn {
+	background-color: #1d284b;
+	color: white;
+	border-style: none;
+	font-family: "Raleway", sans-serif;
+	font-weight: 600;
+	font-size: 14px;
+	letter-spacing: 1px;
+	display: inline-block;
+	padding: 9px 20px;
+	border-radius: 5px;
+	transition: 0.3s;
+	line-height: 1;
+	-webkit-animation-delay: 0.8s;
+	animation-delay: 0.8s;
+	margin-top: 6px;
+	border: 2px solid #1d284b;
 }
 
-.pop-laeyr p.ctxt {
-	color: #666;
-	line-height: 25px;
+#search-btn:hover {
+	background: #006fbe;
+	color: #fff;
+	text-decoration: none;
 }
 
-.pop-layer .btn-r {
-	width: 100%;
-	margin: 10px 0 20px;
-	padding-top: 10px;
-	border-top: 1px solid #ddd;
-	text-align: right;
-}
-
-.pop-layer {
-	display: none;
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	width: 410px;
-	height: auto;
-	background-color: #fff;
-	border: 5px solid #3571B5;
-	z-index: 10;
+#search {
+	margin-left: 30px;
 }
 </style>
+<title>공지사항(관리자)</title>
 </head>
 <body>
-<header id="header" class="fixed-top">
+	<header id="header" class="fixed-top">
 		<div
 			class="container d-flex align-items-center justify-content-between">
 			<!-- 여기에 로고 사진 추가 -->
@@ -191,59 +262,92 @@ button:hover {
 	</header>
 	<!-- End Header -->
 
-
-
+	<!--  === Main ===  -->
 	<main id="main">
 		<section>
 			<div id="main-title">
 				<h1>공지사항</h1>
 			</div>
 		</section>
-		<div id="main-content">
-			<table class="p-table">
-				<thead>
-					<tr>
-						<th scope="cols">제목</th>
-						<th scope="cols"><%=noticeOne.getNoticeTitle() %></th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>작성일</td>
-						<td><fmt:formatDate pattern = "yyyy-MM-dd hh:mm" value="${noticeOne.noticeDate}"/></td>
-					</tr>
-					<tr>
-						<td>글쓴이</td>
-						<td><%=noticeOne.getNoticeWriter() %></td>
-					</tr>
-					<tr>
-						<td colspan="2"><%= noticeOne.getNoticeContents() %></td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-		<section>
-			<div id="back-btn">
-				<a href="#layer" class="check-btn"><button>삭제</button></a> 
-				<a href="/notice/modify?noticeNo=<%=noticeOne.getNoticeNo()%>"><button>수정</button></a> 
-				<a href="/notice/list"><button>목록</button></a>
-			</div>
-		</section>
-			<div id="layer" class="pop-layer">
-				<div class="pop-container">
-					<div class="pop-conts">
-						<!-- 내용 -->
-						<p class="ctxt mb20">정말로 삭제하시겠습니까?</p>
-						<div class="btn-r">
-						
-							<a href="/notice/remove?noticeNo=<%=noticeOne.getNoticeNo()%>" ><button class="btn-layerClose" onclick="deleteNotice()">삭제</button></a> <a
-								href="#" class="btn-layerClose"><button >취소</button></a>
-						</div>
-						<!--  // 내용 끝 -->
-					</div>
-				</div>
-			</div>
 
+		<div id="mainWrapper">
+			<ul>
+				<li>
+					<ul id="ulTable">
+						<li>
+							<ul>
+								<li>No</li>
+								<li>제목</li>
+								<li>작성일</li>
+								<li>작성자</li>
+								<li>조회수</li>
+							</ul>
+						</li>
+						
+<%-- 	 					<% for(Notice nOne : nList) {%>
+						<li>
+							<ul>
+								<li><%= nOne.getNoticeNo() %></li>
+								<li class="left"><a href="/notice/detail?noticeNo=<%=nOne.getNoticeNo()%>"><%=nOne.getNoticeTitle()%></a></li>
+								<li><fmt:formatDate pattern = "yyyy-MM-dd hh:mm" value="${noticeOne.noticeDate}"/></li>
+								<li><%= nOne.getNoticeWriter() %></li>
+								<li><%= nOne.getNoticeCount() %></li>
+							</ul>
+						</li>
+						<%} %>  --%>
+						<c:forEach items="${requestScope.nList}" var="notice">
+						<li>
+							<ul>
+								<li>${notice.noticeNo}</li>
+								<li class="left"><a href="/notice/detail?noticeNo=${notice.noticeNo}">${notice.noticeTitle}</a></li>
+								<li><fmt:formatDate pattern = "yyyy-MM-dd hh:mm" value="${notice.noticeDate}"/></li>
+								<li>${notice.noticeWriter}</li>
+								<li>${notice.noticeCount}</li>
+							</ul>
+						</li>
+						</c:forEach>
+						
+					</ul>
+				</li>
+				
+				<li>
+					<div id="divPaging">
+					<%= pageNavi %>
+<!-- 						<div>◀</div>
+						<div>
+							<b>1</b>
+						</div>
+						<div>2</div>
+						<div>3</div>
+						<div>4</div>
+						<div>5</div>
+						<div>▶</div> -->
+						
+
+					</div>
+				</li>
+			</ul>
+		</div>
+	<section>
+	<c:if test="${sessionScope.userCode eq G}">
+		<div id="back-btn">
+			<a href="/notice/write"><button>글쓰기</button></a>
+		</div>
+	</c:if>
+	</section>
+<!-- 		<section>
+			<ul>
+				<li id='liSearchOption'>
+					<div>
+						<select id='selSearchOption'>
+							<option value='A'>제목+내용</option>
+							<option value='T'>제목</option>
+							<option value='C'>내용</option>
+						</select> <input id='txtKeyWord' /> <input type='button' id="search-btn" value='검색' />
+					</div>
+				</li>
+			</ul>
+		</section> -->
 	</main>
 
 	<!-- footer 옆으로 넘어감 방지 -->
@@ -264,8 +368,7 @@ button:hover {
 				<option value="http://www.kahperd.or.kr/">한국체육학회</option>
 				<option
 					value="https://www.sports.re.kr/front/main/main.do?menu_seq=0">한국정책과학원</option>
-			</select> <br>
-			<br>
+			</select> <br> <br>
 			<div class="copyright">
 				&copy; Copyright <strong><span>SPORTOGETHER</span></strong>. All
 				Rights Reserved
@@ -286,57 +389,16 @@ button:hover {
 		class="bi bi-arrow-up-short"></i></a>
 
 	<!-- Vendor JS Files -->
-	<script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-	<script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-	<script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-	<script src="assets/vendor/php-email-form/validate.js"></script>
-	<script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+	<script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script src="../assets/vendor/glightbox/js/glightbox.min.js"></script>
+	<script src="../assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+	<script src="../assets/vendor/php-email-form/validate.js"></script>
+	<script src="../assets/vendor/swiper/swiper-bundle.min.js"></script>
 
 	<!-- Template Main JS File -->
-	<script src="assets/js/main.js"></script>
-	<script src="assets/js/jquery-1.12.3.min.js"></script>
-	<script src="assets/js/jquery.counterup.min.js"></script>
-	<script src="assets/js/waypoints.min.js"></script>
-
-	<!-- 삭제 경고창 -->
-	<script>
-	$(".check-btn").click(function(){
-        var $href = $(this).attr("href");
-        layer_popup($href);
-    });
-    function layer_popup(el){
-
-        var $el = $(el);    //레이어의 id를 $el 변수에 저장
-        var isDim = $el.prev().hasClass("dimBg"); //dimmed 레이어를 감지하기 위한 boolean 변수
-
-        isDim ? $(".dim-layer").fadeIn() : $el.fadeIn();
-
-        var $elWidth = ~~($el.outerWidth()),
-            $elHeight = ~~($el.outerHeight()),
-            docWidth = $(document).width(),
-            docHeight = $(document).height();
-
-        // 화면의 중앙에 레이어를 띄운다.
-        if ($elHeight < docHeight || $elWidth < docWidth) {
-            $el.css({
-                marginTop: -$elHeight /2,
-                marginLeft: -$elWidth/2
-            })
-        } else {
-            $el.css({top: 0, left: 0});
-        }
-
-        $el.find("a.btn-layerClose").click(function(){
-            isDim ? $(".dim-layer").fadeOut() : $el.fadeOut(); // 닫기 버튼을 클릭하면 레이어가 닫힌다.
-            return false;
-        });
-
-        $(".layer .dimBg").click(function(){
-            $(".dim-layer").fadeOut();
-            return false;
-        });
-
-    }
-	</script>
+	<script src="../assets/js/main.js"></script>
+	<script src="../assets/js/jquery-1.12.3.min.js"></script>
+	<script src="../assets/js/jquery.counterup.min.js"></script>
+	<script src="../assets/js/waypoints.min.js"></script>
 </body>
 </html>

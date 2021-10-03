@@ -167,9 +167,9 @@ button:hover {
 					<li class="dropdown"><a href="#"><span>SIDE MENU</span> <i
 							class="bi bi-chevron-down"></i></a>
 						<ul>
-							<li><a href="../Notice/notice_main.jsp">공지사항</a></li>
+							<li><a href="/notice/list">공지사항</a></li>
 							<li><a href="../MyPage/Mypage_Main.html">마이페이지</a></li>
-							<li><a href="../QnA/Qna_UserMain.html">1:1문의</a></li>
+							<li><a href="/qna/list">1:1문의</a></li>
 						</ul></li>
 				</ul>
 				<i class="bi bi-list mobile-nav-toggle"></i>
@@ -192,18 +192,18 @@ button:hover {
 		<!-- section : 프로필 수정-->
 		<section>
 			<div id="main-content">
+				<form action="/mypage/modify" method="post">
 				<div class="mybox">
 					<div class="content">
 						<!-- 회원 정보 공간 -->
-						아이디 : king2021 <br>
-						<br> 닉네임 : <input type="text" size=16> <br>
-						<br> 이름 : 홍길동 <br>
-						<br> 성별 : 남 <br>
-						<br> 생년월일 : 2000.08.20 <br>
-						<br> 비밀번호 : <input type="password"> <br>
-						<br> 재확인 : <input type="password"> <br>
-						<br> 이메일 : <input type="email"> <br>
-						<br> 전화번호 : <input type="text"> <br>
+						아이디 : <input type="text" name="user-id" value="${requestScope.member.userId}" readonly> <br>
+						<br> 닉네임 : <input type="text" size=16 name="user-nickName" value="${member.userNickName}"> <br>
+						<br> 이름 : <input type="text" size=16 name="user-name" value="${member.userName}" readonly> <br>
+						<br> 성별 : <input type="text" size=16 name="user-gender" value="${member.userGender}" readonly> <br>
+						<br> 생년월일 : <input type="text" size=16 name="user-birthDate" value="${member.userBirthDate}" readonly> <br>
+						<br> 비밀번호 : <input type="password" name="user-pw" value="${member.userPw}"> <br>
+						<br> 이메일 : <input type="email" name="user-email" value="${member.userEmail}"> <br>
+						<br> 전화번호 : <input type="text" name="user-phone" value="${member.userPhone}"> <br>
 					</div>
 
 					<div class="side">
@@ -214,10 +214,12 @@ button:hover {
 						<br>
 						<div class="button">
 							<button id="withdraw">회원탈퇴</button>
-							<button>수정</button>
+							<button type="submit">수정</button>
+							<button href="/MyPage/MyPage_Main.jsp">마이페이지</button>
 						</div>
 					</div>
 				</div>
+			</form>	
 			</div>
 		</section>
 

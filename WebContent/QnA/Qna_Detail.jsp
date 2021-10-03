@@ -1,10 +1,11 @@
-<%@page import="qna.model.vo.QnA"%>
+<%@page import="qna.model.vo.QnAReply"%>
 <%@page import="java.util.List"%>
+<%@page import="qna.model.vo.QnA"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<% 
-	List<QnA> qList = (List<QnA>)request.getAttribute("qList");
-	String pageNavi = (String)request.getAttribute("pageNavi");
+<%
+	QnA qnaOne = (QnA)request.getAttribute("qnaOne");
+	/* List<QnAReply> list = (List<QnAReply>)request.getAttribute("list"); */
 %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!-- 포맷태그 식별 태그라이브러리  -->
@@ -13,7 +14,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>1:1문의 목록</title>
+<title>1:1 문의 상세페이지</title>
 <!-- Google Fonts -->
 <link
 	href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
@@ -35,7 +36,13 @@
 <!-- Template Main CSS File -->
 <link href="../assets/css/style.css" rel="stylesheet">
 
+<script src="https://code.jquery.com/jquery-latest.min.js"></script>
+<title>1:1 문의 상세페이지</title>
 <style>
+#search {
+	margin-left: 30px;
+}
+
 #main-title {
 	margin-top: 2%;
 	width: 100%;
@@ -56,98 +63,46 @@
 	margin-left: 15%;
 	margin-right: 15%;
 	margint-bottom: 15%;
-	display: flex;
+	/* display: flex; */
 	justify-content: center;
 	vertical-align: middle;
 }
 
-h2 {
-	padding: 5px 10px;
-	border-bottom: 1px solid #848484;
-	border-left: 8px solid #848484;
+table.p-table {
+	border-collapse: separate;
+	border-spacing: 1px;
+	line-height: 1.5;
+	/* margin: 20px 10px; */
 }
 
-ul, li {
-	list-style: none;
-	text-align: center;
-	padding: 0;
-	margin: 0;
-}
-
-#mainWrapper {
-	width: 950px;
-	margin: auto;
-	justify-content: center;
-	vertical-align: middle;
-	align-items: center;
-}
-
-#mainWrapper>ul>li:first-child {
-	text-align: center;
-	font-size: 14pt;
-	height: 40px;
-	vertical-align: middle;
-	line-height: 30px;
-}
-
-#ulTable {
-	margin-top: 10px;
-}
-
-#ulTable>li:first-child>ul>li {
-	background: #165992;
-	color: #fff;
+table.p-table th {
+	width: 700px;
+	padding: 10px;
 	font-weight: bold;
+	vertical-align: top;
+	color: #fff;
+	background: #165992;
 	text-align: center;
 }
 
-#ulTable>li>ul {
-	clear: both;
-	padding: 0px auto;
-	position: relative;
-	min-width: 50px;
+table.p-table td {
+	padding: 10px;
+	vertical-align: top;
+	border-bottom: 1px solid #ccc;
+	background: #fff;
 }
 
-#ulTable>li>ul>li {
-	float: left;
-	font-size: 10pt;
-	border-bottom: 1px solid silver;
-	vertical-align: baseline;
-}
-
-#ulTable>li>ul>li:first-child {
+table.p-table td:nth-child(1) {
 	width: 10%;
-} /*No 열 크기*/
-#ulTable>li>ul>li:first-child+li {
-	width: 45%;
-} /*제목 열 크기*/
-#ulTable>li>ul>li:first-child+li+li {
-	width: 15%;
-} /*작성일 열 크기*/
-#ulTable>li>ul>li:first-child+li+li+li {
-	width: 15%;
-} /*작성자 열 크기*/
-#ulTable>li>ul>li:first-child+li+li+li+li {
-	width: 15%;
-} /*추천수 열 크기*/
-#divPaging {
-	clear: both;
-	margin: 0 auto;
-	padding: 20px;
-	width: 250px;
-	height: 50px;
 }
 
-#divPaging>div {
-	float: left;
-	width: 30px;
-	margin: 0 auto;
-	text-align: center;
+table.p-table td:nth-child(2) {
+	width: 90%;
 }
 
 #back-btn {
-	margin-left: 25%;
-	margin-right: 25%;
+	margin-left: 10%;
+	margin-right: 10%;
 	text-align: right;
 }
 
@@ -176,14 +131,52 @@ button:hover {
 	text-decoration: none;
 }
 
-#search {
-	margin-left: 30px;
+.qna-reply {
+	margin-left: 10%;
+	margin-right: 0%;
+	justify-content: center;
+}
+
+#reply {
+	width: 88%;
+}
+
+#reply-btn, #deleteReply-Btn {
+	padding: 10px 25px;
+}
+
+.pop-layer .pop-container {
+	padding: 20px 25px;
+}
+
+.pop-laeyr p.ctxt {
+	color: #666;
+	line-height: 25px;
+}
+
+.pop-layer .btn-r {
+	width: 100%;
+	margin: 10px 0 20px;
+	padding-top: 10px;
+	border-top: 1px solid #ddd;
+	text-align: right;
+}
+
+.pop-layer {
+	display: none;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 410px;
+	height: auto;
+	background-color: #fff;
+	border: 5px solid #3571B5;
+	z-index: 10;
 }
 </style>
 </head>
 <body>
-<!-- ======= Header ======= -->
-	<header id="header" class="fixed-top">
+<header id="header" class="fixed-top">
 		<div
 			class="container d-flex align-items-center justify-content-between">
 			<!-- 여기에 로고 사진 추가 -->
@@ -201,9 +194,9 @@ button:hover {
 					<li class="dropdown"><a href="#"><span>SIDE MENU</span> <i
 							class="bi bi-chevron-down"></i></a>
 						<ul>
-							<li><a href="../Notice/notice_main.jsp">공지사항</a></li>
+							<li><a href="/notice/list">공지사항</a></li>
 							<li><a href="../MyPage/Mypage_Main.html">마이페이지</a></li>
-							<li><a href="../QnA/Qna_UserMain.html">1:1문의</a></li>
+							<li><a href="/qna/list">1:1문의</a></li>
 						</ul></li>
 				</ul>
 				<i class="bi bi-list mobile-nav-toggle"></i>
@@ -214,85 +207,92 @@ button:hover {
 	</header>
 	<!-- End Header -->
 
-	<!-- === Main ===  -->
+
+
 	<main id="main">
 		<section>
 			<div id="main-title">
-				<h1>1:1 문의 내역</h1>
+				<h1>1:1 문의</h1>
 			</div>
 		</section>
-
-		<div id="mainWrapper">
-			<ul>
-				<li>
-					<ul id="ulTable">
-						<li>
-							<ul>
-								<li>No</li>
-								<li>제목</li>
-								<li>작성일</li>
-								<li>작성자</li>
-								<li>답변대기</li>
-							</ul>
-						</li>
+		<div id="main-content">
+			<table class="p-table">
+				<thead>
+					<tr>
+						<th scope="cols">제목</th>
+						<th scope="cols"><%=qnaOne.getQnaTitle() %></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+<%-- 						<td>작성일</td>
+						<td><%=qnaOne.getQnaDate() %></td> --%>
+												<td>작성일</td>
+						<td><fmt:formatDate pattern = "yyyy-MM-dd hh:mm" value="${qnaOne.qnaDate}"/></td>
 						
-						
-<%-- 						<% for(QnA qOne : qList) {%>
-						<li>
-							<ul>
-								<li><%=qOne.getQnaNo() %></li>
-								<li class="left"><a href="/qna/detail?qnaNo=<%=qOne.getQnaNo()%>"><%=qOne.getQnaTitle()%></a></li>
-								<li><%=qOne.getQnaDate() %><fmt:formatDate pattern = "yyyy/MM/dd hh:mm" value=""/></li>
-								<li><%=qOne.getUserId() %></li>
-								<li><%=qOne.getQnaAns()%></li>
-							</ul>
-						</li>
-						<%} %> --%>
-						<c:forEach items="${requestScope.qList}" var="qna">
-						<li>
-							<ul>
-								<li>${qna.qnaNo}</li>
-								<li class="left"><a href="/qna/detail?qnaNo=${qna.qnaNo}">${qna.qnaTitle}</a></li>
-								<li><fmt:formatDate pattern = "yyyy-MM-dd hh:mm" value="${qna.qnaDate}"/></li>
-								<li>${qna.userId}</li>
-								<li>${qna.qnaAns}</li>
-							</ul>
-						</li>
-						</c:forEach>
-					</ul>
-				</li>
-
-				<li>
-					<div id="divPaging">
-					<%= pageNavi %>
-<!-- 						<div>◀</div>
-						<div>
-							<b>1</b>
-						</div>
-						<div>2</div>
-						<div>3</div>
-						<div>4</div>
-						<div>5</div>
-						<div>▶</div> -->
-					</div>
-				</li>
-
-			</ul>
+					</tr>
+					<tr>
+						<td>글쓴이</td>
+						<td><%=qnaOne.getUserId() %></td>
+					</tr>
+					<tr>
+						<td colspan="2"><%=qnaOne.getQnaContents() %></td>
+					</tr>
+				</tbody>
+			</table>
+			<br><br>
+			<!-- 댓글 -->
+			<!-- 댓글출력 -->
+			 <table class="p-table">
+					<tr>
+						<td colspan="4"><h5><b> 댓글 </b> </h5></td>
+					</tr>
+					<c:forEach items="${qnaOne.replies}" var="reply">
+					<tr>
+						<td>${reply.userId}</td>
+						<td>${reply.qnaReplyContents}</td>
+						<td><pre><fmt:formatDate pattern = "yyyy-MM-dd hh:mm" value="${reply.qnaReplyDate}"/></pre> </td>
+						<c:if test="${sessionScope.userCode eq G}"><td><a href="/qnaReply/remove?qnaNo=${reply.qnaNo}&qnaReplyNo=${reply.qnaReplyNo}" class="check-btn" id="deleteReply-Btn"><button>삭제</button></a></td></c:if>
+					</tr>
+					
+					</c:forEach>
+			</table>  
+			<br>
+			<!-- 댓글입력 -->
+			 <form action="/qnaReply/write" method="post">
+				<div class="qna-reply">
+					<input type="text" id="reply" name="replyContents" placeholder="댓글을 입력해주세요" maxlength="10">
+					&nbsp;&nbsp;&nbsp;&nbsp;
+					<input type="hidden" name="qnaNo" value="<%=qnaOne.getQnaNo() %>">
+					<button id="reply-btn" type="submit">등록</button>
+				</div>
+			</form> 
 		</div>
-		
 		<section>
 			<div id="back-btn">
-				<a href="/qna/write"><button>글쓰기</button></a>
+				<a href="#layer" class="check-btn"><button>삭제</button></a> <a
+					href="/qna/list"><button>목록</button></a>
 			</div>
 		</section>
+
+		<div id="layer" class="pop-layer">
+			<div class="pop-container">
+				<div class="pop-conts">
+					<!-- 내용 -->
+					<p class="ctxt mb20">정말로 삭제하시겠습니까?</p>
+					<div class="btn-r">
+						<a href="/qna/remove?qnaNo=<%=qnaOne.getQnaNo() %>"><button class="btn-layerClose" onclick="deleteQna()">삭제</button></a> 
+						<a href="#" class="btn-layerClose"><button>취소</button></a>
+					</div>
+					<!--  // 내용 끝 -->
+				</div>
+			</div>
+		</div>
+
 	</main>
-
-
 
 	<!-- footer 옆으로 넘어감 방지 -->
 	<div style="clear: both;"></div>
-
-	<!-- ======= Footer ======= -->
 	<footer id="footer">
 		<div class="container">
 			<h3>SPORTOGETHER</h3>
@@ -342,5 +342,45 @@ button:hover {
 	<script src="assets/js/jquery-1.12.3.min.js"></script>
 	<script src="assets/js/jquery.counterup.min.js"></script>
 	<script src="assets/js/waypoints.min.js"></script>
+		<!-- 삭제 경고창 -->
+	<script>
+	$(".check-btn").click(function(){
+        var $href = $(this).attr("href");
+        layer_popup($href);
+    });
+    function layer_popup(el){
+
+        var $el = $(el);    //레이어의 id를 $el 변수에 저장
+        var isDim = $el.prev().hasClass("dimBg"); //dimmed 레이어를 감지하기 위한 boolean 변수
+
+        isDim ? $(".dim-layer").fadeIn() : $el.fadeIn();
+
+        var $elWidth = ~~($el.outerWidth()),
+            $elHeight = ~~($el.outerHeight()),
+            docWidth = $(document).width(),
+            docHeight = $(document).height();
+
+        // 화면의 중앙에 레이어를 띄운다.
+        if ($elHeight < docHeight || $elWidth < docWidth) {
+            $el.css({
+                marginTop: -$elHeight /2,
+                marginLeft: -$elWidth/2
+            })
+        } else {
+            $el.css({top: 0, left: 0});
+        }
+
+        $el.find("a.btn-layerClose").click(function(){
+            isDim ? $(".dim-layer").fadeOut() : $el.fadeOut(); // 닫기 버튼을 클릭하면 레이어가 닫힌다.
+            return false;
+        });
+
+        $(".layer .dimBg").click(function(){
+            $(".dim-layer").fadeOut();
+            return false;
+        });
+
+    }
+	</script>
 </body>
 </html>

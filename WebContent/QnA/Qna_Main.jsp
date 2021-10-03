@@ -1,7 +1,19 @@
+<%@page import="qna.model.vo.QnA"%>
+<%@page import="java.util.List"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<% 
+	List<QnA> qList = (List<QnA>)request.getAttribute("qList");
+	String pageNavi = (String)request.getAttribute("pageNavi");
+%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!-- 포맷태그 식별 태그라이브러리  -->
+<%@taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+<title>1:1문의 목록</title>
 <!-- Google Fonts -->
 <link
 	href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
@@ -23,13 +35,7 @@
 <!-- Template Main CSS File -->
 <link href="../assets/css/style.css" rel="stylesheet">
 
-<script src="https://code.jquery.com/jquery-latest.min.js"></script>
-<title>1:1 문의 상세페이지</title>
 <style>
-#search {
-	margin-left: 30px;
-}
-
 #main-title {
 	margin-top: 2%;
 	width: 100%;
@@ -50,46 +56,98 @@
 	margin-left: 15%;
 	margin-right: 15%;
 	margint-bottom: 15%;
-	/* display: flex; */
+	display: flex;
 	justify-content: center;
 	vertical-align: middle;
 }
 
-table.p-table {
-	border-collapse: separate;
-	border-spacing: 1px;
-	line-height: 1.5;
-	/* margin: 20px 10px; */
+h2 {
+	padding: 5px 10px;
+	border-bottom: 1px solid #848484;
+	border-left: 8px solid #848484;
 }
 
-table.p-table th {
-	width: 700px;
-	padding: 10px;
-	font-weight: bold;
-	vertical-align: top;
-	color: #fff;
+ul, li {
+	list-style: none;
+	text-align: center;
+	padding: 0;
+	margin: 0;
+}
+
+#mainWrapper {
+	width: 950px;
+	margin: auto;
+	justify-content: center;
+	vertical-align: middle;
+	align-items: center;
+}
+
+#mainWrapper>ul>li:first-child {
+	text-align: center;
+	font-size: 14pt;
+	height: 40px;
+	vertical-align: middle;
+	line-height: 30px;
+}
+
+#ulTable {
+	margin-top: 10px;
+}
+
+#ulTable>li:first-child>ul>li {
 	background: #165992;
+	color: #fff;
+	font-weight: bold;
 	text-align: center;
 }
 
-table.p-table td {
-	padding: 10px;
-	vertical-align: top;
-	border-bottom: 1px solid #ccc;
-	background: #fff;
+#ulTable>li>ul {
+	clear: both;
+	padding: 0px auto;
+	position: relative;
+	min-width: 50px;
 }
 
-table.p-table td:nth-child(1) {
+#ulTable>li>ul>li {
+	float: left;
+	font-size: 10pt;
+	border-bottom: 1px solid silver;
+	vertical-align: baseline;
+}
+
+#ulTable>li>ul>li:first-child {
 	width: 10%;
+} /*No 열 크기*/
+#ulTable>li>ul>li:first-child+li {
+	width: 45%;
+} /*제목 열 크기*/
+#ulTable>li>ul>li:first-child+li+li {
+	width: 15%;
+} /*작성일 열 크기*/
+#ulTable>li>ul>li:first-child+li+li+li {
+	width: 15%;
+} /*작성자 열 크기*/
+#ulTable>li>ul>li:first-child+li+li+li+li {
+	width: 15%;
+} /*추천수 열 크기*/
+#divPaging {
+	clear: both;
+	margin: 0 auto;
+	padding: 20px;
+	width: 250px;
+	height: 50px;
 }
 
-table.p-table td:nth-child(2) {
-	width: 90%;
+#divPaging>div {
+	float: left;
+	width: 30px;
+	margin: 0 auto;
+	text-align: center;
 }
 
 #back-btn {
-	margin-left: 10%;
-	margin-right: 10%;
+	margin-left: 25%;
+	margin-right: 25%;
 	text-align: right;
 }
 
@@ -118,53 +176,13 @@ button:hover {
 	text-decoration: none;
 }
 
-.qna-reply {
-	margin-left: 10%;
-	margin-right: 0%;
-	justify-content: center;
-}
-
-#reply {
-	width: 88%;
-}
-
-#reply-btn {
-	padding: 10px 25px;
-}
-
-.pop-layer .pop-container {
-	padding: 20px 25px;
-}
-
-.pop-laeyr p.ctxt {
-	color: #666;
-	line-height: 25px;
-}
-
-.pop-layer .btn-r {
-	width: 100%;
-	margin: 10px 0 20px;
-	padding-top: 10px;
-	border-top: 1px solid #ddd;
-	text-align: right;
-}
-
-.pop-layer {
-	display: none;
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	width: 410px;
-	height: auto;
-	background-color: #fff;
-	border: 5px solid #3571B5;
-	z-index: 10;
+#search {
+	margin-left: 30px;
 }
 </style>
-
 </head>
-
 <body>
+<!-- ======= Header ======= -->
 	<header id="header" class="fixed-top">
 		<div
 			class="container d-flex align-items-center justify-content-between">
@@ -196,87 +214,104 @@ button:hover {
 	</header>
 	<!-- End Header -->
 
-
-
+	<!-- === Main ===  -->
 	<main id="main">
 		<section>
 			<div id="main-title">
-				<h1>1:1 문의</h1>
+				<h1>1:1 문의 내역</h1>
 			</div>
 		</section>
-		<div id="main-content">
-			<table class="p-table">
-				<thead>
-					<tr>
-						<th scope="cols">제목</th>
-						<th scope="cols">학폭 관련 기사 나온 김정훈 캠페인 내려주세요</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>작성일</td>
-						<td>2021-09-25 04:45:23</td>
-					</tr>
-					<tr>
-						<td>글쓴이</td>
-						<td>간장게장</td>
-					</tr>
-					<tr>
-						<td colspan="2">초창기에는 이들 코스의 구획도 골프장의 넓이에 따라 달랐으며, 홀의 수도 일정하지
-							않았다. 즉 홀 수가 27∼72개인 경우도 있는 등 통일되지 않았는데, 1764년 스코틀랜드의
-							세인트앤드루스(Saint Andrews)에서 18개로 개조되었고, 이것이 모델이 되어 현재의 모든 코스 단위는
-							18홀로 고정되었다. 이때부터 골프의 기술적 수준이 스코어에 의해 기록에 남게 되었다.</td>
-					</tr>
-				</tbody>
-			</table>
-			<br>
-			<br>
-			<table class="p-table">
-				<tr>
-					<td colspan="3"><h5>
-							<b> 댓글 </b>
-						</h5></td>
-				</tr>
 
-				<tr>
+		<div id="mainWrapper">
+			<ul>
+				<li>
+					<ul id="ulTable">
+						<li>
+							<ul>
+								<li>No</li>
+								<li>제목</li>
+								<li>작성일</li>
+								<li>작성자</li>
+								<li>답변대기</li>
+							</ul>
+						</li>
+						
+						
+<%-- 						<% for(QnA qOne : qList) {%>
+						<li>
+							<ul>
+								<li><%=qOne.getQnaNo() %></li>
+								<li class="left"><a href="/qna/detail?qnaNo=<%=qOne.getQnaNo()%>"><%=qOne.getQnaTitle()%></a></li>
+								<li><%=qOne.getQnaDate() %><fmt:formatDate pattern = "yyyy/MM/dd hh:mm" value=""/></li>
+								<li><%=qOne.getUserId() %></li>
+								<li><%=qOne.getQnaAns()%></li>
+							</ul>
+						</li>
+						<%} %> --%>
+						<c:forEach items="${requestScope.qList}" var="qna">
+						<li>
+							<ul>
+								<li>${qna.qnaNo}</li>
+								<li class="left"><a href="/qna/detail?qnaNo=${qna.qnaNo}">${qna.qnaTitle}</a></li>
+								<li><fmt:formatDate pattern = "yyyy-MM-dd hh:mm" value="${qna.qnaDate}"/></li>
+								<li>${qna.userId}</li>
+								<li>${qna.qnaAns}</li>
+							</ul>
+						</li>
+						</c:forEach>
+					</ul>
+				</li>
 
-					<td>관리자</td>
-					<td>회원님들의 의견에 따라 진위여부 확인중에 있습니다. 감사합니다.</td>
-					<td><pre> 2021-09-26 04:45:23</pre></td>
-				</tr>
-			</table>
-			<br>
-
-			<div class="qna-reply">
-				<input type="text" id="reply" placeholder="댓글을 입력해주세요"
-					maxlength="10"> &nbsp;&nbsp;&nbsp;&nbsp;
-				<button id="reply-btn">등록</button>
-			</div>
-		</div>
-		<section>
-			<div id="back-btn">
-				<a href="#layer" class="check-btn"><button>삭제</button></a> <a
-					href="Qna_AdminMain.html"><button>목록</button></a>
-			</div>
-		</section>
-		<div id="layer" class="pop-layer">
-			<div class="pop-container">
-				<div class="pop-conts">
-					<!-- 내용 -->
-					<p class="ctxt mb20">정말로 삭제하시겠습니까?</p>
-					<div class="btn-r">
-						<a href="#" class="btn-layerClose"><button>삭제</button></a> <a
-							href="#" class="btn-layerClose"><button>취소</button></a>
+				<li>
+					<div id="divPaging">
+					<%= pageNavi %>
+<!-- 						<div>◀</div>
+						<div>
+							<b>1</b>
+						</div>
+						<div>2</div>
+						<div>3</div>
+						<div>4</div>
+						<div>5</div>
+						<div>▶</div> -->
 					</div>
-					<!--  // 내용 끝 -->
-				</div>
-			</div>
-		</div>
+				</li>
 
+			</ul>
+		</div>
+		
+		<section>
+		
+			<div id="back-btn">
+				<a href="/qna/write"><button>글쓰기</button></a>
+			</div>
+		
+		</section>
+		
+		<!-- (관리자만)검색 ///우선 여기에 해서 테스트.. -->
+		<c:if test="${sessionScope.userCode eq G}">
+		<section>
+			<ul>
+				<li id='liSearchOption'>
+					<div>
+						<select id='selSearchOption'>
+							<option value='A'>제목+내용</option>
+							<option value='T'>제목</option>
+							<option value='C'>내용</option>
+						</select> <input id='txtKeyWord' /> <input type='button' id="search-btn" value='검색' />
+					</div>
+				</li>
+			</ul>
+		</section>
+		</c:if>
 	</main>
+
+
 
 	<!-- footer 옆으로 넘어감 방지 -->
 	<div style="clear: both;"></div>
+
+	<!-- ======= Footer ======= -->
 	<footer id="footer">
 		<div class="container">
 			<h3>SPORTOGETHER</h3>
@@ -293,7 +328,8 @@ button:hover {
 				<option value="http://www.kahperd.or.kr/">한국체육학회</option>
 				<option
 					value="https://www.sports.re.kr/front/main/main.do?menu_seq=0">한국정책과학원</option>
-			</select> <br> <br>
+			</select> <br>
+			<br>
 			<div class="copyright">
 				&copy; Copyright <strong><span>SPORTOGETHER</span></strong>. All
 				Rights Reserved
@@ -325,45 +361,5 @@ button:hover {
 	<script src="assets/js/jquery-1.12.3.min.js"></script>
 	<script src="assets/js/jquery.counterup.min.js"></script>
 	<script src="assets/js/waypoints.min.js"></script>
-	<!-- 삭제 경고창 -->
-	<script>
-	$(".check-btn").click(function(){
-        var $href = $(this).attr("href");
-        layer_popup($href);
-    });
-    function layer_popup(el){
-
-        var $el = $(el);    //레이어의 id를 $el 변수에 저장
-        var isDim = $el.prev().hasClass("dimBg"); //dimmed 레이어를 감지하기 위한 boolean 변수
-
-        isDim ? $(".dim-layer").fadeIn() : $el.fadeIn();
-
-        var $elWidth = ~~($el.outerWidth()),
-            $elHeight = ~~($el.outerHeight()),
-            docWidth = $(document).width(),
-            docHeight = $(document).height();
-
-        // 화면의 중앙에 레이어를 띄운다.
-        if ($elHeight < docHeight || $elWidth < docWidth) {
-            $el.css({
-                marginTop: -$elHeight /2,
-                marginLeft: -$elWidth/2
-            })
-        } else {
-            $el.css({top: 0, left: 0});
-        }
-
-        $el.find("a.btn-layerClose").click(function(){
-            isDim ? $(".dim-layer").fadeOut() : $el.fadeOut(); // 닫기 버튼을 클릭하면 레이어가 닫힌다.
-            return false;
-        });
-
-        $(".layer .dimBg").click(function(){
-            $(".dim-layer").fadeOut();
-            return false;
-        });
-
-    }
-	</script>
 </body>
 </html>

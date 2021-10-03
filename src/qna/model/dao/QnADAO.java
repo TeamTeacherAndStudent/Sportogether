@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,13 +30,14 @@ public class QnADAO {
 			pstmt.setInt(2, end);
 			rset = pstmt.executeQuery();
 			qList = new ArrayList<QnA>();
+			/* SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm"); */
 			while(rset.next()) {
 				QnA qna = new QnA();
 				qna.setQnaNo(rset.getInt("QNA_NO"));
 				qna.setUserId(rset.getString("USER_ID"));
 				qna.setQnaTitle(rset.getString("QNA_TITLE"));
 				qna.setQnaContents(rset.getString("QNA_CONTENTS"));
-				qna.setQnaDate(rset.getDate("QNA_DATE"));
+				qna.setQnaDate/* (formatter.format */(rset.getDate("QNA_DATE"))/* ) */;
 				qna.setQnaAns(rset.getString("QNA_ANS"));
 				qList.add(qna);
 			}

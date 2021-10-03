@@ -164,6 +164,7 @@ public class NoticeDAO {
 				noticeOne.setNoticeContents(rset.getString("NOTICE_CONTENTS"));
 				noticeOne.setNoticeWriter(rset.getString("NOTICE_WRITER"));
 				noticeOne.setNoticeDate(rset.getDate("NOTICE_DATE"));
+				noticeOne.setNoticeCount(rset.getInt("NOTICE_COUNT"));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -213,4 +214,20 @@ public class NoticeDAO {
 		}
 		return result;
 	}
+
+	/*
+	 * //공지조회수 public int updateReadCount(Connection conn, int noticeNo) {
+	 * PreparedStatement pstmt = null; String query =
+	 * "UPDATE NOTICE SET NOTICE_COUNT = NOTICE_COUNT+1 WHERE NOTICE_NO = ? "; int
+	 * result = 0; try { pstmt = conn.prepareStatement(query); pstmt.setInt(1,
+	 * noticeNo); result = pstmt.executeUpdate();
+	 * 
+	 * } catch (SQLException e) { // TODO Auto-generated catch block
+	 * e.printStackTrace(); } finally { JDBCTemplate.close(pstmt); } return result;
+	 * }
+	 */
+	
+	
+	
+	
 }

@@ -186,7 +186,7 @@ button:hover {
 							iei@naver.com <br>
 						</div>
 						<div class="button">
-							<a href="/mypage/modify"><button>수정</button></a>
+							<a href="/mypage/myinfo?userId=${userId}"><button>수정</button></a>
 						</div>
 					</div>
 					<div class="mybox">
@@ -211,7 +211,7 @@ button:hover {
 							* 선수인 경우 인증 가능
 						</div>
 						<div class="button">
-							<a href="/mypage/player"><button>인증</button></a>
+							<a href="../MyPage/Mypage_Player.html"><button>인증</button></a>
 						</div>
 					</div>
 					<div class="mybox">

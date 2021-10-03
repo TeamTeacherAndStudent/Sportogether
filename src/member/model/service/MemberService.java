@@ -53,5 +53,43 @@ public class MemberService {
 		}
 		return member;
 	}
+	
+	//마이페이지 회원정보 조회
+	public Member printOneById(String userId) {
+		Member member = null;
+		Connection conn = null;
+		
+		try {
+			conn = jdbcTemplate.createConnection();
+			member = new MemberDAO().selectOneById(conn,userId);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(conn);
+		}
+		return member;
+	}
+	
+	//마이페이지 회원정보 수정
+	public int modifyMember(Member member) {
+		int result = 0;
+		Connection conn = null;
+		
+		try {
+			conn = jdbcTemplate.createConnection();
+			result = new MemberDAO().updateMember(conn,member);
+			if(result>0) {
+				JDBCTemplate.commit(conn);
+			}else {
+				JDBCTemplate.rollback(conn);
+			}			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(conn);
+		}
+		return result;
+	}
+
 
 }

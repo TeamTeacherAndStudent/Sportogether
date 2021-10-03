@@ -1,5 +1,6 @@
 package member.controller;
 
+import java.awt.font.TransformAttribute;
 import java.io.IOException;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
@@ -14,52 +15,42 @@ import member.model.service.MemberService;
 import member.model.vo.Member;
 
 /**
- * Servlet implementation class MemberEnrollServlet
+ * Servlet implementation class MyInfoServlet
  */
-@WebServlet("/member/enroll")
-public class MemberEnrollServlet extends HttpServlet {
+@WebServlet("/mypage/modify")
+public class MyInfoModifyServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public MemberEnrollServlet() {
+ 
+    public MyInfoModifyServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		//한글이 있으니 인코딩..
 		request.setCharacterEncoding("UTF-8");
-		//registraion.jsp(회원가입 page)에서 받은 값들 변수에..
 		String userId = request.getParameter("user-id");
-		String userPw = request.getParameter("user-pw");
-		String userNickName =request.getParameter("user-nickname");
+		String userNickName = request.getParameter("user-nickName");
 		String userName = request.getParameter("user-name");
-		//String으로 온 가입 신청자의 생년월일 Date 형으로 변환 후 변수에 넣기
-		String userBirthDate = request.getParameter("user-birth");
 		String userGender = request.getParameter("user-gender");
-		String userPhone = request.getParameter("user-phone");
+		String userBirthDate = request.getParameter("user-birthDate");
+		String userPw = request.getParameter("user-pw");
 		String userEmail = request.getParameter("user-email");
-		
-		//변수에 넣어둔 정보 Member 객체에 저장 
+		String userPhone = request.getParameter("user-phone");
+
 		Member member = new Member(userId, userNickName, userName, userPw, userBirthDate, userGender, userPhone, userEmail);
-		int result = new MemberService().registerMember(member);
-		System.out.println(member.toString());
-		if(result > 0) {
-			response.sendRedirect("/index.html");
+	
+		int result = new MemberService().modifyMember(member);
+		if(result>0) {
+			response.sendRedirect("/MyPage/MyPage_Main.jsp");
 		}else {
-			response.sendRedirect("/login_registration/loginError.html");
+			response.sendRedirect("/MyPage/Mypage_Error.html");
 		}
 	}
 

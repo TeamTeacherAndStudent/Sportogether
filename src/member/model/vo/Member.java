@@ -8,7 +8,7 @@ public class Member {
 		private String userNickName;
 		private String userName;
 		private String userPw;
-		private	Date userBirthDate;
+		private	String userBirthDate;
 		private String userGender;
 		private String userPhone;
 		private String userEmail;  
@@ -31,7 +31,7 @@ public class Member {
 		
 		//가입일, 회원 구분, 선수 구분 등을 제외한 회원가입용 생성자
 		
-		public Member(String userId, String userNickName, String userName, String userPw, Date userBirthDate,
+		public Member(String userId, String userNickName, String userName, String userPw, String userBirthDate,
 				String userGender, String userPhone, String userEmail) {
 			super();
 			this.userId = userId;
@@ -45,7 +45,7 @@ public class Member {
 		}
 
 		//모든 필드 받는 생성자
-		public Member(String userId, String userNickName, String userName, String userPw, Date userBirthDate,
+		public Member(String userId, String userNickName, String userName, String userPw, String userBirthDate,
 				String userGender, String userPhone, String userEmail, Date userEnrollDate, String userCode,
 				String userPlayer, String userImgName, long userImgSize, String userImgPath) {
 			super();
@@ -108,12 +108,12 @@ public class Member {
 		}
 
 
-		public Date getUserBirthDate() {
+		public String getUserBirthDate() {
 			return userBirthDate;
 		}
 
 
-		public void setUserBirthDate(Date userBirthDate) {
+		public void setUserBirthDate(String userBirthDate) {
 			this.userBirthDate = userBirthDate;
 		}
 
