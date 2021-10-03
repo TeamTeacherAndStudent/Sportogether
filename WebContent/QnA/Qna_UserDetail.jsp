@@ -8,6 +8,8 @@
 	/* List<QnAReply> list = (List<QnAReply>)request.getAttribute("list"); */
 %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!-- 포맷태그 식별 태그라이브러리  -->
+<%@taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -223,8 +225,11 @@ button:hover {
 				</thead>
 				<tbody>
 					<tr>
-						<td>작성일</td>
-						<td><%=qnaOne.getQnaDate() %></td>
+<%-- 						<td>작성일</td>
+						<td><%=qnaOne.getQnaDate() %></td> --%>
+												<td>작성일</td>
+						<td><fmt:formatDate pattern = "yyyy-MM-dd hh:mm" value="${qnaOne.qnaDate}"/></td>
+						
 					</tr>
 					<tr>
 						<td>글쓴이</td>
@@ -246,7 +251,7 @@ button:hover {
 					<tr>
 						<td>${reply.userId}</td>
 						<td>${reply.qnaReplyContents}</td>
-						<td><pre>${reply.qnaReplyDate}</pre> </td>
+						<td><pre><fmt:formatDate pattern = "yyyy-MM-dd hh:mm" value="${reply.qnaReplyDate}"/></pre> </td>
 						<td><a href="/qnaReply/remove?qnaNo=${reply.qnaNo}&qnaReplyNo=${reply.qnaReplyNo}" class="check-btn" id="deleteReply-Btn"><button>삭제</button></a></td>
 					</tr>
 					

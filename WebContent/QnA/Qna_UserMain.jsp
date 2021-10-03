@@ -6,6 +6,9 @@
 	List<QnA> qList = (List<QnA>)request.getAttribute("qList");
 	String pageNavi = (String)request.getAttribute("pageNavi");
 %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!-- 포맷태그 식별 태그라이브러리  -->
+<%@taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -233,17 +236,29 @@ button:hover {
 							</ul>
 						</li>
 						
-						<% for(QnA qOne : qList) {%>
+						
+<%-- 						<% for(QnA qOne : qList) {%>
 						<li>
 							<ul>
 								<li><%=qOne.getQnaNo() %></li>
 								<li class="left"><a href="/qna/detail?qnaNo=<%=qOne.getQnaNo()%>"><%=qOne.getQnaTitle()%></a></li>
-								<li><%=qOne.getQnaDate() %></li>
+								<li><%=qOne.getQnaDate() %><fmt:formatDate pattern = "yyyy/MM/dd hh:mm" value=""/></li>
 								<li><%=qOne.getUserId() %></li>
 								<li><%=qOne.getQnaAns()%></li>
 							</ul>
 						</li>
-						<%} %>
+						<%} %> --%>
+						<c:forEach items="${requestScope.qList}" var="qna">
+						<li>
+							<ul>
+								<li>${qna.qnaNo}</li>
+								<li class="left"><a href="/qna/detail?qnaNo=${qna.qnaNo}">${qna.qnaTitle}</a></li>
+								<li><fmt:formatDate pattern = "yyyy-MM-dd hh:mm" value="${qna.qnaDate}"/></li>
+								<li>${qna.userId}</li>
+								<li>${qna.qnaAns}</li>
+							</ul>
+						</li>
+						</c:forEach>
 					</ul>
 				</li>
 
