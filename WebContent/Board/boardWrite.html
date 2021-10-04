@@ -175,19 +175,22 @@
       					<option value="">사이클</option>
       					<option value="">기타</option>
 			      </select> -->
-			    <form action="/board/write" method="post" id ="form" enctype="multipart/form-data">
+			    <form action="/board/write" method="post" id ="form">
+			    <div class="sportsName">
+			    	<input type="hidden" value="종목" name="sportsName">
+			    </div>
 			      <input type="text" name="title" id="title" maxlength="50" pattern=".{4,50}" placeholder="제목입력(4-50)" size="100" required>
 			      <br><br>
 			   	  <textarea class="form-control" id="editor"
   					name="content" placeholder="내용을 작성하세요."></textarea>
-					<div class="file-upload">
+					<!-- <div class="file-upload">
 						<input type="text" name="upFile" class="upload-name" readonly>
 						<label class="input-file-button" for="input-file">파일 업로드</label>
-						<input type="file" name="upFile" id="input-file" multiple="multiple"><!-- 파일버튼 숨김 -->
-					</div>
+						<input type="file" name="upFile" id="input-file" multiple="multiple">파일버튼 숨김
+					</div> -->
 				    <button id="previewBtn" class="Btn">미리보기</button>
 				    <input type="submit" value="등록" id="enrollBtn" class="Btn" onClick="onEnrollClick();">
-				    <input type="submit" value="취소" id="resetBtn"class="Btn" onclick="onResetClick();">
+				    <button type="submit" value="취소" id="resetBtn"class="Btn" onclick="onResetClick();">
 				 </form>
 			</div>
 		</div>
@@ -229,14 +232,15 @@
          });
 //등록 클릭이벤트
 	function onEnrollClick() {
-		var fileForm = document.getElementById("form");
-		fileForm.action = "/file/upload";
-		var enrollResult = window.confirm("게시판 등록을 하시겠습니까?");
-		if(enrollResult) {
+		/* var fileForm = document.getElementById("form");
+		 fileForm.action = "/file/upload";
+		*/
+		//var enrollResult = window.confirm("게시판 등록을 하시겠습니까?");
+		/* if(enrollResult == ture) {
 			console.log("Yes!");
 		}else{
 			console.log("No~");
-		}
+		} */
 	}
 	//파일 경로 무조건 C:\fakepath\
 	$(function(){
@@ -248,10 +252,10 @@
 		
 	function onResetClick() {
 		var reset = document.getElementById("resetBtn");
-		if(reset != null) {
+		if(reset!=null) {
 			reset.action = "/board/list";
 		}else{
-			local.href="serviceFailed.html";
+			return
 		}
 	}
 </script>

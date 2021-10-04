@@ -225,7 +225,7 @@
                     <div id="divPaging">
                     </div>
                 </li>
-                <form action ="board/write">
+                <form action ="/board/write" method="get">
                 	<input id="writeBtn" class="Btn" type="submit" value="글작성">
                 </form>
                 <li id='liSearchOption'>

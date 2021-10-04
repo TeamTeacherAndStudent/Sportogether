@@ -19,17 +19,16 @@ public class BoardDAO {
 	public int insertBoard(Connection conn, Board board) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-		String query = "INSERT INTO FREEBOARD VALUES(SEQ_BOARD.NEXTVAL, ?, ?, ?, (SELECT USER_NICKNAME FROM MEMBER WHERE USER_ID = '?') 'USER_NICKNAME', DEFAULT, ?, ?)";
+		String query = "INSERT INTO FREEBOARD VALUES(SEQ_BOARD.NEXTVAL,?,?,?,?,DEFAULT,?,?)";
 		//쿼리문 순서 꼭 지키기
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(2, board.getBoardTitle());
-			pstmt.setString(3, board.getBoardContents());
-			pstmt.setString(4, board.getSportsName());
-			pstmt.setString(5, board.getUserId());
-			pstmt.setDate(6, board.getBoardEnrollDate());
-			pstmt.setInt(7, board.getBoardCount());
-			pstmt.setInt(8, board.getBoardLike());
+			pstmt.setString(1, board.getBoardTitle());
+			pstmt.setString(2, board.getBoardContents());
+			pstmt.setString(3, board.getSportsName());
+			pstmt.setString(4, board.getUserId());
+			pstmt.setInt(5, board.getBoardCount());
+			pstmt.setInt(6, board.getBoardLike());
 			result = pstmt.executeUpdate();
 		}catch(SQLException e) {
 				e.printStackTrace();
@@ -73,16 +72,15 @@ public class BoardDAO {
 	public int updateBoard(Connection conn, Board board) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-		String query = "UPDATE FREEBOARD SET BOARD_TITLE = ?, BOARD_CONTETNS = ?, SPOARTS_NAME = ?";
+		String query = "UPDATE FREEBOARD SET BOARD_TITLE = ?, BOARD_CONTENTS = ?, SPORTS_NAME = ? WHERE BOARD_NO = ?";
 		
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, board.getBoardTitle());
 			pstmt.setString(2, board.getBoardContents());
 			pstmt.setString(3, board.getSportsName());
-			//파일은 어떻게 ?
+			pstmt.setInt(4, board.getBoardNo());
 			result = pstmt.executeUpdate();
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
@@ -118,9 +116,10 @@ public class BoardDAO {
 		
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1,  boardNo);
-			pstmt.setString(2,  replyContents);
+			pstmt.setInt(1, boardNo);
+			pstmt.setString(2, replyContents);
 			pstmt.setString(3, userId);
+			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
@@ -188,12 +187,12 @@ public class BoardDAO {
 	public List<FileData> selectByOneBoardFile(Connection conn, int boardNo) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		List<FileData> fileList = null;
+		List<FileData> fList = null;
 		String query = "SELECT * FROM FREEBOARDFILE WHERE BOARD_NO = ?";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, boardNo);
-			fileList = new ArrayList<FileData>();
+			fList = new ArrayList<FileData>();
 			rset = pstmt.executeQuery();
 			while(rset.next()) {
 				FileData fileData = new FileData();
@@ -201,45 +200,43 @@ public class BoardDAO {
 				fileData.setFileName(rset.getString("FILE_NAME"));
 				fileData.setFilePath(rset.getString("FILE_PATH"));
 				fileData.setFileSize(rset.getLong("FILE_SIZE"));
-				fileList.add(fileData);
+				fList.add(fileData);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
-			JDBCTemplate.close(rset);
 			JDBCTemplate.close(pstmt);
 		}
-		return fileList;
+		return fList;
 	}
 
 	// 자유게시판 댓글 리스트 조회
 	public List<BoardReply> selectAllBoardReply(Connection conn, int boardNo) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String query = "SELECT * FROM REPLY WHERE BOARD_NO = ?";
-		List<BoardReply> ReplyList = null;
+		String query = "SELECT * FROM REPLY WHERE BOARD_NO = ? ORDER BY REPLY_NO";
+		List<BoardReply> rList = null;
 		
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, boardNo);
-			ReplyList = new ArrayList<BoardReply>();
+			rList = new ArrayList<BoardReply>();
 			rset = pstmt.executeQuery();
 			while(rset.next()) {
 				BoardReply reply = new BoardReply();
-				reply.setBoardReplyNo(rset.getInt("REPLY_NO"));
 				reply.setBoardNo(rset.getInt("BOARD_NO"));
+				reply.setBoardReplyNo(rset.getInt("REPLY_NO"));
 				reply.setBoardReplyContents(rset.getString("REPLY_CONTENTS"));
+				reply.setBoardReplyUserId(rset.getString("USER_ID"));
 				reply.setBoardReplyDate(rset.getDate("REPLY_DATE"));
-				reply.setBoardReplyUserId(rset.getString("REPLY_USERID"));
-				ReplyList.add(reply);
+				rList.add(reply);
 			}
 		}catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
-			JDBCTemplate.close(rset);
 			JDBCTemplate.close(pstmt);
 		}
-		return ReplyList;
+		return rList;
 	}
 
 	public String getPageNavi(Connection conn, int currentPage) {
@@ -301,8 +298,8 @@ public class BoardDAO {
 			}catch(SQLException e) {
 				e.printStackTrace();
 			}finally {
-				JDBCTemplate.close(rset);
 				JDBCTemplate.close(stmt);
+				JDBCTemplate.close(rset);
 			}
 				return totalValue;
 		}
@@ -409,6 +406,7 @@ public class BoardDAO {
 			pstmt.setInt(1, boardLike.getBoardNo());
 			pstmt.setString(2, boardLike.getUserId());
 			pstmt.setInt(3, boardLike.getLikeCount());
+			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
@@ -425,6 +423,7 @@ public class BoardDAO {
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1,  boardNo);
+			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
@@ -445,6 +444,7 @@ public class BoardDAO {
 			pstmt.setInt(2, scrap.getBoardNo());
 			pstmt.setString(3, scrap.getUserId());
 			pstmt.setString(4, scrap.getBoardContents());
+			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
@@ -462,6 +462,7 @@ public class BoardDAO {
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, scrapNo);
+			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {

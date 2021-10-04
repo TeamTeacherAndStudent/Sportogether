@@ -168,33 +168,21 @@
         <div class="container">
 		  <h2 class="box">게시글 수정</h2>
 		  <div id="form">
-			<!-- <form action ="" method="post" name="sportUpdate">
-				 <select name="sportsName">
-      					<option value="">종목선택</option>
-      					<option value="">배구</option>
-      					<option value="">축구</option>
-      					<option value="">탁구</option>
-      					<option value="">승마</option>
-      					<option value="">농구</option>
-      					<option value="">사이클</option>
-      					<option value="">기타</option>
-			      </select> -->
-			     <form action = "/board/modify" method="post">
-			     <input type="hidden" name="boardNo" value="${board.boardNo}">
-			    	<input type="text" id="title" name="title" value = "${board.boardtitle }" maxlength="50" pattern=".{4,50}" placeholder="제목을 입력해주세요." size="70" required><br><br>
-			    	<textarea rows="30" cols="100" id="editor" name="content" value="${board.boardConents }" placeholder="내용을 작성해주세요."></textarea>
-					<div id="image_container"></div><br>
-					<!-- 파일 수정 불가 
-					<div class="file-upload">
-						<input type="text" class="upload-name" readonly>
-						<label class="input-file-button" for="input-file">파일 업로드</label>
-						<input type="file" id="input-file" name="file" multiple="multiple">
-					</div>
-					-->
-					<br><br>
-			    	<button id="previewBtn" class="Btn">미리보기</button>
-			   		<input type="submit" value="수정" class="Btn" onClick="onEnrollClick();">
-			    	<input type="reset" value="취소" class="Btn">
+			     <form action ="/board/modify" method="post">
+				 		<input type="text" id="sportsName" name="sportsName" value="${board.sportsName }">
+				    	<input type="hidden" name="boardNo" value="${board.boardNo}">
+				    	<input type="text" id="title" name="title" value = "${board.boardTitle }" maxlength="50" pattern=".{4,50}" size="70" required><br><br>
+				    	<textarea rows="30" cols="100" id="editor" name="contents" value="${board.boardContents }"></textarea>
+						<!-- 파일 수정 불가 -->
+						<div class="file-upload">
+							<input type="text" class="upload-name" readonly value="${file.fileName }">
+							<label class="input-file-button" for="input-file">파일 업로드</label>
+							<input type="file" id="input-file" name="file" multiple="multiple">
+						</div>
+						<br><br>
+				    	<button id="previewBtn" class="Btn">미리보기</button>
+				   		<input type="submit" value="수정" class="Btn" onClick="onEnrollClick();">
+				    	<input type="reset" value="취소" class="Btn" onClick="location.href='/board/list'">
 				</form>
 		</div>
    </main><br><br><br>
@@ -237,20 +225,15 @@
 //등록 클릭이벤트
 	function onEnrollClick() {
 		var enrollResult = window.confirm("글이 수정되었습니다.");
-		if(enrollResult) {
-			console.log("Modify Y");
-		}else{
-			console.log("N");
-		}
 	}
-	/* //파일 경로 무조건 C:\fakepath\
+		//파일 경로 무조건 C:\fakepath\
 		$(function(){
 			$('.upload-name').val('파일선택');
 			$('#input-file').change(function(){
 				var filename = $(this).val();
 				$('.upload-name').val(filename);
 			});
-		}); */
+		}); 
 </script>
 </body>
 </html>

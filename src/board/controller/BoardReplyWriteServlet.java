@@ -40,7 +40,7 @@ public class BoardReplyWriteServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		//로그인한 자만 쓰기
 		HttpSession session = request.getSession();
-		String replyContents = request.getParameter("boardReplyContents");
+		String replyContents = request.getParameter("replyContents");
 		int boardNo = Integer.parseInt(request.getParameter("boardNo"));
 		String userId = (String)session.getAttribute("userId");
 		int result = new BoardService().registerBoardReply(boardNo, replyContents, userId);

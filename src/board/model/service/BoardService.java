@@ -45,7 +45,7 @@ public class BoardService {
 		Board boardOne = null;
 		Connection conn = null;
 		List<FileData> fileList = null;
-		List<BoardReply>replyList  = null;
+		List<BoardReply> replyList  = null;
 		BoardDAO bDao = new BoardDAO();
 		
 		try {
@@ -108,6 +108,11 @@ public class BoardService {
 		try {
 			conn = jdbcTemplate.createConnection();
 			result = new BoardDAO().deleteBoard(conn, boardNo);
+			if(result > 0) {
+				JDBCTemplate.commit(conn);
+			}else{
+				JDBCTemplate.rollback(conn);
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {

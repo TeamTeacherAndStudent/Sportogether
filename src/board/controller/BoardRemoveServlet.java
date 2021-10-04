@@ -32,12 +32,14 @@ public class BoardRemoveServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int boardNo = Integer.parseInt(request.getParameter("boardNo"));
+		System.out.println(boardNo);
 		int result = new BoardService().removeBoard(boardNo);
 		
 		if(result > 0) {
-			response.sendRedirect("/Board/board_main.jsp");
+			response.sendRedirect("/board/list");
 		}else {
 			request.getRequestDispatcher("/Board/boardError.html").forward(request, response);
+			System.out.println("false");
 		}
 	}
 
