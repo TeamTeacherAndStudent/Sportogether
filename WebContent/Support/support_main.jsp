@@ -78,7 +78,7 @@
           <li><input type="search" placeholder="검색" size="10" id="search"></li>
        	  <li>
        	  	<c:if test="${sessionScope.userId eq null }">
-       	 		 <a href="login_registration/login.jsp">Login</a>
+       	 		 <a href="/login_registration/login.jsp">Login</a>
        	 	</c:if>
        	 	<c:if test = "${sessionScope.userId ne null }">
        	 		<a href="/member/logout">Logout</a>
@@ -112,7 +112,7 @@
 			  <img src="${support.supportFilePath }" class="card-img-top" alt="...">
 			  <div class="card-body">
 			    <h5 class="card-title">${support.supportTitle }</h5>
-			    <p class="card-text">${support.supportContents }</p>
+			    <p class="card-text">${support.supportPurpose }</p>
 			   
 				<p class="card-text">NOW : ${support.supportAchived } WON</p>
 					<!-- 그래프 -->
@@ -164,8 +164,9 @@
 	</div>
 	<div>
   	<div class="button-wrap">
-  		
+  		<c:if test="${sessionScope.userPlayer eq 'Y' }">
   		<a href="/support/write" id="campbtn" class = "btn btn-primary">후원 작성</a>
+  		</c:if>
   	</div>
   	<br><br><br><br>
   </div>

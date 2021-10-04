@@ -235,6 +235,35 @@ public class SupportDAO {
 		}
 		return srList;
 	}
+	
+	// 후원 게시물 수정
+		public int updateSupport(Connection conn, Support spt) {
+			int result = 0;  
+			String query = "UPDATE SUPPORT SET SUPPORT_TITLE = ?, SUPPORT_PURPOSE = ?, SUPPORT_CONTENTS = ?, SUPPORT_CATEGORY = ?, SUPPORT_GOAL = ?, END_DATE = ?, FILE_NAME = ? , FILE_SIZE = ?, FILE_PATH = ? WHERE SUPPORT_NO = ?";
+			PreparedStatement pstmt = null;
+			try {
+				pstmt = conn.prepareStatement(query);
+				
+				pstmt.setString(1, spt.getSupportTitle());
+				pstmt.setString(2, spt.getSupportPurpose());
+				pstmt.setString(3, spt.getSupportContents());
+				pstmt.setString(4, spt.getSportsCategory());
+				pstmt.setInt(5, spt.getSupportGoal());
+				pstmt.setDate(6,spt.getSupportEndDate());
+				pstmt.setString(7, spt.getSupportFileName());
+				pstmt.setLong(8, spt.getSupportFileSize());
+				pstmt.setString(9, spt.getSupportFilePath());
+				pstmt.setInt(10, spt.getSupportNo());
+				result = pstmt.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally { 
+				JDBCTemplate.close(pstmt);
+			}
+			return result ;
+		}
+	
+		
 	//후원 응원 댓글 작성
 	public int insertReply(Connection conn, int supportNo, String userId, String supportReplyContents) {
 		PreparedStatement pstmt = null;
@@ -315,5 +344,6 @@ public class SupportDAO {
 		}
 		return idCheck;
 	}
+	
 	
 }

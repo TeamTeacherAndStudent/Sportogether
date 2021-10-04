@@ -48,8 +48,9 @@ public class SupportListServlet extends HttpServlet {
 			request.getRequestDispatcher("/Support/support_main.jsp")
 			.forward(request, response);
 		}else {
-			RequestDispatcher view = request.getRequestDispatcher("/Support/supportError.html");
-			view.forward(request, response);
+//			RequestDispatcher view = request.getRequestDispatcher("/Support/support_main.jsp");
+//			view.forward(request, response);
+			response.sendRedirect("/Support/support_main.jsp");
 		}
 	}
 

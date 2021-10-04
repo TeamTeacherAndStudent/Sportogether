@@ -60,7 +60,7 @@ public class MemberEnrollServlet extends HttpServlet {
 		if(result > 0) {
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter writer =response.getWriter();
-			writer.println("<script>alert('회원가입이 완료되었습니다.'); location.href='/index.html';</script>");
+			writer.println("<script>alert('회원가입이 완료되었습니다.'); location.href='/index.jsp';</script>");
 			writer.flush();
 //			response.sendRedirect("/index.html");
 		}else {

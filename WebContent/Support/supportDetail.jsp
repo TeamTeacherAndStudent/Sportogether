@@ -55,6 +55,13 @@
   	#search{
     	margin-left: 30px;
     }
+    .modbtn {
+    }
+    #modbtn{
+    	background-color : #1d284b;
+  		border-style: none;
+  		border-color: #1d284b;
+    }
   </style>
    <!-- 카카오 공유하기 사용을 위한 -->
   <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
@@ -74,7 +81,7 @@
           <li><input type="search" placeholder="검색" size="10" id="search"></li>
        	  <li>
        	  	<c:if test="${sessionScope.userId eq null }">
-       	 		 <a href="login_registration/login.jsp">Login</a>
+       	 		 <a href="../login_registration/login.jsp">Login</a>
        	 	</c:if>
        	 	<c:if test = "${sessionScope.userId ne null }">
        	 		<a href="/member/logout">Logout</a>
@@ -130,7 +137,8 @@
 				<br><br>
 				
 				<!-- 본문 -->
-				<p>${supportOne.supportContents }</p>
+				<p>${supportOne.supportContents }
+				</p>
 			</div>
 			<div class="col-md-1 visible">
 			</div>
@@ -182,12 +190,20 @@
 							</a>
 						</div>
 					</div>
+					<!-- 수정하기 버튼 = 작성자에게만 보이도록 -->
+					<div class=modbtn>
+						<c:if test = "${sessionScope.userId eq supportOne.supportWriter }">
+							<a href="/support/modify?supportNo=${supportOne.supportNo }" id="modbtn" class = "btn btn-primary">수정하기</a>
+						</c:if>
+					</div>
 				</div>
 			</div>
 		</div>
+
 		</section>
 </div>
 <hr>
+	
     <section class="container">
     
 		<!-- 댓글 탭  -->
