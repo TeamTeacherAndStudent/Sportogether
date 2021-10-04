@@ -8,6 +8,7 @@ public class Support {
 	private int supportNo;
 	private String supportWriter;
 	private String supportTitle;
+	private String supportIntro;
 	private String supportPurpose;
 	private String supportContents;
 	private int supportGoal;
@@ -21,27 +22,21 @@ public class Support {
 	private Date supportEndDate;
 	//댓글 list
 	private List<SupportReply> rList;
+	
+	
 	public Support () {}
 	
-	
-	
-	
-
-
 
 	@Override
 	public String toString() {
 		return "Support [supportNo=" + supportNo + ", supportWriter=" + supportWriter + ", supportTitle=" + supportTitle
-				+ ", supportPurpose=" + supportPurpose + ", supportContents=" + supportContents + ", supportGoal="
-				+ supportGoal + ", supportAchived=" + supportAchived + ", sportsCategory=" + sportsCategory
-				+ ", supportFileName=" + supportFileName + ", supportFilePath=" + supportFilePath + ", supportFileSize="
-				+ supportFileSize + ", supportApproval=" + supportApproval + ", supportRegDate=" + supportRegDate
-				+ ", supportEndDate=" + supportEndDate + ", rList=" + rList + "]";
+				+ ", supportIntro=" + supportIntro + ", supportPurpose=" + supportPurpose + ", supportContents="
+				+ supportContents + ", supportGoal=" + supportGoal + ", supportAchived=" + supportAchived
+				+ ", sportsCategory=" + sportsCategory + ", supportFileName=" + supportFileName + ", supportFilePath="
+				+ supportFilePath + ", supportFileSize=" + supportFileSize + ", supportApproval=" + supportApproval
+				+ ", supportRegDate=" + supportRegDate + ", supportEndDate=" + supportEndDate + ", rList=" + rList
+				+ "]";
 	}
-
-
-
-
 
 
 
@@ -168,6 +163,20 @@ public class Support {
 
 	public void setrList(List<SupportReply> rList) {
 		this.rList = rList;
+	}
+
+
+
+
+
+	public String getSupportIntro() {
+		return supportIntro;
+	}
+
+
+
+	public void setSupportIntro(String supportIntro) {
+		this.supportIntro = supportIntro;
 	}
 	
 	

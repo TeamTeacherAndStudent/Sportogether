@@ -74,6 +74,26 @@ public class SupportService {
 		
 		return spt;
 	}
+	// 후원 게시물 수정
+		public int modifySupport(Support spt) {
+			int result = 0;
+			Connection conn = null;
+			try {
+				conn = jdbcTemplate.createConnection();
+				result = new SupportDAO().updateSupport(conn, spt);
+				if(result > 0) {
+					JDBCTemplate.commit(conn);
+				}else {
+					JDBCTemplate.rollback(conn);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				JDBCTemplate.close(conn);
+			}
+			
+			return result;
+		}
 	//후원 댓글 작성
 	public int registerSupportReply(int supportNo, String userId, String supportReplyContents) {
 		int result = 0 ;
@@ -151,5 +171,6 @@ public class SupportService {
 		}
 		return idCheck;
 	}
+	
 
 }

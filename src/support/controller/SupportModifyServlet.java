@@ -18,16 +18,16 @@ import support.model.service.SupportService;
 import support.model.vo.Support;
 
 /**
- * Servlet implementation class SupportWriteServlet
+ * Servlet implementation class SupportModifyServlet
  */
-@WebServlet("/support/write")
-public class SupportWriteServlet extends HttpServlet {
+@WebServlet("/support/modify")
+public class SupportModifyServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SupportWriteServlet() {
+    public SupportModifyServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,30 +36,21 @@ public class SupportWriteServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/Support/supportWrite.html").forward(request, response);
+		int supportNo = Integer.parseInt(request.getParameter("supportNo"));
+		Support spt = new SupportService().printOneByNo(supportNo);
+		
+			request.setAttribute("supportOne", spt);
+			request.getRequestDispatcher("/Support/supportModify.jsp")
+			.forward(request, response);
+	
+	
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		request.setCharacterEncoding("UTF-8");
-//		String title =request.getParameter("title");
-//		String content = request.getParameter("content");
-//		String purpose = request.getParameter("purpose");
-//		String sportsCate = request.getParameter("sports");
-//		String sptGoal = request.getParameter("mokpyo");
-//		String sptEndDate = request.getParameter("end-date");
-//		System.out.println(title + content + purpose + sportsCate + sptGoal);
-//		
-//		int supportGoal = Integer.parseInt(sptGoal);
-//		Date supportEndDate = Date.valueOf(sptEndDate);
-//		
-//		//세션에서 id 가져오기..
-//		HttpSession session = request.getSession();
-//		String supportWriter = (String)session.getAttribute("user-id");
-		
-	
+
 		request.setCharacterEncoding("UTF-8");
 		//upload 경로?
 		String uploadFilePath = request.getServletContext().getRealPath("upload");
@@ -75,66 +66,58 @@ public class SupportWriteServlet extends HttpServlet {
 		String sptGoal = multi.getParameter("mokpyo");
 		String sptEndDate = multi.getParameter("end-date");
 		String sptIntro = multi.getParameter("intro");
-		
+		int sptNo = Integer.parseInt(multi.getParameter("supportNo"));
 		int supportGoal = Integer.parseInt(sptGoal);
 		Date supportEndDate = Date.valueOf(sptEndDate);
 		
 		//세션에서 id 가져오기..
-		HttpSession session = request.getSession();
-		String supportWriter = (String)session.getAttribute("userId");
+//		HttpSession session = request.getSession();
+//		String supportWriter = (String)session.getAttribute("userId");
 	
-		String supportFileName = multi.getFilesystemName("img-file");
-		File uploadFile = multi.getFile("img-file");
-		String filePath = uploadFile.getPath();
-		long fileSize = uploadFile.length();
-		
-		
 		//Support 객체에 정보 세팅..
 		Support spt = new Support();
+		spt.setSupportNo(sptNo);
 		spt.setSupportTitle(title);
 		spt.setSupportContents(content);
 		spt.setSupportPurpose(purpose);
 		spt.setSportsCategory(sportsCate);
 		spt.setSupportGoal(supportGoal);
 		spt.setSupportEndDate(supportEndDate);
-		spt.setSupportWriter(supportWriter);
 		spt.setSupportIntro(sptIntro);
+//		spt.setSupportWriter(supportWriter);
 		
 		
-		//upload파일 정보 Support객체에 세팅
-		spt.setSupportFileName(supportFileName);
-		spt.setSupportFilePath(filePath);
-		spt.setSupportFileSize(fileSize);
+		
 		//파일 정보 변수에 넣기..
-//		String supportFileName = multi.getFilesystemName("img-file");
-//		if(supportFileName != null) {
-//			
-//			File uploadFile = multi.getFile("img-file");
-//			String filePath = uploadFile.getPath();
-//			long fileSize = uploadFile.length();
-//			
-//			//upload파일 정보 Support객체에 세팅
-//			spt.setSupportFileName(supportFileName);
-//			spt.setSupportFilePath(filePath);
-//			spt.setSupportFileSize(fileSize);
-//		}else {
-//			File uploadFile = null;
-//			String filePath = "";
-//			long fileSize = 0;
-//			
-//			//upload파일 정보 Support객체에 세팅
-//			spt.setSupportFileName(supportFileName);
-//			spt.setSupportFilePath(filePath);
-//			spt.setSupportFileSize(fileSize);
-//		}
-		int result = new SupportService().registerSupport(spt);
+		String supportFileName = multi.getFilesystemName("img-file");
+		if(supportFileName != null) {
+			
+			File uploadFile = multi.getFile("img-file");
+			String filePath = uploadFile.getPath();
+			long fileSize = uploadFile.length();
+			
+			//upload파일 정보 Support객체에 세팅
+			spt.setSupportFileName(supportFileName);
+			spt.setSupportFilePath(filePath);
+			spt.setSupportFileSize(fileSize);
+		}else {
+			File uploadFile = null;
+			String filePath = "";
+			long fileSize = 0;
+			
+			//upload파일 정보 Support객체에 세팅
+			spt.setSupportFileName(supportFileName);
+			spt.setSupportFilePath(filePath);
+			spt.setSupportFileSize(fileSize);
+		}
+		int result = new SupportService().modifySupport(spt);
 		
 		
 		//결과
 		if(result > 0) {
 			
 			//콘솔에 후원 성공 테스트
-			System.out.println("후원 등록 성공");
+			System.out.println("후원 수정 성공");
 			response.sendRedirect("/support/list");
 		}else {
 			request.getRequestDispatcher("/Support/supportError.html")

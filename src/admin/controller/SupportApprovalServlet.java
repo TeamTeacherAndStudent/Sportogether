@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import admin.model.service.AdminService;
+
 /**
  * Servlet implementation class SupportApprovalServlet
  */
@@ -26,8 +28,19 @@ public class SupportApprovalServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		//suppotr_approval.jsp(후원 승인 목록) 페이지에서
+		// 해당 게시물의 번호를 받아온다 
+		int supportNo = Integer.parseInt(request.getParameter("supportNo"));
+		int result = new AdminService().approveSupport(supportNo);
+		
+		if(result > 0 ) {
+			//성공
+			response.sendRedirect("/support/approveList");
+		}else {
+			//실패
+		}
+		
+	
 	}
 
 	/**
