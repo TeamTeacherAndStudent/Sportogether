@@ -70,6 +70,14 @@
        maxlength="100" required="required"
        pattern=".{4,30}" value = "${supportOne.supportTitle }">
        <br>
+       
+        <label for="intro">내 소개</label><br>
+        <input type="text" class="form-control" id="intro"
+       placeholder="소개 입력(4-100)" name="intro"
+       maxlength="100" required="required"
+       pattern=".{4,100}" value = "${supportOne.supportIntro }">
+       
+       
        <label for="pupose">캠페인 목적</label><br>
         <input type="text" class="form-control" id="purpose"
        placeholder="목적 입력(4-100)" name="purpose"

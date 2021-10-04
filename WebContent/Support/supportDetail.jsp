@@ -120,9 +120,9 @@
 				&nbsp;<h5>${supportOne.supportWriter }</h5><br>
 				
 				
-<!-- 				<h5>소개</h5> -->
+				<h5>소개</h5>
 				
-<!-- 				<p>여기거 뭐더라?</p> -->
+				<p>${supportOne.supportIntro }</p>
 				<br>
 				
 				<h5>목적</h5>

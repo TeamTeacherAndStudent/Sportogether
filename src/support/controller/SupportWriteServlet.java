@@ -74,6 +74,7 @@ public class SupportWriteServlet extends HttpServlet {
 		String sportsCate = multi.getParameter("sports");
 		String sptGoal = multi.getParameter("mokpyo");
 		String sptEndDate = multi.getParameter("end-date");
+		String sptIntro = multi.getParameter("intro");
 		
 		int supportGoal = Integer.parseInt(sptGoal);
 		Date supportEndDate = Date.valueOf(sptEndDate);
@@ -91,6 +92,7 @@ public class SupportWriteServlet extends HttpServlet {
 		spt.setSupportGoal(supportGoal);
 		spt.setSupportEndDate(supportEndDate);
 		spt.setSupportWriter(supportWriter);
+		spt.setSupportIntro(sptIntro);
 		
 		
 		

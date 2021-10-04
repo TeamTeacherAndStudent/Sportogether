@@ -112,7 +112,7 @@
 			  <img src="${support.supportFilePath }" class="card-img-top" alt="...">
 			  <div class="card-body">
 			    <h5 class="card-title">${support.supportTitle }</h5>
-			    <p class="card-text">${support.supportPurpose }</p>
+			    <p class="card-text">${support.supportIntro }</p>
 			   
 				<p class="card-text">NOW : ${support.supportAchived } WON</p>
 					<!-- 그래프 -->

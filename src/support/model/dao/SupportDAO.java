@@ -21,7 +21,7 @@ public class SupportDAO {
 		List<Support> sList = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String query = "SELECT * FROM(SELECT ROW_NUMBER() OVER(ORDER BY SUPPORT_NO DESC) AS NUM, SUPPORT_NO,SUPPORT_APPROVAL, SUPPORT_CATEGORY, USER_ID, END_DATE, POSTING_DATE,SUPPORT_TITLE,SUPPORT_PURPOSE,SUPPORT_CONTENTS,SUPPORT_GOAL,ACHIVED_RECORD,FILE_NAME,FILE_SIZE,FILE_PATH  FROM SUPPORT )WHERE NUM BETWEEN ? AND ?";
+		String query = "SELECT * FROM(SELECT ROW_NUMBER() OVER(ORDER BY SUPPORT_NO DESC) AS NUM, SUPPORT_NO,SUPPORT_APPROVAL, SUPPORT_CATEGORY, USER_ID, END_DATE, POSTING_DATE,SUPPORT_TITLE, SUPPORT_INTRO, SUPPORT_PURPOSE,SUPPORT_CONTENTS,SUPPORT_GOAL,ACHIVED_RECORD,FILE_NAME,FILE_SIZE,FILE_PATH  FROM SUPPORT )WHERE NUM BETWEEN ? AND ?";
 		try {
 			pstmt = conn.prepareStatement(query);
 			
@@ -39,6 +39,7 @@ public class SupportDAO {
 				spt.setSupportTitle(rset.getString("SUPPORT_TITLE"));
 				spt.setSupportWriter(rset.getString("USER_ID"));
 				spt.setSupportPurpose(rset.getString("SUPPORT_PURPOSE"));
+				spt.setSupportIntro(rset.getString("SUPPORT_INTRO"));
 				spt.setSupportContents(rset.getString("SUPPORT_CONTENTS"));
 				spt.setSupportGoal(rset.getInt("SUPPORT_GOAL"));
 				spt.setSupportAchived(rset.getInt("ACHIVED_RECORD"));
@@ -141,21 +142,22 @@ public class SupportDAO {
 	public int insertSupport(Connection conn, Support spt) {
 		int result = 0;
 		PreparedStatement pstmt = null;
-		String query = "INSERT INTO SUPPORT VALUES (SEQ_SPT_NO.NEXTVAL,DEFAULT,?,?,?,DEFAULT,?,?,?,?,?,?,?,? )";
+		String query = "INSERT INTO SUPPORT VALUES (SEQ_SPT_NO.NEXTVAL,DEFAULT,?,?,?,DEFAULT,?,?,?,?,?,?,?,?,? )";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, spt.getSportsCategory());
 			pstmt.setString(2,spt.getSupportWriter() );
 			pstmt.setDate(3,spt.getSupportEndDate());
 			pstmt.setString(4, spt.getSupportTitle());
-			pstmt.setString(5, spt.getSupportPurpose());
-			pstmt.setString(6, spt.getSupportContents());
-			pstmt.setInt(7, spt.getSupportGoal());
+			pstmt.setString(5, spt.getSupportIntro());
+			pstmt.setString(6, spt.getSupportPurpose());
+			pstmt.setString(7, spt.getSupportContents());
+			pstmt.setInt(8, spt.getSupportGoal());
 			//모금액
-			pstmt.setInt(8, 0);
-			pstmt.setString(9, spt.getSupportFileName());
-			pstmt.setLong(10, spt.getSupportFileSize());
-			pstmt.setString(11, spt.getSupportFilePath());
+			pstmt.setInt(9, 0);
+			pstmt.setString(10, spt.getSupportFileName());
+			pstmt.setLong(11, spt.getSupportFileSize());
+			pstmt.setString(12, spt.getSupportFilePath());
 			result = pstmt.executeUpdate();
 			
 		} catch (SQLException e) {
@@ -181,6 +183,7 @@ public class SupportDAO {
 				spt.setSupportNo(supportNo);
 				spt.setSupportTitle(rset.getString("SUPPORT_TITLE"));
 				spt.setSupportWriter(rset.getString("USER_ID"));
+				spt.setSupportIntro(rset.getString("SUPPORT_INTRO"));
 				spt.setSupportPurpose(rset.getString("SUPPORT_PURPOSE"));
 				spt.setSupportContents(rset.getString("SUPPORT_CONTENTS"));
 				spt.setSupportGoal(rset.getInt("SUPPORT_GOAL"));
@@ -239,7 +242,7 @@ public class SupportDAO {
 	// 후원 게시물 수정
 		public int updateSupport(Connection conn, Support spt) {
 			int result = 0;  
-			String query = "UPDATE SUPPORT SET SUPPORT_TITLE = ?, SUPPORT_PURPOSE = ?, SUPPORT_CONTENTS = ?, SUPPORT_CATEGORY = ?, SUPPORT_GOAL = ?, END_DATE = ?, FILE_NAME = ? , FILE_SIZE = ?, FILE_PATH = ? WHERE SUPPORT_NO = ?";
+			String query = "UPDATE SUPPORT SET SUPPORT_TITLE = ?, SUPPORT_PURPOSE = ?, SUPPORT_CONTENTS = ?, SUPPORT_CATEGORY = ?, SUPPORT_GOAL = ?, END_DATE = ?, FILE_NAME = ? , FILE_SIZE = ?, FILE_PATH = ?, SUPPORT_INTRO = ? WHERE SUPPORT_NO = ?";
 			PreparedStatement pstmt = null;
 			try {
 				pstmt = conn.prepareStatement(query);
@@ -253,7 +256,8 @@ public class SupportDAO {
 				pstmt.setString(7, spt.getSupportFileName());
 				pstmt.setLong(8, spt.getSupportFileSize());
 				pstmt.setString(9, spt.getSupportFilePath());
-				pstmt.setInt(10, spt.getSupportNo());
+				pstmt.setString(10, spt.getSupportIntro());
+				pstmt.setInt(11, spt.getSupportNo());
 				result = pstmt.executeUpdate();
 			} catch (SQLException e) {
 				e.printStackTrace();
