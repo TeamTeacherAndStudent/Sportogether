@@ -83,6 +83,12 @@ public class SupportWriteServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		String supportWriter = (String)session.getAttribute("userId");
 	
+		String supportFileName = multi.getFilesystemName("img-file");
+		File uploadFile = multi.getFile("img-file");
+		String filePath = uploadFile.getPath();
+		long fileSize = uploadFile.length();
+		
+		
 		//Support 객체에 정보 세팅..
 		Support spt = new Support();
 		spt.setSupportTitle(title);
@@ -95,29 +101,32 @@ public class SupportWriteServlet extends HttpServlet {
 		spt.setSupportIntro(sptIntro);
 		
 		
-		
+		//upload파일 정보 Support객체에 세팅
+		spt.setSupportFileName(supportFileName);
+		spt.setSupportFilePath(filePath);
+		spt.setSupportFileSize(fileSize);
 		//파일 정보 변수에 넣기..
-		String supportFileName = multi.getFilesystemName("img-file");
-		if(supportFileName != null) {
-			
-			File uploadFile = multi.getFile("img-file");
-			String filePath = uploadFile.getPath();
-			long fileSize = uploadFile.length();
-			
-			//upload파일 정보 Support객체에 세팅
-			spt.setSupportFileName(supportFileName);
-			spt.setSupportFilePath(filePath);
-			spt.setSupportFileSize(fileSize);
-		}else {
-			File uploadFile = null;
-			String filePath = "";
-			long fileSize = 0;
-			
-			//upload파일 정보 Support객체에 세팅
-			spt.setSupportFileName(supportFileName);
-			spt.setSupportFilePath(filePath);
-			spt.setSupportFileSize(fileSize);
-		}
+//		String supportFileName = multi.getFilesystemName("img-file");
+//		if(supportFileName != null) {
+//			
+//			File uploadFile = multi.getFile("img-file");
+//			String filePath = uploadFile.getPath();
+//			long fileSize = uploadFile.length();
+//			
+//			//upload파일 정보 Support객체에 세팅
+//			spt.setSupportFileName(supportFileName);
+//			spt.setSupportFilePath(filePath);
+//			spt.setSupportFileSize(fileSize);
+//		}else {
+//			File uploadFile = null;
+//			String filePath = "";
+//			long fileSize = 0;
+//			
+//			//upload파일 정보 Support객체에 세팅
+//			spt.setSupportFileName(supportFileName);
+//			spt.setSupportFilePath(filePath);
+//			spt.setSupportFileSize(fileSize);
+//		}
 		int result = new SupportService().registerSupport(spt);
 		
 		

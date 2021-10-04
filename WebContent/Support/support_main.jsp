@@ -109,7 +109,7 @@
   <div class="col">
     
     <a href="/support/detail?supportNo=${support.supportNo }"><div class="card text-center" style="width: 18rem;">
-			  <img src="${support.supportFilePath }" class="card-img-top" alt="...">
+			  <img src="/upload/${support.supportFileName }" class="card-img-top" alt="...">
 			  <div class="card-body">
 			    <h5 class="card-title">${support.supportTitle }</h5>
 			    <p class="card-text">${support.supportIntro }</p>

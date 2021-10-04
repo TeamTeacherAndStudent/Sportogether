@@ -132,7 +132,7 @@
 				
 				<!-- 본문 이미지 -->
 				<div class="row">
-					<img class="spt-img"  src="" alt = "...">
+					<img class="spt-img"  src="/upload/${supportOne.supportFileName }" alt = "...">
 				</div>
 				<br><br>
 				
