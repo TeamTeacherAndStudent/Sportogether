@@ -126,6 +126,7 @@ public class SupportDAO {
 			
 			if(rset.next()) {
 				totalValue = rset.getInt("TOTALCOUNT");
+				
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

@@ -114,5 +114,13 @@ public class SupportService {
 		}
 		return result;
 	}
+	// 후원 댓글 신고
+	public int reportSupportReply(int replyNo, String userId) {
+		int result = 0;
+		Connection conn = null;
+		
+		
+		return 0;
+	}
 
 }

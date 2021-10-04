@@ -237,7 +237,7 @@
  									<a href = "/supportReply/Remove?replyNo=${supportReply.supportReplyNo }&supportNo=${supportReply.supportNo}">삭제</a>
  								</c:if>
  							</td>
- 							<td><a href="#">신고</a></td>
+ 							<td><a href="/supportReply/report?replyNo=${supportReply.supportReplyNo }&supportNo=${supportReply.supportNo}">신고</a></td>
  						</tr>
  						</c:forEach>
  						
