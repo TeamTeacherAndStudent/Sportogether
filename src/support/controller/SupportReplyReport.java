@@ -35,12 +35,24 @@ public class SupportReplyReport extends HttpServlet {
 		//세션에서 아이디 가져오기
 		HttpSession session = request.getSession();
 		String userId = (String)session.getAttribute("userId");
-		// 댓글 번호, 아이디 '응원댓글신고' 테이블에 insert
-		int result = new SupportService().reportSupportReply(replyNo,userId);
-		if(result > 0) {
-			response.sendRedirect("/support/detail?supportNo="+supportNo);
+		//해당 댓글에 해당 아이디로 이미 신고 했는지 확인
+		String idCheck = new SupportService().beforeReportCheck(replyNo, userId);
+		//확인해서 같으면 = ( 이미 신고했으면 )
+		if(idCheck!=null && idCheck.equals(userId)) {
+			//이미 신고했습니다 ! 콘솔 띄우기
+			// 일단 메인으로..
+//			request.getRequestDispatcher("/index.jsp").forward(request, response);
+			response.sendRedirect("/index.jsp");
 		}else {
-			request.getRequestDispatcher("/support/supportError.html");
+			// 신고한적 없으면
+			// 댓글 번호, 아이디 '응원댓글신고' 테이블에 insert
+			int result = new SupportService().reportSupportReply(replyNo,userId);
+			if(result > 0) {
+				//신고하였습니다. 최대한 빠른 시일 내에 검토하겠습니다. 콘솔 띄우기
+				response.sendRedirect("/support/detail?supportNo="+supportNo);
+			}else {
+				request.getRequestDispatcher("/support/supportError.html");
+			}
 		}
 		
 	}

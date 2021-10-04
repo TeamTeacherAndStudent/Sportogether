@@ -253,7 +253,7 @@ public class SupportDAO {
 		
 		return result;
 	}
-
+	// 후원 댓글 삭제 
 	public int deleteReply(Connection conn, int replyNo) {
 		PreparedStatement pstmt = null;
 		String query ="DELETE FROM SUPPORT_REPLY WHERE REPLY_NO = ?";
@@ -270,6 +270,50 @@ public class SupportDAO {
 				}
 				
 		return result;
+	}
+	// 후원 댓글 신고 
+	//REPORTED_SUPPORT_REPLY 테이블에 삽입
+	public int insertReportReply(Connection conn, int replyNo, String userId) {
+		PreparedStatement pstmt = null;
+		String query = "INSERT INTO REPORTED_SUPPORT_REPLY VALUES(?,?)";
+		int result = 0;
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, replyNo);
+			pstmt.setString(2, userId);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
+	}
+	// 댓글 신고 전
+	// 이미 신고했는지 select
+	public String selectBeforeReport(Connection conn, int replyNo, String userId) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query= "SELECT USER_ID FROM REPORTED_SUPPORT_REPLY WHERE USER_ID = ? AND REPLY_NO = ? ";
+		String idCheck = null;
+		try {
+			pstmt  = conn.prepareStatement(query);
+			pstmt.setString(1, userId);
+			pstmt.setInt(2, replyNo);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				idCheck = rset.getString("USER_ID");
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return idCheck;
 	}
 	
 }
