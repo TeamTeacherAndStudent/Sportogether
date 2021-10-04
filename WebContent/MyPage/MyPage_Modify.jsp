@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <title>나의 정보 수정</title>
 <!-- Google Fonts -->
+<!-- Google Fonts -->
 <link
 	href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
 	rel="stylesheet">
@@ -25,6 +26,8 @@
 
 <!-- Template Main CSS File -->
 <link href="../assets/css/style.css" rel="stylesheet">
+
+<script src="https://code.jquery.com/jquery-latest.min.js"></script>
 
 <style>
 #main-title {
@@ -53,8 +56,8 @@
 }
 
 .mybox {
-	width: 80%;
-	height: 500px;
+	width: 100%;
+	height: 650px;
 	border: 1px solid #165992;
 	border-radius: 10px;
 	background-color: white;
@@ -125,6 +128,7 @@ button {
 	animation-delay: 0.8s;
 	margin-top: 6px;
 	border: 2px solid #1d284b;
+	
 }
 
 button:hover {
@@ -145,6 +149,35 @@ button:hover {
 #search {
 	margin-left: 30px;
 }
+
+.pop-layer .pop-container {
+	padding: 20px 25px;
+}
+
+.pop-laeyr p.ctxt {
+	color: #666;
+	line-height: 25px;
+}
+
+.pop-layer .btn-r {
+	width: 100%;
+	margin: 10px 0 20px;
+	padding-top: 10px;
+	border-top: 1px solid #ddd;
+	text-align: right;
+}
+
+.pop-layer {
+	display: none;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 410px;
+	height: auto;
+	background-color: #fff;
+	border: 5px solid #3571B5;
+	z-index: 10;
+}
 </style>
 </head>
 <body>
@@ -154,13 +187,13 @@ button:hover {
 			class="container d-flex align-items-center justify-content-between">
 			<!-- 여기에 로고 사진 추가 -->
 			<h1 class="logo">
-				<a href="../index.html"> Sportogether </a>
+				<a href="../index.jsp"> Sportogether </a>
 			</h1>
 			<nav id="navbar" class="navbar">
 				<ul>
 					<li><a class="active" href="../Sports/sportsList.jsp">종목</a></li>
-					<li><a href="../Board/board_main.jsp">자유게시판</a></li>
-					<li><a href="../Support/support_main.jsp">후원</a></li>
+					<li><a href="/board/list">자유게시판</a></li>
+					<li><a href="/support/list">후원</a></li>
 					<li><input type="search" placeholder="검색" size="10"
 						id="search"></li>
 					<li><a href="../login_registration/login.jsp">Login</a></li>
@@ -168,7 +201,7 @@ button:hover {
 							class="bi bi-chevron-down"></i></a>
 						<ul>
 							<li><a href="/notice/list">공지사항</a></li>
-							<li><a href="../MyPage/Mypage_Main.html">마이페이지</a></li>
+							<li><a href="/mypage/main">마이페이지</a></li>
 							<li><a href="/qna/list">1:1문의</a></li>
 						</ul></li>
 				</ul>
@@ -194,6 +227,7 @@ button:hover {
 			<div id="main-content">
 				<form action="/mypage/modify" method="post">
 				<div class="mybox">
+				
 					<div class="content">
 						<!-- 회원 정보 공간 -->
 						아이디 : <input type="text" name="user-id" value="${requestScope.member.userId}" readonly> <br>
@@ -213,16 +247,33 @@ button:hover {
 						</div>
 						<br>
 						<div class="button">
-							<button id="withdraw">회원탈퇴</button>
 							<button type="submit">수정</button>
-							<button href="/MyPage/MyPage_Main.jsp">마이페이지</button>
+							<button href="/mypage/main">마이페이지</button>
 						</div>
 					</div>
 				</div>
-			</form>	
+				</form>	
+			</div>
+				<div class="button">
+					<a href="#layer" class="check-btn"><button id="withdraw">회원탈퇴</button></a>
+				</div>
+		</section>
+		<section>
+				<div id="layer" class="pop-layer">
+				<div class="pop-container">
+					<div class="pop-conts">
+						<!-- 내용 -->
+						<p class="ctxt mb20">정말로 탈퇴하시겠습니까?</p>
+						<div class="btn-r">
+						
+							<a href="/mypage/remove" ><button class="btn-layerClose" onclick="deleteNotice()">삭제</button></a> <a
+								href="#" class="btn-layerClose"><button >취소</button></a>
+						</div>
+						<!--  // 내용 끝 -->
+					</div>
+				</div>
 			</div>
 		</section>
-
 	</main>
 
 
@@ -280,6 +331,47 @@ button:hover {
 	<script src="assets/js/jquery-1.12.3.min.js"></script>
 	<script src="assets/js/jquery.counterup.min.js"></script>
 	<script src="assets/js/waypoints.min.js"></script>
+	
+	
+	<!-- 삭제 경고창 -->
+	<script>
+	$(".check-btn").click(function(){
+        var $href = $(this).attr("href");
+        layer_popup($href);
+    });
+    function layer_popup(el){
 
+        var $el = $(el);    //레이어의 id를 $el 변수에 저장
+        var isDim = $el.prev().hasClass("dimBg"); //dimmed 레이어를 감지하기 위한 boolean 변수
+
+        isDim ? $(".dim-layer").fadeIn() : $el.fadeIn();
+
+        var $elWidth = ~~($el.outerWidth()),
+            $elHeight = ~~($el.outerHeight()),
+            docWidth = $(document).width(),
+            docHeight = $(document).height();
+
+        // 화면의 중앙에 레이어를 띄운다.
+        if ($elHeight < docHeight || $elWidth < docWidth) {
+            $el.css({
+                marginTop: -$elHeight /2,
+                marginLeft: -$elWidth/2
+            })
+        } else {
+            $el.css({top: 0, left: 0});
+        }
+
+        $el.find("a.btn-layerClose").click(function(){
+            isDim ? $(".dim-layer").fadeOut() : $el.fadeOut(); // 닫기 버튼을 클릭하면 레이어가 닫힌다.
+            return false;
+        });
+
+        $(".layer .dimBg").click(function(){
+            $(".dim-layer").fadeOut();
+            return false;
+        });
+
+    }
+	</script>
 </body>
 </html>

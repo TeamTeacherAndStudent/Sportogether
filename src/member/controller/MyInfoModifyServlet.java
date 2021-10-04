@@ -28,8 +28,14 @@ public class MyInfoModifyServlet extends HttpServlet {
 
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		String userId = (String)request.getSession().getAttribute("userId");
+		Member member = new MemberService().printOneById(userId);
+		if(member != null) {
+			request.setAttribute("member",member);
+			request.getRequestDispatcher("/MyPage/MyPage_Modify.jsp").forward(request, response);
+		}else {
+			response.sendRedirect("/MyPage/Mypage_Error.html");
+		}
 	}
 
 
@@ -48,7 +54,7 @@ public class MyInfoModifyServlet extends HttpServlet {
 	
 		int result = new MemberService().modifyMember(member);
 		if(result>0) {
-			response.sendRedirect("/MyPage/MyPage_Main.jsp");
+			response.sendRedirect("/mypage/main");
 		}else {
 			response.sendRedirect("/MyPage/Mypage_Error.html");
 		}

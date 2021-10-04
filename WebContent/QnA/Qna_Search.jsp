@@ -1,9 +1,19 @@
+<%@page import="qna.model.vo.QnA"%>
+<%@page import="java.util.List"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<% 
+	List<QnA> qList = (List<QnA>)request.getAttribute("qList");
+	String pageNavi = (String)request.getAttribute("pageNavi");
+%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!-- 포맷태그 식별 태그라이브러리  -->
+<%@taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>나의 활동 차트</title>
-
+<title>1:1문의 목록</title>
 <!-- Google Fonts -->
 <link
 	href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
@@ -24,45 +34,6 @@
 
 <!-- Template Main CSS File -->
 <link href="../assets/css/style.css" rel="stylesheet">
-
-<!--Load the AJAX API-->
-<script type="text/javascript"
-	src="https://www.gstatic.com/charts/loader.js"></script>
-<script type="text/javascript">
-
-      // Load the Visualization API and the corechart package.
-      google.charts.load('current', {'packages':['corechart']});
-
-      // Set a callback to run when the Google Visualization API is loaded.
-      google.charts.setOnLoadCallback(drawChart);
-
-      // Callback that creates and populates a data table,
-      // instantiates the pie chart, passes in the data and
-      // draws it.
-      function drawChart() {
-
-        // Create the data table.
-        var data = new google.visualization.DataTable();
-        data.addColumn('string', 'Topping');
-        data.addColumn('number', 'Slices');
-        data.addRows([
-          ['Mushrooms', 3],
-          ['Onions', 1],
-          ['Olives', 1],
-          ['Zucchini', 1],
-          ['Pepperoni', 2]
-        ]);
-
-        // Set chart options
-        var options = {'title':'내가 한 후원 종목 비율 확인',
-                       'width':700,
-                       'height':500};
-
-        // Instantiate and draw our chart, passing in some options.
-        var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
-        chart.draw(data, options);
-      }
-    </script>
 
 <style>
 #main-title {
@@ -88,6 +59,90 @@
 	display: flex;
 	justify-content: center;
 	vertical-align: middle;
+}
+
+h2 {
+	padding: 5px 10px;
+	border-bottom: 1px solid #848484;
+	border-left: 8px solid #848484;
+}
+
+ul, li {
+	list-style: none;
+	text-align: center;
+	padding: 0;
+	margin: 0;
+}
+
+#mainWrapper {
+	width: 950px;
+	margin: auto;
+	justify-content: center;
+	vertical-align: middle;
+	align-items: center;
+}
+
+#mainWrapper>ul>li:first-child {
+	text-align: center;
+	font-size: 14pt;
+	height: 40px;
+	vertical-align: middle;
+	line-height: 30px;
+}
+
+#ulTable {
+	margin-top: 10px;
+}
+
+#ulTable>li:first-child>ul>li {
+	background: #165992;
+	color: #fff;
+	font-weight: bold;
+	text-align: center;
+}
+
+#ulTable>li>ul {
+	clear: both;
+	padding: 0px auto;
+	position: relative;
+	min-width: 50px;
+}
+
+#ulTable>li>ul>li {
+	float: left;
+	font-size: 10pt;
+	border-bottom: 1px solid silver;
+	vertical-align: baseline;
+}
+
+#ulTable>li>ul>li:first-child {
+	width: 10%;
+} /*No 열 크기*/
+#ulTable>li>ul>li:first-child+li {
+	width: 45%;
+} /*제목 열 크기*/
+#ulTable>li>ul>li:first-child+li+li {
+	width: 15%;
+} /*작성일 열 크기*/
+#ulTable>li>ul>li:first-child+li+li+li {
+	width: 15%;
+} /*작성자 열 크기*/
+#ulTable>li>ul>li:first-child+li+li+li+li {
+	width: 15%;
+} /*추천수 열 크기*/
+#divPaging {
+	clear: both;
+	margin: 0 auto;
+	padding: 20px;
+	width: 250px;
+	height: 50px;
+}
+
+#divPaging>div {
+	float: left;
+	width: 30px;
+	margin: 0 auto;
+	text-align: center;
 }
 
 #back-btn {
@@ -127,28 +182,28 @@ button:hover {
 </style>
 </head>
 <body>
-	<!-- ======= Header ======= -->
+<!-- ======= Header ======= -->
 	<header id="header" class="fixed-top">
 		<div
 			class="container d-flex align-items-center justify-content-between">
 			<!-- 여기에 로고 사진 추가 -->
 			<h1 class="logo">
-				<a href="../index.html"> Sportogether </a>
+				<a href="../index.jsp"> Sportogether </a>
 			</h1>
 			<nav id="navbar" class="navbar">
 				<ul>
 					<li><a class="active" href="../Sports/sportsList.jsp">종목</a></li>
-					<li><a href="../Board/board_main.jsp">자유게시판</a></li>
-					<li><a href="../Support/support_main.jsp">후원</a></li>
+					<li><a href="/board/list">자유게시판</a></li>
+					<li><a href="/support/list">후원</a></li>
 					<li><input type="search" placeholder="검색" size="10"
 						id="search"></li>
 					<li><a href="../login_registration/login.jsp">Login</a></li>
 					<li class="dropdown"><a href="#"><span>SIDE MENU</span> <i
 							class="bi bi-chevron-down"></i></a>
 						<ul>
-							<li><a href="../Notice/notice_main.jsp">공지사항</a></li>
-							<li><a href="../MyPage/Mypage_Main.html">마이페이지</a></li>
-							<li><a href="../QnA/Qna_UserMain.html">1:1문의</a></li>
+							<li><a href="../notice/list">공지사항</a></li>
+							<li><a href="/mypage/main">마이페이지</a></li>
+							<li><a href="../qna/list">1:1문의</a></li>
 						</ul></li>
 				</ul>
 				<i class="bi bi-list mobile-nav-toggle"></i>
@@ -160,36 +215,100 @@ button:hover {
 	<!-- End Header -->
 
 	<!-- === Main ===  -->
-	<main>
+	<main id="main">
 		<section>
 			<div id="main-title">
-				<h1>활동차트</h1>
+				<h1>1:1 문의 내역</h1>
 			</div>
 		</section>
 
+		<div id="mainWrapper">
+			<ul>
+				<li>
+					<ul id="ulTable">
+						<li>
+							<ul>
+								<li>No</li>
+								<li>제목</li>
+								<li>작성일</li>
+								<li>작성자</li>
+								<li>답변대기</li>
+							</ul>
+						</li>
+						
+						
+<%-- 						<% for(QnA qOne : qList) {%>
+						<li>
+							<ul>
+								<li><%=qOne.getQnaNo() %></li>
+								<li class="left"><a href="/qna/detail?qnaNo=<%=qOne.getQnaNo()%>"><%=qOne.getQnaTitle()%></a></li>
+								<li><%=qOne.getQnaDate() %><fmt:formatDate pattern = "yyyy/MM/dd hh:mm" value=""/></li>
+								<li><%=qOne.getUserId() %></li>
+								<li><%=qOne.getQnaAns()%></li>
+							</ul>
+						</li>
+						<%} %> --%>
+						<c:forEach items="${requestScope.qList}" var="qna">
+						<li>
+							<ul>
+								<li>${qna.qnaNo}</li>
+								<li class="left"><a href="/qna/detail?qnaNo=${qna.qnaNo}">${qna.qnaTitle}</a></li>
+								<li><fmt:formatDate value="${qna.qnaDate}" pattern = "yyyy-MM-dd HH:mm" /></li>
+								<li>${qna.userId}</li>
+								<li>${qna.qnaAns}</li>
+							</ul>
+						</li>
+						</c:forEach>
+					</ul>
+				</li>
 
-		<!-- section : 프로필 수정-->
+				<li>
+					<div id="divPaging">
+					<%= pageNavi %>
+<!-- 						<div>◀</div>
+						<div>
+							<b>1</b>
+						</div>
+						<div>2</div>
+						<div>3</div>
+						<div>4</div>
+						<div>5</div>
+						<div>▶</div> -->
+					</div>
+				</li>
+
+			</ul>
+		</div>
+		
 		<section>
-			<div id="main-content">
-				<!--Div that will hold the pie chart-->
-				<div id="chart_div"></div>
-				<div id="count">
-					<br>
-					<br>
-					<br>
-					<br>
-					<br>
-					<br>
-					<br>
-					<br> 후원 횟수 : 10 <br> 스포투게더 방문횟수 : 46
-				</div>
-			</div>
-		</section>
-		<section>
+		
 			<div id="back-btn">
-				<a href="Mypage_Main.html"><button>마이 페이지</button></a>
+				<a href="/qna/write"><button>글쓰기</button></a>
 			</div>
+		
 		</section>
+		
+		
+		<!-- (관리자만)검색 ///우선 여기에 해서 테스트.. -->
+		<c:if test="${sessionScope.userCode eq 'G'}">
+		<section>
+		<form action="/qna/search" method="get">
+			<ul>
+				<li id='liSearchOption'>
+					<div>
+<!-- 					<select id='selSearchOption' name="select">
+							<option value='A'>제목+내용</option>
+							<option value='T'>제목</option>
+							<option value='C'>내용</option>
+						</select>  -->
+						<input type="text" id="txtKeyWord" name="searchKeyword" /> <input type="submit" id="search-btn" value='검색' />
+					</div>
+				</li>
+			</ul>
+		</form>
+		</section>
+		</c:if>
+		
 	</main>
 
 
@@ -247,6 +366,5 @@ button:hover {
 	<script src="assets/js/jquery-1.12.3.min.js"></script>
 	<script src="assets/js/jquery.counterup.min.js"></script>
 	<script src="assets/js/waypoints.min.js"></script>
-
 </body>
 </html>

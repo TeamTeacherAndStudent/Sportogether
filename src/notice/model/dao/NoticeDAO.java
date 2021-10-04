@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,13 +56,14 @@ public class NoticeDAO {
 			pstmt.setInt(2, end);
 			rset = pstmt.executeQuery();
 			nList = new ArrayList<Notice>();
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 			while(rset.next()) {
 				Notice notice = new Notice();
 				notice.setNoticeNo(rset.getInt("NOTICE_NO"));
 				notice.setNoticeTitle(rset.getString("NOTICE_TITLE"));
 				notice.setNoticeContents(rset.getString("NOTICE_CONTENTS"));
 				notice.setNoticeWriter(rset.getString("NOTICE_WRITER"));
-				notice.setNoticeDate(rset.getDate("NOTICE_DATE"));
+				notice.setNoticeDate(rset.getTimestamp("NOTICE_DATE"));
 				nList.add(notice);
 			}
 		} catch (SQLException e) {
@@ -157,13 +159,14 @@ public class NoticeDAO {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, noticeNo);
 			rset = pstmt.executeQuery();
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 			if(rset.next()) {
 				noticeOne = new Notice();
 				noticeOne.setNoticeNo(rset.getInt("NOTICE_NO"));
 				noticeOne.setNoticeTitle(rset.getString("NOTICE_TITLE"));
 				noticeOne.setNoticeContents(rset.getString("NOTICE_CONTENTS"));
 				noticeOne.setNoticeWriter(rset.getString("NOTICE_WRITER"));
-				noticeOne.setNoticeDate(rset.getDate("NOTICE_DATE"));
+				noticeOne.setNoticeDate(rset.getTimestamp("NOTICE_DATE"));
 				noticeOne.setNoticeCount(rset.getInt("NOTICE_COUNT"));
 			}
 		} catch (SQLException e) {

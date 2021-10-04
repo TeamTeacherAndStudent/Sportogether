@@ -103,11 +103,13 @@ public class QnAService {
 	public int registerQnaReply(int qnaNo, String replyContents, String userId) {
 		Connection conn = null;
 		int result = 0;		
-		
+		QnADAO qna = new QnADAO();
 		try {
 			conn= jdbcTemplate.createConnection();
-			result = new QnADAO().insertQnaReply(conn,qnaNo,replyContents,userId);
+			result = qna.insertQnaReply(conn,qnaNo,replyContents,userId);
 			if(result>0) {
+				// update qna board qna_ans 답변대기 -> 답변완료 
+				qna.updateQnaAns(conn,qnaNo);
 				JDBCTemplate.commit(conn);
 			}else {
 				JDBCTemplate.rollback(conn);
@@ -139,6 +141,28 @@ public class QnAService {
 		}
 		
 		return result;
+	}
+
+	
+	//검색 리스트
+	public PageData printSearchQna(String searchKeyword, int currentPage) {
+		Connection conn = null;
+		List<QnA> qList = null;
+		String searchPageNavi = null;
+		PageData pd = new PageData();
+		QnADAO qDAO = new QnADAO();
+		try {
+			conn = jdbcTemplate.createConnection();
+			qList = qDAO.selectSearchQna(conn,searchKeyword,currentPage);
+			searchPageNavi = qDAO.getSearchPageNavi(conn,searchKeyword,currentPage);
+			pd.setQnaList(qList);
+			pd.setPageNavi(searchPageNavi);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(conn);
+		}
+		return pd;
 	}
 
 }

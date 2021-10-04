@@ -140,22 +140,22 @@ button:hover {
 			class="container d-flex align-items-center justify-content-between">
 			<!-- 여기에 로고 사진 추가 -->
 			<h1 class="logo">
-				<a href="../index.html"> Sportogether </a>
+				<a href="../index.jsp"> Sportogether </a>
 			</h1>
 			<nav id="navbar" class="navbar">
 				<ul>
 					<li><a class="active" href="../Sports/sportsList.jsp">종목</a></li>
-					<li><a href="../Board/board_main.jsp">자유게시판</a></li>
-					<li><a href="../Support/support_main.jsp">후원</a></li>
+					<li><a href="/board/list">자유게시판</a></li>
+					<li><a href="/support/list">후원</a></li>
 					<li><input type="search" placeholder="검색" size="10"
 						id="search"></li>
 					<li><a href="../login_registration/login.jsp">Login</a></li>
 					<li class="dropdown"><a href="#"><span>SIDE MENU</span> <i
 							class="bi bi-chevron-down"></i></a>
 						<ul>
-							<li><a href="../Notice/notice_main.jsp">공지사항</a></li>
-							<li><a href="../MyPage/Mypage_Main.html">마이페이지</a></li>
-							<li><a href="../QnA/Qna_UserMain.html">1:1문의</a></li>
+							<li><a href="/notice/list">공지사항</a></li>
+							<li><a href="/mypage/main">마이페이지</a></li>
+							<li><a href="/qna/list">1:1문의</a></li>
 						</ul></li>
 				</ul>
 				<i class="bi bi-list mobile-nav-toggle"></i>
@@ -182,11 +182,12 @@ button:hover {
 						<div class="title">프로필</div>
 						<div class="content">
 							<!-- 회원 정보 공간 -->
-							닉네임 : 홍길동 <br> 전화번호 : 010-1234-5678 <br> 이메일 :
-							iei@naver.com <br>
+							닉네임 : ${member.userNickName} <br> 
+							전화번호 : ${member.userPhone} <br> 
+							이메일 : ${member.userEmail} <br>
 						</div>
 						<div class="button">
-							<a href="/mypage/myinfo?userId=${userId}"><button>수정</button></a>
+							<a href="/mypage/modify"><button>수정</button></a>
 						</div>
 					</div>
 					<div class="mybox">

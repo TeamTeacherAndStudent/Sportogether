@@ -1,12 +1,13 @@
 package qna.model.vo;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 public class QnAReply {
 	private int qnaReplyNo;
 	private int qnaNo;
 	private String qnaReplyContents;
-	private Date qnaReplyDate;
+	private Timestamp qnaReplyDate;
 	private String userId;
 	
 	public QnAReply() {}
@@ -35,11 +36,11 @@ public class QnAReply {
 		this.qnaReplyContents = qnaReplyContents;
 	}
 
-	public Date getQnaReplyDate() {
+	public Timestamp getQnaReplyDate() {
 		return qnaReplyDate;
 	}
 
-	public void setQnaReplyDate(Date qnaReplyDate) {
+	public void setQnaReplyDate(Timestamp qnaReplyDate) {
 		this.qnaReplyDate = qnaReplyDate;
 	}
 

@@ -11,7 +11,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>공지사항 상세페이지(관리자)</title>
+<title>공지사항 상세페이지</title>
 <!-- Google Fonts -->
 <link
 	href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
@@ -165,22 +165,22 @@ button:hover {
 			class="container d-flex align-items-center justify-content-between">
 			<!-- 여기에 로고 사진 추가 -->
 			<h1 class="logo">
-				<a href="../index.html"> Sportogether </a>
+				<a href="../index.jsp"> Sportogether </a>
 			</h1>
 			<nav id="navbar" class="navbar">
 				<ul>
 					<li><a class="active" href="../Sports/sportsList.jsp">종목</a></li>
-					<li><a href="../Board/board_main.jsp">자유게시판</a></li>
-					<li><a href="../Support/support_main.jsp">후원</a></li>
+					<li><a href="/board/list">자유게시판</a></li>
+					<li><a href="/support/list">후원</a></li>
 					<li><input type="search" placeholder="검색" size="10"
 						id="search"></li>
 					<li><a href="../login_registration/login.jsp">Login</a></li>
 					<li class="dropdown"><a href="#"><span>SIDE MENU</span> <i
 							class="bi bi-chevron-down"></i></a>
 						<ul>
-							<li><a href="../Notice/notice_main.jsp">공지사항</a></li>
-							<li><a href="../MyPage/Mypage_Main.html">마이페이지</a></li>
-							<li><a href="../QnA/Qna_UserMain.html">1:1문의</a></li>
+							<li><a href="/notice/list">공지사항</a></li>
+							<li><a href="/mypage/main">마이페이지</a></li>
+							<li><a href="qna/list">1:1문의</a></li>
 						</ul></li>
 				</ul>
 				<i class="bi bi-list mobile-nav-toggle"></i>
@@ -224,7 +224,7 @@ button:hover {
 		</div>
 		<section>
 			<div id="back-btn">
-			<c:if test="${sessionScope.userCode eq G}">
+			<c:if test="${sessionScope.userCode eq 'G'}">
 				<a href="#layer" class="check-btn"><button>삭제</button></a> 
 				<a href="/notice/modify?noticeNo=<%=noticeOne.getNoticeNo()%>"><button>수정</button></a> 
 			</c:if>
