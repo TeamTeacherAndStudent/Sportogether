@@ -164,17 +164,7 @@
         <div class="container">
 		  <h2 class="box">게시판 글쓰기</h2>
 		  <div id="form">
-			<!-- <form action ="" method="post" name="sportEnroll">
-				 <select name="sportsName">
-      					<option value="">종목선택</option>
-      					<option value="">배구</option>
-      					<option value="">축구</option>
-      					<option value="">탁구</option>
-      					<option value="">승마</option>
-      					<option value="">농구</option>
-      					<option value="">사이클</option>
-      					<option value="">기타</option>
-			      </select> -->
+				<input type="text" value="종목입력" size="10" id="sportEnroll">
 			    <form action="/board/write" method="post" id ="form">
 			    <div class="sportsName">
 			    	<input type="hidden" value="종목" name="sportsName">
@@ -182,12 +172,12 @@
 			      <input type="text" name="title" id="title" maxlength="50" pattern=".{4,50}" placeholder="제목입력(4-50)" size="100" required>
 			      <br><br>
 			   	  <textarea class="form-control" id="editor"
-  					name="content" placeholder="내용을 작성하세요."></textarea>
-					<!-- <div class="file-upload">
+ 					name="content" placeholder="내용을 작성하세요."></textarea>
+					<div class="file-upload">
 						<input type="text" name="upFile" class="upload-name" readonly>
 						<label class="input-file-button" for="input-file">파일 업로드</label>
 						<input type="file" name="upFile" id="input-file" multiple="multiple">파일버튼 숨김
-					</div> -->
+					</div> 
 				    <button id="previewBtn" class="Btn">미리보기</button>
 				    <input type="submit" value="등록" id="enrollBtn" class="Btn" onClick="onEnrollClick();">
 				    <button type="submit" value="취소" id="resetBtn"class="Btn" onclick="onResetClick();">

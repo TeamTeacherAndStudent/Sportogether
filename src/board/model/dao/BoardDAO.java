@@ -358,9 +358,7 @@ public class BoardDAO {
 		PreparedStatement pstmt =null;
 		ResultSet rset = null;
 		List<Board> bList = null;
-		String query = "SELECT * FROM(\r\n" + 
-				"SELECT ROW_NUMBER() OVER(ORDER BY BOARD_NO DESC) AS NUM, BOARD_NO, BOARD_TITLE, BOARD_CONTENTS, USER_ID, \r\n" + 
-				"FROM FREEBOARD WHERE BOARD_TITLE LIKE ? OR BOARD_CONTENTS LIKE ?) WHERE NUM BETWEEN ? AND ?";  //"SELECT * FROM NOTICE WHERE NOTICE_SUBJECT LIKE ?";
+		String query = "SELECT * FROM(SELECT ROW_NUMBER() OVER(ORDER BY BOARD_NO DESC) AS NUM, BOARD_NO, BOARD_TITLE, BOARD_CONTENTS, SPORTS_NAME, USER_ID, BOARD_ENROLLDATE FROM FREEBOARD WHERE BOARD_TITLE LIKE ? OR BOARD_CONTENTS LIKE ?) WHERE NUM BETWEEN ? AND ?";  //"SELECT * FROM NOTICE WHERE NOTICE_SUBJECT LIKE ?";
 		//쿼리문 다시보기
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -469,5 +467,76 @@ public class BoardDAO {
 			JDBCTemplate.close(pstmt);
 		}
 		return result;
+	}
+
+
+	public List<Board> selectSearchBoardTitle(Connection conn, String searchKeyword, int currentPage) {
+		PreparedStatement pstmt =null;
+		ResultSet rset = null;
+		List<Board> bList = null;
+		String query = "SELECT * FROM(SELECT ROW_NUMBER() OVER(ORDER BY BOARD_NO DESC) AS NUM, BOARD_NO, BOARD_TITLE, BOARD_CONTENTS, USER_ID, SPORTS_NAME, BOARD_ENROLLDATE FROM FREEBOARD WHERE BOARD_TITLE LIKE ?) WHERE NUM BETWEEN ? AND ?"; 
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1,  "%" + searchKeyword + "%"); 
+			int viewCountPerPage = 10; int start = currentPage * viewCountPerPage-(viewCountPerPage - 1);
+			int end = currentPage * viewCountPerPage;
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, end);
+			
+			bList = new ArrayList<Board>();
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				Board board = new Board();
+				board.setBoardNo(rset.getInt("BOARD_NO"));
+				board.setBoardTitle(rset.getString("BOARD_TITLE"));
+				board.setBoardContents(rset.getString("BOARD_CONTENTS"));
+				board.setBoardEnrollDate(rset.getDate("BOARD_ENROLLDATE"));
+				board.setSportsName(rset.getString("SPORTS_NAME"));
+				board.setUserId(rset.getString("USER_ID"));
+				bList.add(board);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return bList;
+	}
+
+
+	public List<Board> selectSearchBoardContents(Connection conn, String searchKeyword, int currentPage) {
+		PreparedStatement pstmt =null;
+		ResultSet rset = null;
+		List<Board> bList = null;
+		String query = "SELECT * FROM(SELECT ROW_NUMBER() OVER(ORDER BY BOARD_NO DESC) AS NUM, BOARD_NO, BOARD_TITLE, BOARD_CONTENTS, USER_ID, SPORTS_NAME, BOARD_ENROLLDATE FROM FREEBOARD WHERE BOARD_CONTENTS LIKE ?) WHERE NUM BETWEEN ? AND ?"; 
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1,  "%" + searchKeyword + "%"); 
+			int viewCountPerPage = 10;
+			int start = currentPage * viewCountPerPage-(viewCountPerPage - 1);
+			int end = currentPage * viewCountPerPage;
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, end);
+			
+			bList = new ArrayList<Board>();
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				Board board = new Board();
+				board.setBoardNo(rset.getInt("BOARD_NO"));
+				board.setBoardTitle(rset.getString("BOARD_TITLE"));
+				board.setBoardContents(rset.getString("BOARD_CONTENTS"));
+				board.setSportsName(rset.getString("SPORTS_NAME"));
+				board.setUserId(rset.getString("USER_ID"));
+				board.setBoardEnrollDate(rset.getDate("BOARD_ENROLLDATE"));
+				bList.add(board);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return bList;
 	}
 }

@@ -29,7 +29,6 @@ public class LikeDeleteServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int boardNo = Integer.parseInt(request.getParameter("boardNo"));
-		int CountLike = Integer.parseInt(request.getParameter("likeCount"));
 		int result = new BoardService().removeLike(boardNo);
 		if(result > 0) {
 			response.sendRedirect("/board/detail?boardNo="+boardNo);
@@ -42,8 +41,7 @@ public class LikeDeleteServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		
 	}
 
 }
