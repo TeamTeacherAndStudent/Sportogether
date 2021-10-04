@@ -2,9 +2,11 @@ package admin.model.service;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.List;
 
 import admin.model.dao.AdminDAO;
 import common.JDBCTemplate;
+import support.model.vo.Support;
 
 public class AdminService {
 	
@@ -33,6 +35,23 @@ private JDBCTemplate jdbcTemplate;
 		}
 		
 		return result;
+	}
+	// 미승인 후원 리스트 조회
+	public List<Support> printSupportList() {
+		Connection conn = null;
+		
+		List<Support> sList = null;
+		try {
+			conn = jdbcTemplate.createConnection();
+			sList = new AdminDAO().selectSupportList(conn);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(conn);
+		}
+		
+		
+		return sList;
 	}
 
 }

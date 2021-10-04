@@ -3,8 +3,10 @@ package admin.model.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.List;
 
 import common.JDBCTemplate;
+import support.model.vo.Support;
 
 public class AdminDAO {
 	
@@ -26,6 +28,10 @@ public class AdminDAO {
 		}
 		
 		return result;
+	}
+	// 미승인 후원 전체 조회
+	public List<Support> selectSupportList(Connection conn) {
+		return null;
 	}
 
 }
