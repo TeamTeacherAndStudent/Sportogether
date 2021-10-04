@@ -154,7 +154,7 @@
           <li class="dropdown"><a href="#"><span>SIDE MENU</span> <i class="bi bi-chevron-down"></i></a>
           <ul>
              <li><a href="/notice/list">공지사항</a></li>     
-             <li><a href="../MyPage/MyPage_Main.jsp">마이페이지</a></li>
+             <li><a href="/mypage/main">마이페이지</a></li>
              <li><a href="/qna/list">1:1문의</a></li>
           </ul>
           </li>

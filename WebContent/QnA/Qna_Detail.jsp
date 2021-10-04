@@ -181,13 +181,13 @@ button:hover {
 			class="container d-flex align-items-center justify-content-between">
 			<!-- 여기에 로고 사진 추가 -->
 			<h1 class="logo">
-				<a href="../index.html"> Sportogether </a>
+				<a href="../index.jsp"> Sportogether </a>
 			</h1>
 			<nav id="navbar" class="navbar">
 				<ul>
 					<li><a class="active" href="../Sports/sportsList.jsp">종목</a></li>
-					<li><a href="../Board/board_main.jsp">자유게시판</a></li>
-					<li><a href="../Support/support_main.jsp">후원</a></li>
+					<li><a href="/board/list">자유게시판</a></li>
+					<li><a href="/support/list">후원</a></li>
 					<li><input type="search" placeholder="검색" size="10"
 						id="search"></li>
 					<li><a href="../login_registration/login.jsp">Login</a></li>
@@ -195,7 +195,7 @@ button:hover {
 							class="bi bi-chevron-down"></i></a>
 						<ul>
 							<li><a href="/notice/list">공지사항</a></li>
-							<li><a href="../MyPage/Mypage_Main.html">마이페이지</a></li>
+							<li><a href="/mypage/main">마이페이지</a></li>
 							<li><a href="/qna/list">1:1문의</a></li>
 						</ul></li>
 				</ul>
@@ -252,21 +252,23 @@ button:hover {
 						<td>${reply.userId}</td>
 						<td>${reply.qnaReplyContents}</td>
 						<td><pre><fmt:formatDate pattern = "yyyy-MM-dd hh:mm" value="${reply.qnaReplyDate}"/></pre> </td>
-						<c:if test="${sessionScope.userCode eq G}"><td><a href="/qnaReply/remove?qnaNo=${reply.qnaNo}&qnaReplyNo=${reply.qnaReplyNo}" class="check-btn" id="deleteReply-Btn"><button>삭제</button></a></td></c:if>
+						<c:if test="${sessionScope.userCode eq 'G'}"><td><a href="/qnaReply/remove?qnaNo=${reply.qnaNo}&qnaReplyNo=${reply.qnaReplyNo}" class="check-btn" id="deleteReply-Btn"><button>삭제</button></a></td></c:if>
 					</tr>
 					
 					</c:forEach>
 			</table>  
 			<br>
 			<!-- 댓글입력 -->
+			<c:if test="${sessionScope.userCode eq 'G'}">
 			 <form action="/qnaReply/write" method="post">
 				<div class="qna-reply">
-					<input type="text" id="reply" name="replyContents" placeholder="댓글을 입력해주세요" maxlength="10">
+					<input type="text" id="reply" name="replyContents" placeholder="댓글을 입력해주세요" >
 					&nbsp;&nbsp;&nbsp;&nbsp;
 					<input type="hidden" name="qnaNo" value="<%=qnaOne.getQnaNo() %>">
 					<button id="reply-btn" type="submit">등록</button>
 				</div>
 			</form> 
+			</c:if>
 		</div>
 		<section>
 			<div id="back-btn">

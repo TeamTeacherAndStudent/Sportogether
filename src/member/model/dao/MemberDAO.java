@@ -90,7 +90,7 @@ public class MemberDAO {
 				member.setUserPw(rset.getString("USER_PW"));
 				member.setUserNickName(rset.getString("USER_NICKNAME"));
 				member.setUserName(rset.getString("USER_NAME"));
-				member.setUserBirthDate(rset.getString("USER_BIRTHDATE"));
+				member.setUserBirthDate(rset.getString("USER_BIRTHDAY"));
 				member.setUserGender(rset.getString("USER_GENDER"));
 				member.setUserPhone(rset.getString("USER_PHONE"));
 				member.setUserEmail(rset.getString("USER_EMAIL"));
@@ -127,6 +127,27 @@ public class MemberDAO {
 			//자원해제
 			JDBCTemplate.close(pstmt);
 		}
+		return result;
+	}
+
+
+
+	
+	//마이페이지 회원탈퇴
+	public int deleteMember(Connection conn, String userId) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "DELETE FROM MEMBER WHERE USER_ID = ?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userId);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
 		return result;
 	}
 

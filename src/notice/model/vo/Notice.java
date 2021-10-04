@@ -1,13 +1,14 @@
 package notice.model.vo;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 public class Notice {
 	private int noticeNo;
 	private String noticeTitle;
 	private String noticeContents;
 	private String noticeWriter;
-	private Date noticeDate;
+	private Timestamp noticeDate;
 	private int noticeCount;
 	
 	public Notice() {}
@@ -45,11 +46,11 @@ public class Notice {
 		this.noticeWriter = noticeWriter;
 	}
 
-	public Date getNoticeDate() {
+	public Timestamp getNoticeDate() {
 		return noticeDate;
 	}
 
-	public void setNoticeDate(Date noticeDate) {
+	public void setNoticeDate(Timestamp noticeDate) {
 		this.noticeDate = noticeDate;
 	}
 

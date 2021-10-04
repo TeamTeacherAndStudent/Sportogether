@@ -1,6 +1,7 @@
 package qna.model.vo;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
 public class QnA {
@@ -8,7 +9,7 @@ public class QnA {
 	private String userId;
 	private String qnaTitle;
 	private String qnaContents;
-	private Date qnaDate;
+	private Timestamp qnaDate;
 	private String qnaAns;
 	
 	//댓글 - 구조상 QNA에 포함되기 떄문에 어레이리스트를 포함시킴
@@ -60,11 +61,11 @@ public class QnA {
 		this.qnaContents = qnaContents;
 	}
 
-	public Date getQnaDate() {
+	public Timestamp getQnaDate() {
 		return qnaDate;
 	}
 
-	public void setQnaDate(Date qnaDate) {
+	public void setQnaDate(Timestamp qnaDate) {
 		this.qnaDate = qnaDate;
 	}
 
