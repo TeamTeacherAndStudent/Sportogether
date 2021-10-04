@@ -21,13 +21,14 @@ public class SupportDAO {
 		List<Support> sList = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String query = "SELECT * FROM(SELECT ROW_NUMBER() OVER(ORDER BY SUPPORT_NO DESC) AS NUM, SUPPORT_NO,SUPPORT_APPROVAL, SUPPORT_CATEGORY, USER_ID, END_DATE, POSTING_DATE,SUPPORT_TITLE, SUPPORT_INTRO, SUPPORT_PURPOSE,SUPPORT_CONTENTS,SUPPORT_GOAL,ACHIVED_RECORD,FILE_NAME,FILE_SIZE,FILE_PATH  FROM SUPPORT WHERE SUPPORT_APPROVAL = 'N' )WHERE NUM BETWEEN ? AND ?";
+		String query = "SELECT * FROM(SELECT ROW_NUMBER() OVER(ORDER BY SUPPORT_NO DESC) AS NUM, SUPPORT_NO,SUPPORT_APPROVAL, SUPPORT_CATEGORY, USER_ID, END_DATE, POSTING_DATE,SUPPORT_TITLE, SUPPORT_INTRO, SUPPORT_PURPOSE,SUPPORT_CONTENTS,SUPPORT_GOAL,ACHIVED_RECORD,FILE_NAME,FILE_SIZE,FILE_PATH  FROM SUPPORT  ) WHERE NUM BETWEEN ? AND ? ";
 		try {
 			pstmt = conn.prepareStatement(query);
 			
 			int viewCountPerPage = 8;
 			int start = currentPage * viewCountPerPage - (viewCountPerPage - 1);
 			int end = currentPage * viewCountPerPage;
+			
 			pstmt.setInt(1, start);
 			pstmt.setInt(2, end);
 			rset = pstmt.executeQuery();
@@ -116,13 +117,13 @@ public class SupportDAO {
 	private int totalCount(Connection conn) {
 		int totalValue = 0;
 		PreparedStatement pstmt = null;
-		String query= "SELECT COUNT(*) AS TOTALCOUNT FROM SUPPORT WHERE SUPPORT_APPROVAL = ?";
+		String query= "SELECT COUNT(*) AS TOTALCOUNT FROM SUPPORT ";
 		ResultSet rset = null;
 		
 		try {
 			pstmt = conn.prepareStatement(query);
 			//승인 여부 바꿔줘야함. 
-			pstmt.setString(1, "N");
+//			pstmt.setString(1, "Y");
 			rset = pstmt.executeQuery();
 			
 			if(rset.next()) {

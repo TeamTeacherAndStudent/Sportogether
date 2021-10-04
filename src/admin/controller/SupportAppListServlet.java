@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import admin.model.service.AdminService;
+import support.model.service.SupportService;
+import support.model.vo.PageData;
 import support.model.vo.Support;
 
 /**
@@ -36,14 +38,20 @@ public class SupportAppListServlet extends HttpServlet {
 //승인 여부가 'N'인 후원 게시물 리스트 
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		int supportNo =Integer.parseInt(request.getParameter("supportNo"));
-		
-		List<Support> sList = new AdminService().printSupportList();
-		
+		int currentPage = 0;
+		String getCurrentPage = request.getParameter("currentPage");
+		if(getCurrentPage == null) {
+			currentPage = 1;
+		}else {
+			currentPage = Integer.parseInt(getCurrentPage);
+		}
+		PageData pageData = new SupportService().printAllSupport(currentPage);
+		List<Support> sList = pageData.getSupportList();
 		//리스트 조회 성공하면
 		if(!sList.isEmpty()) {
 			//
 			request.setAttribute("sList", sList);
+			request.setAttribute("pageNavi",pageData.getPageNavi());
 			// 후원 승인 목록 페이지로 이동
 			request.getRequestDispatcher("/Admin/support_approval.jsp")
 			.forward(request, response);
