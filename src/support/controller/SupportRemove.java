@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import support.model.service.SupportService;
+
 /**
  * Servlet implementation class SupportRemove
  */
@@ -26,8 +28,17 @@ public class SupportRemove extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		int supportNo = Integer.parseInt(request.getParameter("supportNo"));
+		int result = new SupportService().removeSupport(supportNo);
+		
+		if(result>0) {
+			//삭제 성공
+			response.sendRedirect("/support/list?supprtNo="+supportNo);
+		}else {
+			//삭제 실패
+			
+		}
+	
 	}
 
 	/**

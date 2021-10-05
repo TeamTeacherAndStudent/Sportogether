@@ -171,6 +171,27 @@ public class SupportService {
 		}
 		return idCheck;
 	}
+	//후원 삭제
+	public int removeSupport(int supportNo) {
+		int result = 0;
+		Connection conn =null;
+		try {
+			conn=jdbcTemplate.createConnection();
+			result = new SupportDAO().deleteSupport(conn, supportNo);
+			if(result > 0) {
+				JDBCTemplate.commit(conn);
+			}else {
+				JDBCTemplate.rollback(conn);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(conn);
+		}
+		
+		
+		return result;
+	}
 	
 
 }
