@@ -222,6 +222,7 @@ button:hover {
 			</div>
 		</section>
 
+	<c:if test="${sessionScope.userCode eq 'G'}">
 		<div id="mainWrapper">
 			<ul>
 				<li>
@@ -237,17 +238,6 @@ button:hover {
 						</li>
 						
 						
-<%-- 						<% for(QnA qOne : qList) {%>
-						<li>
-							<ul>
-								<li><%=qOne.getQnaNo() %></li>
-								<li class="left"><a href="/qna/detail?qnaNo=<%=qOne.getQnaNo()%>"><%=qOne.getQnaTitle()%></a></li>
-								<li><%=qOne.getQnaDate() %><fmt:formatDate pattern = "yyyy/MM/dd hh:mm" value=""/></li>
-								<li><%=qOne.getUserId() %></li>
-								<li><%=qOne.getQnaAns()%></li>
-							</ul>
-						</li>
-						<%} %> --%>
 						<c:forEach items="${requestScope.qList}" var="qna">
 						<li>
 							<ul>
@@ -265,23 +255,57 @@ button:hover {
 				<li>
 					<div id="divPaging">
 					<%= pageNavi %>
-<!-- 						<div>◀</div>
-						<div>
-							<b>1</b>
-						</div>
-						<div>2</div>
-						<div>3</div>
-						<div>4</div>
-						<div>5</div>
-						<div>▶</div> -->
+					</div>
+				</li>
+	
+			</ul>
+		</div>
+	</c:if>
+	
+	<c:if test="${sessionScope.userCode eq 'A'}">
+		<div id="mainWrapper">
+			<ul>
+				<li>
+					<ul id="ulTable">
+						<li>
+							<ul>
+								<li>No</li>
+								<li>제목</li>
+								<li>작성일</li>
+								<li>작성자</li>
+								<li>답변대기</li>
+							</ul>
+						</li>
+						
+						
+						<c:forEach items="${requestScope.qList}" var="qna">
+						<c:if test="${sessionScope.userId eq qna.userId}">
+						<li>
+							<ul>
+								<li>${qna.qnaNo}</li>
+								<li class="left"><a href="/qna/detail?qnaNo=${qna.qnaNo}">${qna.qnaTitle}</a></li>
+								<li><fmt:formatDate value="${qna.qnaDate}" pattern = "yyyy-MM-dd HH:mm" /></li>
+								<li>${qna.userId}</li>
+								<li>${qna.qnaAns}</li>
+							</ul>
+						</li>
+						</c:if>
+						</c:forEach>
+					</ul>
+				</li>
+
+				<li>
+					<div id="divPaging">
+					<%= pageNavi %>
 					</div>
 				</li>
 
 			</ul>
 		</div>
-		
+	</c:if>	
+	
+	
 		<section>
-		
 			<div id="back-btn">
 				<a href="/qna/write"><button>글쓰기</button></a>
 			</div>
@@ -307,6 +331,7 @@ button:hover {
 		</form>
 		</section>
 		</c:if>
+
 	</main>
 
 

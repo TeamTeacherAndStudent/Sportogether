@@ -2,7 +2,10 @@ package member.model.service;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.List;
 
+import board.model.vo.Board;
+import board.model.vo.PageData;
 import common.JDBCTemplate;
 import member.model.dao.MemberDAO;
 import member.model.vo.Member;
@@ -111,6 +114,27 @@ public class MemberService {
 			JDBCTemplate.close(conn);
 		}
 		return result;
+	}
+	
+	//마이페이지 내가 쓴 게시글 리스트
+	public PageData printAllMypost(int currentPage, String userId) {
+		Connection conn = null;
+		List<Board> bList = null;
+		String mypostPageNavi = null;
+		PageData pd = new PageData();
+		MemberDAO mDAO = new MemberDAO();
+		try {
+			conn = jdbcTemplate.createConnection();
+			bList = mDAO.selectAllMypost(conn,currentPage,userId);
+			mypostPageNavi = mDAO.getPageNavi(conn,currentPage,userId);
+			pd.setBoardList(bList);
+			pd.setPageNavi(mypostPageNavi);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(conn);
+		}
+		return pd;
 	}
 
 

@@ -28,6 +28,7 @@ public class QnAListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int currentPage = 0;
 		String getCurrentPage = request.getParameter("currentPage");
+		/* String userId = request.getParameter("userId"); */
 		if(getCurrentPage == null) {
 			currentPage = 1;
 		}else {
@@ -40,8 +41,7 @@ public class QnAListServlet extends HttpServlet {
 		if(!qList.isEmpty()) {
 			request.setAttribute("qList", qList);
 			request.setAttribute("pageNavi", pageData.getPageNavi());
-			
-			//관리자/사용자 화면 어떻게 구분?
+			/* request.setAttribute("userId", userId); */
 			request.getRequestDispatcher("/QnA/Qna_Main.jsp").forward(request, response);
 		}else {
 			RequestDispatcher view = request.getRequestDispatcher("/QnA/Qna_Error.html");
