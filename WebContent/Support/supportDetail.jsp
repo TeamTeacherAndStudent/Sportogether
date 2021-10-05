@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>캠페인 상세</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
  <!-- font Awesome -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/fontawesome.min.css">
  <!-- Google Fonts -->
@@ -227,7 +228,7 @@
 				  		<form action = "/supportReply/write" method = "post">
 				  			<div>
 								<div class="input-group mb-3">
-						  			<input type = "hidden" name = "supportNo" value = ${supportOne.supportNo }>
+						  			<input id="supportNo" type = "hidden" name = "supportNo" value = "${supportOne.supportNo }">
 								  <input type="text" class="form-control" name = "reply-contents" placeholder="응원 댓글을 작성해보세요!" aria-label="Recipient's username" aria-describedby="button-addon2">
 								  <button class="btn btn-outline-secondary" type="submit" id="button-addon2">등록</button>
 								</div>
@@ -239,7 +240,9 @@
  							<th>작성자</th>
  							<th>내용</th>
  							<th>작성일</th>
- 							<th></th>
+ 							<th>
+ 								
+ 							</th>
  							
  						</tr>
  						<!--  EL/JSTL로 댓글 소환 -->
@@ -253,7 +256,14 @@
  									<a href = "/supportReply/Remove?replyNo=${supportReply.supportReplyNo }&supportNo=${supportReply.supportNo}">삭제</a>
  								</c:if>
  							</td>
- 							<td><a href="/supportReply/report?replyNo=${supportReply.supportReplyNo }&supportNo=${supportReply.supportNo}">신고</a></td>
+ 							<td>
+ 								<!-- 댓글 번호 저장해두기 -->
+ 								<input id = "replyNo" type="hidden" value = "${supportReply.supportReplyNo }">
+ 								<a href="/supportReply/report?replyNo=${supportReply.supportReplyNo }&supportNo=${supportReply.supportNo}">신고
+ 								</a>
+ 								<!-- confirm창으로 확인 후 신고하기 -->
+ 								<a href="javascript:reportReply();" >신고</a>
+ 							</td>
  						</tr>
  						</c:forEach>
  						
@@ -380,10 +390,25 @@
 	<script>
 	 <!-- URL 복사 -->
 		
-			window.copyURL = function(){
-				prompt("[Ctrl + c]를 눌러 URL을 복사하세요:",window.location);
-				}
-				
+	window.copyURL = function(){
+		prompt("[Ctrl + c]를 눌러 URL을 복사하세요:",window.location);
+	}
+	//  confirm 창 띄운 후 신고
+	
+	function reportReply(){
+		var reportReplyChk = window.confirm("해당 댓글을 신고하시겠습니까?");
+		var supportNo = $("#supportNo").val();
+		var replyNo = $("#replyNo").val();
+		if(reportReplyChk) {
+			//신고했는지 여부를 다른 서블렛에서 체크해야하나?
+			
+			location.href ="/supportReply/report?replyNo=" + replyNo + "&supportNo=" + supportNo;
+			window.alert${requestScope.reportmsg};
+// 			window.alert("신고하였습니다. 최대한 빠른 시일 내에 검토하겠습니다.");
+		}else{
+			window.alert("취소하였습니다.");
+		}
+	}			
 		
 	</script>
   

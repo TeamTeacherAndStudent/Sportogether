@@ -134,7 +134,7 @@
 				</a>
 			</div>
 			<div class="col-lg-4 col-md-4 col-xs-4 col-sm-4">
-				<a href="support_approval.jsp">
+				<a href="/support/appList">
 					<div id="approvalcard" class="card">
 						<div class="card-header">
 							<h3>승인 대기 캠페인 목록</h3>
