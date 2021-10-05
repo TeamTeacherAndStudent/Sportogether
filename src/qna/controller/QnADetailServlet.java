@@ -29,9 +29,9 @@ public class QnADetailServlet extends HttpServlet {
 		if(qnaOne != null) {
 			//성공하면 디테일 페이지
 			request.setAttribute("qnaOne", qnaOne);
-			request.getRequestDispatcher("/QnA/Qna_Detail.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/QnA/Qna_Detail.jsp").forward(request, response);
 		}else {
-			request.getRequestDispatcher("/QnA/Qna_Error.html").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/QnA/Qna_Error.html").forward(request, response);
 		}
 	}
 

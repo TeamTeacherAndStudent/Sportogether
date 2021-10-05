@@ -157,7 +157,7 @@
 				</a>
 			</div>
 			<div class="col-lg-4 col-md-4 col-xs-4 col-sm-4">
-				<a href="member_manage.jsp">
+				<a href="/admin/memberlist">
 					<div id="membercard" class="card">
 						<div class="card-header">
 							<h3>회원 관리</h3>

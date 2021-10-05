@@ -26,7 +26,7 @@ public class QnAWriteServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//페이지 이동용
-		request.getRequestDispatcher("/QnA/Qna_Write.html").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/QnA/Qna_Write.html").forward(request, response);
 	}
 
 
@@ -52,7 +52,7 @@ public class QnAWriteServlet extends HttpServlet {
 			//작성성공
 			response.sendRedirect("/qna/list");
 		}else {
-			request.getRequestDispatcher("/QnA/ServiceFailed.html").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/QnA/ServiceFailed.html").forward(request, response);
 		}
 	}
 

@@ -42,9 +42,9 @@ public class NoticeListServlet extends HttpServlet {
 			request.setAttribute("nList", nList);
 			request.setAttribute("pageNavi", pageData.getPageNavi());
 			// 관리자/사용자화면 어떻게 구분?
-			request.getRequestDispatcher("/Notice/Notice_List.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/Notice/Notice_List.jsp").forward(request, response);
 		}else {
-			RequestDispatcher view = request.getRequestDispatcher("/Notice/Notice_Error.html");
+			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/Notice/Notice_Error.html");
 			view.forward(request, response);
 		}
 		

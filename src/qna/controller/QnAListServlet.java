@@ -42,9 +42,9 @@ public class QnAListServlet extends HttpServlet {
 			request.setAttribute("qList", qList);
 			request.setAttribute("pageNavi", pageData.getPageNavi());
 			/* request.setAttribute("userId", userId); */
-			request.getRequestDispatcher("/QnA/Qna_Main.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/QnA/Qna_Main.jsp").forward(request, response);
 		}else {
-			RequestDispatcher view = request.getRequestDispatcher("/QnA/Qna_Error.html");
+			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/QnA/Qna_Error.html");
 			view.forward(request, response);
 		}
 	}

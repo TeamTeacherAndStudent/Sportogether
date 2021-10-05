@@ -46,7 +46,7 @@ public class QnAReplyWriteServlet extends HttpServlet {
 		if(result>0) {
 			response.sendRedirect("/qna/detail?qnaNo="+qnaNo);
 		}else {
-			request.getRequestDispatcher("/QnA/Qna_Error.html").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/QnA/Qna_Error.html").forward(request, response);
 		}
 		
 		

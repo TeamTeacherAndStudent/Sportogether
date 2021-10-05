@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import common.JDBCTemplate;
+import member.model.vo.Member;
 import support.model.vo.Support;
 
 public class AdminDAO {
@@ -160,6 +161,165 @@ public class AdminDAO {
 			}
 			
 			return totalValue;
+		}
+
+		
+		//관리자페이지 전체 회원 목록 조회
+		public List<Member> selectAllMember(Connection conn, int currentPage) {
+			PreparedStatement pstmt = null;
+			ResultSet rset = null;
+			String query = "SELECT * FROM (SELECT ROW_NUMBER() OVER(ORDER BY USER_ID) AS NUM, USER_ID, USER_PW, USER_NICKNAME, USER_NAME, USER_BIRTHDAY, USER_GENDER, USER_PHONE, USER_EMAIL, USER_CODE, PLAYER, USER_ENROLLDATE, USER_IMG_NAME, USER_IMG_SIZE, USER_IMG_PATH FROM MEMBER) WHERE NUM BETWEEN ? AND ?";
+			List<Member> mList = null;
+			try {
+				pstmt = conn.prepareStatement(query);
+				int viewCountPerPage = 10;
+				int start = currentPage * viewCountPerPage - (viewCountPerPage -1);
+				int end = currentPage * viewCountPerPage;
+				pstmt.setInt(1,start);
+				pstmt.setInt(2,end);
+				rset = pstmt.executeQuery();
+				mList = new ArrayList<Member>();
+				while(rset.next()) {
+					Member member = new Member();
+					member.setUserId(rset.getString("USER_ID"));
+					member.setUserPw(rset.getString("USER_PW"));
+					member.setUserNickName(rset.getString("USER_NICKNAME"));
+					member.setUserName(rset.getString("USER_NAME"));
+					member.setUserBirthDate(rset.getString("USER_BIRTHDAY"));
+					member.setUserGender(rset.getString("USER_GENDER"));
+					member.setUserPhone(rset.getString("USER_PHONE"));
+					member.setUserEmail(rset.getString("USER_EMAIL"));
+					member.setUserCode(rset.getString("USER_EMAIL"));
+					member.setUserPlayer(rset.getString("PLAYER")); //변수명 체크
+					member.setUserEnrollDate(rset.getDate("USER_ENROLLDATE"));
+					member.setUserImgName(rset.getString("USER_IMG_NAME"));
+					member.setUserImgSize(rset.getInt("USER_IMG_SIZE"));
+					member.setUserImgPath(rset.getString("USER_IMG_PATH"));
+					mList.add(member);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}finally {
+				JDBCTemplate.close(rset);
+				JDBCTemplate.close(pstmt);
+			}
+			return mList;
+		}
+		
+		
+		//관리자 회원 상세 조회
+		public Member selectOneById(Connection conn, String userId) {
+			PreparedStatement pstmt = null;
+			ResultSet rset = null;
+			
+			Member member = null;
+			String query = "SELECT * FROM MEMBER WHERE USER_ID = ?";
+			
+			try {
+				pstmt = conn.prepareStatement(query);
+				pstmt.setString(1, userId);
+				rset = pstmt.executeQuery();
+				if(rset.next()) {
+					member = new Member();
+					member.setUserId(rset.getString("USER_ID"));
+					member.setUserPw(rset.getString("USER_PW"));
+					member.setUserNickName(rset.getString("USER_NICKNAME"));
+					member.setUserName(rset.getString("USER_NAME"));
+					member.setUserBirthDate(rset.getString("USER_BIRTHDAY"));
+					member.setUserGender(rset.getString("USER_GENDER"));
+					member.setUserPhone(rset.getString("USER_PHONE"));
+					member.setUserEmail(rset.getString("USER_EMAIL"));
+					member.setUserCode(rset.getString("USER_EMAIL"));
+					member.setUserPlayer(rset.getString("PLAYER")); //변수명 체크
+					member.setUserEnrollDate(rset.getDate("USER_ENROLLDATE"));
+					member.setUserImgName(rset.getString("USER_IMG_NAME"));
+					member.setUserImgSize(rset.getInt("USER_IMG_SIZE"));
+					member.setUserImgPath(rset.getString("USER_IMG_PATH"));
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}finally {
+				JDBCTemplate.close(rset);
+				JDBCTemplate.close(pstmt);
+			}
+			return member;
+		}
+		
+		//관리자페이지 회원강퇴
+		public int deleteMember(Connection conn, String userId) {
+			PreparedStatement pstmt = null;
+			int result = 0;
+			String query = "DELETE FROM MEMBER WHERE USER_ID = ?";
+			try {
+				pstmt = conn.prepareStatement(query);
+				pstmt.setString(1,userId);
+				result = pstmt.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}finally {
+				JDBCTemplate.close(pstmt);
+			}
+			return result;
+		}
+		
+		//선수 인증
+		public int updatePlayer(Connection conn, Member member) {
+			int result = 0;
+			PreparedStatement pstmt = null;
+			String query = "UPDATE MEMBER SET PLAYER = ? WHERE USER_ID = ?";
+			try {
+				pstmt = conn.prepareStatement(query);
+				pstmt.setString(1, "Y");
+				pstmt.setString(2, member.getUserId());
+				result = pstmt.executeUpdate();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}finally {
+				JDBCTemplate.close(pstmt);
+			}
+			
+			return result;
+		}
+		
+		
+		//관리자페이지 회원검색
+		public List<Member> selectSearchMember(Connection conn, String searchKeyword) {
+			PreparedStatement pstmt = null;
+			ResultSet rset = null;
+			List<Member> mList = null;
+			String query = "SELECT * FROM MEMBER WHERE USER_ID = ?";
+			try {
+				pstmt = conn.prepareStatement(query);
+				pstmt.setString(1, searchKeyword);
+				mList = new ArrayList<Member>();
+				rset = pstmt.executeQuery();
+				if(rset.next()) {
+					Member member = new Member();
+					member.setUserId(rset.getString("USER_ID"));
+					member.setUserPw(rset.getString("USER_PW"));
+					member.setUserNickName(rset.getString("USER_NICKNAME"));
+					member.setUserName(rset.getString("USER_NAME"));
+					member.setUserBirthDate(rset.getString("USER_BIRTHDAY"));
+					member.setUserGender(rset.getString("USER_GENDER"));
+					member.setUserPhone(rset.getString("USER_PHONE"));
+					member.setUserEmail(rset.getString("USER_EMAIL"));
+					member.setUserCode(rset.getString("USER_EMAIL"));
+					member.setUserPlayer(rset.getString("PLAYER")); //변수명 체크
+					member.setUserEnrollDate(rset.getDate("USER_ENROLLDATE"));
+					member.setUserImgName(rset.getString("USER_IMG_NAME"));
+					member.setUserImgSize(rset.getInt("USER_IMG_SIZE"));
+					member.setUserImgPath(rset.getString("USER_IMG_PATH"));
+					mList.add(member);
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}finally {
+				JDBCTemplate.close(rset);
+				JDBCTemplate.close(pstmt);
+			}
+			return mList;
 		}
 
 

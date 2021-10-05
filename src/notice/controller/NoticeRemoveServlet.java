@@ -32,7 +32,7 @@ public class NoticeRemoveServlet extends HttpServlet {
 			//성공하면 게시글 리스트로 이동
 			response.sendRedirect("/notice/list");
 		}else {
-			request.getRequestDispatcher("/Notice/Notice_Error.html").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/Notice/Notice_Error.html").forward(request, response);
 		}
 	}
 

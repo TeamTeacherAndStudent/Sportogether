@@ -3,11 +3,12 @@
     <%-- +선수/일반 회원 들급 변경 /유저 아이디(닉네임) 검색 기능 추가 / 페이징 처리 추가--%>
     <%-- 회원삭제 버튼 클릭시 회원 정보 삭제 처리페이지로 이동(member_remove_action.jsp --%>
 	<%-- css 보정 검색창 위치변경/ 검색창 바탕색변경 / 테이블 css손보기 --%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>관리자 회원 관리</title>
+<title>관리자 회원 관리(전체 회원 정보 조회)</title>
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
@@ -135,25 +136,28 @@
 <body>
 		 <header id="header" class="fixed-top">
 	    <div class="container d-flex align-items-center justify-content-between">
-		<!-- 여기에 로고 사진 추가 -->
-     	<h1 class="logo"><a href="../index.html"> Sportogether </a></h1>
-       <nav id="navbar" class="navbar">
-        <ul>
-          <li><a class="active" href="../Sports/sportsList.jsp">종목</a></li>
-          <li><a href="../Board/board_main.jsp">자유게시판</a></li>
-          <li><a href="../Support/support_main.jsp">후원</a></li>
-          <li><input type="search" placeholder="검색" size="10" id="search"></li>
-            <li><a href="../login_registration/login.jsp">Login</a></li>
-          <li class="dropdown"><a href="#"><span>SIDE MENU</span> <i class="bi bi-chevron-down"></i></a>
-          <ul>
-             <li><a href="../Notice/notice_main.jsp">공지사항</a></li>     
-             <li><a href="../MyPage/Mypage_Main.html">마이페이지</a></li>
-             <li><a href="../QnA/Qna_UserMain.html">1:1문의</a></li>
-          </ul>
-          </li>
-        </ul>
-        <i class="bi bi-list mobile-nav-toggle"></i>
-      </nav><!-- .navbar -->
+         <!-- 여기에 로고 사진 추가 -->
+         <h1 class="logo">
+            <a href="../index.jsp"> Sportogether </a>
+         </h1>
+         <nav id="navbar" class="navbar">
+            <ul>
+               <li><a class="active" href="../Sports/sportsList.jsp">종목</a></li>
+               <li><a href="/board/list">자유게시판</a></li>
+               <li><a href="/support/list">후원</a></li>
+               <li><input type="search" placeholder="검색" size="10"
+                  id="search"></li>
+               <li><a href="../login_registration/login.jsp">Login</a></li>
+               <li class="dropdown"><a href="#"><span>SIDE MENU</span> <i
+                     class="bi bi-chevron-down"></i></a>
+                  <ul>
+                     <li><a href="/notice/list">공지사항</a></li>
+                     <li><a href="/mypage/main">마이페이지</a></li>
+                     <li><a href="/qna/list">1:1문의</a></li>
+                  </ul></li>
+            </ul>
+            <i class="bi bi-list mobile-nav-toggle"></i>
+         </nav><!-- .navbar -->
     </div>
   </header><!-- End Header -->
   <br><br>
@@ -161,35 +165,26 @@
 		<section id="membermanage">
 <!-- 모든 값을 출력해준다 memberDTO list로 불러와서 selectAllMember() -->
 			<div class="container">
-				<h1>회원 관리</h1><br><br>
+				<h1>전체 회원 관리</h1><br><br>
 				<ul class="ulTable">
 					<li>
 						<ul>
-							<li><input type="checkbox" name="" value="all" id="chk_all"></li>
-							<li>회원번호</li>
+<!-- 							<li><input type="checkbox" name="" value="all" id="chk_all"></li> -->
 							<li>아이디</li>
 							<li>닉네임</li>
 							<li>가입일</li>
 						</ul>
 					</li>
+					<c:forEach items="${requestScope.mList}" var="member" varStatus="index">
 					<li>
 						<ul>
-							<li><input type="checkbox" name="" value="vallyball" class="one-chk"></li>
-							<li>1</li>
-							<li>admin</li>
-							<li><a href="member_detail.jsp">관리자</a></li>
-							<li>2021.09.28</li>
+<!-- 						<li><input type="checkbox" name="" value="vallyball" class="one-chk"></li> -->
+							<li><a href="/mypage/modify?useId=${member.userId}">${member.userId}</a></li>
+							<li>${member.userNickName}</li>
+							<li>${member.userEnrollDate}</li>
 						</ul>
 					</li>
-					<li>
-						<ul>
-							<li><input type="checkbox" name="" value="vallyball" class="one-chk"></li>
-							<li>1</li>
-							<li>admin</li>
-							<li><a href="member_detail.jsp">관리자</a></li>
-							<li>2021.09.28</li>
-						</ul>
-					</li><br><br>
+					</c:forEach>
 					<li>
 						<div id="divPaging">
 							<div>◀</div>

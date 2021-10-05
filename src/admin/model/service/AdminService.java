@@ -6,6 +6,7 @@ import java.util.List;
 
 import admin.model.dao.AdminDAO;
 import common.JDBCTemplate;
+import member.model.vo.Member;
 import support.model.dao.SupportDAO;
 import support.model.vo.PageData;
 import support.model.vo.Support;
@@ -59,5 +60,98 @@ private JDBCTemplate jdbcTemplate;
 	public board.model.vo.PageData printReportedBoardList(int currentPage) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	
+	//관리자페이지 전체 회원 목록 조회
+	public PageData printAllMember(int currentPage) {
+		PageData pd = new PageData();
+		Connection conn = null;
+		AdminDAO aDAO = new AdminDAO();
+		
+		try {
+			conn = jdbcTemplate.createConnection();
+			pd.setMemberList(aDAO.selectAllMember(conn,currentPage));
+			pd.setPageNavi(aDAO.getPageNavi(conn, currentPage));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(conn);
+		}
+		return pd;
+	}
+
+	//관리자페이지 회원 상세 조회
+	public Member printOneById(String userId) {
+		Member member = null;
+		Connection conn = null;
+		
+		try {
+			conn = jdbcTemplate.createConnection();
+			member = new AdminDAO().selectOneById(conn,userId);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(conn);
+		}
+		return member;
+	}
+
+	
+	//관리자페이지 회원강퇴처리
+	public int deleteMember(String userId) {
+		int result = 0;
+		Connection conn = null;
+		
+		try {
+			conn = jdbcTemplate.createConnection();
+			result = new AdminDAO().deleteMember(conn,userId);
+			if(result > 0) {
+				JDBCTemplate.commit(conn);
+			}else {
+				JDBCTemplate.rollback(conn);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return result;
+	}
+
+	
+	//선수 인증
+	public int updatePlayer(Member member) {
+		int result = 0;
+		Connection conn = null;
+		try {
+			conn = jdbcTemplate.createConnection();
+			result = new AdminDAO().updatePlayer(conn,member);
+			if(result>0) {
+				JDBCTemplate.commit(conn);
+			}else {
+				JDBCTemplate.rollback(conn);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(conn);
+		}
+		return result;
+	}
+
+	
+	//관리자페이지 회원 검색
+	public List<Member> printSearchMember(String searchKeyword) {
+		Connection conn = null;
+		List<Member> mList = null;
+		try {
+			conn = jdbcTemplate.createConnection();
+			mList = new AdminDAO().selectSearchMember(conn,searchKeyword);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(conn);
+		}
+		return mList;
 	}
 }

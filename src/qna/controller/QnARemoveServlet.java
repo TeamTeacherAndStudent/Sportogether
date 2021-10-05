@@ -28,7 +28,7 @@ public class QnARemoveServlet extends HttpServlet {
 		if(result>0) {
 			response.sendRedirect("/qna/list");
 		}else {
-			request.getRequestDispatcher("/QnA/Qna_Error.html").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/QnA/Qna_Error.html").forward(request, response);
 		}
 		
 	}
