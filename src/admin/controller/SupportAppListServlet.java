@@ -45,7 +45,7 @@ public class SupportAppListServlet extends HttpServlet {
 		}else {
 			currentPage = Integer.parseInt(getCurrentPage);
 		}
-		PageData pageData = new SupportService().printAllSupport(currentPage);
+		PageData pageData = new AdminService().printAllSupport(currentPage);
 		List<Support> sList = pageData.getSupportList();
 		//리스트 조회 성공하면
 		if(!sList.isEmpty()) {

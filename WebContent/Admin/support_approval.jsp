@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,7 +9,7 @@
 <title>관리자 캠페인 승인 관리</title>
 <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <!-- Vendor CSS Files -->
   <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
@@ -103,6 +105,9 @@
 		 #search{
 		   margin-left: 30px;
 		}
+		.ulTable > a {
+			text-decoration: none;
+		}
 	</style>
 </head>
 <body>
@@ -146,44 +151,26 @@
 							<li>승인여부</li>
 						</ul>
 					</li>
-					<li>
-						<ul>
-							<li>No</li>
-							<li>제목</li>
-							<li>작성자</li>
-							<li>날짜</li>
-							<li><button class="approvalBtn" onclick="onApprovalClick();">승인</button></li>
-						</ul>
-					</li>
-					<li>
-						<ul>
-							<li>No</li>
-							<li>제목</li>
-							<li>작성자</li>
-							<li>날짜</li>
-							<li><button class="approvalBtn" onclick="onApprovalClick();">승인</button></li>
-						</ul>
-					</li>
-					<li>
-						<ul>
-							<li>No</li>
-							<li>제목</li>
-							<li>작성자</li>
-							<li>날짜</li>
-							<li><button class="approvalBtn" onclick="onApprovalClick();">승인</button></li>
-						</ul>
-					</li>
+					<c:forEach items="${requestScope.sList }" var= "support" varStatus="index">
+						<li>
+							<ul>
+								<li>${support.supportNo }</li>
+								<li><a style= "color: black;"   href = "/support/detail?supportNo=${support.supportNo }">${support.supportTitle }</a></li>
+								<li>${support.supportWriter }</li>
+								<li><fmt:formatDate value="${support.supportRegDate }" pattern="yyyy/MM/dd HH:mm"/></li>
+							
+								<li>
+									<button class="approvalBtn" id = "approvalBtn" onclick="onApprovalClick();" value = "${support.supportNo }">승인</button>
+								</li>
+							</ul>
+						</li>
+					</c:forEach>	
+					
 				</ul>
 				<!-- 페이징 처리 -->
 				<br><br>
 				<div id="divPaging">
-					<div>◀</div>
-					<div><b>1</b></div>
-					<div>2</div>
-					<div>3</div>
-					<div>4</div>
-					<div>5</div>
-					<div>▶</div>
+				${requestScope.pageNavi }
 				</div>
 				
 			</div>
@@ -223,15 +210,24 @@
 <!-- Vendor JS Files -->
 	<script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 	<script>
+// 	function onApprovalClick(){
+// 		var Approvalcheck = window.confirm("캠페인 게시를 승인하시겠습니까?");
+// 		if(Approvalcheck) {
+// 			console.log("네");
+// 		}else {
+// 			console.log("아니오");
+// 		}
+// 	}
 	function onApprovalClick(){
-		var Approvalcheck = window.confirm("캠페인 승인을 하시겠습니까?");
-		if(Approvalcheck) {
-			console.log("네");
-		}else {
-			console.log("아니오");
+		var ApprovalChk = window.confirm("해당 후원 게시를 승인하시겠습니까?");
+		var approval = $("#approvalBtn").val();
+		if(ApprovalChk) {
+			location.href ="/support/approval?supportNo="+approval;
+			window.alert("승인되었습니다");
+		}else{
+			window.alert("승인 실패하였습니다.");
 		}
 	}
-	
 	</script>
 </body>
 </html>

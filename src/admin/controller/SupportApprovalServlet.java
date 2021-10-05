@@ -35,9 +35,11 @@ public class SupportApprovalServlet extends HttpServlet {
 		
 		if(result > 0 ) {
 			//성공
-			response.sendRedirect("/support/approveList");
+			response.sendRedirect("/support/appList");
+			System.out.println("후원 승인 성공");
 		}else {
 			//실패
+			System.out.println("후원 승인 실패");
 		}
 		
 	
