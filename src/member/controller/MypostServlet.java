@@ -35,7 +35,7 @@ public class MypostServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int currentPage = 0;
 		String getCurrentPage = request.getParameter("currentPage");
-		String userId = request.getParameter("userId");
+		String userId = (String)request.getSession().getAttribute("userId");
 		if(getCurrentPage == null) {
 			currentPage = 1;
 		}else {
@@ -43,7 +43,8 @@ public class MypostServlet extends HttpServlet {
 		}
 		PageData pageData = new MemberService().printAllMypost(currentPage,userId);
 		List<Board> bList = pageData.getBoardList();
-		if(!bList.isEmpty()) {
+		 if(!bList.isEmpty()) { 
+			request.setAttribute("userId", userId); 
 			request.setAttribute("bList", bList);
 			request.setAttribute("pageNavi", pageData.getPageNavi());
 			request.getRequestDispatcher("/MyPage/MyPage_Mypost.jsp").forward(request, response);

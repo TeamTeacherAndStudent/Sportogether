@@ -108,7 +108,6 @@ public class MemberService {
 				JDBCTemplate.rollback(conn);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally {
 			JDBCTemplate.close(conn);

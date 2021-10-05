@@ -207,11 +207,11 @@ button:hover {
 									<li>작성일</li>
 								</ul>
 							</li>
-							<c:forEach items="${requestScope.bList}" var="mypost">
+							<c:forEach items="${requestScope.bList}" var="mypost" varStatus="index">
 							<li>
 								<ul>
-									<li>${bList.boardNo}</li>
-									<li>${bList.boardEnrollDate}</li>
+									<li><a href="/board/detail?boardNo=${mypost.boardNo}">${mypost.boardTitle}</a></li>
+									<li>${mypost.boardEnrollDate}</li>
 								</ul>
 							</li>
 							</c:forEach>
