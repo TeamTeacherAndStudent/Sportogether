@@ -159,7 +159,7 @@ public class MemberDAO {
 	public List<Board> selectAllMypost(Connection conn, int currentPage, String userId) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String query = "SELECT * FROM (SELECT ROW_NUMBER() OVER(ORDER BY BOARD_NO DESC) AS NUM, BOARD_NO, BOARD_TITLE, BOARD_CONTENTS, SPORTS_NAME, USER_ID, BOARD_ENROLLDATE, BOARD_COUNT, BAORD_LIKE FROM FREEBOARD WHERE USER_ID = ?) WHERE NUM BETWEEN ? AND ?";
+		String query = "SELECT * FROM (SELECT ROW_NUMBER() OVER(ORDER BY BOARD_NO DESC) AS NUM, BOARD_NO, BOARD_TITLE, BOARD_CONTENTS, SPORTS_NAME, USER_ID, BOARD_ENROLLDATE, BOARD_COUNT, BOARD_LIKE FROM FREEBOARD WHERE USER_ID = ?) WHERE NUM BETWEEN ? AND ?";
 		List<Board> bList = null;
 		try {
 			pstmt = conn.prepareStatement(query);
