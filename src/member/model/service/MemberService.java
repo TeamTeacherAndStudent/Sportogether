@@ -135,6 +135,26 @@ public class MemberService {
 		}
 		return pd;
 	}
+	
+	// ID 찾기
+	
+	//입력받은 이름, 생년월일, 휴대폰 번호로 member 테이블에서 id 조회
+	public String findUserId(String userName, String userBirth, String userPhone) {
+		Connection conn = null;
+		String userId = null;
+		try {
+			conn = jdbcTemplate.createConnection();
+			userId = new MemberDAO().selectFindId(conn, userName, userBirth, userPhone);
+				
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(conn);
+		}
+		
+		return userId;
+	}
 
 
 }

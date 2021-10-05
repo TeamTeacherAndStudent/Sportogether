@@ -253,6 +253,34 @@ public class MemberDAO {
 
 		return result;
 	}
+	
+	// ID 찾기
+	public String selectFindId(Connection conn, String userName, String userBirth, String userPhone) {
+		Statement stmt = null;
+		ResultSet rset = null;
+		String userId = null;
+		String query ="SELECT USER_ID FROM MEMBER WHERE USER_NAME = ? AND USER_BIRTHDAY = ? AND USER_PHONE = ?";
+		
+		PreparedStatement pstmt = null;
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userName);
+			pstmt.setString(2, userBirth);
+			pstmt.setString(3, userPhone);
+			rset=pstmt.executeQuery();
+			if(rset.next()) {
+				userId = rset.getString("USER_ID");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(stmt);
+		}
+		
+		return userId;
+	}
 
 
 

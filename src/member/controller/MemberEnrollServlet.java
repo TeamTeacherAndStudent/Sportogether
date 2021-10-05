@@ -66,7 +66,7 @@ public class MemberEnrollServlet extends HttpServlet {
 		}else {
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter writer =response.getWriter();
-			writer.println("<script>alert('회원가입이 실패하였습니다. 다시 시도해주세요.'); location.href='/login_registration/registration.html';</script>");
+			writer.println("<script>alert('중복되는 아이디입니다.다시 시도해주세요'); history.back();</script>");
 			writer.flush();
 //			response.sendRedirect("/login_registration/loginError.html");
 		}
