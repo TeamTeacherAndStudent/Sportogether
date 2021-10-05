@@ -217,6 +217,21 @@ public class BoardService {
 		}
 		return result;
 	}
+	public BoardLike selectBoardLike(int boardNo, String userId) {
+		Connection conn = null;
+		BoardLike result = null;
+		
+		try {
+			conn = jdbcTemplate.createConnection();
+			result = new BoardDAO().selectBoardLike(conn, boardNo, userId);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(conn);
+		}
+		return result;
+	}
+	
 	public int updateLike(BoardLike boardLike) {
 		Connection conn = null;
 		int result = 0;
@@ -234,13 +249,13 @@ public class BoardService {
 		return result;
 	}
 	
-	public int removeLike(int boardNo) {
+	public int removeLike(int boardNo, String userId) {
 		Connection conn = null;
 		int result = 0;
 		
 		try {
 			conn = jdbcTemplate.createConnection();
-			result = new BoardDAO().removeLike(conn,boardNo);
+			result = new BoardDAO().removeLike(conn,boardNo,userId);
 			if(result > 0) {
 				JDBCTemplate.commit(conn);
 			}else {
@@ -260,6 +275,11 @@ public class BoardService {
 		try {
 			conn = jdbcTemplate.createConnection();
 			result = new BoardDAO().updateScrap(conn, scrap);
+			if(result > 0) {
+				JDBCTemplate.commit(conn);
+			}else {
+				JDBCTemplate.rollback(conn);
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
@@ -276,6 +296,11 @@ public class BoardService {
 		try {
 			conn = jdbcTemplate.createConnection();
 			result = new BoardDAO().deleteScrap(conn, scrapNo);
+			if(result > 0) {
+				JDBCTemplate.commit(conn);
+			}else {
+				JDBCTemplate.rollback(conn);
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {

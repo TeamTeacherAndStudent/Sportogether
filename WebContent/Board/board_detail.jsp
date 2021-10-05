@@ -148,7 +148,7 @@
 <br><br><br><br><br>
     <main id="main">
   		<div class="container">
-  			<h1 class="">자유게시판</h1><br><hr><br>
+  			<h1 class="">자유게시판 : ${likeYn }</h1><br><hr><br>
   			<fieldset>
 	  			<div id="form">
 					<div class="text">
@@ -184,9 +184,13 @@
 			</fieldset>
 					<c:if test="${sessionScope.userId ne null }">
 						<div id="center-btn">
-						<c:if test="${sessionScope.userId eq boardLike.userId }" var="likeChk">
-	    						<button type="submit" id="likeBtn" class="Btn" onclick="onLikeChange()">좋아요</button>
+					<!--<c:if test="${sessionScope.userId eq boardLike.userId }" var="likeChk">
+	    						<button type="submit" id="likeBtn" class="Btn" onclick="offLikeChange()">좋아요</button>
 	                    </c:if>
+	                    <c:if test="${sessionScope.userId ne boardLike.userId }" var="likeChk">
+	    						<button type="submit" id="likeBtn" class="Btn" onclick="onLikeChange()">좋아요</button>
+	                    </c:if>-->
+	    		     		<button type="submit" id="likeBtn" class="Btn" onclick="onLikeChange()">좋아요</button>
 	                        <button type="submit"id="scrapBtn" class="Btn" onclick="onScrapChange();">스크랩</button>
 	                        <button id="reportBtn" class="Btn" onclick="onReportedBoardClick();">게시글신고</button>
 						</div>
@@ -230,7 +234,7 @@
 	                    </div>
 	                    <div class="col-md-1">
 	                    <c:if test="${sessionScope.userId eq reply.boardReplyUserId}">
-	                    	<a href="/boardReply/delete?boardNo="${reply.boardNo }"&boardReplyNo="${reply.boardReplyNo}">삭제</a>
+	                    	<a href="/boardReply/delete?boardNo=${reply.boardNo }&boardReplyNo=${reply.boardReplyNo}">삭제</a>
 	                    </c:if>	
 	                    </div>
 	                    <div class="col-md-2">
@@ -277,18 +281,34 @@
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
 <script>
-	function onLikeChange(){
-			likeChk
-			$("#likeBtn").toggleClass('like');
-			var boardNo = "${requestScope.boardOne.boardNo }";
-			
-	 		if($(this).attr('class') == 'like'){
-				location.href="/like/delete?boardNo="+boardNo;
-	 		}else{ 
-				location.href ="/like/update?boardNo="+boardNo+"&likeCount="+1;
-	 		}
+	var likeYn = '${likeYn }';
+	if(likeYn == 'Y') {
+		$("#likeBtn").addClass('like');
 	}
-	
+	function onLikeChange(){
+		$("#likeBtn").toggleClass('like');
+		var boardNo = "${requestScope.boardOne.boardNo }";
+	   location.href="/like/detail?boardNo="+boardNo;
+	   if($(this).attr('class') == 'like'){
+			location.href ="/like/delete?boardNo="+boardNo;
+			$("#likeBtn").removeClass('like');
+		}else{
+			location.href ="/like/update?boardNo="+boardNo;
+			$("#likeBtn").addClass('like');
+		}
+	}
+		//	location.href ="/like/update?boardNo="+boardNo;
+	 //	if($(this).attr('class') == 'like'){
+	//			location.href ="/like/update?boardNo="+boardNo;
+	// 	}else{ 
+	//			location.href ="/like/update?boardNo="+boardNo;
+	// 	}
+		 	
+		 //	if($(this).attr('class') == 'like'){
+		//			location.href="/like/delete?boardNo="+boardNo;
+		//	}else{ 
+		//			location.href ="/like/update?boardNo="+boardNo+"&likeCount="+1;
+		// 	}
 	function onScrapChange(){
 			$("#scrapBtn").toggleClass('scrap');
 			var boardNo = "${requestScope.boardOne.boardNo }";

@@ -6,23 +6,22 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
+import board.model.dao.BoardDAO;
 import board.model.service.BoardService;
-import board.model.vo.Board;
 import board.model.vo.BoardLike;
 
 /**
- * Servlet implementation class BoardDetailServlet
+ * Servlet implementation class LikeCheckServlet
  */
-@WebServlet("/board/detail")
-public class BoardDetailServlet extends HttpServlet {
+@WebServlet("/like/check")
+public class LikeCheckServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BoardDetailServlet() {
+    public LikeCheckServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,29 +31,22 @@ public class BoardDetailServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int boardNo = Integer.parseInt(request.getParameter("boardNo"));
-		Board boardOne = new BoardService().printOneByNo(boardNo);
+		String userId = request.getParameter("userId");
 		
-		if(boardOne != null) {
-			request.setAttribute("boardOne",boardOne); //service에서 와서 출력
-		}else {
-			request.getRequestDispatcher("/WEB-INF/board/boardError.html").forward(request, response);
-		}
-		HttpSession session = request.getSession();
-//		int likeCount = Integer.parseInt(request.getParameter("likeCount"));
-		String userId = (String)session.getAttribute("userId");
-		BoardLike boardLike  = new BoardService().selectBoardLike(boardNo, userId);
-		if(boardLike != null) {
-			request.setAttribute("likeYn", "Y");
-		}else {
-			request.setAttribute("likeYn", "N");
-		}
-		request.getRequestDispatcher("/Board/board_detail.jsp").forward(request, response);
+//		int result = new BoardService().selectBoardLike(boardNo, userId);
+//		if(result > 0) {
+			response.sendRedirect("/board/detail?boardNo="+boardNo);
+//		}else {
+//			response.sendRedirect("/board/detail?boardNo="+boardNo);
+//		}
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		// TODO Auto-generated method stub
+		doGet(request, response);
 	}
+
 }

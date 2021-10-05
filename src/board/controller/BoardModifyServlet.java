@@ -60,5 +60,4 @@ public class BoardModifyServlet extends HttpServlet {
 			request.getRequestDispatcher("/Board/boardError.html");
 		}
 	}
-
 }

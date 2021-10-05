@@ -343,17 +343,6 @@ public class BoardDAO {
 		return bList;
 	}
 
-
-	public String getSearchPageNavi(Connection conn, String searchKeyword, int currentPage) {
-
-		return null;
-	}
-	
-	public void searchTotalCount(Connection conn, String searchKeyword) {
-		
-	}
-
-
 	public List<Board> selectSearchBoard(Connection conn, String searchKeyword, int currentPage) {
 		PreparedStatement pstmt =null;
 		ResultSet rset = null;
@@ -394,17 +383,41 @@ public class BoardDAO {
 	}
 
 
+	public BoardLike selectBoardLike(Connection conn, int boardNo, String userId) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		BoardLike boardLike = null;
+		String query = "SELECT * FROM BOARD_LIKE WHERE BOARD_NO = ? AND USER_ID = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, boardNo);
+			pstmt.setString(2, userId);
+			rset  = pstmt.executeQuery();
+			if(rset.next()) {
+				boardLike = new BoardLike();
+				boardLike.setBoardNo(rset.getInt("BOARD_NO"));;
+				boardLike.setUserId(rset.getString("USER_ID"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return boardLike;
+	}
+	
 	public int updateLike(Connection conn, BoardLike boardLike) {
 		int result = 0;
 		PreparedStatement pstmt = null;
-		String query = "INSERT INTO BOARD_LIKE VALUES(?, ?, ?)";
+		String query = "INSERT INTO BOARD_LIKE VALUES(?, ?, SEQ_LIKE_NO.NEXTVAL)";
 		
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, boardLike.getBoardNo());
 			pstmt.setString(2, boardLike.getUserId());
-			pstmt.setInt(3, boardLike.getLikeCount());
 			result = pstmt.executeUpdate();
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
@@ -413,14 +426,15 @@ public class BoardDAO {
 		return result;
 	}
 
-	public int removeLike(Connection conn, int boardNo) {
+	public int removeLike(Connection conn, int boardNo, String userId) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-		String query = "DELETE FROM BOARD_LIKE WHERE BOARD_NO = ?";
+		String query = "DELETE FROM BOARD_LIKE WHERE BOARD_NO = ? AND USER_ID = ?";
 		
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1,  boardNo);
+			pstmt.setString(2, userId);
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -539,4 +553,11 @@ public class BoardDAO {
 		}
 		return bList;
 	}
+
+
+	public String getSearchPageNavi(Connection conn, String searchKeyword, int currentPage) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
