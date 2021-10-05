@@ -75,7 +75,7 @@
 						<input class = "login-input" id = "floatingInput" autocomplete="off" type="text" name = "user-id" placeholder ="ID"><br>
 						<input class = "login-input" id = "floatingPassword" autocomplete="off" type="password" name = "user-pw" placeholder ="PASSWORD"><br>
 					<a href="/login_registration/findmyId.jsp" style="font-size:12px;" class="link-secondary">ID 찾기</a>
-					<a href="#" style="font-size:12px;" class="link-secondary">PW 찾기</a><br>
+					<a href="/login_registration/findmyPw.jsp" style="font-size:12px;" class="link-secondary">PW 찾기</a><br>
 					<a href="/login_registration/registration.html" style="font-size:18px;" id = "registration" class="link-secondary">회원가입</a><br><br>
 					<input class = "btn btn-info" type="submit" value= "    LOG-IN !    ">
 					<hr>

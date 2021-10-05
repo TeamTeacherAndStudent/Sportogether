@@ -2,12 +2,22 @@ package member.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Properties;
+import java.util.Random;
 
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import member.model.service.MemberService;
 import member.model.vo.Member;
@@ -40,10 +50,10 @@ public class MemberFindMyPw extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String userId = request.getParameter("user-id");
-		Member m = new MemberService().printOneById(userId);
+		MemberService ms = new MemberService();
+		Member m = ms.printOneById(userId);
 		
-		if(m != null) {
-			String userMail = m.getUserEmail();
+		if(m == null) {
 			response.setContentType("text/html;charset=UTF-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
@@ -56,17 +66,145 @@ public class MemberFindMyPw extends HttpServlet {
 //			request.setAttribute("userMail", userMail);
 //			request.getRequestDispatcher("/login_registration/sendPw.jsp").forward(request, response);
 			
-		}else {
-			response.setContentType("text/html;charset=UTF-8");
-			PrintWriter out = response.getWriter();
-			out.println("<script>");
-
-			out.println("alert('존재하지 않는 아이디 입니다.')");
-
-			out.println("history.back()");
-
-			out.println("</script>");
 		}
+		//인증 번호 생성기
+		 StringBuffer temp =new StringBuffer();
+        Random rnd = new Random();
+        for(int i=0;i<6;i++)
+        {
+            int rIndex = rnd.nextInt(3);
+            switch (rIndex) {
+            case 0:
+                // a-z
+                temp.append((char) ((int) (rnd.nextInt(26)) + 97));
+                break;
+            case 1:
+                // A-Z
+                temp.append((char) ((int) (rnd.nextInt(26)) + 65));
+                break;
+            case 2:
+                // 0-9
+                temp.append((rnd.nextInt(10)));
+                break;
+            }
+        }
+        //비밀번호 변경
+        
+        
+        
+        //메일발송
+        String host = "smtp.gmail.com";
+	    final String user = "rohilkie94@gmail.com"; 
+	    String sender = "rohilkie94@gmail.com";
+	    final String password = "jsilki94";
+	
+    
+	    
+	    // SMTP 서버 정보를 설정한다. (ssl적용에따라 설정옵션이 달라진다. 아래는 ssl적용 안한버전이다.)
+	    Properties props = new Properties(); 
+	    props.put("mail.smtp.starttls.enable", "true");
+	    props.put("mail.smtp.host", host); 	
+	    props.put("mail.smtp.port", 587); 
+	    props.put("mail.smtp.auth", "true"); 
+	    props.put("mail.smtp.ssl.protocols", "TLSv1.2");                                                                     
+        //인증	    
+	    Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() { 
+	        protected PasswordAuthentication getPasswordAuthentication() { 
+	            return new PasswordAuthentication(user, password); 
+	        } 
+	    }); 
+	    
+	    try { 
+	        MimeMessage message = new MimeMessage(session); 
+            //받는사람 메일
+	        message.setFrom(new InternetAddress(sender)); 
+	        message.addRecipient(Message.RecipientType.TO, new InternetAddress(m.getUserEmail())); 
+
+	        // 메일 제목 
+	        message.setSubject("SPORTOGETHER 임시 비밀번호 발송 안내입니다."); 
+	        // 메일 내용 
+	        message.setText("비밀번호가 임시 비밀번호 : "+temp+" 로 변경되었습니다. 로그인 후 반드시 비밀번호를 변경해주세요."); 
+	        // send the message 
+	        Transport.send(message); 
+	    } catch (MessagingException e) {
+	        e.printStackTrace(); 
+	    } 
+	
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        //mail server 설정
+//		String host = "smtp.naver.com";
+//		final String user = "shdlfrl91";
+//		final String password = "jsilki9457";
+//		
+//		//메일 받을 주소
+//		String to_email = m.getUserEmail();
+//		
+//		//SMTP 서버 정보 설정
+//		Properties props = new Properties();
+//		props.put("mail.smtp.host", "smtp.naver.com");
+//		props.put("mail.smtp.port", 465);
+//		props.put("mail.smtp.auth", "true");
+//		props.put("mail.smtp.ssl.enable", "true");
+//		props.put("mail.smtp.ssl.trust", "smtp.naver.com");
+//		
+//         String AuthenticationKey = temp.toString();
+//         System.out.println(AuthenticationKey);
+//         
+         
+         
+         //임시 비밀번호로 비밀번호 변경
+         
+         
+//         Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
+//             protected PasswordAuthentication getPasswordAuthentication() {
+//                 return new PasswordAuthentication(user,password);
+//             }
+//         });
+         
+         //email 전송
+//         try {
+//             MimeMessage msg = new MimeMessage(session);
+//             msg.setFrom(new InternetAddress(user, "sportogether"));
+//             msg.addRecipient(Message.RecipientType.TO, new InternetAddress(to_email));
+//             
+//             //메일 제목
+//             msg.setSubject("안녕하세요 SPORTOGETHER 임시 비밀번호 안내 메일입니다.");
+//             //메일 내용
+//             msg.setText("임시 비밀 번호 :"+temp);
+//             msg.setText("로그인 후 반드시 비밀번호를 변경해주세요.");
+//             Transport.send(msg);
+//             System.out.println("이메일 전송");
+//             
+//         }catch (Exception e) {
+//             e.printStackTrace();// TODO: handle exception
+//         }
+//     
+         
+     	response.setContentType("text/html;charset=UTF-8");
+
+		PrintWriter out = response.getWriter();
+
+		out.println("<script>");
+
+		out.println("alert('메일이 발송되었습니다.')");
+
+		out.println("location.href='/index.jsp'");
+
+		out.println("</script>");
 	}
 
 }

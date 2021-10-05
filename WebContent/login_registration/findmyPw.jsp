@@ -86,7 +86,7 @@
 			<div class="col-md-3 visible"></div>
 			<div class= " col-md-6">
 				<div class="container px-5 my-5 center">
-				    <form  class="was-validated" action="/member/findid" method="post">
+				    <form  class="was-validated" action="/member/findpw" method="post">
 				      	 <div class="mb-3">
 				            <label class="form-label" for="user-id">아이디</label>
 				            <input  class="form-control" id="user-id" name="user-id" type="text" placeholder="아이디"  autocomplete = "off" required minLength="5" maxLength="14" pattern="^[0-9a-zA-Z]+$"/>
@@ -160,7 +160,7 @@
 // 		}else{
 // 			window.alert("취소하였습니다.");
 // 		}
-	}
+	
   
   </script>
 </body>
