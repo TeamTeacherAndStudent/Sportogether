@@ -5,9 +5,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import admin.model.vo.ReportedBoard;
+import admin.model.vo.ReportedReply;
 import board.model.vo.Board;
 import board.model.vo.BoardLike;
 import board.model.vo.FileData;
@@ -220,6 +223,7 @@ public class BoardDAO {
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, boardNo);
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 			rList = new ArrayList<BoardReply>();
 			rset = pstmt.executeQuery();
 			while(rset.next()) {
@@ -554,10 +558,101 @@ public class BoardDAO {
 		return bList;
 	}
 
+	public int insertReportedBoard(Connection conn, ReportedBoard rboard) {
 
-	public String getSearchPageNavi(Connection conn, String searchKeyword, int currentPage) {
-		// TODO Auto-generated method stub
-		return null;
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "INSERT INTO REPORTED_BOARD VALUES(?, ?, SEQ_REPORTED_BOARD_NO.NEXTVAL)";
+	try {
+		pstmt = conn.prepareStatement(query);
+		pstmt.setInt(1,rboard.getBoardNo());
+		pstmt.setString(2, rboard.getUserId());
+		result = pstmt.executeUpdate();
+	}catch(SQLException e) {
+			e.printStackTrace();
+	}finally {
+		JDBCTemplate.close(pstmt);
+	}
+	return result;
 	}
 
+
+
+	public int insertReportedRely(Connection conn, ReportedReply rReply) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "INSERT INTO REPORTED_REPLY VALUES(?, ?)";
+			try {
+				pstmt = conn.prepareStatement(query);
+				pstmt.setInt(1,rReply.getReplyNo());
+				pstmt.setString(2, rReply.getUserId());
+				result = pstmt.executeUpdate();
+			}catch(SQLException e) {
+					e.printStackTrace();
+			}finally {
+				JDBCTemplate.close(pstmt);
+			}
+			return result;
+	}
+
+	public String getSearchPageNavi(Connection conn, String searchKeyword, int currentPage) {
+		int pageCountPerView = 5;
+		int viewTotalCount = totalCount(conn);
+		int viewCountPerPage = 10;
+		int pageTotalCount = 0;
+		int pageTotalCountMod = viewTotalCount % viewCountPerPage;
+		if(pageTotalCountMod > 0) {
+			pageTotalCount = viewTotalCount / viewCountPerPage + 1;
+		}else {
+			pageTotalCount = viewTotalCount / viewCountPerPage;
+		}
+		int startNavi = ((currentPage - 1)/pageCountPerView) *pageCountPerView + 1;
+		int endNavi = startNavi + pageCountPerView - 1;
+		if(endNavi > pageTotalCount) {
+			endNavi = pageTotalCount; //끝페이지 이후의 값들 총 13페이지면 14 15안나오게
+		}
+		
+		boolean needPrev = true; //다음이전값
+		boolean needNext = true;
+		if(startNavi == 1) {
+			needPrev = false;
+		}
+		if(endNavi == pageTotalCount) { //끝값을 알아야(pageTotalCount 전체게시물가져옴
+			needNext = false;
+		}
+		StringBuilder sb = new StringBuilder();
+		if(needPrev) {
+			sb.append("<a href = '/board/search?currnetPage=" + (startNavi-1) +"'> [이전] </a>");
+		}
+		for(int i = startNavi ; i <= endNavi; i++) {
+			if(i == currentPage) {
+				sb.append(i);
+			}else {
+				sb.append("<a href='/board/search?currentPage=" + i + "'>" + i + "</a>");
+			}
+		}
+		if(needNext){
+			sb.append("<a href = '/board/search?currentPage=" +(endNavi+1) +"'> [다음] </a>");
+		}
+			return sb.toString(); //String builder에 쌓음
+	}
+	private int SearchTotalCount(Connection conn) {
+		int totalValue = 0;
+		Statement stmt = null;
+		ResultSet rset = null;
+		String query = "SELECT COUNT(*) AS TOTALCOUNT FROM FREEBOARD WHERE NOTICE_SUBJECT LIKE '%\" +searchKeyword + \"%'\" ";
+		try {
+			stmt = conn.createStatement();
+			rset = stmt.executeQuery(query);
+			if(rset.next()) {
+				totalValue = rset.getInt("TOTALCOUNT");
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(stmt);
+			JDBCTemplate.close(rset);
+		}
+			return totalValue;
+	}
 }

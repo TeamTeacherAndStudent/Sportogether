@@ -116,6 +116,9 @@
   	 #search{
 		   margin-left: 30px;
 		}
+	.replyNo{
+		display: hidden;
+	}
   </style>
 <title>자유게시판</title>
 </head>
@@ -217,6 +220,7 @@
 						</form><br><br>
 						<!-- 출력 -->
 					<c:forEach items="${boardOne.replies }" var ="reply"> <!-- 반복문 -->
+						<input type="hidden" name="boardReplyNo" value="${reply.boardReplyNo }">
 						<div class="col-md-1">
 	                    	<div class="replyContents">
 	                    		작성자  ${reply.boardReplyUserId }

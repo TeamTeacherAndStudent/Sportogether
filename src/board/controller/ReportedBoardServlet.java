@@ -6,18 +6,22 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import admin.model.vo.ReportedBoard;
+import board.model.service.BoardService;
 
 /**
  * Servlet implementation class ReportedBoard
  */
 @WebServlet("/board/reported")
-public class ReportedBoard extends HttpServlet {
+public class ReportedBoardServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ReportedBoard() {
+    public ReportedBoardServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,10 +30,25 @@ public class ReportedBoard extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
-
+		//reported insertServlet
+				HttpSession session = request.getSession();
+				int boardNo  = Integer.parseInt(request.getParameter("boardNo"));
+				String userId = (String)session.getAttribute("userId");
+				
+				
+				ReportedBoard rboard = new ReportedBoard();
+				rboard.setBoardNo(boardNo);
+				rboard.setUserId(userId);
+				
+				int result = new BoardService().insertReportedBoard(rboard);
+				if(result >0) {
+					response.sendRedirect("/board/detail?boardNo="+boardNo);
+					
+				}else {
+					request.getRequestDispatcher("/Board/serviceFailed.html").forward(request, response);
+				}
+	}			
+				
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

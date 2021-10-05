@@ -11,9 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import admin.model.service.AdminService;
-import board.model.service.BoardService;
-import board.model.vo.Board;
-import board.model.vo.PageData;
+import admin.model.vo.ReportedBoard;
+import support.model.vo.Support;
+import admin.model.vo.PageData1;
 
 /**
  * Servlet implementation class ReportedBoardList
@@ -41,12 +41,12 @@ public class ReportedBoardListServlet extends HttpServlet {
 		}else {
 			currentPage = Integer.parseInt(getCurrentPage);
 		}
-		PageData pageData = new AdminService().printReportedBoardList(currentPage);
-		List<Board> bList = pageData.getBoardList();
+		PageData1 pd = new AdminService().printReportedBoard(currentPage);
+		List<ReportedBoard> bList = pd.getReportedbList();
 		
 		if(!bList.isEmpty()) {
 			request.setAttribute("bList", bList);
-			request.setAttribute("pageNavi", pageData.getPageNavi());
+			request.setAttribute("pageNavi", pd.getReportPageNavi());
 			request.getRequestDispatcher("/Admin/reported_manage.jsp").forward(request, response);
 		}else {
 			RequestDispatcher view = request.getRequestDispatcher("/Admin/serviceFailed.html");

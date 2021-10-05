@@ -5,11 +5,12 @@ import java.sql.SQLException;
 import java.util.List;
 
 import admin.model.dao.AdminDAO;
+import admin.model.vo.ReportedBoard;
 import common.JDBCTemplate;
 import support.model.dao.SupportDAO;
 import support.model.vo.PageData;
 import support.model.vo.Support;
-
+import admin.model.vo.PageData1;
 public class AdminService {
 	
 private JDBCTemplate jdbcTemplate;
@@ -56,8 +57,34 @@ private JDBCTemplate jdbcTemplate;
 		return pageData;
 	}
 
-	public board.model.vo.PageData printReportedBoardList(int currentPage) {
-		// TODO Auto-generated method stub
-		return null;
+	
+	public PageData1 printReportedBoard(int currentPage) {
+		Connection conn = null; 
+		AdminDAO aDAO = new AdminDAO();  
+		PageData1 pd = new PageData1();
+		try { 
+			conn = jdbcTemplate.createConnection();
+			pd.setReportPageNavi(aDAO.getReportPageNavi(conn, currentPage));
+			pd.setReportedbList(aDAO.selectReportedBoard(conn, currentPage));
+		} catch (SQLException e) { 
+			e.printStackTrace(); 
+		} finally {
+				 JDBCTemplate.close(conn); 
+		}return pd;
 	}
-}
+	
+	
+
+	/*
+	 * public board.model.vo.PageData printReportedBoardList(int currentPage) {
+	 * Connection conn = null; AdminDAO aDAO = new AdminDAO(); PageData pageData =
+	 * null; try { conn = jdbcTemplate.createConnection();
+	 * pageData.setPageNavi(aDAO.getPageNavi(conn, currentPage));
+	 * PageData.setReportedBoard(aDAO.selectReportedBoard(conn, currentPage)); }
+	 * catch (SQLException e) { e.printStackTrace(); } finally {
+	 * JDBCTemplate.close(conn); } return pageData; }
+	 */
+
+
+	
+	}

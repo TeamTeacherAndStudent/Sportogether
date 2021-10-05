@@ -4,10 +4,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import admin.model.vo.ReportedBoard;
+import admin.model.vo.ReportedReply;
 import common.JDBCTemplate;
 import support.model.vo.Support;
 
@@ -161,6 +164,101 @@ public class AdminDAO {
 			
 			return totalValue;
 		}
+		
+		
+		
+		public List<ReportedBoard> selectReportedBoard(Connection conn, int currentPage) {
+			List<ReportedBoard> bList = null;
+			PreparedStatement pstmt = null;
+			ResultSet rset = null;
+			String query = "SELECT * FROM(SELECT ROW_NUMBER() OVER(ORDER BY BOARD_NO DESC) AS NUM, BOARD_NO,USER_ID, REPOTED_NO FROM REPORTED_BOARD) WHERE NUM BETWEEN ? AND ? AND";
+			try {
+				pstmt = conn.prepareStatement(query);
+				
+				int viewCountPerPage = 8;
+				int start = currentPage * viewCountPerPage - (viewCountPerPage - 1);
+				int end = currentPage * viewCountPerPage;
+				
+				pstmt.setInt(1, start);
+				pstmt.setInt(2, end);
+				rset = pstmt.executeQuery();
+				bList = new ArrayList<ReportedBoard>();
+				while(rset.next()) {
+					ReportedBoard rBoard = new ReportedBoard();
+					rBoard.setBoardNo(rset.getInt("BOARD_NO"));
+					rBoard.setUserId(rset.getString("USER_ID"));
+					bList.add(rBoard);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally  {
+				JDBCTemplate.close(rset);
+				JDBCTemplate.close(pstmt);
+				
+			}
+			return bList ;
+		}
 
-
+		public String getReportPageNavi(Connection conn, int currentPage) {
+			int pageCountPerView = 5;
+			int viewTotalCount = totalCount(conn);
+			int viewCountPerPage = 10;
+			int pageTotalCount = 0;
+			int pageTotalCountMod = viewTotalCount % viewCountPerPage;
+			if(pageTotalCountMod > 0) {
+				pageTotalCount = viewTotalCount / viewCountPerPage + 1;
+			}else {
+				pageTotalCount = viewTotalCount / viewCountPerPage;
+			}
+			int startNavi = ((currentPage - 1)/pageCountPerView) *pageCountPerView + 1;
+			int endNavi = startNavi + pageCountPerView - 1;
+			if(endNavi > pageTotalCount) {
+				endNavi = pageTotalCount; //끝페이지 이후의 값들 총 13페이지면 14 15안나오게
+			}
+			
+			boolean needPrev = true; //다음이전값
+			boolean needNext = true;
+			if(startNavi == 1) {
+				needPrev = false;
+			}
+			if(endNavi == pageTotalCount) { //끝값을 알아야(pageTotalCount 전체게시물가져옴
+				needNext = false;
+			}
+			StringBuilder sb = new StringBuilder();
+			if(needPrev) {
+				sb.append("<a href = '/reportedList/board?currnetPage=" + (startNavi-1) +"'> [이전] </a>");
+			}
+			for(int i = startNavi ; i <= endNavi; i++) {
+				if(i == currentPage) {
+					sb.append(i);
+				}else {
+					sb.append("<a href='/reportedList/board?currentPage=" + i + "'>" + i + "</a>");
+				}
+			}
+			if(needNext){
+				sb.append("<a href = '/reportedList/board?currentPage=" +(endNavi+1) +"'> [다음] </a>");
+			}
+				return sb.toString();
+		}
+		
+		
+		private int ReportTotalCount(Connection conn) {
+			int totalValue = 0;
+			Statement stmt = null;
+			ResultSet rset = null;
+			String query = "SELECT COUNT(*) AS TOTALCOUNT FROM REPORTED_BOARD";
+			try {
+				stmt = conn.createStatement();
+				rset = stmt.executeQuery(query);
+				if(rset.next()) {
+					totalValue = rset.getInt("TOTALCOUNT");
+				}
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}finally {
+				JDBCTemplate.close(stmt);
+				JDBCTemplate.close(rset);
+			}
+				return totalValue;
+		}
 }

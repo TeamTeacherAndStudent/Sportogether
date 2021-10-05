@@ -4,6 +4,9 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
+import admin.model.dao.AdminDAO;
+import admin.model.vo.ReportedBoard;
+import admin.model.vo.ReportedReply;
 import board.model.dao.BoardDAO;
 import board.model.vo.Board;
 import board.model.vo.BoardLike;
@@ -348,5 +351,44 @@ public class BoardService {
 			JDBCTemplate.close(conn);
 		}
 		return pd;
+	}
+	
+	
+	public int insertReportedBoard(ReportedBoard rboard) {
+		int result = 0;
+		Connection conn = null;
+		try {	
+			conn = jdbcTemplate.createConnection();
+			result = new BoardDAO().insertReportedBoard(conn, rboard);
+			if(result > 0) {
+				JDBCTemplate.commit(conn);
+			}else {
+				JDBCTemplate.rollback(conn);
+			}
+		} catch (SQLException e){
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(conn);
+		}
+		return result;
+	}
+	
+	public int insertReportedReply(ReportedReply rReply) {
+		int result = 0;
+		Connection conn = null;
+		try {
+			conn = jdbcTemplate.createConnection();
+			result = new BoardDAO().insertReportedRely(conn, rReply);
+			if(result > 0) {
+				JDBCTemplate.commit(conn);
+			}else {
+				JDBCTemplate.rollback(conn);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(conn);
+		}
+		return result;
 	}
 }
