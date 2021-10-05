@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<% String pageNavi = (String)request.getAttribute("pageNavi"); %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>나의 정보 수정</title>
-<!-- Google Fonts -->
+<title>내가 쓴 게시글</title>
 <!-- Google Fonts -->
 <link
 	href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
@@ -27,8 +28,6 @@
 <!-- Template Main CSS File -->
 <link href="../assets/css/style.css" rel="stylesheet">
 
-<script src="https://code.jquery.com/jquery-latest.min.js"></script>
-
 <style>
 #main-title {
 	margin-top: 2%;
@@ -45,70 +44,85 @@
 	text-align: center;
 }
 
-#main-content {
-	/* margin-top : 5%; */
-	margin-left: 15%;
-	margin-right: 15%;
-	margint-bottom: 15%;
-	display: flex;
+h2 {
+	padding: 5px 10px;
+	border-bottom: 1px solid #848484;
+	border-left: 8px solid #848484;
+}
+
+ul, li {
+	list-style: none;
+	text-align: center;
+	padding: 0;
+	margin: 0;
+}
+
+#mainWrapper {
+	width: 950px;
+	margin: auto;
 	justify-content: center;
 	vertical-align: middle;
-}
-
-.mybox {
-	width: 100%;
-	height: 650px;
-	border: 1px solid #165992;
-	border-radius: 10px;
-	background-color: white;
-	letter-spacing: 1px;
-	justify-content: center;
-	display: flex;
-}
-
-.content {
-	height: 100%;
-	width: 60%;
-	margin: 20px;
-	letter-spacing: 1px;
 	align-items: center;
-	line-height: 1.5em;
-	color: #165992;
+}
+
+#mainWrapper>ul>li:first-child {
+	text-align: center;
+	font-size: 14pt;
+	height: 40px;
+	vertical-align: middle;
+	line-height: 30px;
+}
+
+#ulTable {
+	margin-top: 10px;
+}
+
+#ulTable>li:first-child>ul>li {
+	background: #165992;
+	color: #fff;
+	font-weight: bold;
+	text-align: center;
+}
+
+#ulTable>li>ul {
+	clear: both;
+	padding: 0px auto;
+	position: relative;
+	min-width: 50px;
+}
+
+#ulTable>li>ul>li {
 	float: left;
-	align: left;
+	font-size: 10pt;
+	border-bottom: 1px solid silver;
+	vertical-align: baseline;
 }
 
-.side {
-	height: 100%;
-	width: 30%;
-	margin: 20px;
+#ulTable>li>ul>li:first-child {
+	width: 80%;
+} /*No 열 크기*/
+#ulTable>li>ul>li:first-child+li {
+	width: 20%;
+} /*제목 열 크기*/
+#divPaging {
+	clear: both;
+	margin: 0 auto;
+	padding: 20px;
+	width: 250px;
+	height: 50px;
+}
+
+#divPaging>div {
 	float: left;
-	align: right;
+	width: 30px;
+	margin: 0 auto;
+	text-align: center;
 }
 
-.side-top {
-	height: 70%;
-	width: 100%;
-	/* align-items: center; */
-}
-
-#photo {
-	/* margin : 1%; */
-	width: inherit;
-	height: 75%;
-	border: 1px solid black;
-}
-
-.side-top>button {
-	margin: 2%;
-	float: right;
-}
-
-.button {
-	height: 20%;
-	margin: 2%;
-	text-aligh: right;
-	float: right;
+#back-btn {
+	margin-left: 25%;
+	margin-right: 25%;
+	text-align: right;
 }
 
 button {
@@ -128,7 +142,6 @@ button {
 	animation-delay: 0.8s;
 	margin-top: 6px;
 	border: 2px solid #1d284b;
-	
 }
 
 button:hover {
@@ -137,51 +150,13 @@ button:hover {
 	text-decoration: none;
 }
 
-#withdraw {
-	background: #B2B2B2;
-	border: 2px solid #B2B2B2;
-}
-
-#withdraw:hover {
-	background: #DB4455;
-}
-
 #search {
 	margin-left: 30px;
-}
-
-.pop-layer .pop-container {
-	padding: 20px 25px;
-}
-
-.pop-laeyr p.ctxt {
-	color: #666;
-	line-height: 25px;
-}
-
-.pop-layer .btn-r {
-	width: 100%;
-	margin: 10px 0 20px;
-	padding-top: 10px;
-	border-top: 1px solid #ddd;
-	text-align: right;
-}
-
-.pop-layer {
-	display: none;
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	width: 410px;
-	height: auto;
-	background-color: #fff;
-	border: 5px solid #3571B5;
-	z-index: 10;
 }
 </style>
 </head>
 <body>
-	<!-- ======= Header ======= -->
+<!-- ======= Header ======= -->
 	<header id="header" class="fixed-top">
 		<div
 			class="container d-flex align-items-center justify-content-between">
@@ -217,63 +192,46 @@ button:hover {
 	<main>
 		<section>
 			<div id="main-title">
-				<h1>나의 정보 수정</h1>
+				<h1>내가 쓴 게시글</h1>
 			</div>
 		</section>
 
-
-		<!-- section : 프로필 수정-->
 		<section>
-			<div id="main-content">
-				<form action="/mypage/modify" method="post">
-				<div class="mybox">
-				
-					<div class="content">
-						<!-- 회원 정보 공간 -->
-						아이디 : <input type="text" name="user-id" value="${requestScope.member.userId}" readonly> <br>
-						<br> 닉네임 : <input type="text" size=16 name="user-nickName" value="${member.userNickName}"> <br>
-						<br> 이름 : <input type="text" size=16 name="user-name" value="${member.userName}" readonly> <br>
-						<br> 성별 : <input type="text" size=16 name="user-gender" value="${member.userGender}" readonly> <br>
-						<br> 생년월일 : <input type="text" size=16 name="user-birthDate" value="${member.userBirthDate}" readonly> <br>
-						<br> 비밀번호 : <input type="password" name="user-pw" value="${member.userPw}"> <br>
-						<br> 이메일 : <input type="email" name="user-email" value="${member.userEmail}"> <br>
-						<br> 전화번호 : <input type="text" name="user-phone" value="${member.userPhone}"> <br>
-					</div>
+			<div id="mainWrapper">
+				<ul>
+					<li>
+						<ul id="ulTable">
+							<li>
+								<ul>
+									<li>제목</li>
+									<li>작성일</li>
+								</ul>
+							</li>
+							<c:forEach items="${requestScope.bList}" var="mypost">
+							<li>
+								<ul>
+									<li>${bList.boardNo}</li>
+									<li>${bList.boardEnrollDate}</li>
+								</ul>
+							</li>
+							</c:forEach>
+						</ul>
+					</li>
 
-					<div class="side">
-						<div class="side-top">
-							<div id="photo"></div>
-							<button>변경</button>
+					<li>
+						<div id="divPaging">
+						<%=pageNavi%>
 						</div>
-						<br>
-						<div class="button">
-							<button type="submit">수정</button>
-							<button href="/mypage/main">마이페이지</button>
-						</div>
-					</div>
-				</div>
-				</form>	
+					</li>
+
+				</ul>
 			</div>
-				<div class="button">
-					<a href="#layer" class="check-btn"><button id="withdraw">회원탈퇴</button></a>
+			</section>
+			<section>
+				<div id="back-btn">
+					<a href="/mypage/main"><button>마이 페이지</button></a>
 				</div>
-		</section>
-		<section>
-				<div id="layer" class="pop-layer">
-				<div class="pop-container">
-					<div class="pop-conts">
-						<!-- 내용 -->
-						<p class="ctxt mb20">정말로 탈퇴하시겠습니까?</p>
-						<div class="btn-r">
-						
-							<a href="/mypage/remove" ><button class="btn-layerClose" onclick="deleteNotice()">탈퇴</button></a> <a
-								href="#" class="btn-layerClose"><button >취소</button></a>
-						</div>
-						<!--  // 내용 끝 -->
-					</div>
-				</div>
-			</div>
-		</section>
+			</section>
 	</main>
 
 
@@ -331,47 +289,6 @@ button:hover {
 	<script src="assets/js/jquery-1.12.3.min.js"></script>
 	<script src="assets/js/jquery.counterup.min.js"></script>
 	<script src="assets/js/waypoints.min.js"></script>
-	
-	
-	<!-- 삭제 경고창 -->
-	<script>
-	$(".check-btn").click(function(){
-        var $href = $(this).attr("href");
-        layer_popup($href);
-    });
-    function layer_popup(el){
 
-        var $el = $(el);    //레이어의 id를 $el 변수에 저장
-        var isDim = $el.prev().hasClass("dimBg"); //dimmed 레이어를 감지하기 위한 boolean 변수
-
-        isDim ? $(".dim-layer").fadeIn() : $el.fadeIn();
-
-        var $elWidth = ~~($el.outerWidth()),
-            $elHeight = ~~($el.outerHeight()),
-            docWidth = $(document).width(),
-            docHeight = $(document).height();
-
-        // 화면의 중앙에 레이어를 띄운다.
-        if ($elHeight < docHeight || $elWidth < docWidth) {
-            $el.css({
-                marginTop: -$elHeight /2,
-                marginLeft: -$elWidth/2
-            })
-        } else {
-            $el.css({top: 0, left: 0});
-        }
-
-        $el.find("a.btn-layerClose").click(function(){
-            isDim ? $(".dim-layer").fadeOut() : $el.fadeOut(); // 닫기 버튼을 클릭하면 레이어가 닫힌다.
-            return false;
-        });
-
-        $(".layer .dimBg").click(function(){
-            $(".dim-layer").fadeOut();
-            return false;
-        });
-
-    }
-	</script>
 </body>
 </html>
