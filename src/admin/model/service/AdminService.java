@@ -6,6 +6,7 @@ import java.util.List;
 
 import admin.model.dao.AdminDAO;
 import common.JDBCTemplate;
+import support.model.dao.SupportDAO;
 import support.model.vo.PageData;
 import support.model.vo.Support;
 
@@ -37,6 +38,21 @@ private JDBCTemplate jdbcTemplate;
 		
 		return result;
 	}
-	
-
+	//미승인 후원 전체  목록 조회
+	public PageData printAllSupport(int currentPage) {
+		
+		Connection conn = null;
+		AdminDAO aDAO = new AdminDAO();
+		PageData pageData = new PageData();
+		try {
+			conn = jdbcTemplate.createConnection();
+			pageData.setPageNavi(aDAO.getPageNavi(conn, currentPage));
+			pageData.setSupportList(aDAO.selectAllSupport(conn, currentPage));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally { 
+			JDBCTemplate.close(conn);
+		}
+		return pageData;
+	}
 }
