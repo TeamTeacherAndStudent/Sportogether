@@ -68,27 +68,27 @@
   		color : white;
   	}
 	#title{
-		display: inline-block;
+	/*	display: inline-block;*/
 	/*	float: left; */
-		margin-right: 10px;
 		border: 1px solid silver;
 		width: 100%;
-		float: left;
+		height: 35px;
+		line-height : 35px;
 	}
 	#category{
-		display: inline-block;
-	/*	float: left; */
-		margin-right: 10px;
-		width: 80%;
-		border: 1px solid red;
-		float: left;
+	/*	display: inline-block;*/
+		/*	float: left; */
+		width: 100%;
+		border: 1px solid silver;
+		height: 35px;
+		line-height : 35px;
 	}
 	#writeInf{
-		margin-left: 10px;
 		width: 100%;
-		float: left;
-		margin-bottom : 30px;
 	
+	}
+	#content{
+		
 	}
   	.input-field{
   		display: inline-block;
@@ -148,40 +148,50 @@
 <br><br><br><br><br>
     <main id="main">
   		<div class="container">
-  			<h1 class="">자유게시판</h1><br><br>
+  			<h1 class="">자유게시판</h1><br><hr><br>
   			<fieldset>
-	  			<div id="form" class="row">
+	  			<div id="form">
 					<div class="text">
-						<input type="hidden" value="${requestScope.boardOne.boardNo }">
-						<div class = "col-lg-2">
-							<div id="category"class="input-field">${requestScope.boardOne.sportsName }</div>
-						</div>
-						<div class="col-lg-7">	
-							<div id="title" class="input-field">${requestScope.boardOne.boardTitle }</div>
-						</div>
-						<div class="col-lg-3">	
-							<div id="writeInf" class="input-field">
-								작성자 : ${requestScope.boardOne.userId }<br>
-								날짜  : ${requestScope.boardOne.boardEnrollDate }<br>
-								조회수 : ${requestScope.boardOne.boardCount } <br>
-								추천수 : ${requestScope.boardOne.boardLike }<br>
+					 	<div class="row"> 
+							<input type="hidden" value="${requestScope.boardOne.boardNo }">
+							<div class = "col-md-2">
+								<div id="category"class="input-field">${requestScope.boardOne.sportsName }</div>
+							</div>
+							<div class="col-md-6">	
+								<div id="title" class="input-field">${requestScope.boardOne.boardTitle }</div>
+							</div>
+							<div class="col-md-3">	
+								<div id="writeInf" class="input-field">
+									작성자 ${requestScope.boardOne.userId }
+									&nbsp;&nbsp;${requestScope.boardOne.boardEnrollDate }
+									<br>조회수 : ${requestScope.boardOne.boardCount } 
+									&nbsp;&nbsp;추천수 : ${requestScope.boardOne.boardLike }
+								</div>
 							</div>
 						</div><br><br>
-							<div id="content">
-								${requestScope.boardOne.boardContents }
-							</div><br>
-							<hr>
-							<div class="file-download">
-								${requestScope.boardOne.files }
-							</div><br><hr>
+						<div class="row">
+                     		 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+								<div id="content">
+									<br><br>${requestScope.boardOne.boardContents }
+								</div><br>
+							</div>
+						</div><hr>
+						<div class="file-download">
+							${requestScope.boardOne.files }
+						</div><br><hr>
 					</div>
 				</div>
 			</fieldset>
-					<div id="center-btn">
-    					<button type="submit" id="likeBtn" class="Btn" onclick="onLikeChange()">좋아요</button>
-                        <button type="submit"id="scrapBtn" class="Btn" onclick="onScrapChange();">스크랩</button>
-                        <button id="reportBtn" class="Btn" onclick="onReportedBoardClick();">게시글신고</button>
-					</div><br><br>
+					<c:if test="${sessionScope.userId ne null }">
+						<div id="center-btn">
+						<c:if test="${sessionScope.userId eq boardLike.userId }" var="likeChk">
+	    						<button type="submit" id="likeBtn" class="Btn" onclick="onLikeChange()">좋아요</button>
+	                    </c:if>
+	                        <button type="submit"id="scrapBtn" class="Btn" onclick="onScrapChange();">스크랩</button>
+	                        <button id="reportBtn" class="Btn" onclick="onReportedBoardClick();">게시글신고</button>
+						</div>
+					</c:if>
+					<br><br>
 	                <div id="BtnZip">
 	                	<c:if test="${sessionScope.userId eq boardOne.userId }">
 	                 	 <button type="submit" id="modifyBtn" class="Btn" onclick="onModifyClick();">수정</button>
@@ -219,10 +229,14 @@
 		                    </div>
 	                    </div>
 	                    <div class="col-md-1">
-	                    	<a href="/boardReply/delete?boardNo=${reply.boardNo }&boardReplyNo=${reply.boardReplyNo }" id="removeReply" onclick="onRemoveReplyClick();">삭제</a>
+	                    <c:if test="${sessionScope.userId eq reply.boardReplyUserId}">
+	                    	<a href="/boardReply/delete?boardNo="${reply.boardNo }"&boardReplyNo="${reply.boardReplyNo}">삭제</a>
+	                    </c:if>	
 	                    </div>
 	                    <div class="col-md-2">
-	                    	<a href="/boardReply/reported?boardNo=${reply.boardNo }&boardReplyNo=${reply.boardReplyNo }" id="repostedReply" onclick="onReportedReplyClick();">신고</a>
+	                    <c:if test="${sessionScope.userId ne null}">
+	                    	<a href="javascript:onReportedReplyClick();">신고</a>
+	                    </c:if>
 	                    </div><hr>
 					</c:forEach>
 				</div>
@@ -264,55 +278,40 @@
 
 <script>
 	function onLikeChange(){
-		$("#likeBtn").toggleClass('like');
-		var boardNo = "${requestScope.boardOne.boardNo }";
- 		if($(this).attr('class') == 'like'){
-			location.href ="/like/update?boardNo="+boardNo;
-		}else{ 
-			location.href="/like/delete?boardNo="+boardNo;
-		}
+			likeChk
+			$("#likeBtn").toggleClass('like');
+			var boardNo = "${requestScope.boardOne.boardNo }";
+			
+	 		if($(this).attr('class') == 'like'){
+				location.href="/like/delete?boardNo="+boardNo;
+	 		}else{ 
+				location.href ="/like/update?boardNo="+boardNo+"&likeCount="+1;
+	 		}
 	}
 	
 	function onScrapChange(){
-		$("#scrapBtn").toggleClass('scrap');
-		var boardNo = "${requestScope.boardOne.boardNo }";
-		if($(this).attr('class') == 'scrap'){
-	//      마이페이지 세션으로 넘어가서 마이스크랩목록에 보여지게 하기
-			location.href = "/scrap/update?boardNo="+boardNo;
-		}else{ 
-			location.href ="/scrap/delete?boardNo="+boardNo;
-		}
+			$("#scrapBtn").toggleClass('scrap');
+			var boardNo = "${requestScope.boardOne.boardNo }";
+			console.log("scrap");
+			if($(this).attr('class') == 'scrap'){
+				console.log("scrap");
+				location.href = "/scrap/update?boardNo="+boardNo;
+			}else{ 
+				console.log("no");
+				location.href ="/scrap/delete?boardNo="+boardNo;
+			}
 	}
 	function onReportedBoardClick(){
 		var reportedChk = window.confirm("해당 게시물을 신고하겠습니까?");
-		var boardNo = "${requestScope.boardOne.boardNo}"
-		if(reportedChk) {
-			<c:if test="${sessionScope.userId eq null }">
-				location.href = "/board/reported"+boardNo; //관리자 신고리스트servlet들어가기
-				window.alert("게시물이 신고되었습니다");
-			</c:if> 
-			<c:if test="${sessionScope.userId ne null }">
-				window.alert("로그인 후 이용할 수 있습니다.");
-			</c:if>
-		}else{
-			return
-		}
-	}
-	function onReportedReplyClick(){
-		var reportedChk = window.confirm("해당 댓글을 신고하겠습니까?"); 
 		var boardNo = "${requestScope.boardOne.boardNo}";
 		if(reportedChk) {
-			<c:if test="${sessionScope.userId eq null }">
-			 	location.href="#"; //신고리스트servlet에 들어가기
-				window.alert("댓글이 신고되었습니다");
-			</c:if>
-			<c:if test="${sessionScope.userId ne null }">
-				window.alert("로그인 후 이용할 수 있습니다.");
-			</c:if>
+				location.href ="/board/reported?boardNo="+boardNo; //관리자 신고리스트servlet들어가기
+				window.alert("게시물이 신고되었습니다");
 		}else{
 			return
 		}
 	}
+	
 	
 	function onModifyClick(){
 		var boardNo = '${requestScope.boardOne.boardNo }';
@@ -330,6 +329,29 @@
 			window.alert("로그인 후 이용해주세요.");
 		}
 	}
+	function onReportedReplyClick(){
+		var reportedChk = window.confirm("해당 댓글을 신고하겠습니까?"); 
+		var boardNo = "${reply.boardNo }";
+		var replyNo = "${reply.boardReplyNo }";
+		if(reportedChk) {
+				window.alert("댓글이 신고되었습니다");
+			 	location.href="/boardReply/reported?boardNo="+boardNo+"&boardReplyNo="+replyNo; //신고리스트servlet에 들어가기
+		}else{
+			return
+		}
+	}
+	
+	/* function onRemoveReplyClick(){
+		var removeReplyChk= window.confirm("댓글을 삭제하겠습니까?");
+		var boardNo = "${reply.boardNo }";
+		var replyNo = "${reply.boardReplyNo }";	
+		if(removeReplyChk){
+			window.alert("댓글이 삭제되었습니다");
+			location.href ="/boardReply/delete?boardNo="+boardNo+"&boardReplyNo="+replyNo;
+		}else{
+			return
+		} */
+	
 </script>
 </body>
 </html>

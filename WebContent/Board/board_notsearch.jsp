@@ -141,12 +141,11 @@
 		float: right;
 		font-size : 15px;
 	}
-	#searchType{
+	#selSearchOption{
 		height: 40px;
 		width:120px;
-		text-align : center;
 	}
-	#KeyWord{
+	#txtKeyWord{
 		height:38px;
 		width: 300px;
 	}
@@ -185,18 +184,29 @@
         <div id="mainWrapper">
             <ul>
                 <li>
-                    <h1 class="page">자유게시판</h1>
-   <!--                  <select id="selectSports" name="sportsZip">
-      					<option value="">종목선택</option>
-      					<option value="">배구</option>
-      					<option value="">축구</option>
-      					<option value="">탁구</option>
-      					<option value="">승마</option>
-      					<option value="">농구</option>
-      					<option value="">사이클</option>
-      					<option value="">기타</option>
-     				</select> -->
-           			<br>
+                    <h1 class="page">자유게시판 검색결과가 없습니다.</h1>
+                    <form action ="/board/search" method="get">
+                       	<select id='searchType' name="type" >
+	                          <option value='A'>제목+내용</option>
+	                          <option value='T'>제목</option>
+	                          <option value='C'>내용</option>
+                   		</select>
+                        <input type="text" id="keyWord" name="keyWord" placeholder="검색">
+                         <input type='submit' value='검색' class="Btn"/>
+                	 </form><br><br><hr>
+                	 <div id="category">
+	                    <c:choose>
+							<c:when test="${applicationScope.type eq 'A'}">
+								<c:out value='제목+내용'>검색결과</c:out>
+							</c:when>
+							<c:when test="${applicationScope.type eq 'T'}">
+								<c:out value='제목'> 검색결과</c:out>
+							</c:when>
+							<c:when test="${applicationScope.type eq 'C'}">
+								<c:out value='내용'>검색결과</c:out>
+							</c:when>
+						</c:choose>
+					</div><br>
                     <ul id ="ulTable">
                         <li>
                         	<ul>
@@ -224,25 +234,8 @@
                 </li>
                 <li>
                     <div id="divPaging">
-                    	<%= pageNavi %>
                     </div>
                 </li>
-<!--                 <form action ="/board/write" method="get"> -->
-<!--                 	<input type="submit" value="글작성"  id="writeBtn" class="Btn"> -->
-<!--                 </form> -->
-                <li id='liSearchOption'>
-                    <div>
-                  	<form action="/board/search" method="get">
-                        <select id="searchType" name="type">
-                            <option value='A'>제목+내용</option>
-                            <option value='T'>제목</option>
-                            <option value='C'>내용</option>
-                        </select>
-                        <input type="text" id='keyWord' name="keyWord">
-                        <input type='submit' value='검색' class="Btn">
-                	 </form>
-                     </div>
-                 </li>
             </ul>
         </div>
     </main>

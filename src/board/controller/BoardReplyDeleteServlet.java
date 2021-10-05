@@ -28,9 +28,9 @@ public class BoardReplyDeleteServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int replyNo = Integer.parseInt(request.getParameter("replyNo"));
+		int replyNo = Integer.parseInt(request.getParameter("boardReplyNo"));
 		int boardNo = Integer.parseInt(request.getParameter("boardNo"));
-		String replyContents = request.getParameter("replyContents");
+		String replyContents = request.getParameter("boardReplyContents");
 		int result = new BoardService().removeBoardReplyOne(replyNo);
 		if(result > 0) {
 			response.sendRedirect("/board/detail?boardNo="+boardNo);

@@ -147,6 +147,11 @@ public class BoardService {
 		try {
 			conn  = jdbcTemplate.createConnection();
 			result = new BoardDAO().deleteBoardReply(conn, replyNo);
+			if(result>0){
+				JDBCTemplate.commit(conn);
+			}else {
+				JDBCTemplate.rollback(conn);
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
@@ -228,6 +233,7 @@ public class BoardService {
 		}
 		return result;
 	}
+	
 	public int removeLike(int boardNo) {
 		Connection conn = null;
 		int result = 0;
@@ -276,5 +282,45 @@ public class BoardService {
 			JDBCTemplate.close(conn);
 		}
 		return result;
+	}
+	public PageData printSearchBoardTitle(String searchKeyword, int currentPage) {
+		Connection conn = null;
+		List<Board> bList = null;
+		String searchPageNavi = null;
+		PageData pd = new PageData();
+		BoardDAO  nDAO = new BoardDAO();
+		
+		try {
+			conn = jdbcTemplate.createConnection();
+			bList = new BoardDAO().selectSearchBoardTitle(conn, searchKeyword, currentPage);
+			searchPageNavi = nDAO.getSearchPageNavi(conn, searchKeyword, currentPage);
+			pd.setBoardList(bList);
+			pd.setPageNavi(searchPageNavi);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(conn);
+		}
+		return pd;
+	}
+	public PageData printSearchBoardTContents(String searchKeyword, int currentPage) {
+		Connection conn = null;
+		List<Board> bList = null;
+		String searchPageNavi = null;
+		PageData pd = new PageData();
+		BoardDAO  nDAO = new BoardDAO();
+		
+		try {
+			conn = jdbcTemplate.createConnection();
+			bList = new BoardDAO().selectSearchBoardContents(conn, searchKeyword, currentPage);
+			searchPageNavi = nDAO.getSearchPageNavi(conn, searchKeyword, currentPage);
+			pd.setBoardList(bList);
+			pd.setPageNavi(searchPageNavi);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(conn);
+		}
+		return pd;
 	}
 }

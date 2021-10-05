@@ -32,29 +32,59 @@ public class BoardSearchServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String searchKeyword = request.getParameter("searchKeyWord");
+		request.setCharacterEncoding("UTF-8");
+		String type = request.getParameter("type");
+		String searchKeyword = request.getParameter("keyWord");
 		int currentPage = 1;
 		String currentPageVal = request.getParameter("currentPage");
 		if(currentPageVal != null) {
 			currentPage = Integer.parseInt(currentPageVal);
-		}
-		PageData pd = new BoardService().printSearchBoard(searchKeyword, currentPage);
-		List<Board> bList = pd.getBoardList();
-		if(!bList.isEmpty()) {
-			request.setAttribute("bList", bList);
-			request.setAttribute("pageNavi", pd.getPageNavi());
-			request.getRequestDispatcher("/Board/board_search.jsp").forward(request, response);
 		}else {
-			request.getRequestDispatcher("/Board/boardError.html").forward(request, response);
+			currentPage = 1;
 		}
+		switch(type) {
+		case "A" :
+			PageData pd1 = new BoardService().printSearchBoard(searchKeyword, currentPage);
+			List<Board> bList1 = pd1.getBoardList();
+			if(!bList1.isEmpty()) {
+				request.setAttribute("bList", bList1);
+				request.setAttribute("pageNavi", pd1.getPageNavi());
+				request.getRequestDispatcher("/Board/board_search.jsp").forward(request, response);
+			}else {
+				request.getRequestDispatcher("/Board/boardError.html").forward(request, response);
+			}
+			break;
+			
+		case "T":
+			PageData pd2 = new BoardService().printSearchBoardTitle(searchKeyword, currentPage);
+			List<Board> bList2 = pd2.getBoardList();
+			if(!bList2.isEmpty()) {
+				request.setAttribute("bList", bList2);
+				request.setAttribute("pageNavi", pd2.getPageNavi());
+				request.getRequestDispatcher("/Board/board_search.jsp").forward(request, response);
+			}else {
+				request.getRequestDispatcher("/Board/boardError.html").forward(request, response);
+			}
+			break;
+			
+		case "C" :
+			PageData pd3 = new BoardService().printSearchBoardTContents(searchKeyword, currentPage);
+			List<Board> bList3 = pd3.getBoardList();
+			if(!bList3.isEmpty()) {
+				request.setAttribute("bList", bList3);
+				request.setAttribute("pageNavi", pd3.getPageNavi());
+				request.getRequestDispatcher("/Board/board_search.jsp").forward(request, response);
+			}else {
+				request.getRequestDispatcher("/Board/boardError.html").forward(request, response);
+			}
+			break;
+		}
+	}
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
 		
 	}
 
