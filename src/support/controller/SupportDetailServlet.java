@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import member.model.service.MemberService;
+import member.model.vo.Member;
 import support.model.service.SupportService;
 import support.model.vo.Support;
 
@@ -31,12 +33,16 @@ public class SupportDetailServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//후원 상세 page
+		SupportService ss = new SupportService();
 		int supportNo = Integer.parseInt(request.getParameter("supportNo"));
-		Support spt = new SupportService().printOneByNo(supportNo);
+		Support spt = ss.printOneByNo(supportNo);
+		String userId = spt.getSupportWriter();
+		Member member = new MemberService().printOneById(userId);
 //		HttpSession session = request.getSession();
 //		String useridtest = (String)session.getAttribute("userId");
 //		System.out.println(useridtest);
 		if(spt != null) {
+			request.setAttribute("member", member);
 			request.setAttribute("supportOne", spt);
 			request.getRequestDispatcher("/Support/supportDetail.jsp").forward(request, response);
 		}else {

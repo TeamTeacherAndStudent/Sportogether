@@ -117,7 +117,7 @@
 				
 				<!-- 선수 이름 -->
 				
-				&nbsp;<h5>${supportOne.supportWriter }</h5><br>
+				&nbsp;<h5>${member.userName }</h5><br>
 				
 				
 				<h5>소개</h5>

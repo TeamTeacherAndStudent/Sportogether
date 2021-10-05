@@ -2,6 +2,7 @@ package admin.model.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -29,9 +30,7 @@ public class AdminDAO {
 		
 		return result;
 	}
-	// 미승인 후원 전체 조회
-	public List<Support> selectSupportList(Connection conn) {
-		return null;
-	}
+
+
 
 }
