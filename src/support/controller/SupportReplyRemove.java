@@ -1,6 +1,8 @@
 package support.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -32,9 +34,22 @@ public class SupportReplyRemove extends HttpServlet {
 		int replyNo = Integer.parseInt(request.getParameter("replyNo"));
 		int result = new SupportService().removeSupportReply(replyNo);
 		if(result > 0) {
+//			response.sendRedirect("/support/detail?supportNo="+supportNo);
+
+			response.setContentType("text/html;charset=UTF-8");
+
+			PrintWriter out = response.getWriter();
 			response.sendRedirect("/support/detail?supportNo="+supportNo);
+
+			out.println("<script>");
+
+			out.println("alert('댓글을 삭제하였습니다.')");
+
+//			out.println("location.href='/support/detail?supportNo='"+ supportNo);
+			out.println("</script>");
 		}else {
 			request.getRequestDispatcher("/support/supportError.html");
+			
 		}
 		
 	}

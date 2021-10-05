@@ -252,15 +252,16 @@
  							<td>${supportReply.supportReplyContents }</td>
  							<td>${supportReply.supportReplyRegDate }</td>
  							<td>
+ 								<!-- 댓글 번호 저장해두기 -->
+ 								<input id = "replyNo" type="hidden" value = "${supportReply.supportReplyNo }">
+ 								<!-- 댓글 작성자와 세션 아이디가 같으면 삭제 버튼 활성화 -->
  								<c:if test="${sessionScope.userId eq supportReply.supportReplyWriter }">
- 									<a href = "/supportReply/Remove?replyNo=${supportReply.supportReplyNo }&supportNo=${supportReply.supportNo}">삭제</a>
+ 									<a href = "javascript:removeReply();">삭제</a>
  								</c:if>
  							</td>
  							<td>
- 								<!-- 댓글 번호 저장해두기 -->
- 								<input id = "replyNo" type="hidden" value = "${supportReply.supportReplyNo }">
- 								<a href="/supportReply/report?replyNo=${supportReply.supportReplyNo }&supportNo=${supportReply.supportNo}">신고
- 								</a>
+ 								
+ 								
  								<!-- confirm창으로 확인 후 신고하기 -->
  								<a href="javascript:reportReply();" >신고</a>
  							</td>
@@ -393,18 +394,29 @@
 	window.copyURL = function(){
 		prompt("[Ctrl + c]를 눌러 URL을 복사하세요:",window.location);
 	}
-	//  confirm 창 띄운 후 신고
+	
+	
+	// confirm 후 댓글 삭제하기
+	function removeReply(){
+		var removeReplyChk = window.confirm("해당 댓글을 삭제하시겠습니까?");
+		var supportNo = $("#supportNo").val();
+		var replyNo = $("#replyNo").val();
+		if(removeReplyChk) {
+			location.href = "/supportReply/Remove?replyNo=" + replyNo + "&supportNo=" + supportNo;;
+					
+		}else{
+			window.alert("취소하였습니다.");
+		}
+	}
+	// confirm 후 댓글 신고하기
 	
 	function reportReply(){
 		var reportReplyChk = window.confirm("해당 댓글을 신고하시겠습니까?");
 		var supportNo = $("#supportNo").val();
 		var replyNo = $("#replyNo").val();
 		if(reportReplyChk) {
-			//신고했는지 여부를 다른 서블렛에서 체크해야하나?
 			
 			location.href ="/supportReply/report?replyNo=" + replyNo + "&supportNo=" + supportNo;
-			window.alert${requestScope.reportmsg};
-// 			window.alert("신고하였습니다. 최대한 빠른 시일 내에 검토하겠습니다.");
 		}else{
 			window.alert("취소하였습니다.");
 		}
