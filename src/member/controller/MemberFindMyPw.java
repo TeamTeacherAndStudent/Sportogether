@@ -130,69 +130,6 @@ public class MemberFindMyPw extends HttpServlet {
 	        e.printStackTrace(); 
 	    } 
 	
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        //mail server 설정
-//		String host = "smtp.naver.com";
-//		final String user = "shdlfrl91";
-//		final String password = "jsilki9457";
-//		
-//		//메일 받을 주소
-//		String to_email = m.getUserEmail();
-//		
-//		//SMTP 서버 정보 설정
-//		Properties props = new Properties();
-//		props.put("mail.smtp.host", "smtp.naver.com");
-//		props.put("mail.smtp.port", 465);
-//		props.put("mail.smtp.auth", "true");
-//		props.put("mail.smtp.ssl.enable", "true");
-//		props.put("mail.smtp.ssl.trust", "smtp.naver.com");
-//		
-//         String AuthenticationKey = temp.toString();
-//         System.out.println(AuthenticationKey);
-//         
-         
-         
-         //임시 비밀번호로 비밀번호 변경
-         
-         
-//         Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
-//             protected PasswordAuthentication getPasswordAuthentication() {
-//                 return new PasswordAuthentication(user,password);
-//             }
-//         });
-         
-         //email 전송
-//         try {
-//             MimeMessage msg = new MimeMessage(session);
-//             msg.setFrom(new InternetAddress(user, "sportogether"));
-//             msg.addRecipient(Message.RecipientType.TO, new InternetAddress(to_email));
-//             
-//             //메일 제목
-//             msg.setSubject("안녕하세요 SPORTOGETHER 임시 비밀번호 안내 메일입니다.");
-//             //메일 내용
-//             msg.setText("임시 비밀 번호 :"+temp);
-//             msg.setText("로그인 후 반드시 비밀번호를 변경해주세요.");
-//             Transport.send(msg);
-//             System.out.println("이메일 전송");
-//             
-//         }catch (Exception e) {
-//             e.printStackTrace();// TODO: handle exception
-//         }
-//     
          
      	response.setContentType("text/html;charset=UTF-8");
 
