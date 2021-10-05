@@ -48,7 +48,7 @@
 		box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 		overflow: hidden;
     }
-    #repostedcard{
+    #reportedcard{
     	background-color: #3be8b0;
     }
     #approvalcard{
@@ -95,6 +95,11 @@
   </style>
 </head>
 <body>
+<script>
+	window.onload = function() {
+		
+	}
+</script>
 	<!-- ======= Header ======= -->
   	<header id="header" class="fixed-top">
    <div class="container d-flex align-items-center justify-content-between">
@@ -125,8 +130,8 @@
   	<div class="container">
 	 	<div class="row">
 	 		<div class="col-lg-4 col-md-4 col-xs-4 col-sm-4">
-				<a href="reposted_manage.jsp">
-					<div id="repostedcard" class="card">
+				<a href="/admin/reportedList/board">
+					<div id="reportedcard" class="card">
 						<div class="card-header">
 							<h3>신고글 목록</h3>
 						</div>

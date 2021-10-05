@@ -190,7 +190,7 @@
 	                    <c:if test="${sessionScope.userId ne boardLike.userId }" var="likeChk">
 	    						<button type="submit" id="likeBtn" class="Btn" onclick="onLikeChange()">좋아요</button>
 	                    </c:if>-->
-	    		     		<button type="submit" id="likeBtn" class="Btn" onclick="onLikeChange()">좋아요</button>
+	    		     		<button type="submit" id="likeBtn" class="Btn" onclick="onLikeChange(this)">좋아요</button>
 	                        <button type="submit"id="scrapBtn" class="Btn" onclick="onScrapChange();">스크랩</button>
 	                        <button id="reportBtn" class="Btn" onclick="onReportedBoardClick();">게시글신고</button>
 						</div>
@@ -284,19 +284,19 @@
 	var likeYn = '${likeYn }';
 	if(likeYn == 'Y') {
 		$("#likeBtn").addClass('like');
+	}else{
+		
 	}
-	function onLikeChange(){
-		$("#likeBtn").toggleClass('like');
+	function onLikeChange(obj){
 		var boardNo = "${requestScope.boardOne.boardNo }";
-	   location.href="/like/detail?boardNo="+boardNo;
-	   if($(this).attr('class') == 'like'){
+	   if($(obj).attr("class").indexOf("like") > 0){
 			location.href ="/like/delete?boardNo="+boardNo;
-			$("#likeBtn").removeClass('like');
 		}else{
 			location.href ="/like/update?boardNo="+boardNo;
-			$("#likeBtn").addClass('like');
+			$("#likeBtn").removeClass('like');
 		}
 	}
+// 		$("#likeBtn").toggleClass('like');
 		//	location.href ="/like/update?boardNo="+boardNo;
 	 //	if($(this).attr('class') == 'like'){
 	//			location.href ="/like/update?boardNo="+boardNo;

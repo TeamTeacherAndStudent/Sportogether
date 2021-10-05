@@ -41,8 +41,6 @@ public class SupportApprovalServlet extends HttpServlet {
 			//실패
 			System.out.println("후원 승인 실패");
 		}
-		
-	
 	}
 
 	/**

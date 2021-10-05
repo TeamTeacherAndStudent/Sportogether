@@ -268,6 +268,7 @@ public class BoardService {
 		}
 		return result;
 	}
+	
 	public int updateScrap(Scrap scrap) {
 		Connection conn = null;
 		int result = 0;

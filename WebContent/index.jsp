@@ -156,6 +156,7 @@
              <li><a href="/notice/list">공지사항</a></li>     
              <li><a href="/mypage/main">마이페이지</a></li>
              <li><a href="/qna/list">1:1문의</a></li>
+             <c:if test="${sessionScope.userCode eq 'G'}"><li><a href="/admin/main">관리자 페이지</a></li></c:if>
           </ul>
           </li>
         </ul>

@@ -55,4 +55,9 @@ private JDBCTemplate jdbcTemplate;
 		}
 		return pageData;
 	}
+
+	public board.model.vo.PageData printReportedBoardList(int currentPage) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

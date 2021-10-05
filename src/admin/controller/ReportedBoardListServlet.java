@@ -1,11 +1,19 @@
 package admin.controller;
 
 import java.io.IOException;
+import java.util.List;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import admin.model.service.AdminService;
+import board.model.service.BoardService;
+import board.model.vo.Board;
+import board.model.vo.PageData;
 
 /**
  * Servlet implementation class ReportedBoardList
@@ -26,8 +34,24 @@ public class ReportedBoardListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		int currentPage = 0;
+		String getCurrentPage = request.getParameter("currentPage");
+		if(getCurrentPage == null) {
+			currentPage = 1;
+		}else {
+			currentPage = Integer.parseInt(getCurrentPage);
+		}
+		PageData pageData = new AdminService().printReportedBoardList(currentPage);
+		List<Board> bList = pageData.getBoardList();
+		
+		if(!bList.isEmpty()) {
+			request.setAttribute("bList", bList);
+			request.setAttribute("pageNavi", pageData.getPageNavi());
+			request.getRequestDispatcher("/Admin/reported_manage.jsp").forward(request, response);
+		}else {
+			RequestDispatcher view = request.getRequestDispatcher("/Admin/serviceFailed.html");
+			view.forward(request, response);
+		}
 	}
 
 	/**

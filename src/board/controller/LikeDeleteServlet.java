@@ -30,9 +30,11 @@ public class LikeDeleteServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int boardNo = Integer.parseInt(request.getParameter("boardNo"));
-		String userId = request.getParameter("userId");
+		HttpSession session = request.getSession();
+		String userId = (String)session.getAttribute("userId");
 		int result = new BoardService().removeLike(boardNo, userId);
 		if(result > 0) {
+		//	request.setAttribute("userId",userId);
 			response.sendRedirect("/board/detail?boardNo="+boardNo);
 		}else {
 			request.getRequestDispatcher("/Board/boardError.html").forward(request, response);

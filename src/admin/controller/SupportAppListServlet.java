@@ -3,6 +3,7 @@ package admin.controller;
 import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -56,8 +57,8 @@ public class SupportAppListServlet extends HttpServlet {
 			request.getRequestDispatcher("/Admin/support_approval.jsp")
 			.forward(request, response);
 		}else {
-			//실패!
-			System.out.println("미승인 후원 리스트 조회 실패 ㅠㅠ");
+			RequestDispatcher view = request.getRequestDispatcher("/Admin/serviceFailed.html");
+			view.forward(request, response);
 		}
 		
 	}
