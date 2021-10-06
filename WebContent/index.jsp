@@ -75,7 +75,18 @@
     }
     .carousel-item {
     }
+    .glightbox{
+   	 height: 50px;
+    }
+    #size1{
+    	height: 100px;
+    }
+    p{
+  	 font-size : bold;
+     font-family: 'Nanum Myeongjo', serif;
+    }
   </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
 
   <!-- =======================================================
   * Template Name: MeFamily - v4.5.0
@@ -277,7 +288,7 @@
         </section>
         <!--end of counter-->
   <!-- =============== 인기글 / 최신글 ================ -->
-    <section class="">
+   <!--  <section class="">
 		<div class="container">
 	        <div class="section-title">
 	        </div>
@@ -297,7 +308,7 @@
 	          </div>
 	      	</div>
         </div>
-    </section><!-- Section -->
+    </section>Section -->
     <!-- ======= Recent Campaign Section ======= -->
 	<section id="campaign-recent-photos" class="recent-photos">
 	<div class="container">
@@ -306,10 +317,11 @@
 		</div>
 		<div class="recent-photos-slider swiper">
 			<div class="swiper-wrapper align-items-center">
-	            <div class="swiper-slide"><a href="#" class="glightbox"><img src="assets/img/recent-photos/recent-photos-1.jpg" class="img-fluid" alt=""></a></div>
-	            <div class="swiper-slide"><a href="#" class="glightbox"><img src="assets/img/recent-photos/recent-photos-2.jpg" class="img-fluid" alt=""></a></div>
-	            <div class="swiper-slide"><a href="#" class="glightbox"><img src="assets/img/recent-photos/recent-photos-3.jpg" class="img-fluid" alt=""></a></div>
-	            <div class="swiper-slide"><a href="#" class="glightbox"><img src="assets/img/recent-photos/recent-photos-4.jpg" class="img-fluid" alt=""></a></div>
+	            <div class="swiper-slide"><a href="/support/list" class="glightbox"><img src="Img/4.PNG" class="img-fluid" alt=""></a></div>
+	            <div class="swiper-slide"><a href="/support/list" class="glightbox"><img src="https://i.pinimg.com/564x/22/aa/54/22aa54e7f2be2355c6e20a82caa2fc34.jpg" class="img-fluid" alt=""></a></div>
+	            <div class="swiper-slide"><a href="/support/list" class="glightbox"><img src="http://res.heraldm.com/content/image/2020/11/25/20201125000855_0.jpg" class="img-fluid" alt=""></a></div>
+	            <div class="swiper-slide"><a href="/support/list" class="glightbox"><img src="http://www.mooye.net/imgdata/mooye_net/202107/2021070759277679.jpg" class="img-fluid" alt=""></a></div>
+s	            <div class="swiper-slide"><a href="/support/list" class="glightbox"><img src="http://www.incheonilbo.com/news/photo/201808/901295_201192_1012.jpg" class="img-fluid" alt=""></a></div>
          	</div>
         	<div class="swiper-pagination"></div>
 		</div>
@@ -321,24 +333,24 @@
 
         <div class="section-title">
           <h2>종목소개</h2>
-          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+          <p>선수들이 열심히 이뤄낸 성장을 응원하고 같이 즐기기 위해<br>여러 종목들에 대한 경기규칙과 방식을 소개합니다</p>
         </div>
 
         <div class="recent-photos-slider swiper">
           <div class="swiper-wrapper align-items-center">
-            <div class="swiper-slide"><a href="#" class="glightbox"><img src="#" class="img-fluid" alt=""></a></div>
-            <div class="swiper-slide"><a href="#" class="glightbox"><img src="#" class="img-fluid" alt=""></a></div>
-            <div class="swiper-slide"><a href="#" class="glightbox"><img src="#" class="img-fluid" alt=""></a></div>
-            <div class="swiper-slide"><a href="#" class="glightbox"><img src="#" class="img-fluid" alt=""></a></div>
-            <div class="swiper-slide"><a href="#" class="glightbox"><img src="#" class="img-fluid" alt=""></a></div>
-            <div class="swiper-slide"><a href="#" class="glightbox"><img src="#" class="img-fluid" alt=""></a></div>
+            <div class="swiper-slide"><a href="https://olympics.com/ko/sports/golf/" class="glightbox"><img src="https://olympics.com/images/static/sports/pictograms/golf.svg" class="img-fluid" alt=""></a></div>
+            <div class="swiper-slide"><a href="https://olympics.com/ko/sports/nordic-combined/"  class="glightbox"><img src="https://olympics.com/images/static/sports/pictograms/nordic-combined.svg" class="img-fluid" alt=""></a></div>
+            <div class="swiper-slide"><a href="https://olympics.com/ko/sports/breaking/" class="glightbox"><img src="https://olympics.com/images/static/sports/pictograms/breaking.svg" class="img-fluid" alt=""></a></div>
+            <div class="swiper-slide"><a href="https://olympics.com/ko/sports/skeleton/" class="glightbox"><img src="https://olympics.com/images/static/sports/pictograms/skeleton.svg" class="img-fluid" alt=""></a></div>
+            <div class="swiper-slide"><a href="https://olympics.com/ko/sports/luge/" class="glightbox"><img src="https://olympics.com/images/static/sports/pictograms/luge.svg" class="img-fluid" alt=""></a></div>
+            <div class="swiper-slide"><a href="https://olympics.com/ko/sports/trampoline-gymnastics/" class="glightbox"><img src="https://olympics.com/images/static/sports/pictograms/trampoline-gymnastics.svg" class="img-fluid" alt=""></a></div>
           </div>
           <div class="swiper-pagination"></div>
         </div>
       </div>
     </section><!-- End Sports Section -->
   </main>
-  <!-- End #main -->
+  <!-- End #main --><br><br><br><br>
 
   <!-- ======= Footer ======= -->
   <footer id="footer">
