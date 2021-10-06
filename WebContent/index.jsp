@@ -291,6 +291,9 @@
 	            <ul>
 	              <li>실시간 인기글</li>
 	            </ul>
+	            <div class="like">
+	            	
+	            </div>
 	          </div>
 	      	</div>
         </div>
