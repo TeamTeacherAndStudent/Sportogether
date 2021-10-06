@@ -251,10 +251,10 @@
 			<div class = "col-md-8">
 				<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
   				  <li class="nav-item" role="presentation">
-				    <button class="nav-link active btn secondary-btn" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">응원댓글</button>
+<!-- 				    <button class="nav-link active btn secondary-btn" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">응원댓글</button> -->
 				  </li>
 				  <li class="nav-item" role="presentation">
-				    <button class="nav-link btn secondary-btn" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">문의댓글</button>
+<!-- 				    <button class="nav-link btn secondary-btn" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">문의댓글</button> -->
 				  </li>
 				</ul>
 				
@@ -315,38 +315,38 @@
 					</table>
 				  </div>
 				  <!-- 문의댓글 -->
-				  <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-				  		<table class="table table-hover">
- 						<tr>
- 							<th>작성자</th>
- 							<th>내용</th>
- 							<th>작성일</th>
- 							<th></th>
+<!-- 				  <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab"> -->
+<!-- 				  		<table class="table table-hover"> -->
+<!--  						<tr> -->
+<!--  							<th>작성자</th> -->
+<!--  							<th>내용</th> -->
+<!--  							<th>작성일</th> -->
+<!--  							<th></th> -->
  							
- 						</tr>
- 						<tr>
- 							<td>인간극장</td>
- 							<td>현재 어느 구단에 소속되어계신건가요? 3년 전에 은퇴하셨다고 들었는데 언제 다시 시작하셨나요? </td>
- 							<td>2021-09-21</td>
- 							<td><a href="#">신고</a></td>
- 						</tr>
+<!--  						</tr> -->
+<!--  						<tr> -->
+<!--  							<td>인간극장</td> -->
+<!--  							<td>현재 어느 구단에 소속되어계신건가요? 3년 전에 은퇴하셨다고 들었는데 언제 다시 시작하셨나요? </td> -->
+<!--  							<td>2021-09-21</td> -->
+<!--  							<td><a href="#">신고</a></td> -->
+<!--  						</tr> -->
  					
- 						<tr>
+<!--  						<tr> -->
  							
- 							<td>호동이</td>
- 							<td>궁금하면 500원~</td>
- 							<td>2021-09-21</td>
- 							<td><a href="#">신고</a></td>
- 						</tr>
+<!--  							<td>호동이</td> -->
+<!--  							<td>궁금하면 500원~</td> -->
+<!--  							<td>2021-09-21</td> -->
+<!--  							<td><a href="#">신고</a></td> -->
+<!--  						</tr> -->
  						
- 						<tr>
- 							<td></td>
- 							<td></td>
- 							<td></td>
- 							<td></td>
- 						</tr>
-					</table>
-				  </div>
+<!--  						<tr> -->
+<!--  							<td></td> -->
+<!--  							<td></td> -->
+<!--  							<td></td> -->
+<!--  							<td></td> -->
+<!--  						</tr> -->
+<!-- 					</table> -->
+<!-- 				  </div> -->
 				</div>
 			</div>
 			<div class="col-md-1">
