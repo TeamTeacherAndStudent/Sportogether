@@ -236,6 +236,9 @@
                     	<%= pageNavi %>
                     </div>
                 </li>
+                <c:if test="${sessionScope.userId ne null }">
+                <li><button type="submit" id="writeBtn" class="Btn" onclick="location.href='/board/write'">글쓰기</button><li>
+                </c:if>
 <!--                 <form action ="/board/write" method="get"> -->
 <!--                 	<input type="submit" value="글작성"  id="writeBtn" class="Btn"> -->
 <!--                 </form> -->

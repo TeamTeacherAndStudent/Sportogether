@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>s
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,19 +29,16 @@
   <!-- Template Main JS File -->
   <script src="../assets/js/main.js"></script>
   <script src = "../assets/js/waypoints.min.js"></script>
-  <!-- CKEditor5-->
-  <script src="https://cdn.ckeditor.com/ckeditor5/29.2.0/classic/ckeditor.js"></script>
+  
+  <!-- jQuery  CDN -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<!-- 추가 -->
-	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<title>자유게시판 수정</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script src="https://cdn.ckeditor.com/ckeditor5/29.2.0/classic/ckeditor.js"></script>
+<title>자유게시판</title>
   
   <style>
-     .ck.ck-editor{
-     	max-width: 100%;
-     	text-align: center;
-     }
-     .ck.ck-editor-editable{
-     }
+		
 	  #main{
 	    width: 100%;
 	  }
@@ -52,9 +49,9 @@
 	    width: 70%;
 	    height: 70%;
 	  }
-	   #search{
-		   margin-left: 30px;
-		}
+      #search{
+      	margin-left: 30px;
+  	  }
 	  .text{
 		text-align:center;
 		}
@@ -132,15 +129,15 @@
 	    letter-spacing: 1px;
   		color : white;
   	  }
-  	  #BtnZip{
-  	  	margin-right: 800px;
-  	  }
+  	#Btnzip {
+  		text-align : center;
+  		margin-right : 800px;
+  	}
   </style>
 
 </head>
 
 <body>
-
   <!-- ======= Header ======= -->
   <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center justify-content-between">
@@ -170,82 +167,105 @@
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
-     </div>
-    </header>
+		</div>
+	</header>
+	<!-- End Header -->
 
 <br><br><br><br><br><br><br>
 
     <main id="main">
         <div class="container">
-		  <h2 class="box">게시글 수정</h2>
-		  <div id="form">
-			     <form action ="/board/modify" method="post">
-				 		<input type="text" id="sportsName" name="sportsName" value="${board.sportsName }">
-				    	<input type="hidden" name="boardNo" value="${board.boardNo}">
-				    	<input type="text" id="title" name="title" value = "${board.boardTitle }" maxlength="50" pattern=".{4,50}" size="70" required><br><br>
-				    	<textarea rows="30" cols="100" id="editor" name="contents" value="${board.boardContents }"></textarea>
-						<!-- 파일 수정 불가 -->
-						<div class="file-upload">
-							<input type="text" class="upload-name" readonly value="${file.fileName }">
-							<label class="input-file-button" for="input-file">파일 업로드</label>
-							<input type="file" id="input-file" name="file" multiple="multiple">
-						</div>
-						<br><br>
-						<div id="BtnZip">
-					   		<input type="submit" value="수정" class="Btn" onClick="onEnrollClick();">
-					    	<input type="reset" value="취소" class="Btn" onClick="location.href='/board/list'">
-						</div>
-				</form>
+		  <h2 class="box">게시판 글쓰기</h2>
+		  <div class="row">
+			  <div id="form">
+				    <form action="/board/write" method="post" id ="form">
+					    <div class="sportsName">
+							<input type="text" placeholder="종목입력" size="10" id="sportEnroll">
+					    	<input type="hidden" value="종목" name="sportsName">
+					    	<input type="text" name="title" id="title" maxlength="50" pattern=".{4,50}" placeholder="제목입력(4-50)" size="80" required>
+					    </div>
+					      <br><br>
+					   	  <textarea class="form-control" id="editor"
+		 					name="content" placeholder="내용을 작성하세요."></textarea>
+							<div class="file-upload">
+								<input type="text" name="upFile" class="upload-name" readonly>
+								<label class="input-file-button" for="input-file">파일 업로드</label>
+								<input type="file" name="upFile" id="input-file" multiple="multiple">
+							</div><br><br><br><br><br>
+					<div id="Btnzip">
+					    <input type="submit" value="등록" id="enrollBtn" class="Btn" onClick="onEnrollClick();">
+						<button type="submit" value="취소" id="resetBtn"class="Btn" onclick="location.href='/board/list'">취소</button>
+					</div>
+					 </form>
+				</div>
+			</div>
 		</div>
    </main><br><br><br>
   <!-- ======= Footer ======= -->
-  <footer id="footer">
-    <div class="container">
-      <h3>SPORTOGETHER</h3>
-      <!-- 넣을 말 추가 -->
-      <p>모두 모아 그리고 모두 모여 함께 즐깁시다.</p>
-      <select name="sitezip" onchange="if(this.value) window.open(this.value);">
-      	<option value="">관련 사이트 바로가기</option>
-      	<option value="https://www.sports.or.kr/index.do">대한체육회</option>
-      	<option value="https://www.kspo.or.kr/kspo/main/main.do">국민체육진흥공단</option>
-      	<option value="https://www.koreanpc.kr/index.do">대한장애인체육회</option>
-      	<option value="https://www.gb.go.kr/2021sports/sports.html">전국체육대회</option>
-      	<option value="http://k-scf.co.kr/">한국체육지도자연맹</option>
-      	<option value="http://www.kahperd.or.kr/">한국체육학회</option>
-      	<option value="https://www.sports.re.kr/front/main/main.do?menu_seq=0">한국정책과학원</option>
-      </select>
-      <br><br>
-      <div class="copyright">
-        &copy; Copyright <strong><span>SPORTOGETHER</span></strong>. All Rights Reserved
-      </div>
-      <div class="credits">
-        <!-- All the links in the footer should remain intact. -->
-        <!-- You can delete the links only if you purchased the pro version. -->
-        <!-- Licensing information: https://bootstrapmade.com/license/ -->
-        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/family-multipurpose-html-bootstrap-template-free/ -->
-        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-      </div>
-    </div>
-</footer>
+  <div style="clear: both;">
+	  <footer id="footer">
+	    <div class="container">
+	      <h3>SPORTOGETHER</h3>
+	      <!-- 넣을 말 추가 -->
+	      <p>모두 모아 그리고 모두 모여 함께 즐깁시다.</p>
+	      <select name="sitezip" onchange="if(this.value) window.open(this.value);">
+	      	<option value="">관련 사이트 바로가기</option>
+	      	<option value="https://www.sports.or.kr/index.do">대한체육회</option>
+	      	<option value="https://www.kspo.or.kr/kspo/main/main.do">국민체육진흥공단</option>
+	      	<option value="https://www.koreanpc.kr/index.do">대한장애인체육회</option>
+	      	<option value="https://www.gb.go.kr/2021sports/sports.html">전국체육대회</option>
+	      	<option value="http://k-scf.co.kr/">한국체육지도자연맹</option>
+	      	<option value="http://www.kahperd.or.kr/">한국체육학회</option>
+	      	<option value="https://www.sports.re.kr/front/main/main.do?menu_seq=0">한국정책과학원</option>
+	      </select>
+	      <br><br>
+	      <div class="copyright">
+	        &copy; Copyright <strong><span>SPORTOGETHER</span></strong>. All Rights Reserved
+	      </div>
+	      <div class="credits">
+	        <!-- All the links in the footer should remain intact. -->
+	        <!-- You can delete the links only if you purchased the pro version. -->
+	        <!-- Licensing information: https://bootstrapmade.com/license/ -->
+	        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/family-multipurpose-html-bootstrap-template-free/ -->
+	        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+		      </div>
+		    </div>
+		</footer>
+   </div>
 <script>
-		ClassicEditor
-		.create( document.querySelector( '#editor' ) )
+		 ClassicEditor
+         .create( document.querySelector( '#editor' ) )
 		.catch( error => {
-		    console.error( error );
-		});
-		
+             console.error( error );
+         });
 //등록 클릭이벤트
 	function onEnrollClick() {
-		var enrollResult = window.confirm("글이 수정되었습니다.");
+		/* var fileForm = document.getElementById("form");
+		 fileForm.action = "/file/upload";
+		*/
+		//var enrollResult = window.confirm("게시판 등록을 하시겠습니까?");
+		/* if(enrollResult == ture) {
+			console.log("Yes!");
+		}else{
+			console.log("No~");
+		} */
 	}
-		//파일 경로 무조건 C:\fakepath\
-		$(function(){
-			$('.upload-name').val('파일선택');
-			$('#input-file').change(function(){
-				var filename = $(this).val();
-				$('.upload-name').val(filename);
-			});
-		}); 
+	//파일 경로 무조건 C:\fakepath\
+	$(function(){
+		$('#input-file').change(function(){
+	 		var filename = $(this).val();
+	 		$('.upload-name').val(filename);
+		});
+	});
+		
+	function onResetClick() {
+		var reset = document.getElementById("resetBtn");
+		if(reset!=null) {
+			reset.action = "/board/list";
+		}else{
+			return
+		}
+	}
 </script>
 </body>
 </html>

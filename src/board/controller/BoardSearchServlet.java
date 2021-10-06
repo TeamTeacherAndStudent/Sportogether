@@ -51,8 +51,8 @@ public class BoardSearchServlet extends HttpServlet {
 				request.setAttribute("pageNavi", pd1.getPageNavi());
 				request.getRequestDispatcher("/WEB-INF/Board/board_search.jsp").forward(request, response);
 			}else {
-				request.getRequestDispatcher("/WEB-INF/Board/boardError.html").forward(request, response);
-			}
+				request.getRequestDispatcher("/WEB-INF/Board/board_nosearch.jsp").forward(request, response);
+			}	
 			break;
 			
 		case "T":
@@ -63,7 +63,7 @@ public class BoardSearchServlet extends HttpServlet {
 				request.setAttribute("pageNavi", pd2.getPageNavi());
 				request.getRequestDispatcher("/WEB-INF/Board/board_search.jsp").forward(request, response);
 			}else {
-				request.getRequestDispatcher("/WEB-INF/Board/boardError.html").forward(request, response);
+				request.getRequestDispatcher("/WEB-INF/Board/board_nosearch.jsp").forward(request, response);
 			}
 			break;
 			
@@ -75,7 +75,7 @@ public class BoardSearchServlet extends HttpServlet {
 				request.setAttribute("pageNavi", pd3.getPageNavi());
 				request.getRequestDispatcher("/WEB-INF/Board/board_search.jsp").forward(request, response);
 			}else {
-				request.getRequestDispatcher("/WEB-INF/Board/boardError.html").forward(request, response);
+				request.getRequestDispatcher("/WEB-INF/Board/board_nosearch.jsp").forward(request, response);
 			}
 			break;
 		}

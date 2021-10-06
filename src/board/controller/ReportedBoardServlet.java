@@ -31,6 +31,7 @@ public class ReportedBoardServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//reported insertServlet
+		request.getRequestDispatcher("/WEB-INF/Admin/reposted_manage.jsp").forward(request, response);
 				HttpSession session = request.getSession();
 				int boardNo  = Integer.parseInt(request.getParameter("boardNo"));
 				String userId = (String)session.getAttribute("userId");

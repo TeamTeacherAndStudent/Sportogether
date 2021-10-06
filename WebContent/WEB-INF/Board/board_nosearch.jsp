@@ -149,51 +149,52 @@
 		height:38px;
 		width: 300px;
 	}
-	
+	#box{
+		width : 100%;
+		height : 500px;
+		background-color : silver;
+	}
   </style>
 <title>자유게시판 </title>
 </head>
 
 <body>
-  <!-- ======= Header ======= -->
-  <header id="header" class="fixed-top">
-    <div class="container d-flex align-items-center justify-content-between">
-      <h1 class="logo"><a href="/"> Sportogether </a></h1>
-      <nav id="navbar" class="navbar">
+ <header id="header" class="fixed-top">
+     <div class="container d-flex align-items-center justify-content-between">
+      <!-- 여기에 로고 사진 추가 -->
+        <h1 class="logo"><a href="/"> Sportogether </a></h1>
+       <nav id="navbar" class="navbar">
         <ul>
           <li><a class="active" href="/sports/list">종목</a></li>
           <li><a href="/board/list">자유게시판</a></li>
           <li><a href="/support/list">후원</a></li>
           <li><input type="search" placeholder="검색" size="10" id="search"></li>
-       	  <li>
-       	  	<c:if test="${sessionScope.userId eq null }">
-       	 		 <a href="/member/login">Login</a>
-       	 	</c:if>
-       	 	<c:if test = "${sessionScope.userId ne null }">
-       	 		<a href="/member/logout">Logout</a>
-       	 	</c:if>
-       	  </li>
+             <c:if test="${sessionScope.userId eq null }">
+                 <a href="/member/login">Login</a>
+             </c:if>
+             <c:if test = "${sessionScope.userId ne null }">
+                <a href="/member/logout">Logout</a>
+             </c:if>
           <li class="dropdown"><a href="#"><span>SIDE MENU</span> <i class="bi bi-chevron-down"></i></a>
           <ul>
              <li><a href="/notice/list">공지사항</a></li>     
              <li><a href="/mypage/main">마이페이지</a></li>
              <li><a href="/qna/list">1:1문의</a></li>
-             <c:if test="${sessionScope.userCode eq 'G'}"><li><a href="/admin/main">관리자 페이지</a></li></c:if>
           </ul>
           </li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
-		</div>
-	</header>
-	<!-- End Header -->
+
+    </div>
+  </header><!-- End Header -->
 
 <br><br><br><br>
     <main id="main">
         <div id="mainWrapper">
             <ul>
                 <li>
-                    <h1 class="page">자유게시판 검색결과가 없습니다.</h1>
+                    <h1 class="page">자유게시판 검색결과</h1>
                     <form action ="/board/search" method="get">
                        	<select id='searchType' name="type" >
 	                          <option value='A'>제목+내용</option>
@@ -206,38 +207,21 @@
                 	 <div id="category">
 	                    <c:choose>
 							<c:when test="${applicationScope.type eq 'A'}">
-								<c:out value='제목+내용'>검색결과</c:out>
+								<c:out value='제목+내용'></c:out>
 							</c:when>
 							<c:when test="${applicationScope.type eq 'T'}">
-								<c:out value='제목'> 검색결과</c:out>
+								<c:out value='제목'> </c:out>
 							</c:when>
 							<c:when test="${applicationScope.type eq 'C'}">
-								<c:out value='내용'>검색결과</c:out>
+								<c:out value='내용'></c:out>
 							</c:when>
 						</c:choose>
 					</div><br>
                     <ul id ="ulTable">
                         <li>
                         	<ul>
-                                <li>No</li>
-                                <li>종목</li>
-                                <li>제목</li>
-                                <li>작성일</li>
-                                <li>작성자</li>
-                                <li>조회수</li>
-                                <li>추천수</li>
+                                <li id="box"><h4>검색 결과가 없습니다.</h4></li>
                             </ul>
-                            <% for(Board bOne : bList) { %>
-                            <ul>
-                            	 <li><%=bOne.getBoardNo() %></li>
-                            	 <li><%=bOne.getSportsName() %></li>
-								 <li><a href="/board/detail?boardNo=<%=bOne.getBoardNo() %>"><%=bOne.getBoardTitle() %></a></li>
-								 <li><%=bOne.getBoardEnrollDate() %></li>
-								 <li><%=bOne.getUserId() %></li>
-								 <li><%=bOne.getBoardCount() %></li>
-								 <li><%=bOne.getBoardLike() %></li>					
-                            </ul>
-							<% } %>  
                         </li>
                     </ul>
                 </li>

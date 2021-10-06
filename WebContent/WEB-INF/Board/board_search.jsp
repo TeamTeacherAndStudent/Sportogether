@@ -149,7 +149,10 @@
 		height:38px;
 		width: 300px;
 	}
+	#category{
 	
+		display: hidden;
+	}
   </style>
 <title>자유게시판 </title>
 </head>
@@ -203,13 +206,13 @@
                 	 <div id="category">
 	                    <c:choose>
 							<c:when test="${applicationScope.type eq 'A'}">
-								<c:out value='제목+내용'>검색결과</c:out>
+								<c:out value='제목+내용'></c:out>
 							</c:when>
 							<c:when test="${applicationScope.type eq 'T'}">
-								<c:out value='제목'> 검색결과</c:out>
+								<c:out value='제목'> </c:out>
 							</c:when>
 							<c:when test="${applicationScope.type eq 'C'}">
-								<c:out value='내용'>검색결과</c:out>
+								<c:out value='내용'></c:out>
 							</c:when>
 						</c:choose>
 					</div><br>

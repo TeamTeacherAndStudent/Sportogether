@@ -391,22 +391,22 @@ public class BoardService {
 		}
 		return result;
 	}
-	public int printLike(int boardNo) {
-		int result = 0;
-		Connection conn = null;
-		try {
-			conn = jdbcTemplate.createConnection();
-			result = new BoardDAO().selectLike(conn, boardNo);
-			if(result > 0) {
-				JDBCTemplate.commit(conn);
-			}else {
-				JDBCTemplate.rollback(conn);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}finally {
-			JDBCTemplate.close(conn);
-		}
-		return result;
-	}
+	
+	/*
+	 * public int printLike(int boardNo, int boardLike) { List<Board> result = null;
+	 * Connection conn = null; try { conn = jdbcTemplate.createConnection(); result
+	 * = new BoardDAO().selectLike(conn, boardNo, boardLike);
+	 * pd.setBoardList(bList); if(result > 0) { JDBCTemplate.commit(conn); }else {
+	 * JDBCTemplate.rollback(conn); } } catch (SQLException e) {
+	 * e.printStackTrace(); }finally { JDBCTemplate.close(conn); } return result; }
+	 * 
+	 * public int updateLikeBoard(BoardLike boardLike) { int result = 0; Connection
+	 * conn = null; try { conn = jdbcTemplate.createConnection(); result = new
+	 * BoardDAO().(); if(result > 0) { JDBCTemplate.commit(conn); }else {
+	 * JDBCTemplate.rollback(conn); } } catch (SQLException e) {
+	 * e.printStackTrace(); }finally { JDBCTemplate.close(conn); } return result;
+	 * 
+	 * 
+	 * }
+	 */
 }

@@ -37,14 +37,15 @@ public class LikePrintServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int boardLike = Integer.parseInt(request.getParameter("boardLike"));
 		int boardNo = Integer.parseInt(request.getParameter("boardNo"));
 		
-		int result = new BoardService().printLike(boardNo);
-		if(result>0) {
-			response.sendRedirect("/board/detail?boardNo="+boardNo);
-		}else {
-			request.getRequestDispatcher("/WEB-INF/Board/boardError/html").forward(request, response);
-		}
+	//	int result = new BoardService().printLike(boardNo, boardLike);
+		/*
+		 * if(result>0) { response.sendRedirect("/board/detail?boardNo="+boardNo); }else
+		 * { request.getRequestDispatcher("/WEB-INF/Board/boardError/html").forward(
+		 * request, response); }
+		 */
 	}
 
 }

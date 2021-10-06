@@ -33,6 +33,7 @@ public class BoardDAO {
 			pstmt.setInt(5, board.getBoardCount());
 			pstmt.setInt(6, board.getBoardLike());
 			result = pstmt.executeUpdate();
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		}catch(SQLException e) {
 				e.printStackTrace();
 		}finally {
@@ -62,6 +63,7 @@ public class BoardDAO {
 				boardOne.setBoardEnrollDate(rset.getDate("BOARD_ENROLLDATE"));
 				boardOne.setBoardCount(rset.getInt("BOARD_COUNT"));
 				boardOne.setBoardLike(rset.getInt("BOARD_LIKE"));
+				SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -84,6 +86,7 @@ public class BoardDAO {
 			pstmt.setString(3, board.getSportsName());
 			pstmt.setInt(4, board.getBoardNo());
 			result = pstmt.executeUpdate();
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
@@ -123,6 +126,7 @@ public class BoardDAO {
 			pstmt.setString(2, replyContents);
 			pstmt.setString(3, userId);
 			result = pstmt.executeUpdate();
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
@@ -234,6 +238,7 @@ public class BoardDAO {
 				reply.setBoardReplyUserId(rset.getString("USER_ID"));
 				reply.setBoardReplyDate(rset.getDate("REPLY_DATE"));
 				rList.add(reply);
+				SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 			}
 		}catch (SQLException e) {
 			e.printStackTrace();
@@ -336,6 +341,7 @@ public class BoardDAO {
 			board.setBoardCount(rset.getInt("BOARD_COUNT"));
 			board.setBoardLike(rset.getInt("BOARD_LIKE"));
 			bList.add(board);
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -657,21 +663,32 @@ public class BoardDAO {
 	}
 
 
-
-	public int selectLike(Connection conn, int boardNo) {
+	public List<Board> selectLike(Connection conn, int boardNo, int boardLike) {
+		List <Board> bList = null;
 		PreparedStatement pstmt = null;
-		int result = 0;
-		String query = "SELECT FROM BOARD_LIKE WHERE BOARD_NO = ?";
+		ResultSet rset = null;
+		String query = "SELECT * FROM (SELECT ROW_NUMBER() OVER (ORDER BY BOARD_LIKE DESC) AS LIKE_ORDER, BOARD_NO, BOARD_TITLE, BOARD_CONTENTS, BOARD_ENROLLDATE, BOARD_LIKE FROM FREEBOARD)";
 		
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1, boardNo);
-			result = pstmt.executeUpdate();
-		} catch (SQLException e) {
+			bList = new ArrayList<Board>();
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				Board board = new Board();
+				board.setBoardNo(rset.getInt("BOARD_NO"));
+				board.setBoardTitle(rset.getString("BOARD_TITLE"));
+				board.setBoardContents(rset.getString("BOARD_CONTENTS"));
+				board.setSportsName(rset.getString("SPORTS_NAME"));
+				board.setUserId(rset.getString("USER_ID"));
+				board.setBoardEnrollDate(rset.getDate("BOARD_ENROLLDATE"));
+				bList.add(board);
+			}
+		}catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
 			JDBCTemplate.close(pstmt);
+			JDBCTemplate.close(rset);
 		}
-		return result;
+		return bList;
 	}
 }

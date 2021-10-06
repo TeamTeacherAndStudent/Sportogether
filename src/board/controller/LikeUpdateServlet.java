@@ -38,6 +38,7 @@ public class LikeUpdateServlet extends HttpServlet {
 		boardLike.setBoardNo(boardNo);
 		boardLike.setUserId(userId);
 		int result = new BoardService().updateLike(boardLike);
+		//int result2 = new BoardService().updateLikeBoard(boardLike);
 		if(result> 0) {
 			response.sendRedirect("/board/detail?boardNo="+boardNo);
 		}else {

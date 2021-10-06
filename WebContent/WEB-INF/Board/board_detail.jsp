@@ -189,7 +189,7 @@
 							</div>
 						</div><hr>
 						<div class="file-download">
-							${requestScope.boardOne.files }
+							파일 선택 : ${requestScope.boardOne.files }
 						</div><br><hr>
 					</div>
 				</div>
@@ -203,7 +203,6 @@
 	    						<button type="submit" id="likeBtn" class="Btn" onclick="onLikeChange()">좋아요</button>
 	                    </c:if>-->
 	    		     		<button type="submit" id="likeBtn" class="Btn" onclick="onLikeChange(this)">좋아요</button>
-	                        <button type="submit"id="scrapBtn" class="Btn" onclick="onScrapChange();">스크랩</button>
 	                        <button id="reportBtn" class="Btn" onclick="onReportedBoardClick();">게시글신고</button>
 						</div>
 					</c:if>
@@ -297,8 +296,6 @@
 	var likeYn = '${likeYn }';
 	if(likeYn == 'Y') {
 		$("#likeBtn").addClass('like');
-	}else{
-		
 	}
 	function onLikeChange(obj){
 		var boardNo = "${requestScope.boardOne.boardNo }";
@@ -309,6 +306,7 @@
 			$("#likeBtn").removeClass('like');
 		}
 	}
+	
 // 		$("#likeBtn").toggleClass('like');
 		//	location.href ="/like/update?boardNo="+boardNo;
 	 //	if($(this).attr('class') == 'like'){

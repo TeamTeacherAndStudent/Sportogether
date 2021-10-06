@@ -34,7 +34,7 @@ public class BoardWriteServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//views로 이동하는 코드작성
-		request.getRequestDispatcher("/WEB-INF/Board/boardWrite.html").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/Board/board_write.jsp").forward(request, response);
 	}
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

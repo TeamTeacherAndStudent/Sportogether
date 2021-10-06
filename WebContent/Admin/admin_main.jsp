@@ -159,7 +159,7 @@
 				</a>
 			</div>
 			<div class="col-lg-4 col-md-4 col-xs-4 col-sm-4">
-				<a href="campaign_delete.jsp">
+				<a href="/support">
 					<div id="campaigncard" class="card">
 						<div class="card-header">
 							<h3>캠페인 관리</h3>

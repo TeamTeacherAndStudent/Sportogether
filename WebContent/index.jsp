@@ -241,8 +241,8 @@
                               <div class="sigle_counter_item">
                                    <img src="img/tree.png" alt="">
                                   <div class="counter_text">
-                                      <span class="people-counter">134</span>
-                                      <p>일일 방문자 수</p>
+                                   		<span class="people-counter"><%=session.getAttribute("todayCount") %></span>   
+                                	  	<p>일일 방문자 수<p>
                                   </div>
                               </div>
                           </div>
@@ -252,7 +252,7 @@
                               <div class="sigle_counter_item">
                                   <img src="img/hand.png" alt="">
                                   <div class="counter_text">
-                                      <span class="people-counter">1458</span>
+                                      <span class="people-counter"><%=session.getAttribute("totalCount") %></span>
                                       <p>전체 방문자 수</p>
                                   </div>
                               </div>
