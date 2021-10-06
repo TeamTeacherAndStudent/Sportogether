@@ -228,6 +228,7 @@ button:hover {
 <title>회원 검색 결과</title>
 </head>
 <body>
+
 	  <!-- ======= Header ======= -->
   <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center justify-content-between">

@@ -101,11 +101,13 @@
 		
 	}
 </script>
+
   <!-- ======= Header ======= -->
   <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center justify-content-between">
       <h1 class="logo"><a href="/"> Sportogether </a></h1>
       <nav id="navbar" class="navbar">
+
         <ul>
           <li><a class="active" href="/sports/list">종목</a></li>
           <li><a href="/board/list">자유게시판</a></li>

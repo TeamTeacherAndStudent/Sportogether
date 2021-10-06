@@ -163,26 +163,30 @@ button:hover {
 <header id="header" class="fixed-top">
 		<div
 			class="container d-flex align-items-center justify-content-between">
-			<!-- 여기에 로고 사진 추가 -->
-			<h1 class="logo">
-				<a href="../index.jsp"> Sportogether </a>
-			</h1>
-			<nav id="navbar" class="navbar">
-				<ul>
-					<li><a class="active" href="../Sports/sportsList.jsp">종목</a></li>
-					<li><a href="/board/list">자유게시판</a></li>
-					<li><a href="/support/list">후원</a></li>
-					<li><input type="search" placeholder="검색" size="10"
-						id="search"></li>
-					<li><a href="../login_registration/login.jsp">Login</a></li>
-					<li class="dropdown"><a href="#"><span>SIDE MENU</span> <i
-							class="bi bi-chevron-down"></i></a>
-						<ul>
-							<li><a href="/notice/list">공지사항</a></li>
-							<li><a href="/mypage/main">마이페이지</a></li>
-							<li><a href="qna/list">1:1문의</a></li>
-						</ul></li>
-				</ul>
+		<!-- 여기에 로고 사진 추가 -->
+     	<h1 class="logo"><a href="/index.jsp"> Sportogether </a></h1>
+       <nav id="navbar" class="navbar">
+        <ul>
+          <li><a class="active" href="/sports/list">종목</a></li>
+          <li><a href="/board/list">자유게시판</a></li>
+          <li><a href="/support/list">후원</a></li>
+          <li><input type="search" placeholder="검색" size="10" id="search"></li>
+          <li>
+          	<c:if test="${sessionScope.userId eq null }">
+				<a href="/member/login">Login</a>
+			</c:if> 
+			<c:if test="${sessionScope.userId ne null }">
+				<a href="/member/logout">Logout</a>
+			</c:if></li>
+          <li class="dropdown"><a href="#"><span>SIDE MENU</span> <i class="bi bi-chevron-down"></i></a>
+          <ul>
+             <li><a href="/notice/list">공지사항</a></li>     
+             <li><a href="/mypage/main">마이페이지</a></li>
+             <li><a href="/qna/list">1:1문의</a></li>
+              <c:if test="${sessionScope.userCode eq 'G'}"><li><a href="/admin/main">관리자 페이지</a></li></c:if>
+          </ul>
+          </li>
+        </ul>
 				<i class="bi bi-list mobile-nav-toggle"></i>
 			</nav>
 			<!-- .navbar -->

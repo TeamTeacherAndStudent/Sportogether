@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -138,26 +139,30 @@ button:hover {
 	<header id="header" class="fixed-top">
 		<div
 			class="container d-flex align-items-center justify-content-between">
-			<!-- 여기에 로고 사진 추가 -->
-			<h1 class="logo">
-				<a href="../index.jsp"> Sportogether </a>
-			</h1>
-			<nav id="navbar" class="navbar">
-				<ul>
-					<li><a class="active" href="../Sports/sportsList.jsp">종목</a></li>
-					<li><a href="/board/list">자유게시판</a></li>
-					<li><a href="/support/list">후원</a></li>
-					<li><input type="search" placeholder="검색" size="10"
-						id="search"></li>
-					<li><a href="../login_registration/login.jsp">Login</a></li>
-					<li class="dropdown"><a href="#"><span>SIDE MENU</span> <i
-							class="bi bi-chevron-down"></i></a>
-						<ul>
-							<li><a href="/notice/list">공지사항</a></li>
-							<li><a href="/mypage/main">마이페이지</a></li>
-							<li><a href="/qna/list">1:1문의</a></li>
-						</ul></li>
-				</ul>
+		<!-- 여기에 로고 사진 추가 -->
+     	<h1 class="logo"><a href="/index.jsp"> Sportogether </a></h1>
+       <nav id="navbar" class="navbar">
+        <ul>
+          <li><a class="active" href="/sports/list">종목</a></li>
+          <li><a href="/board/list">자유게시판</a></li>
+          <li><a href="/support/list">후원</a></li>
+          <li><input type="search" placeholder="검색" size="10" id="search"></li>
+          <li>
+          	<c:if test="${sessionScope.userId eq null }">
+				<a href="/member/login">Login</a>
+			</c:if> 
+			<c:if test="${sessionScope.userId ne null }">
+				<a href="/member/logout">Logout</a>
+			</c:if></li>
+          <li class="dropdown"><a href="#"><span>SIDE MENU</span> <i class="bi bi-chevron-down"></i></a>
+          <ul>
+             <li><a href="/notice/list">공지사항</a></li>     
+             <li><a href="/mypage/main">마이페이지</a></li>
+             <li><a href="/qna/list">1:1문의</a></li>
+              <c:if test="${sessionScope.userCode eq 'G'}"><li><a href="/admin/main">관리자 페이지</a></li></c:if>
+          </ul>
+          </li>
+        </ul>
 				<i class="bi bi-list mobile-nav-toggle"></i>
 			</nav>
 			<!-- .navbar -->
@@ -185,6 +190,8 @@ button:hover {
 							닉네임 : ${member.userNickName} <br> 
 							전화번호 : ${member.userPhone} <br> 
 							이메일 : ${member.userEmail} <br>
+							<c:if test="${sessionScope.userPlayer eq 'Y'}">선수인증: 인증완료</c:if>
+							<c:if test="${sessionScope.userPlayer eq 'N'}">선수인증: 인증 전</c:if>
 						</div>
 						<div class="button">
 							<a href="/mypage/modify"><button>수정</button></a>
@@ -197,7 +204,7 @@ button:hover {
 							김연경 (배구) : 1000원
 						</div>
 						<div class="button">
-							<a href="/mypage/support"><button>더보기</button></a>
+							<a href="/Mypage_html/Mypage_Support.html"><button>더보기</button></a>
 						</div>
 					</div>
 				</div>
@@ -222,7 +229,7 @@ button:hover {
 							방문 횟수 : 10회 <br> 주요 후원 종목 : 배구
 						</div>
 						<div class="button">
-							<a href="/mypage/chart"><button>더보기</button></a>
+							<a href="/Mypage_html/Mypage_Chart.html"><button>더보기</button></a>
 						</div>
 					</div>
 				</div>
@@ -241,7 +248,7 @@ button:hover {
 						<div class="title">나의 스크랩 내역</div>
 						<div class="content"></div>
 						<div class="button">
-							<a href="/mypage/scrap"><button>보기</button></a>
+							<a href="/Mypage_html/Mypage_Scrap.html"><button>보기</button></a>
 						</div>
 					</div>
 				</div>

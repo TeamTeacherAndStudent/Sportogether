@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>선수인증</title>
+<title>나의 활동 차트</title>
 
 <!-- Google Fonts -->
 <link
@@ -25,16 +25,44 @@
 <!-- Template Main CSS File -->
 <link href="../assets/css/style.css" rel="stylesheet">
 
-<!-- jQuery  CDN -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<!--Load the AJAX API-->
+<script type="text/javascript"
+	src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
 
-<!-- email -->
-<link rel="stylesheet"
-	href="https://unpkg.com/purecss@1.0.0/build/pure-min.css">
+      // Load the Visualization API and the corechart package.
+      google.charts.load('current', {'packages':['corechart']});
 
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+      // Set a callback to run when the Google Visualization API is loaded.
+      google.charts.setOnLoadCallback(drawChart);
 
+      // Callback that creates and populates a data table,
+      // instantiates the pie chart, passes in the data and
+      // draws it.
+      function drawChart() {
+
+        // Create the data table.
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Topping');
+        data.addColumn('number', 'Slices');
+        data.addRows([
+          ['Mushrooms', 3],
+          ['Onions', 1],
+          ['Olives', 1],
+          ['Zucchini', 1],
+          ['Pepperoni', 2]
+        ]);
+
+        // Set chart options
+        var options = {'title':'내가 한 후원 종목 비율 확인',
+                       'width':700,
+                       'height':500};
+
+        // Instantiate and draw our chart, passing in some options.
+        var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+      }
+    </script>
 
 <style>
 #main-title {
@@ -62,38 +90,10 @@
 	vertical-align: middle;
 }
 
-table.p-table {
-	border-collapse: separate;
-	border-spacing: 1px;
-	line-height: 1.5;
-	/* margin: 20px 10px; */
-}
-
-table.p-table th {
-	width: 900px;
-	padding: 10px;
-	font-weight: bold;
-	vertical-align: top;
-	color: #fff;
-	background: #165992;
-	text-align: center;
-}
-
-table.p-table td {
-	width: 900px;
-	padding: 10px;
-	vertical-align: top;
-	border-bottom: 1px solid #ccc;
-	background: #fff;
-}
-
-table.p-table tr:nth-child(2) {
-	height: 500px;
-}
-
-.p-table tr:nth-child(4) td {
+#back-btn {
+	margin-left: 25%;
+	margin-right: 25%;
 	text-align: right;
-	justify-contnet: space-between;
 }
 
 button {
@@ -121,44 +121,6 @@ button:hover {
 	text-decoration: none;
 }
 
-/* 파일명 upload-name  */
-.upload-name {
-	display: inline-block;
-	padding: 12px 32px; /* label의 패딩값과 일치 */
-	font-size: inherit;
-	font-family: inherit;
-	line-height: normal;
-	vertical-align: middle;
-	background-color: #f5f5f5;
-	border: 1px solid #ebebeb;
-	width: 660px;
-	height: 38px;
-}
-
-/* 파일 업로드 버튼  */
-.input-file-button {
-	font-family: "Raleway", sans-serif;
-	font-weight: 600;
-	font-size: 14px;
-	border-style: none;
-	margin-top: 6px;
-	margin-left: 10px;
-	padding: 12px 32px;
-	border-radius: 5px;
-	border: 2px solid #1d284b;
-	transition: 0.3s;
-	line-height: 1;
-	background-color: #1d284b;
-	color: white;
-	cursor: pointer;
-	width: 150px;
-	letter-spacing: 1px;
-}
-
-#input-file {
-	display: none;
-}
-
 #search {
 	margin-left: 30px;
 }
@@ -169,26 +131,23 @@ button:hover {
 	<header id="header" class="fixed-top">
 		<div
 			class="container d-flex align-items-center justify-content-between">
-			<!-- 여기에 로고 사진 추가 -->
-			<h1 class="logo">
-				<a href="../index.jsp"> Sportogether </a>
-			</h1>
-			<nav id="navbar" class="navbar">
-				<ul>
-					<li><a class="active" href="../Sports/sportsList.jsp">종목</a></li>
-					<li><a href="/board/list">자유게시판</a></li>
-					<li><a href="/support/list">후원</a></li>
-					<li><input type="search" placeholder="검색" size="10"
-						id="search"></li>
-					<li><a href="../login_registration/login.jsp">Login</a></li>
-					<li class="dropdown"><a href="#"><span>SIDE MENU</span> <i
-							class="bi bi-chevron-down"></i></a>
-						<ul>
-							<li><a href="/notice/list">공지사항</a></li>
-							<li><a href="/mypage/main">마이페이지</a></li>
-							<li><a href="/qna/list">1:1문의</a></li>
-						</ul></li>
-				</ul>
+		<!-- 여기에 로고 사진 추가 -->
+     	<h1 class="logo"><a href="/index.jsp"> Sportogether </a></h1>
+       <nav id="navbar" class="navbar">
+        <ul>
+          <li><a class="active" href="/sports/list">종목</a></li>
+          <li><a href="/board/list">자유게시판</a></li>
+          <li><a href="/support/list">후원</a></li>
+          <li><input type="search" placeholder="검색" size="10" id="search"></li>
+          <li><a href="/member/logout">Logout</a></li>
+          <li class="dropdown"><a href="#"><span>SIDE MENU</span> <i class="bi bi-chevron-down"></i></a>
+          <ul>
+             <li><a href="/notice/list">공지사항</a></li>     
+             <li><a href="/mypage/main">마이페이지</a></li>
+             <li><a href="/qna/list">1:1문의</a></li>
+          </ul>
+          </li>
+        </ul>
 				<i class="bi bi-list mobile-nav-toggle"></i>
 			</nav>
 			<!-- .navbar -->
@@ -201,63 +160,33 @@ button:hover {
 	<main>
 		<section>
 			<div id="main-title">
-				<h1>선수 인증</h1>
+				<h1>활동차트</h1>
 			</div>
 		</section>
 
 
-
+		<!-- section : 프로필 수정-->
 		<section>
 			<div id="main-content">
-			<form class="gform pure-form pure-form-stacked" method="POST" data-email="suyunsong1007@gmail.com" action="https://script.google.com/macros/s/AKfycbxDSVMGNOSnLnnOp4whSBCBtFuMSq0l3Hog7kwUgnxg_6nr60jyqife-_y4qjSJGk1y/exec">
-				<table class="p-table">
-					<thead>
-						<tr>
-							<th scope="cols">선수인증</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td><input id="email" name="email" type="email" value="" required placeholder="이메일을 입력해주세요"/></td>
-						</tr>
-						<tr>
-							<td><textarea rows="20" style="width: 100%; border: 0;"  id="message" name="message"
-									placeholder="선수인증에 관한 증빙 자료를 첨부하셔야 합니다. 따로 문의사항이 있다면 내용에 기입하셔서 문의주세요."></textarea>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<!-- &nbsp;&nbsp;첨부파일 &nbsp;&nbsp; &nbsp;&nbsp;<input type="file"> -->
-								<input type="text" class="upload-name" readonly="readonly">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								<label class="input-file-button" for="input-file"> 파일
-									업로드</label> <input type="file" id="input-file"> <!-- 파일 버튼 숨김 -->
-							</td>
-
-						</tr>
-						<tr>
-							<td>
-								<button type="submit">등록</button>&nbsp;&nbsp;&nbsp;&nbsp;
-								<button>취소</button>
-							</td>
-						</tr>
-
-
-					</tbody>
-				</table>
-			</form>
+				<!--Div that will hold the pie chart-->
+				<div id="chart_div"></div>
+				<div id="count">
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br> 후원 횟수 : 10 <br> 스포투게더 방문횟수 : 46
+				</div>
 			</div>
-			    <!-- Customise the Thankyou Message People See when they submit the form: -->
-
-    <div class="thankyou_message" style="display:none;">
-
-      <h2><em>Thanks</em> for contacting us!
-
-        We will get back to you soon!</h2>
-
-    </div>
-
 		</section>
-
+		<section>
+			<div id="back-btn">
+				<a href="/mypage/main"><button>마이 페이지</button></a>
+			</div>
+		</section>
 	</main>
 
 
@@ -282,7 +211,8 @@ button:hover {
 				<option value="http://www.kahperd.or.kr/">한국체육학회</option>
 				<option
 					value="https://www.sports.re.kr/front/main/main.do?menu_seq=0">한국정책과학원</option>
-			</select> <br> <br>
+			</select> <br>
+			<br>
 			<div class="copyright">
 				&copy; Copyright <strong><span>SPORTOGETHER</span></strong>. All
 				Rights Reserved
@@ -314,23 +244,6 @@ button:hover {
 	<script src="assets/js/jquery-1.12.3.min.js"></script>
 	<script src="assets/js/jquery.counterup.min.js"></script>
 	<script src="assets/js/waypoints.min.js"></script>
-
-
-	<!--  파일 첨부 -->
-	<script>
-      $(function(){
-         $('.upload-name').val('파일선택');
-         $('#input-file').change(function(){
-            var filename = $(this).val();
-            $('.upload-name').val(filename);
-         });
-      });
-   </script>
-
-	<!-- Submit the Form to Google Using "AJAX" -->
-
-	<script data-cfasync="false" type="text/javascript"
-		src="form-submission-handler.js"></script>
 
 </body>
 </html>
