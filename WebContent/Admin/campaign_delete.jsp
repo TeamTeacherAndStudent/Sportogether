@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+ <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,6 +20,7 @@
 
   <!-- Template Main CSS File -->
   <link href="../assets/css/style.css" rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<style>
 	 		/*제목*/
 	h1{
@@ -103,7 +106,7 @@
 	    border-radius: 5px;
 	    border: 2px solid #1d284b;
 	    transition: 0.3s;
-	    line-height: 1;
+	    line-height: 0;
   		background-color: #1d284b;
   		cursor: pointer;
   		width: 80px;
@@ -113,6 +116,26 @@
   		float: right;
   		margin-right: 100px;
 	}
+	#deleteBtn{
+		height:32px
+	}
+/* 	.deleteBtn{ */
+/* 		font-family: "Raleway", sans-serif; */
+/* 		    font-weight: 600; */
+/* 		    font-size: 12px; */
+/* 		    border-style : none; */
+/* 		    margin-top: 2px; */
+/* 	  		padding: 7px 7px; */
+/* 		    border-radius: 5px; */
+/* 		    border: 1px solid #1d284b; */
+/* 		    transition: 0.3s; */
+/* 	  		background-color: #1d284b; */
+/* 	  		cursor: pointer; */
+/* 	  		width: 50px; */
+/* 		    letter-spacing: 1px; */
+/* 	  		color : white; */
+/* 	  		height: 25px; */
+/* 	} */
 	 #search{
 		   margin-left: 30px;
 		}
@@ -153,44 +176,36 @@
 				<ul class="ulTable">
        			<li>
 					<ul>
-						<li><input type="checkbox" name="" value="all" id="chk_all"></li>
+<!-- 						<li><input type="checkbox" name="" value="all" id="chk_all"></li> -->
 						<li>번호</li>
 						<li>캠페인 이름</li>
 						<li>작성자</li>
 						<li>캠페인 게시일자</li>
+						<li>삭제</li>
 					</ul>
 				</li>
-				<li>
-					<ul>
-						<li><input type="checkbox" name="" value="vallyball" class="one-chk"></li>
-						<li>1</li>
-						<li>제빵 배이커리</li>
-						<li>김연경</li>
-						<li>2021/09/27</li>
-					</ul>
-				</li>
-				<li>
-					<ul>
-						<li><input type="checkbox" name="" value="vallyball" class="one-chk"></li>
-						<li>1</li>
-						<li>제빵 배이커리</li>
-						<li>김연경</li>
-						<li>2021/09/27</li>
-					</ul>
-				</li>
+				<c:forEach items="${requestScope.sList }" var= "support" varStatus="index">
+						<li>
+							<ul>
+								
+								<li>${support.supportNo }</li>
+								<li><a style= "color: black;"   href = "/support/detail?supportNo=${support.supportNo }">${support.supportTitle }</a></li>
+								<li>${support.supportWriter }</li>
+								<li><fmt:formatDate value="${support.supportRegDate }" pattern="yyyy/MM/dd HH:mm"/></li>
+							
+								<li>
+									<button class="Btn" id = "deleteBtn" onclick="onDeleteClick();" value = "${support.supportNo }">삭제</button>
+								</li>
+							</ul>
+						</li>
+					</c:forEach>	
 				</ul>
 			</div>
 			<br>
 			<div id="divPaging">
-				<div>◀</div>
-				<div><b>1</b></div>
-				<div>2</div>
-				<div>3</div>
-				<div>4</div>
-				<div>5</div>
-				<div>▶</div>
+			${requestScope.pageNavi }
 			</div>
-			<button id="removeBtn" class="Btn" onclick="onRemoveClick()">삭제</button>
+<!-- 			<button id="removeBtn" class="Btn" onclick="onRemoveClick()">삭제</button> -->
 		</section>
 	</main>
   <!-- ======= Footer ======= -->
@@ -226,28 +241,38 @@
 <!-- Vendor JS Files -->
 	<script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 	<script>
-	function onRemoveClick(){
-		var removecheck = window.confirm("캠페인을 삭제하겠습니까?");
-		if(removecheck) {
-			console.log("네");
-		}else {
-			console.log("아니오");
+	function onDeleteClick(){
+		var deleteConfirm = window.confirm("해당 캠페인을 삭제하시겠습니까?");
+		var supportNo = $("#deleteBtn").val();
+		if(deleteConfirm){
+			location.href ="/support/remove?supportNo="+supportNo;
+			window.alert("삭제되었습니다.");
+		}else{
+			window.alert("취소하였습니다.")
 		}
 	}
-	$(document).on('click','#chk_all',function(){
-		if($('#chk_all').is(':checked')){
-			$('.one-chk').prop('checked',true);
-		}else{
-			$('.one-chk').prop('checked',false);
-		}
-	});
-	$(document).on('click','one-chk',function(){
-		if($('input[class=one-chk]:checked').length==$('one-chk').legth){
-			$('#chk_all').prop('checked',true);
-		}else{
-			$('#chk_all').prop('checked',false);
-		}
-	});
+// 	function onRemoveClick(){
+// 		var removecheck = window.confirm("캠페인을 삭제하겠습니까?");
+// 		if(removecheck) {
+// 			console.log("네");
+// 		}else {
+// 			console.log("아니오");
+// 		}
+// 	}
+// 	$(document).on('click','#chk_all',function(){
+// 		if($('#chk_all').is(':checked')){
+// 			$('.one-chk').prop('checked',true);
+// 		}else{
+// 			$('.one-chk').prop('checked',false);
+// 		}
+// 	});
+// 	$(document).on('click','one-chk',function(){
+// 		if($('input[class=one-chk]:checked').length==$('one-chk').legth){
+// 			$('#chk_all').prop('checked',true);
+// 		}else{
+// 			$('#chk_all').prop('checked',false);
+// 		}
+// 	});
 	</script>
 </body>
 </html>

@@ -196,6 +196,10 @@
 						<c:if test = "${sessionScope.userId eq supportOne.supportWriter }">
 							<a href="/support/modify?supportNo=${supportOne.supportNo }" id="modbtn" class = "btn btn-primary">수정하기</a>
 						</c:if>
+						<c:if test = "${sessionScope.userId eq supportOne.supportWriter || sessionScope.userCode eq  'G'}">
+							<a href="/support/remove?supportNo=${supportOne.supportNo }" id="modbtn" class = "btn btn-primary">삭제하기</a>
+						</c:if>
+						
 					</div>
 				</div>
 			</div>

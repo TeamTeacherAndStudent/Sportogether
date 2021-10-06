@@ -2,6 +2,7 @@ package support.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Date;
 
 import javax.servlet.ServletException;
@@ -43,28 +44,12 @@ public class SupportWriteServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		request.setCharacterEncoding("UTF-8");
-//		String title =request.getParameter("title");
-//		String content = request.getParameter("content");
-//		String purpose = request.getParameter("purpose");
-//		String sportsCate = request.getParameter("sports");
-//		String sptGoal = request.getParameter("mokpyo");
-//		String sptEndDate = request.getParameter("end-date");
-//		System.out.println(title + content + purpose + sportsCate + sptGoal);
-//		
-//		int supportGoal = Integer.parseInt(sptGoal);
-//		Date supportEndDate = Date.valueOf(sptEndDate);
-//		
-//		//세션에서 id 가져오기..
-//		HttpSession session = request.getSession();
-//		String supportWriter = (String)session.getAttribute("user-id");
-		
 	
 		request.setCharacterEncoding("UTF-8");
 		//upload 경로?
 		String uploadFilePath = request.getServletContext().getRealPath("upload");
 //		System.out.println("업로드 리얼 패스 : " + uploadFilePath);
-		int uploadFileLimit = 5*1024*1024; //최대 파일 크기 5mb
+		int uploadFileLimit = 8*1024*1024; //최대 파일 크기 5mb
 		String encType = "UTF-8";
 		MultipartRequest multi = new MultipartRequest(request, uploadFilePath, uploadFileLimit, encType, new DefaultFileRenamePolicy());
 		//multi로 수정	
@@ -84,6 +69,19 @@ public class SupportWriteServlet extends HttpServlet {
 		String supportWriter = (String)session.getAttribute("userId");
 	
 		String supportFileName = multi.getFilesystemName("img-file");
+		if(supportFileName == null) {
+			response.setContentType("text/html;charset=UTF-8");
+
+			PrintWriter out = response.getWriter();
+
+			out.println("<script>");
+
+			out.println("alert('첨부할 이미지 파일을 선택해주세요.')");
+
+			out.println("history.back()");
+
+			out.println("</script>");
+		}
 		File uploadFile = multi.getFile("img-file");
 		String filePath = uploadFile.getPath();
 		long fileSize = uploadFile.length();

@@ -1,4 +1,4 @@
-package admin.controller;
+package support.controller;
 
 import java.io.IOException;
 import java.util.List;
@@ -16,16 +16,16 @@ import support.model.vo.PageData;
 import support.model.vo.Support;
 
 /**
- * Servlet implementation class SupportAppListServlet
+ * Servlet implementation class AdminSptListServlet
  */
-@WebServlet("/support/appList")
-public class SupportAppListServlet extends HttpServlet {
+@WebServlet("/support/delList")
+public class AdminSptListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SupportAppListServlet() {
+    public AdminSptListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,10 +34,7 @@ public class SupportAppListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
     
-    
-    
-//승인 여부가 'N'인 후원 게시물 리스트 
-    
+    ///support/delList
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int currentPage = 0;
 		String getCurrentPage = request.getParameter("currentPage");
@@ -47,7 +44,7 @@ public class SupportAppListServlet extends HttpServlet {
 		}else {
 			currentPage = Integer.parseInt(getCurrentPage);
 		}
-		PageData pageData = new AdminService().printAllSupport(currentPage);
+		PageData pageData = new SupportService().printAllSupport(currentPage);
 		List<Support> sList = pageData.getSupportList();
 		//리스트 조회 성공하면
 		if(!sList.isEmpty()) {
@@ -55,13 +52,13 @@ public class SupportAppListServlet extends HttpServlet {
 			request.setAttribute("sList", sList);
 			request.setAttribute("pageNavi",pageData.getPageNavi());
 			// 후원 승인 목록 페이지로 이동
-			request.getRequestDispatcher("/Admin/support_approval.jsp")
+			request.getRequestDispatcher("/Admin/campaign_delete.jsp")
 			.forward(request, response);
 		}else {
 			RequestDispatcher view = request.getRequestDispatcher("/Admin/serviceFailed.html");
 			view.forward(request, response);
 		}
-		
+	
 	}
 
 	/**

@@ -350,6 +350,23 @@ public class SupportDAO {
 		}
 		return idCheck;
 	}
+	// 후원 게시물 삭제
+	public int deleteSupport(Connection conn, int supportNo) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = "DELETE FROM SUPPORT WHERE SUPPORT_NO = ?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, supportNo);
+			result=pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
+	}
 	
 	
 }

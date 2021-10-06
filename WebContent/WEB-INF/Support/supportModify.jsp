@@ -112,7 +112,7 @@
         <label for="goalmoney">목표 금액</label>
         <input type="text" class="form-control" id="goalmoney"
        placeholder="후원 목표 금액 입력" name="mokpyo"
-       maxlength="50" required pattern="^[0-9]+$" value = "${supportOne.supportGoal }"><br>
+       maxlength="50"  pattern="^[0-9]+$" value = "${supportOne.supportGoal }" readonly><br>
       
        <div class="mb-3">
 			<label class="form-label" for="user-birth">종료일</label>

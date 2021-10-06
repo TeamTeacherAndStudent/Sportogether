@@ -1,13 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>   
+    
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>로그인</title>
-<!-- Google Fonts -->
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Sportogether</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+ <!-- <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+-->
+
+  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
-   <!-- Vendor CSS Files -->
+
+  <!-- Vendor CSS Files -->
   <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
   <link href="../assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
@@ -17,87 +30,92 @@
 
   <!-- Template Main CSS File -->
   <link href="../assets/css/style.css" rel="stylesheet">
-  <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-  <script src="https://kit.fontawesome.com/a9dc1781b1.js" crossorigin="anonymous"></script>
+  
+  <!-- 추가 counter js, jquery-->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <style>
-  	#formtest{
-  		margin-top:5%;
-  		margin-bottom: 120px;
+  	.reg-main{
+		margin-top : 5%;  
   	}
-  	.login-main{
-  		margin-top : 100px;
-  		text-align: center;
+  	.btn-lg{
+  		background-color: #1d284b;
+  		border-color: #1d284b;
   	}
-  	.login-input{
-		margin : 8px; 	
-		
-		
-  	}
-   </style>
-</head>
+  </style>
 <body>
-
  <!-- ======= Header ======= -->
   <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center justify-content-between">
-<!-- 여기에 로고 사진 추가 -->
-      <h1 class="logo"><a href="index.html"> Sportogether </a></h1>
-      <!-- Uncomment below if you prefer to use an image logo -->
-      <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
-
+      <h1 class="logo"><a href="/index.jsp"> Sportogether </a></h1>
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a class="active" href="sports.html">종목</a></li>
-          <li><a href="freeboard.html">자유게시판</a></li>
-          <li><a href="support.html">후원</a></li>
-          <li><input type="search" placeholder="검색" size="5"></li>
+          <li><a class="active" href="/Sports/sportsList.jsp">종목</a></li>
+          <li><a href="/board/list">자유게시판</a></li>
+          <li><a href="/support/list">후원</a></li>
+          <li><input type="search" placeholder="검색" size="10" id="search"></li>
+       	  <li>
+       	  	<c:if test="${sessionScope.userId eq null }">
+       	 		 <a href="login_registration/login.jsp">Login</a>
+       	 	</c:if>
+       	 	<c:if test = "${sessionScope.userId ne null }">
+       	 		<a href="/member/logout">Logout</a>
+       	 	</c:if>
+       	  </li>
           <li class="dropdown"><a href="#"><span>SIDE MENU</span> <i class="bi bi-chevron-down"></i></a>
           <ul>
-             <li><a href="notice.html">공지사항</a></li>     
-             <li><a href="myinfo.html">마이페이지</a></li>
-             <li><a href="qna">1:1문의</a></li>
+             <li><a href="/notice/list">공지사항</a></li>     
+             <li><a href="/mypage/main">마이페이지</a></li>
+             <li><a href="/qna/list">1:1문의</a></li>
+             <c:if test="${sessionScope.userCode eq 'G'}"><li><a href="/admin/main">관리자 페이지</a></li></c:if>
           </ul>
           </li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
-      </nav><!-- .navbar -->
+      </nav><br><br><br><!-- .navbar -->
 
     </div>
-  </header><!-- End Header -->
-  
-<!-- 로그인 -->
-<div class="login-main">
-	<section class="container">
-		<div>
-			<div id = "formtest">
-			<span style="font-size : 6em;"><i class="far fa-user"></span></i><br>
-				<form action = "/member/login" method="post">
-						<input class = "login-input" id = "floatingInput" autocomplete="off" type="text" name = "user-id" placeholder ="ID"><br>
-						<input class = "login-input" id = "floatingPassword" autocomplete="off" type="password" name = "user-pw" placeholder ="PASSWORD"><br>
-					<a href="#" style="font-size:12px;" class="link-secondary">ID 찾기</a>
-					<a href="#" style="font-size:12px;" class="link-secondary">PW 찾기</a><br>
-					<a href="/login_registration/registration.html" style="font-size:18px;" id = "registration" class="link-secondary">회원가입</a><br><br>
-					<input class = "btn btn-info" type="submit" value= "    LOG-IN !    ">
-					<hr>
-				</form>
+  </header>
+  <!-- End Header -->
+  <div class="reg-main">
+  	<section class="container">
+  		<div><h2>아이디 찾기</h2></div>
+		<div class = "row">
+			<div class="col-md-3 visible"></div>
+			<div class= " col-md-6">
+				<div class="container px-5 my-5">
+				    <form  class="was-validated" action="/member/findid" method="post">
+				      
+				       
+				        <div class="mb-3">
+				            <label class="form-label" for="user-name">이름</label>
+				            <input class="form-control" id="user-name" name="user-name" type="text" autocomplete = "off" placeholder="이름" required minLength="2" maxLength="14" pattern="^[가-힣]+$"/>
+				            <div class="invalid-feedback" >이름을 입력해주세요</div>
+				        </div>
+				        <div class="mb-3">
+				            <label class="form-label" for="user-birth">생년월일</label>
+				            <input class="form-control" id="user-birth" name="user-birth" type="date" placeholder="생년월일" required />
+				            <div class="invalid-feedback" >생년월일을 선택해주세요</div>
+				        </div>
+				        <div class="mb-3">
+				            <label class="form-label" for="휴대전화">휴대전화</label>
+				            <input class="form-control" id="휴대전화" name = "user-phone" type="text" placeholder="휴대전화" required minLength="10" maxLength="11" pattern="^[0-9]+$"/>
+				            <div class="invalid-feedback" >핸드폰 번호를 숫자로만 입력해주세요</div>
+				        </div>
+				        <div>
+				        	<input type="submit" id = "enrollbtn" class= "btn btn-primary btn-lg" value ="아이디 찾기">
+				        
+				        </div>
+				    </form>
+				</div>
 				
-					간편 로그인
-					<div>
-					
-					</div>
 				
 			</div>
 		</div>
-	</section>
-</div>
-
-    
-
-   
-
+  	</section>
+  </div>
   
- <!-- ======= Footer ======= -->
-  <footer id="footer">
+  <!-- footer -->
+   <footer id="footer">
     <div class="container">
       <h3>SPORTOGETHER</h3>
       <!-- 넣을 말 추가 -->
@@ -124,22 +142,17 @@
         Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
       </div>
     </div>
-  </footer>
-  <!-- End Footer -->
-   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-  
-  <!-- Vendor JS Files -->
+  </footer><!-- End Footer -->
+   <!-- Vendor JS Files -->
   <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="../assets/vendor/glightbox/js/glightbox.min.js"></script>
   <script src="../assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
   <script src="../assets/vendor/php-email-form/validate.js"></script>
   <script src="../assets/vendor/swiper/swiper-bundle.min.js"></script>
-  
-  <!-- Template Main JS File -->
+   <!-- Template Main JS File -->
   <script src="../assets/js/main.js"></script>
   <script src = "../assets/js/jquery-1.12.3.min.js"></script>
   <script src = "../assets/js/jquery.counterup.min.js"></script>
   <script src = "../assets/js/waypoints.min.js"></script>
-
 </body>
 </html>
