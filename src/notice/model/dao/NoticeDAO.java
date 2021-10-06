@@ -56,7 +56,7 @@ public class NoticeDAO {
 			pstmt.setInt(2, end);
 			rset = pstmt.executeQuery();
 			nList = new ArrayList<Notice>();
-			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm");
 			while(rset.next()) {
 				Notice notice = new Notice();
 				notice.setNoticeNo(rset.getInt("NOTICE_NO"));
