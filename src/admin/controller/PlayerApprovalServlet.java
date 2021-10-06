@@ -26,23 +26,23 @@ public class PlayerApprovalServlet extends HttpServlet {
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-	}
-
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		String userId = request.getParameter("user-id");
-		String userPlayer = request.getParameter("user-player");
-		Member member = new Member(userId,userPlayer);
-		int result = new AdminService().updatePlayer(member);
+		/* String userPlayer = "N"; */
+		/* Member member = new Member(userId,userPlayer); */
+		/* Member member = new Member(userId); */
+		int result = new AdminService().updatePlayer(userId);
 		if(result > 0) {
-			request.setAttribute("member", member);
 			response.sendRedirect("/admin/main");
 		}else {
 			RequestDispatcher view = request.getRequestDispatcher("/Admin/Admin_Error.html");
 			view.forward(request, response);
 		}
+	}
+
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 	}
 
 }

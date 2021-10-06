@@ -197,26 +197,26 @@ button:hover {
 	<header id="header" class="fixed-top">
 		<div
 			class="container d-flex align-items-center justify-content-between">
-			<!-- 여기에 로고 사진 추가 -->
-			<h1 class="logo">
-				<a href="../index.jsp"> Sportogether </a>
-			</h1>
-			<nav id="navbar" class="navbar">
-				<ul>
-					<li><a class="active" href="../Sports/sportsList.jsp">종목</a></li>
-					<li><a href="/board/list">자유게시판</a></li>
-					<li><a href="/support/list">후원</a></li>
-					<li><input type="search" placeholder="검색" size="10"
-						id="search"></li>
-					<li><a href="../login_registration/login.jsp">Login</a></li>
-					<li class="dropdown"><a href="#"><span>SIDE MENU</span> <i
-							class="bi bi-chevron-down"></i></a>
-						<ul>
-							<li><a href="/notice/list">공지사항</a></li>
-							<li><a href="/mypage/main">마이페이지</a></li>
-							<li><a href="/qna/list">1:1문의</a></li>
-						</ul></li>
-				</ul>
+		<!-- 여기에 로고 사진 추가 -->
+     	<h1 class="logo"><a href="/index.jsp"> Sportogether </a></h1>
+       <nav id="navbar" class="navbar">
+        <ul>
+          <li><a class="active" href="/sports/list">종목</a></li>
+          <li><a href="/board/list">자유게시판</a></li>
+          <li><a href="/support/list">후원</a></li>
+          <li><input type="search" placeholder="검색" size="10" id="search"></li>
+          <li>
+				<a href="/member/logout">Logout</a>
+			</li>
+          <li class="dropdown"><a href="#"><span>SIDE MENU</span> <i class="bi bi-chevron-down"></i></a>
+          <ul>
+             <li><a href="/notice/list">공지사항</a></li>     
+             <li><a href="/mypage/main">마이페이지</a></li>
+             <li><a href="/qna/list">1:1문의</a></li>
+             <li><a href="/admin/main">관리자 페이지</a></li>
+          </ul>
+          </li>
+        </ul>
 				<i class="bi bi-list mobile-nav-toggle"></i>
 			</nav>
 			<!-- .navbar -->
@@ -265,7 +265,7 @@ button:hover {
 				</div>
 				</form>	
 				<div class="button">
-				<a href="/admin/player"><button class="admin-btn">선수인증</button></a> <br>
+				<a href="/admin/player?user-id=${member.userId}"><button class="admin-btn">선수인증</button></a> <br>
 				<a href="/admin/main"><button class="admin-btn">관리자페이지</button></a> <br>
 					<a href="#layer" class="check-btn"><button  class="admin-btn" id="withdraw">탈퇴처리</button></a>
 				</div>
@@ -279,7 +279,7 @@ button:hover {
 						<p class="ctxt mb20">정말로 탈퇴처리하시겠습니까?</p>
 						<div class="btn-r">
 						
-							<a href="/admin/remove"><button class="btn-layerClose" onclick="deleteNotice()">탈퇴</button><!-- </a> --> 
+							<a href="/admin/remove?userId=${member.userId }"><button class="btn-layerClose" onclick="deleteNotice()">탈퇴</button><!-- </a> --> 
 							<a href="#" class="btn-layerClose"><button class="btn-layerClose">취소</button></a>
 						</div>
 						<!--  // 내용 끝 -->

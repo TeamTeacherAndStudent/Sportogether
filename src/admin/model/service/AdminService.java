@@ -132,12 +132,12 @@ private JDBCTemplate jdbcTemplate;
 
 	
 	//선수 인증
-	public int updatePlayer(Member member) {
+	public int updatePlayer(String userId) {
 		int result = 0;
 		Connection conn = null;
 		try {
 			conn = jdbcTemplate.createConnection();
-			result = new AdminDAO().updatePlayer(conn,member);
+			result = new AdminDAO().updatePlayer(conn,userId);
 			if(result>0) {
 				JDBCTemplate.commit(conn);
 			}else {

@@ -362,14 +362,13 @@ public class AdminDAO {
 		}
 		
 		//선수 인증
-		public int updatePlayer(Connection conn, Member member) {
+		public int updatePlayer(Connection conn, String userId) {
 			int result = 0;
 			PreparedStatement pstmt = null;
-			String query = "UPDATE MEMBER SET PLAYER = ? WHERE USER_ID = ?";
+			String query = "UPDATE MEMBER SET PLAYER = 'Y' WHERE USER_ID = ?";
 			try {
 				pstmt = conn.prepareStatement(query);
-				pstmt.setString(1, "Y");
-				pstmt.setString(2, member.getUserId());
+				pstmt.setString(1, userId);
 				result = pstmt.executeUpdate();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
