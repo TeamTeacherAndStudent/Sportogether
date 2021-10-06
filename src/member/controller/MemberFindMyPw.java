@@ -87,60 +87,79 @@ public class MemberFindMyPw extends HttpServlet {
                 break;
             }
         }
+        String tempPw = temp.toString();
         //비밀번호 변경
+        int result = 0 ;
+        result = ms.modifyPassword(userId,tempPw);
+        
+        if(result > 0) {
+
+        	//메일발송
+        	String host = "smtp.gmail.com";
+        	final String user = "rohilkie94@gmail.com"; 
+        	String sender = "sportogether";
+        	final String password = "jsilki94";
+        	
+        	
+        	
+        	// SMTP 서버 정보를 설정한다. (ssl적용에따라 설정옵션이 달라진다. 아래는 ssl적용 안한버전이다.)
+        	Properties props = new Properties(); 
+        	props.put("mail.smtp.starttls.enable", "true");
+        	props.put("mail.smtp.host", host); 	
+        	props.put("mail.smtp.port", 587); 
+        	props.put("mail.smtp.auth", "true"); 
+        	props.put("mail.smtp.ssl.protocols", "TLSv1.2");                                                                     
+        	//인증	    
+        	Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() { 
+        		protected PasswordAuthentication getPasswordAuthentication() { 
+        			return new PasswordAuthentication(user, password); 
+        		} 
+        	}); 
+        	
+        	try { 
+        		MimeMessage message = new MimeMessage(session); 
+        		//받는사람 메일
+        		message.setFrom(new InternetAddress(sender)); 
+        		message.addRecipient(Message.RecipientType.TO, new InternetAddress(m.getUserEmail())); 
+        		
+        		// 메일 제목 
+        		message.setSubject("SPORTOGETHER 임시 비밀번호 발송 안내입니다."); 
+        		// 메일 내용 
+        		message.setText("비밀번호가 임시 비밀번호 : "+temp+" 로 변경되었습니다. 로그인 후 반드시 비밀번호를 변경해주세요."); 
+        		// send the message 
+        		Transport.send(message); 
+        	} catch (MessagingException e) {
+        		e.printStackTrace(); 
+        	} 
+        	
+        	
+        	response.setContentType("text/html;charset=UTF-8");
+        	
+        	PrintWriter out = response.getWriter();
+        	
+        	out.println("<script>");
+        	
+        	out.println("alert('메일이 발송되었습니다.')");
+        	
+        	out.println("location.href='/index.jsp'");
+        	
+        	out.println("</script>");
+        }else {
+        	response.setContentType("text/html;charset=UTF-8");
+        	
+        	PrintWriter out = response.getWriter();
+        	
+        	out.println("<script>");
+        	
+        	out.println("alert('다시 시도해주세요.')");
+        	
+        	out.println("location.href='/index.jsp'");
+        	
+        	out.println("</script>");
+        }
         
         
         
-        //메일발송
-        String host = "smtp.gmail.com";
-	    final String user = "rohilkie94@gmail.com"; 
-	    String sender = "rohilkie94@gmail.com";
-	    final String password = "jsilki94";
-	
-    
-	    
-	    // SMTP 서버 정보를 설정한다. (ssl적용에따라 설정옵션이 달라진다. 아래는 ssl적용 안한버전이다.)
-	    Properties props = new Properties(); 
-	    props.put("mail.smtp.starttls.enable", "true");
-	    props.put("mail.smtp.host", host); 	
-	    props.put("mail.smtp.port", 587); 
-	    props.put("mail.smtp.auth", "true"); 
-	    props.put("mail.smtp.ssl.protocols", "TLSv1.2");                                                                     
-        //인증	    
-	    Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() { 
-	        protected PasswordAuthentication getPasswordAuthentication() { 
-	            return new PasswordAuthentication(user, password); 
-	        } 
-	    }); 
-	    
-	    try { 
-	        MimeMessage message = new MimeMessage(session); 
-            //받는사람 메일
-	        message.setFrom(new InternetAddress(sender)); 
-	        message.addRecipient(Message.RecipientType.TO, new InternetAddress(m.getUserEmail())); 
-
-	        // 메일 제목 
-	        message.setSubject("SPORTOGETHER 임시 비밀번호 발송 안내입니다."); 
-	        // 메일 내용 
-	        message.setText("비밀번호가 임시 비밀번호 : "+temp+" 로 변경되었습니다. 로그인 후 반드시 비밀번호를 변경해주세요."); 
-	        // send the message 
-	        Transport.send(message); 
-	    } catch (MessagingException e) {
-	        e.printStackTrace(); 
-	    } 
-	
-         
-     	response.setContentType("text/html;charset=UTF-8");
-
-		PrintWriter out = response.getWriter();
-
-		out.println("<script>");
-
-		out.println("alert('메일이 발송되었습니다.')");
-
-		out.println("location.href='/index.jsp'");
-
-		out.println("</script>");
 	}
 
 }

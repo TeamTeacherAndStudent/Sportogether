@@ -1,6 +1,8 @@
 package member.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -41,19 +43,45 @@ public class MemberLoginServlet extends HttpServlet {
 		
 		String userId = request.getParameter("user-id");
 		String userPw = request.getParameter("user-pw");
-		Member member = new MemberService().printOneLogin(userId,userPw);
-		if(member != null) {
-			//세션
-			HttpSession session = request.getSession();
-			session.setAttribute("userId", member.getUserId());
-			session.setAttribute("userNickname",member.getUserNickName());
-			session.setAttribute("userCode",member.getUserCode());
-			session.setAttribute("userPlayer", member.getUserPlayer());
-			response.sendRedirect("/index.jsp"); //성공시 메인 페이지로 이동 
+		
+		if(userId == "" || userPw == "") {
+			response.setContentType("text/html;charset=UTF-8");
+
+			PrintWriter out = response.getWriter();
+
+			out.println("<script>");
+
+			out.println("alert('아이디와 비밀번호를 입력해주세요')");
 			
-		}else { 
-			response.sendRedirect("/WEB-INF/login_registration/loginError.html");//실패시 ( 임시로만든 에러 페이지 ) 로 이동
+			out.println("history.back()");
+
+			out.println("</script>");
+		}else {
+			Member member = new MemberService().printOneLogin(userId,userPw);
+			if(member != null) {
+				//세션
+				HttpSession session = request.getSession();
+				session.setAttribute("userId", member.getUserId());
+				session.setAttribute("userNickname",member.getUserNickName());
+				session.setAttribute("userCode",member.getUserCode());
+				session.setAttribute("userPlayer", member.getUserPlayer());
+				response.sendRedirect("/index.jsp"); //성공시 메인 페이지로 이동 
+				
+			}else { 
+				response.setContentType("text/html;charset=UTF-8");
+
+				PrintWriter out = response.getWriter();
+
+				out.println("<script>");
+
+				out.println("alert('아이디 혹은 비밀번호가 다릅니다.')");
+				
+				out.println("history.back()");
+
+				out.println("</script>");//실패시 ( 임시로만든 에러 페이지 ) 로 이동
+			}
 		}
+	
 		
 	}
 

@@ -155,6 +155,28 @@ public class MemberService {
 		
 		return userId;
 	}
+	//회원 비밀번호 임시 비밀번호로 변경
+	
+	public int modifyPassword(String userId, String tempPw) {
+		Connection conn = null;
+		int result= 0;
+		try {
+			conn = jdbcTemplate.createConnection();
+			result = new MemberDAO().updateTempPw(conn, userId , tempPw);
+			if(result>0) {
+				JDBCTemplate.commit(conn);
+			}else {
+				JDBCTemplate.rollback(conn);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(conn);
+		}
+		
+		return result;
+	}
 
 
 }

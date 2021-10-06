@@ -6,13 +6,24 @@
 <head>
 <meta charset="UTF-8">
 <title>캠페인 상세</title>
+
+ <!-- jQuery -->
+  <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+  <!-- iamport.payment.js -->
+  <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
  <!-- font Awesome -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/fontawesome.min.css">
  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
    
-  
+    <!-- jQuery -->
+  <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+  <!-- iamport.payment.js -->
+  <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+ 
    <!-- Vendor CSS Files -->
   <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
@@ -74,6 +85,7 @@
   <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 </head>
 <body>
+
  <!-- ======= Header ======= -->
   <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center justify-content-between">
@@ -105,7 +117,7 @@
       </nav><!-- .navbar -->
 
     </div>
-  </header><!-- End Header -->
+  </header><!-- End Header --><br><br><br>
 
 <div>
 	<section class="container">
@@ -161,11 +173,29 @@
 					
 					<!-- 달성률 % -->
 					<h6>${(supportOne.supportAchived/ supportOne.supportGoal)*100 } %</h6><br>
+<!-- 					<form action = "/support/pay" method = "post"> -->
+					<div  class="container px-5 my-5">
+					
+						<!-- 후원자 정보-->
+							<input type = "hidden" id = "supportNo" name ="supportNo" value = "${supportOne.supportNo }">
+							<input type = "hidden" id = "donator-id" name = "donator-id" value ="${sessionScope.userId }">
+							<input type = "hidden" id = "donator-email" name= "donator-email" value="${donator.userEmail}">
+							<input type = "hidden" id = "donator-phone" name = "donator-phone" value = "${donator.userPhone }">
+							<input type = "text" id = "amount" name = "amount" placeholder = "금액을 입력해주세요!" class = form-control  pattern="^[0-9]+$"> 
+					
+					</div>
 					
 					<!-- 후원 버튼  -->
 					<div class="d-grid gap-2" >
-  						<a href="#" id="modbtn" class="btn btn-primary" >후원하기</a>
+<!-- 						<button id="modbtn" type="submit" class="btn btn-primary" >후원하기</button> -->
+						<button id="modbtn"  class="btn btn-primary" >후원하기</button>
+<!-- 						<input  type="submit" class="btn btn-primary" value="후원하기"> -->
+
+
+<!--   						<a href="javascript:gotopay();"  id="modbtn" class="btn btn-primary" >후원하기</a> -->
+
 					</div>
+<!-- 					</form> -->
 					
 					<!-- sns 로고 -->
 					<div class= "logos">
@@ -235,6 +265,7 @@
 				  		<form action = "/supportReply/write" method = "post">
 				  			<div>
 								<div class="input-group mb-3">
+								<!-- 게시물 번호 -->
 						  			<input id="supportNo" type = "hidden" name = "supportNo" value = "${supportOne.supportNo }">
 								  <input type="text" class="form-control" name = "reply-contents" placeholder="응원 댓글을 작성해보세요!" aria-label="Recipient's username" aria-describedby="button-addon2">
 								  <button class="btn btn-outline-secondary" type="submit" id="button-addon2">등록</button>
@@ -365,6 +396,88 @@
   <!-- End Footer -->
    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
   
+   <!-- i'mport 카카오 결제 -->
+  <script>
+   $("#modbtn").click(function (){
+// 	   function gotopay(){
+// 	   if(true){
+// 		   alert.("로그인 후 이용해주세요.");
+// 		   location.href="/member/login";
+// 	   }
+        var supportNo = $("#supportNo").val();
+	    var donatorId = $("#donator-id").val();
+	    var donatorEmail = $("#donator-email").val();
+	    var donatorPhone = $("#donator-phone").val();
+	    var donateAmount = $("#amount").val();
+	    
+    	 // 생략가능
+        var IMP = window.IMP;
+        IMP.init('imp70817839'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
+        var msg;
+       
+        IMP.request_pay({
+            pg : 'kakaopay',
+            pay_method : 'card',
+            merchant_uid : 'merchant_' + new Date().getTime(),
+            name : 'Sportogether 후원 결제',
+//             amount : donatorAmount,
+//             buyer_email : donatorEmail,
+//             buyer_name : donatorId,
+//             buyer_tel : donatorPhone,
+            amount : 2000,
+            buyer_email : 'email',
+            buyer_name : 'userId',
+            buyer_tel : '0104666',
+            buyer_addr : 'not',
+            buyer_postcode : 'not',
+            //m_redirect_url : 'http://www.naver.com'
+        }, function(rsp) {
+            if ( rsp.success ) {
+            	
+                //[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
+                jQuery.ajax({
+                    url: "/support/pay", //cross-domain error가 발생하지 않도록 주의해주세요
+                    type: 'POST',
+                    dataType: 'json',
+                    data: {
+                        imp_uid : rsp.imp_uid
+                        //기타 필요한 데이터가 있으면 추가 전달
+                    }
+                }).done(function(data) {
+                    //[2] 서버에서 REST API로 결제정보확인 및 서비스루틴이 정상적인 경우
+                    if ( everythings_fine ) {
+                        msg = '결제가 완료되었습니다.';
+                        msg += '\n고유ID : ' + rsp.imp_uid;
+                        msg += '\n상점 거래ID : ' + rsp.merchant_uid;
+                        msg += '\결제 금액 : ' + rsp.paid_amount;
+                        msg += '카드 승인번호 : ' + rsp.apply_num;
+                        
+                        alert(msg);
+                    } else {
+                        //[3] 아직 제대로 결제가 되지 않았습니다.
+                        //[4] 결제된 금액이 요청한 금액과 달라 결제를 자동취소처리하였습니다.
+                    }
+                });
+                //성공시 이동할 페이지
+<%--                 location.href='<%=request.getContextPath()%>/order/paySuccess?msg='+msg; --%>
+// 					location.href="/support/detail?supportNo="+supportNo";
+					alert(msg);
+					history.back();
+            } else {
+                msg = '결제에 실패하였습니다.';
+                msg += '에러내용 : ' + rsp.error_msg;
+                //실패시 이동할 페이지
+<%--                 location.href="<%=request.getContextPath()%>/order/payFail"; --%>
+// 				location.href="/support/detail?supportNo="+supportNo;
+					history.back();
+                alert(msg);
+            }
+        });
+        
+    });
+    </script>
+  
+  
   <!-- Vendor JS Files -->
   <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="../assets/vendor/glightbox/js/glightbox.min.js"></script>
@@ -377,7 +490,6 @@
   <script src = "../assets/js/jquery-1.12.3.min.js"></script>
   <script src = "../assets/js/jquery.counterup.min.js"></script>
   <script src = "../assets/js/waypoints.min.js"></script>
-  
  
 	<!-- 카카오 공유하기  -->
   <script type="text/javascript">
@@ -386,7 +498,7 @@
       Kakao.Link.sendDefault({
         objectType: 'text',
         text:
-          '기본 템플릿으로 제공되는 텍스트 템플릿은 텍스트를 최대 200자까지 표시할 수 있습니다. 텍스트 템플릿은 텍스트 영역과 하나의 기본 버튼을 가집니다. 임의의 버튼을 설정할 수도 있습니다. 여러 장의 이미지, 프로필 정보 등 보다 확장된 형태의 카카오링크는 다른 템플릿을 이용해 보낼 수 있습니다.',
+          '후원을 공유합니다.',
         link: {
           mobileWebUrl: 'https://developers.kakao.com',
           webUrl: 'https://developers.kakao.com',

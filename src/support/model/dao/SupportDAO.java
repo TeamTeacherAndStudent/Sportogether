@@ -367,6 +367,68 @@ public class SupportDAO {
 		
 		return result;
 	}
+	//후원금 누적
+	public int donateSupport(Connection conn, int supportNo, int payAmount) {
+		int result = 0 ;
+		PreparedStatement pstmt = null;
+		int achived = getAchived(conn,supportNo);
+		int sumAmount = achived + payAmount;
+		String query = "UPDATE SUPPORT SET ACHIVED_RECORD = ? WHERE SUPPORT_NO = ?";
+		try {
+			pstmt=conn.prepareStatement(query);
+			pstmt.setInt(1, sumAmount);
+			pstmt.setInt(2, supportNo);
+			result=pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+	//누적모금액조회
+	private int getAchived(Connection conn, int supportNo) {
+		String query = "SELECT ACHIVED_RECORD FROM SUPPORT WHERE SUPPORT_NO = ?";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int aMoney=0;
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, supportNo);
+			rset=pstmt.executeQuery();
+			if(rset.next()) {
+				aMoney = rset.getInt("ACHIVED_RECORD");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return aMoney;
+	}
+	//  후원 내역 저장
+	public int insertSuppotHistory(Connection conn, String userId , int supportNo, int payAmount) {
+		PreparedStatement pstmt = null;
+		int result =  0;
+		Support spt= selectOneByNo(conn,supportNo);
+		String writer = spt.getSupportWriter();
+		String sportCategory = spt.getSportsCategory();
+		String query = "INSERT INTO SUPPORT_MANAGE VALUES (SEQ_SPT_MNG.NEXTVAL, ? , ? , ? , DEFAULT , DEFAULT,?,?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, supportNo);
+			pstmt.setString(2, userId);
+			pstmt.setInt(3, payAmount);
+			pstmt.setString(4, sportCategory);
+			pstmt.setString(5, writer);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
 	
 	
 }
