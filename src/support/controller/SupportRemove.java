@@ -1,6 +1,8 @@
 package support.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -36,7 +38,15 @@ public class SupportRemove extends HttpServlet {
 			response.sendRedirect("/support/list?supprtNo="+supportNo);
 		}else {
 			//삭제 실패
-			
+			PrintWriter out = response.getWriter();
+
+			out.println("<script>");
+
+			out.println("alert('삭제에 실패하였습니다.')");
+
+			out.println("history.back()");
+
+			out.println("</script>");
 		}
 	
 	}

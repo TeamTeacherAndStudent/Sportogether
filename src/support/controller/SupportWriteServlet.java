@@ -37,7 +37,7 @@ public class SupportWriteServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/Support/supportWrite.html").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/Support/supportWrite.html").forward(request, response);
 	}
 
 	/**
@@ -103,28 +103,7 @@ public class SupportWriteServlet extends HttpServlet {
 		spt.setSupportFileName(supportFileName);
 		spt.setSupportFilePath(filePath);
 		spt.setSupportFileSize(fileSize);
-		//파일 정보 변수에 넣기..
-//		String supportFileName = multi.getFilesystemName("img-file");
-//		if(supportFileName != null) {
-//			
-//			File uploadFile = multi.getFile("img-file");
-//			String filePath = uploadFile.getPath();
-//			long fileSize = uploadFile.length();
-//			
-//			//upload파일 정보 Support객체에 세팅
-//			spt.setSupportFileName(supportFileName);
-//			spt.setSupportFilePath(filePath);
-//			spt.setSupportFileSize(fileSize);
-//		}else {
-//			File uploadFile = null;
-//			String filePath = "";
-//			long fileSize = 0;
-//			
-//			//upload파일 정보 Support객체에 세팅
-//			spt.setSupportFileName(supportFileName);
-//			spt.setSupportFilePath(filePath);
-//			spt.setSupportFileSize(fileSize);
-//		}
+		//insert
 		int result = new SupportService().registerSupport(spt);
 		
 		
@@ -135,7 +114,7 @@ public class SupportWriteServlet extends HttpServlet {
 			System.out.println("후원 등록 성공");
 			response.sendRedirect("/support/list");
 		}else {
-			request.getRequestDispatcher("/Support/supportError.html")
+			request.getRequestDispatcher("/WEB-INF/Support/supportError.html")
 			.forward(request, response);
 		}
 	}

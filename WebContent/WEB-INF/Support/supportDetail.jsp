@@ -63,6 +63,10 @@
   		border-style: none;
   		border-color: #1d284b;
     }
+    .lg{
+  		background-color: #1d284b;
+  		border-color: #1d284b;
+  	}
   </style>
    <!-- 카카오 공유하기 사용을 위한 -->
   <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
@@ -72,7 +76,7 @@
 <body>
  <!-- ======= Header ======= -->
   <header id="header" class="fixed-top">
-     <div class="container d-flex align-items-center justify-content-between">
+    <div class="container d-flex align-items-center justify-content-between">
       <h1 class="logo"><a href="/index.jsp"> Sportogether </a></h1>
       <nav id="navbar" class="navbar">
         <ul>
@@ -82,7 +86,7 @@
           <li><input type="search" placeholder="검색" size="10" id="search"></li>
        	  <li>
        	  	<c:if test="${sessionScope.userId eq null }">
-       	 		 <a href="../login_registration/login.jsp">Login</a>
+       	 		 <a href="/meber/login">Login</a>
        	 	</c:if>
        	 	<c:if test = "${sessionScope.userId ne null }">
        	 		<a href="/member/logout">Logout</a>
@@ -91,8 +95,9 @@
           <li class="dropdown"><a href="#"><span>SIDE MENU</span> <i class="bi bi-chevron-down"></i></a>
           <ul>
              <li><a href="/notice/list">공지사항</a></li>     
-             <li><a href="../MyPage/MyPage_Main.jsp">마이페이지</a></li>
+             <li><a href="/mypage/main">마이페이지</a></li>
              <li><a href="/qna/list">1:1문의</a></li>
+             <c:if test="${sessionScope.userCode eq 'G'}"><li><a href="/admin/main">관리자 페이지</a></li></c:if>
           </ul>
           </li>
         </ul>
@@ -101,8 +106,6 @@
 
     </div>
   </header><!-- End Header -->
-  <br><br><br>
-<!-- supportDetail -->
 
 <div>
 	<section class="container">
@@ -157,11 +160,11 @@
 					</div>
 					
 					<!-- 달성률 % -->
-					<h6>${(supportOne.supportAchived/ supportOne.supportGoal)*100 }</h6><br>
+					<h6>${(supportOne.supportAchived/ supportOne.supportGoal)*100 } %</h6><br>
 					
 					<!-- 후원 버튼  -->
 					<div class="d-grid gap-2" >
-  						<a href="#" class="btn btn-primary" >후원하기</a>
+  						<a href="#" id="modbtn" class="btn btn-primary" >후원하기</a>
 					</div>
 					
 					<!-- sns 로고 -->
@@ -218,10 +221,10 @@
 			<div class = "col-md-8">
 				<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
   				  <li class="nav-item" role="presentation">
-				    <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">응원댓글</button>
+				    <button class="nav-link active btn secondary-btn" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">응원댓글</button>
 				  </li>
 				  <li class="nav-item" role="presentation">
-				    <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">문의댓글</button>
+				    <button class="nav-link btn secondary-btn" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">문의댓글</button>
 				  </li>
 				</ul>
 				

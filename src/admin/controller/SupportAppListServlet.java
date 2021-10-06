@@ -55,10 +55,10 @@ public class SupportAppListServlet extends HttpServlet {
 			request.setAttribute("sList", sList);
 			request.setAttribute("pageNavi",pageData.getPageNavi());
 			// 후원 승인 목록 페이지로 이동
-			request.getRequestDispatcher("/Admin/support_approval.jsp")
+			request.getRequestDispatcher("/WEB-INF/Admin/support_approval.jsp")
 			.forward(request, response);
 		}else {
-			RequestDispatcher view = request.getRequestDispatcher("/Admin/serviceFailed.html");
+			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/Admin/serviceFailed.html");
 			view.forward(request, response);
 		}
 		

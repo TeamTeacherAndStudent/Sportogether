@@ -31,7 +31,7 @@ public class MemberLoginServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		request.getRequestDispatcher("/login_registration/login.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/login_registration/login.jsp").forward(request, response);
 	}
 
 	/**
@@ -52,7 +52,7 @@ public class MemberLoginServlet extends HttpServlet {
 			response.sendRedirect("/index.jsp"); //성공시 메인 페이지로 이동 
 			
 		}else { 
-			response.sendRedirect("/login_registration/loginError.html");//실패시 ( 임시로만든 에러 페이지 ) 로 이동
+			response.sendRedirect("/WEB-INF/login_registration/loginError.html");//실패시 ( 임시로만든 에러 페이지 ) 로 이동
 		}
 		
 	}

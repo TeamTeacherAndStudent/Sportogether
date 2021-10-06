@@ -45,12 +45,12 @@ public class SupportListServlet extends HttpServlet {
 			request.setAttribute("sList", sList);
 			
 			request.setAttribute("pageNavi",pageData.getPageNavi());
-			request.getRequestDispatcher("/Support/support_main.jsp")
+			request.getRequestDispatcher("/WEB-INF/Support/support_main.jsp")
 			.forward(request, response);
 		}else {
 //			RequestDispatcher view = request.getRequestDispatcher("/Support/support_main.jsp");
 //			view.forward(request, response);
-			response.sendRedirect("/Support/support_main.jsp");
+//			response.sendRedirect("/Support/support_main.jsp");
 		}
 	}
 

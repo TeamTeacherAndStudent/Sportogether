@@ -32,7 +32,7 @@ public class MemberFindMyId extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		request.getRequestDispatcher("/WEB-INF/login_registration/findmyId.jsp").forward(request, response);
 	}
 
 	/**
@@ -56,10 +56,14 @@ public class MemberFindMyId extends HttpServlet {
 			out.println("<script>");
 
 			out.println("alert('회원님의 아이디는 "+userId+" 입니다.')");
-
-			out.println("location.href='/login_registration/login.jsp");
+			
+			out.println("history.back()");
 
 			out.println("</script>");
+			
+			
+
+		
 		}else {
 			response.setContentType("text/html;charset=UTF-8");
 

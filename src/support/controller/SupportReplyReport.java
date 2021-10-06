@@ -89,7 +89,7 @@ public class SupportReplyReport extends HttpServlet {
 
 				out.println("</script>");
 			}else {
-				request.getRequestDispatcher("/support/supportError.html");
+				request.getRequestDispatcher("WEB-INF/support/supportError.html");
 			}
 		}
 		

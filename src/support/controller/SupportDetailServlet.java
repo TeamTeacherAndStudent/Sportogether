@@ -44,9 +44,7 @@ public class SupportDetailServlet extends HttpServlet {
 		if(spt != null) {
 			request.setAttribute("member", member);
 			request.setAttribute("supportOne", spt);
-			request.getRequestDispatcher("/Support/supportDetail.jsp").forward(request, response);
-		}else {
-			response.sendRedirect("/Support/supportError.html");
+			request.getRequestDispatcher("/WEB-INF/Support/supportDetail.jsp").forward(request, response);
 		}
 	
 	}

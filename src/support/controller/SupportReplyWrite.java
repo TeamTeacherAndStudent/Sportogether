@@ -47,7 +47,7 @@ public class SupportReplyWrite extends HttpServlet {
 		if(result > 0) {
 			response.sendRedirect("/support/detail?supportNo="+supportNo);
 		}else {
-			request.getRequestDispatcher("/Support/supportError.html").forward(request, response);
+			request.getRequestDispatcher("WEB-INF/Support/supportError.html").forward(request, response);
 		}
 		
 	
