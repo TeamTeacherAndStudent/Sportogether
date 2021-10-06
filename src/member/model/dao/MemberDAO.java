@@ -281,6 +281,24 @@ public class MemberDAO {
 		
 		return userId;
 	}
+	// 임시 비밀번호로 비밀번호 변경
+	public int updateTempPw(Connection conn, String userId, String tempPw) {
+		PreparedStatement pstmt = null;
+		String query = "UPDATE MEMBER SET USER_PW = ? WHERE USER_ID = ?";
+		int result = 0;
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, tempPw);
+			pstmt.setString(2, userId);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
 
 
 
