@@ -144,7 +144,7 @@
           <li><a class="active" href="/sports/list">종목</a></li>
           <li><a href="/board/list">자유게시판</a></li>
           <li><a href="/support/list">후원</a></li>
-          <li><input type="search" placeholder="검색" size="10" id="search"></li>
+  <!--         <li><input type="search" placeholder="검색" size="10" id="search" name="keyword"><a href="/board/search"><button>검색</button></a></li> -->
        	  <li>
        	  	<c:if test="${sessionScope.userId eq null }">
        	 		 <a href="/member/login">Login</a>
