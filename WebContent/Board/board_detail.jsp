@@ -151,7 +151,7 @@
 <br><br><br><br><br>
     <main id="main">
   		<div class="container">
-  			<h1 class="">자유게시판 : ${likeYn }</h1><br><hr><br>
+  			<h1 class="">자유게시판</h1><br><hr><br>
   			<fieldset>
 	  			<div id="form">
 					<div class="text">

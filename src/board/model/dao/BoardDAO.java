@@ -410,7 +410,7 @@ public class BoardDAO {
 		}
 		return boardLike;
 	}
-	
+	//좋아요 삽입
 	public int updateLike(Connection conn, BoardLike boardLike) {
 		int result = 0;
 		PreparedStatement pstmt = null;
@@ -429,7 +429,7 @@ public class BoardDAO {
 		}
 		return result;
 	}
-
+//컬럼에서 삭제
 	public int removeLike(Connection conn, int boardNo, String userId) {
 		PreparedStatement pstmt = null;
 		int result = 0;
@@ -581,7 +581,7 @@ public class BoardDAO {
 	public int insertReportedRely(Connection conn, ReportedReply rReply) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-		String query = "INSERT INTO REPORTED_REPLY VALUES(?, ?)";
+		String query = "INSERT INTO REPORTED_REPLY VALUES(?, ?, SEQ_REPORTED_REPLY_NO.NEXTVAL)";
 			try {
 				pstmt = conn.prepareStatement(query);
 				pstmt.setInt(1,rReply.getReplyNo());
@@ -654,5 +654,24 @@ public class BoardDAO {
 			JDBCTemplate.close(rset);
 		}
 			return totalValue;
+	}
+
+
+
+	public int selectLike(Connection conn, int boardNo) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "SELECT FROM BOARD_LIKE WHERE BOARD_NO = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, boardNo);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
 	}
 }

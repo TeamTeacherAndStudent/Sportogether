@@ -171,7 +171,7 @@ public class AdminDAO {
 			List<ReportedBoard> bList = null;
 			PreparedStatement pstmt = null;
 			ResultSet rset = null;
-			String query = "SELECT * FROM(SELECT ROW_NUMBER() OVER(ORDER BY BOARD_NO DESC) AS NUM, BOARD_NO,USER_ID, REPOTED_NO FROM REPORTED_BOARD) WHERE NUM BETWEEN ? AND ? AND";
+			String query = "SELECT * FROM(SELECT ROW_NUMBER() OVER(ORDER BY BOARD_NO DESC) AS NUM, BOARD_NO,USER_ID, REPOTED_NO FROM REPORTED_BOARD) WHERE NUM BETWEEN ? AND ?";
 			try {
 				pstmt = conn.prepareStatement(query);
 				
@@ -183,6 +183,7 @@ public class AdminDAO {
 				pstmt.setInt(2, end);
 				rset = pstmt.executeQuery();
 				bList = new ArrayList<ReportedBoard>();
+				
 				while(rset.next()) {
 					ReportedBoard rBoard = new ReportedBoard();
 					rBoard.setBoardNo(rset.getInt("BOARD_NO"));

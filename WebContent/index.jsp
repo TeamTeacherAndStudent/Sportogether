@@ -73,6 +73,8 @@
     	font-weight: bold;
     	border-radius : 10px;
     }
+    .carousel-item {
+    }
   </style>
 
   <!-- =======================================================
@@ -175,17 +177,19 @@
       <div class="carousel-inner" role="listbox">
 
         <!-- Slide 1 -->
-        <div class="carousel-item active" style="background-image: url(assets/img/slide/slide-1.jpg)">
+        <div class="carousel-item active" style="background-image: url(banner/1.png)">
         </div>
 
         <!-- Slide 2 -->
-        <div class="carousel-item" style="background-image: url(assets/img/slide/slide-2.jpg)">
+        <div class="carousel-item" style="background-image: url(banner/2.png)">
         </div>
 
         <!-- Slide 3 -->
-        <div class="carousel-item" style="background-image: url(assets/img/slide/slide-3.jpg)">
+        <div class="carousel-item" style="background-image: url(banner/3.png)">
         </div>
-
+        
+		 <div class="carousel-item" style="background-image: url(banner/4.png)">
+		 </div>
       </div>
 
       <a class="carousel-control-prev" href="#heroCarousel" role="button" data-bs-slide="prev">
