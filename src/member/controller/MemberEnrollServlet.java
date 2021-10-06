@@ -57,13 +57,19 @@ public class MemberEnrollServlet extends HttpServlet {
 		//변수에 넣어둔 정보 Member 객체에 저장 
 		Member member = new Member(userId, userNickName, userName, userPw, userBirthDate, userGender, userPhone, userEmail);
 		int result = new MemberService().registerMember(member);
-		System.out.println(member.toString());
+//		System.out.println(member.toString());
 		if(result > 0) {
-			response.setContentType("text/html; charset=UTF-8");
-			PrintWriter writer =response.getWriter();
-			writer.println("<script>alert('회원가입이 완료되었습니다.'); location.href='/index.jsp';</script>");
-			writer.flush();
-//			response.sendRedirect("/index.html");
+			response.setContentType("text/html;charset=UTF-8");
+
+			PrintWriter out = response.getWriter();
+
+			out.println("<script>");
+
+			out.println("alert('회원가입이 완료되었습니다.')");
+			
+			out.println("history.back()");
+
+			out.println("</script>");
 		}else {
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter writer =response.getWriter();
