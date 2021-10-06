@@ -37,7 +37,7 @@ public class LikeDeleteServlet extends HttpServlet {
 		//	request.setAttribute("userId",userId);
 			response.sendRedirect("/board/detail?boardNo="+boardNo);
 		}else {
-			request.getRequestDispatcher("/Board/boardError.html").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/Board/boardError.html").forward(request, response);
 		}
 	}
 

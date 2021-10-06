@@ -41,9 +41,9 @@ public class BoardListServlet extends HttpServlet {
 		if(!bList.isEmpty()) {
 			request.setAttribute("bList", bList);
 			request.setAttribute("pageNavi", pageData.getPageNavi());
-			request.getRequestDispatcher("/Board/board_main.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/Board/board_main.jsp").forward(request, response);
 		}else {
-			RequestDispatcher view = request.getRequestDispatcher("/Board/boardError.html");
+			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/Board/boardError.html");
 			view.forward(request, response);
 		}
 	}

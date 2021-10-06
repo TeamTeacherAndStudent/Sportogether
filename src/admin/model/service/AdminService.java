@@ -166,4 +166,19 @@ private JDBCTemplate jdbcTemplate;
 		}
 		return mList;
 	}
+
+	public PageData1 printReportedReply(int currentPage) {
+		Connection conn = null; 
+		AdminDAO aDAO = new AdminDAO();  
+		PageData1 pd = new PageData1();
+		try { 
+			conn = jdbcTemplate.createConnection();
+			pd.setReportPageNavi(aDAO.getReportPageNavi(conn, currentPage));
+			pd.setReportedrList(aDAO.selectReportedReply(conn, currentPage));
+		} catch (SQLException e) { 
+			e.printStackTrace(); 
+		} finally {
+				 JDBCTemplate.close(conn); 
+		}return pd;
+	}
 }

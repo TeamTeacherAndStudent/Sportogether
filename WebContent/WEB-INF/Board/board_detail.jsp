@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<title>자유게시판</title>
 <meta charset="UTF-8">
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
@@ -124,30 +125,38 @@
 </head>
 
 <body>
-
- <header id="header" class="fixed-top">
-     <div class="container d-flex align-items-center justify-content-between">
-		<!-- 여기에 로고 사진 추가 -->
-     	<h1 class="logo"><a href="../index.html"> Sportogether </a></h1>
-       <nav id="navbar" class="navbar">
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top">
+    <div class="container d-flex align-items-center justify-content-between">
+      <h1 class="logo"><a href="/"> Sportogether </a></h1>
+      <nav id="navbar" class="navbar">
         <ul>
-          <li><a class="active" href="../Sports/sportsList.jsp">종목</a></li>
-          <li><a href="../Board/board_main.jsp">자유게시판</a></li>
-          <li><a href="../Support/support_main.jsp">후원</a></li>
+          <li><a class="active" href="/sports/list">종목</a></li>
+          <li><a href="/board/list">자유게시판</a></li>
+          <li><a href="/support/list">후원</a></li>
           <li><input type="search" placeholder="검색" size="10" id="search"></li>
-            <li><a href="../login_registration/login.jsp">Login</a></li>
+       	  <li>
+       	  	<c:if test="${sessionScope.userId eq null }">
+       	 		 <a href="/member/login">Login</a>
+       	 	</c:if>
+       	 	<c:if test = "${sessionScope.userId ne null }">
+       	 		<a href="/member/logout">Logout</a>
+       	 	</c:if>
+       	  </li>
           <li class="dropdown"><a href="#"><span>SIDE MENU</span> <i class="bi bi-chevron-down"></i></a>
           <ul>
-             <li><a href="../Notice/notice_main.jsp">공지사항</a></li>     
-             <li><a href="../MyPage/Mypage_Main.html">마이페이지</a></li>
-             <li><a href="../QnA/Qna_UserMain.html">1:1문의</a></li>
+             <li><a href="/notice/list">공지사항</a></li>     
+             <li><a href="/mypage/main">마이페이지</a></li>
+             <li><a href="/qna/list">1:1문의</a></li>
+             <c:if test="${sessionScope.userCode eq 'G'}"><li><a href="/admin/main">관리자 페이지</a></li></c:if>
           </ul>
           </li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
-    </div>
-  </header><!-- End Header -->
+		</div>
+	</header>
+	<!-- End Header -->
 <br><br><br><br><br>
     <main id="main">
   		<div class="container">
@@ -214,13 +223,13 @@
 						<form action="/boardReply/write" method="post">
 		                        <div class="replyEnroll">
 		                           	<input type="text" name="replyContents" id="comment" placeholder="댓글을 입력해주세요." maxlength="500" size="100">
-									<input type="hidden" name="boardNo" value="${boardOne.boardNo}">
+									<input type="hidden" name="boardNo" id="boardNo" value="${boardOne.boardNo}">
 									<input type="submit" value="등록" class="Btn">
 		                        </div>
 						</form><br><br>
 						<!-- 출력 -->
 					<c:forEach items="${boardOne.replies }" var ="reply"> <!-- 반복문 -->
-						<input type="hidden" name="boardReplyNo" value="${reply.boardReplyNo }">
+						<input type="hidden" name="boardReplyNo" id="replyNo" value="${reply.boardReplyNo }">
 						<div class="col-md-1">
 	                    	<div class="replyContents">
 	                    		작성자  ${reply.boardReplyUserId }
@@ -354,17 +363,18 @@
 		}
 	}
 	function onReportedReplyClick(){
+	 	var replyNo2 = $("#replyNo").val();
+	 	var boardNo2 = $("#boardNo").val();
 		var reportedChk = window.confirm("해당 댓글을 신고하겠습니까?"); 
 		var boardNo = "${reply.boardNo }";
 		var replyNo = "${reply.boardReplyNo }";
 		if(reportedChk) {
 				window.alert("댓글이 신고되었습니다");
-			 	location.href="/boardReply/reported?boardNo="+boardNo+"&boardReplyNo="+replyNo; //신고리스트servlet에 들어가기
+			 	location.href="/boardReply/reported?boardNo="+boardNo2+"&boardReplyNo="+replyNo2; //신고리스트servlet에 들어가기
 		}else{
 			return
 		}
 	}
-	
 	/* function onRemoveReplyClick(){
 		var removeReplyChk= window.confirm("댓글을 삭제하겠습니까?");
 		var boardNo = "${reply.boardNo }";

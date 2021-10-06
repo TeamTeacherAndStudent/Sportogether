@@ -43,7 +43,7 @@ public class LikePrintServlet extends HttpServlet {
 		if(result>0) {
 			response.sendRedirect("/board/detail?boardNo="+boardNo);
 		}else {
-			request.getRequestDispatcher("/Board/boardError/html").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/Board/boardError/html").forward(request, response);
 		}
 	}
 

@@ -48,7 +48,7 @@ public class BoardDetailServlet extends HttpServlet {
 		}else {
 			request.setAttribute("likeYn", "N");
 		}
-		request.getRequestDispatcher("/Board/board_detail.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/Board/board_detail.jsp").forward(request, response);
 	}
 
 	/**
