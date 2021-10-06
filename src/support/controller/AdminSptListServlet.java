@@ -51,7 +51,7 @@ public class AdminSptListServlet extends HttpServlet {
 			//
 			request.setAttribute("sList", sList);
 			request.setAttribute("pageNavi",pageData.getPageNavi());
-			// 후원 승인 목록 페이지로 이동
+			
 			request.getRequestDispatcher("/WEB-INF/Admin/campaign_delete.jsp")
 			.forward(request, response);
 		}else {
