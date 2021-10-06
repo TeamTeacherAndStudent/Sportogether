@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -106,9 +107,9 @@
 
 .button {
 	height: 20%;
-	margin: 2%;
-	text-aligh: right;
-	float: right;
+	margin :3%
+	
+	/* float: right; */
 }
 
 button {
@@ -127,8 +128,15 @@ button {
 	-webkit-animation-delay: 0.8s;
 	animation-delay: 0.8s;
 	margin-top: 6px;
+	margin-left: 5px;
 	border: 2px solid #1d284b;
-	
+	text-aligh: right;
+	float:right; 
+
+}
+
+.btn-layerClose{
+	padding : 0.5%;
 }
 
 button:hover {
@@ -178,6 +186,10 @@ button:hover {
 	border: 5px solid #3571B5;
 	z-index: 10;
 }
+
+.admin-btn{
+
+}
 </style>
 </head>
 <body>
@@ -222,7 +234,64 @@ button:hover {
 		</section>
 
 
-		<!-- section : 프로필 수정-->
+		<!-- section : (회원용)프로필 수정-->
+		<c:if test="${sessionScope.userCode eq 'A'}">
+		<section>
+			<div id="main-content">
+				<form action="/mypage/modify" method="post">
+				<div class="mybox">
+					<div class="content">
+						<!-- 회원 정보 공간 -->
+						아이디 : <input type="text" name="user-id" value="${requestScope.member.userId}" readonly> <br>
+						<br> 닉네임 : <input type="text" size=16 name="user-nickName" value="${member.userNickName}"> <br>
+						<br> 이름 : <input type="text" size=16 name="user-name" value="${member.userName}" readonly> <br>
+						<br> 성별 : <input type="text" size=16 name="user-gender" value="${member.userGender}" readonly> <br>
+						<br> 생년월일 : <input type="text" size=16 name="user-birthDate" value="${member.userBirthDate}" readonly> <br>
+						<br> 비밀번호 : <input type="password" name="user-pw" value="${member.userPw}"> <br>
+						<br> 이메일 : <input type="email" name="user-email" value="${member.userEmail}"> <br>
+						<br> 전화번호 : <input type="text" name="user-phone" value="${member.userPhone}"> <br>
+					</div>
+					
+					<div class="side">
+						<div class="side-top">
+							<div id="photo"></div>
+							<button>변경</button>
+						</div>
+						<br>
+						<div class="button">
+							<button type="submit">수정</button>
+							<button href="/mypage/main">마이페이지</button>
+						</div>
+					</div>
+				</div>
+			</form>	
+				<div class="button">
+					<a href="#layer" class="check-btn"><button  class="admin-btn" id="withdraw">회원탈퇴</button></a>
+				</div>
+
+
+			</div>
+		</section>
+		<section>
+				<div id="layer" class="pop-layer">
+				<div class="pop-container">
+					<div class="pop-conts">
+						<!-- 내용 -->
+						<p class="ctxt mb20">정말로 탈퇴하시겠습니까?</p>
+						<div class="btn-r">
+						
+							<a href="/mypage/remove" ><button class="btn-layerClose" onclick="deleteNotice()">탈퇴</button></a> <a
+								href="#" class="btn-layerClose"><button class="btn-layerClose" >취소</button></a>
+						</div>
+						<!--  // 내용 끝 -->
+					</div>
+				</div>
+			</div>
+		</section>
+		</c:if>
+		
+<%-- 		<!-- section : 관리자확인용-->
+		<c:if test="${sessionScope.userCode eq 'G'}">
 		<section>
 			<div id="main-content">
 				<form action="/mypage/modify" method="post">
@@ -239,41 +308,53 @@ button:hover {
 						<br> 이메일 : <input type="email" name="user-email" value="${member.userEmail}"> <br>
 						<br> 전화번호 : <input type="text" name="user-phone" value="${member.userPhone}"> <br>
 					</div>
-
+					
 					<div class="side">
 						<div class="side-top">
 							<div id="photo"></div>
-							<button>변경</button>
+							<c:if test="${sessionScope.userCode eq 'A'}"><button>변경</button></c:if>
 						</div>
 						<br>
-						<div class="button">
+<!-- 						<div class="button">
 							<button type="submit">수정</button>
 							<button href="/mypage/main">마이페이지</button>
-						</div>
+							<a href="#layer" class="check-btn"><button  class="admin-btn" id="withdraw">회원탈퇴</button></a>
+						</div> -->
 					</div>
+					
 				</div>
 				</form>	
-			</div>
 				<div class="button">
-					<a href="#layer" class="check-btn"><button id="withdraw">회원탈퇴</button></a>
+				<c:if test="${sessionScope.userCode eq 'G'}">
+				<button href="/mypage/main"  class="admin-btn">선수인증</button> <br>
+				<a href="/admin/main"><button class="admin-btn">관리자페이지</button></a> <br>
+				</c:if>
+					<a href="#layer" class="check-btn"><button  class="admin-btn" id="withdraw"><c:if test="${sessionScope.userCode eq 'A'}">회원탈퇴</c:if><c:if test="${sessionScope.userCode eq 'G'}">탈퇴처리</c:if></button></a>
 				</div>
+			</div>
+			
+
+			
 		</section>
 		<section>
 				<div id="layer" class="pop-layer">
 				<div class="pop-container">
 					<div class="pop-conts">
 						<!-- 내용 -->
-						<p class="ctxt mb20">정말로 탈퇴하시겠습니까?</p>
+						<p class="ctxt mb20">정말로 탈퇴처리하시겠습니까?</p>
 						<div class="btn-r">
 						
-							<a href="/mypage/remove" ><button class="btn-layerClose" onclick="deleteNotice()">탈퇴</button></a> <a
-								href="#" class="btn-layerClose"><button >취소</button></a>
+							<a href="/admin/remove" ><button class="btn-layerClose" onclick="deleteNotice()">탈퇴</button></a> <a
+								href="#" class="btn-layerClose"><button class="btn-layerClose">취소</button></a>
 						</div>
 						<!--  // 내용 끝 -->
 					</div>
 				</div>
 			</div>
 		</section>
+		</c:if> --%>
+	
+	
 	</main>
 
 

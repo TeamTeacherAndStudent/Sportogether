@@ -44,10 +44,10 @@ public class QnASearchServlet extends HttpServlet {
 			request.setAttribute("qList", qList);
 			request.setAttribute("pageNavi",pageData.getPageNavi());
 			//편의를 위해 검색페이지.jsp 새로 생성
-			request.getRequestDispatcher("/QnA/Qna_Search.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/QnA/Qna_Search.jsp").forward(request, response);
 		}else {
 			//실패
-			request.getRequestDispatcher("/QnA/QnA_Error.html").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/QnA/QnA_Error.html").forward(request, response);
 		}
 	}
 

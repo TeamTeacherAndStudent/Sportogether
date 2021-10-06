@@ -29,6 +29,14 @@ public class Member {
 		public Member() {};
 		
 		
+		//선수구분용 생성자
+		public Member(String userId, String userPlayer) {
+			super();
+			this.userId = userId;
+			this.userPlayer = userPlayer;
+		}
+		
+		
 		//가입일, 회원 구분, 선수 구분 등을 제외한 회원가입용 생성자
 		
 		public Member(String userId, String userNickName, String userName, String userPw, String userBirthDate,
@@ -43,6 +51,12 @@ public class Member {
 			this.userPhone = userPhone;
 			this.userEmail = userEmail;
 		}
+
+
+
+
+
+
 
 		//모든 필드 받는 생성자
 		public Member(String userId, String userNickName, String userName, String userPw, String userBirthDate,

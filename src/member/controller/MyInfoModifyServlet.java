@@ -29,10 +29,11 @@ public class MyInfoModifyServlet extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String userId = (String)request.getSession().getAttribute("userId");
+		/* String userId = request.getParameter("userId"); */
 		Member member = new MemberService().printOneById(userId);
 		if(member != null) {
 			request.setAttribute("member",member);
-			request.getRequestDispatcher("/MyPage/MyPage_Modify.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/MyPage/MyPage_Modify.jsp").forward(request, response);
 		}else {
 			response.sendRedirect("/MyPage/Mypage_Error.html");
 		}

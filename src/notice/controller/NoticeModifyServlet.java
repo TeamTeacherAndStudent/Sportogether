@@ -31,7 +31,7 @@ public class NoticeModifyServlet extends HttpServlet {
 		int noticeNo = Integer.parseInt(request.getParameter("noticeNo"));
 		Notice noticeOne = new NoticeService().printOneByNo(noticeNo);
 		request.setAttribute("notice", noticeOne);
-		request.getRequestDispatcher("/Notice/Notice_Modify.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/Notice/Notice_Modify.jsp").forward(request, response);
 	}
 
 	/**
@@ -51,7 +51,7 @@ public class NoticeModifyServlet extends HttpServlet {
 		if(result>0) {
 			response.sendRedirect("/notice/list");
 		}else {
-			request.getRequestDispatcher("/Notice/Notice_Error.html").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/Notice/Notice_Error.html").forward(request, response);
 		}
 	}
 

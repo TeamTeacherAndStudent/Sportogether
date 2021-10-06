@@ -47,7 +47,7 @@ public class MypostServlet extends HttpServlet {
 			request.setAttribute("userId", userId); 
 			request.setAttribute("bList", bList);
 			request.setAttribute("pageNavi", pageData.getPageNavi());
-			request.getRequestDispatcher("/MyPage/MyPage_Mypost.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/MyPage/MyPage_Mypost.jsp").forward(request, response);
 		}else {
 			RequestDispatcher view = request.getRequestDispatcher("/MyPage/Mypage_Error.html");
 			view.forward(request, response);

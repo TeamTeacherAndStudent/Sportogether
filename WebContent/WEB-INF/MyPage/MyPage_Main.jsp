@@ -212,7 +212,7 @@ button:hover {
 							* 선수인 경우 인증 가능
 						</div>
 						<div class="button">
-							<a href="../MyPage/Mypage_Player.html"><button>인증</button></a>
+							<a href="/Player/Mypage_Player.html"><button>인증</button></a>
 						</div>
 					</div>
 					<div class="mybox">

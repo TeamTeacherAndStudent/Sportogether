@@ -44,7 +44,7 @@ public class MypageMainServlet extends HttpServlet {
 //		Member member = new Member(userId, userNickName, userName, userPw, userBirthDate, userGender, userPhone, userEmail);
 		if(member != null) {
 			request.setAttribute("member", member);
-			request.getRequestDispatcher("/MyPage/MyPage_Main.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/MyPage/MyPage_Main.jsp").forward(request, response);
 		}else {
 			response.sendRedirect("/MyPage/Mypage_Error.html");
 		}

@@ -32,9 +32,9 @@ public class NoticeDetailServlet extends HttpServlet {
 			/* int result = new NoticeService().updateReadCount(noticeNo); */
 			/* int noticeCount = Integer.parseInt(request.getParameter("noticeCount")); */
 			request.setAttribute("noticeOne", noticeOne);
-			request.getRequestDispatcher("/Notice/Notice_Detail.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/Notice/Notice_Detail.jsp").forward(request, response);
 		}else {
-			request.getRequestDispatcher("/Noitce/Notice_Error.html").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/Noitce/Notice_Error.html").forward(request, response);
 		}
 	}
 

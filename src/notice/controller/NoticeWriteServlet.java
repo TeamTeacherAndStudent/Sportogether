@@ -23,7 +23,7 @@ public class NoticeWriteServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//페이지이동용
-		request.getRequestDispatcher("/Notice/Notice_Write.html").forward(request,response);
+		request.getRequestDispatcher("/WEB-INF/Notice/Notice_Write.html").forward(request,response);
 	}
 
 
@@ -49,7 +49,7 @@ public class NoticeWriteServlet extends HttpServlet {
 			//작성 성공 > NoticeList로 이동(noticeList.jsp로 이동)
 			response.sendRedirect("/notice/list");
 		}else {
-			request.getRequestDispatcher("/Notice/ServiceFailed.html").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/Notice/ServiceFailed.html").forward(request, response);
 		}
 	}
 
