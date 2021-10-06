@@ -47,7 +47,7 @@ public class BoardReplyWriteServlet extends HttpServlet {
 		if(result > 0) {
 			response.sendRedirect("/board/detail?boardNo="+boardNo);
 		}else {
-			request.getRequestDispatcher("/Board/serviceFailed.html").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/Board/serviceFailed.html").forward(request, response);
 		}
 	}
 }

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%-- +페이징 처리/ 테이블 정렬 css/ tr하나 클릭시 후원사이트로 이동  --%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    <%-- +페이징 처리/ tr하나 클릭시 후원사이트로 이동  --%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -87,30 +88,38 @@
   </style>
 </head>
 <body>
-	<!-- ======= Header ======= -->
-  	<header id="header" class="fixed-top">
-	    <div class="container d-flex align-items-center justify-content-between">
-		<!-- 여기에 로고 사진 추가 -->
-     	<h1 class="logo"><a href="../index.html"> Sportogether </a></h1>
-       <nav id="navbar" class="navbar">
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top">
+    <div class="container d-flex align-items-center justify-content-between">
+      <h1 class="logo"><a href="/"> Sportogether </a></h1>
+      <nav id="navbar" class="navbar">
         <ul>
-          <li><a class="active" href="../Sports/sportsList.jsp">종목</a></li>
-          <li><a href="../Board/board_main.jsp">자유게시판</a></li>
-          <li><a href="../Support/support_main.jsp">후원</a></li>
+          <li><a class="active" href="/sports/list">종목</a></li>
+          <li><a href="/board/list">자유게시판</a></li>
+          <li><a href="/support/list">후원</a></li>
           <li><input type="search" placeholder="검색" size="10" id="search"></li>
-            <li><a href="../login_registration/login.jsp">Login</a></li>
+       	  <li>
+       	  	<c:if test="${sessionScope.userId eq null }">
+       	 		 <a href="/member/login">Login</a>
+       	 	</c:if>
+       	 	<c:if test = "${sessionScope.userId ne null }">
+       	 		<a href="/member/logout">Logout</a>
+       	 	</c:if>
+       	  </li>
           <li class="dropdown"><a href="#"><span>SIDE MENU</span> <i class="bi bi-chevron-down"></i></a>
           <ul>
-             <li><a href="../Notice/notice_main.jsp">공지사항</a></li>     
-             <li><a href="../MyPage/Mypage_Main.html">마이페이지</a></li>
-             <li><a href="../QnA/Qna_UserMain.html">1:1문의</a></li>
+             <li><a href="/notice/list">공지사항</a></li>     
+             <li><a href="/mypage/main">마이페이지</a></li>
+             <li><a href="/qna/list">1:1문의</a></li>
+             <c:if test="${sessionScope.userCode eq 'G'}"><li><a href="/admin/main">관리자 페이지</a></li></c:if>
           </ul>
           </li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
-    </div>
-  </header><!-- End Header -->
+		</div>
+	</header>
+	<!-- End Header -->
 
  	<br><br>
  	<main id="main">
@@ -156,7 +165,7 @@
 			</div>
 			<!-- 링크를 오른쪽 하단에 재배치 -->
 			<div class="link">
-				<a href = "support_chart.html">종목별 비율 차트 보기</a><br>
+				<a href ="support_chart.jsp">종목별 비율 차트 보기</a><br>
 			</div>
 		</section>
 	</main>

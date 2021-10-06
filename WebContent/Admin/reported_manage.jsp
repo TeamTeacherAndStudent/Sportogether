@@ -1,17 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%--수정사항유 ) 
-    1) current가 계속 보여진다
-    2)  css가 마음에 들지 않는다
-	3) 페이징 처리를 해줘야한다
-    
-      --%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>신고 관리</title>
- <!-- Google Fonts -->
+   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
   <!-- Vendor CSS Files -->
@@ -24,6 +19,22 @@
 
   <!-- Template Main CSS File -->
   <link href="../assets/css/style.css" rel="stylesheet">
+  
+  <!-- Vendor JS Files -->
+  <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="../assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="../assets/vendor/php-email-form/validate.js"></script>
+  <script src="../assets/vendor/swiper/swiper-bundle.min.js"></script>
+  
+  <!-- Template Main JS File -->
+  <script src = "../assets/js/main.js"></script>
+  <script src = "../assets/js/jquery-1.12.3.min.js"></script>
+  <script src = "../assets/js/jquery.counterup.min.js"></script>
+  <script src = "../assets/js/waypoints.min.js"></script>
+	<!-- jQuery  CDN -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	
   
 <style>
 	#main {
@@ -150,31 +161,38 @@
 	});
 
 	</script>
-	
-	<!-- ======= Header ======= -->
-  	 <header id="header" class="fixed-top">
-	    <div class="container d-flex align-items-center justify-content-between">
-		<!-- 여기에 로고 사진 추가 -->
-     	<h1 class="logo"><a href="../index.html"> Sportogether </a></h1>
-       <nav id="navbar" class="navbar">
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top">
+    <div class="container d-flex align-items-center justify-content-between">
+      <h1 class="logo"><a href="/"> Sportogether </a></h1>
+      <nav id="navbar" class="navbar">
         <ul>
-          <li><a class="active" href="../Sports/sportsList.jsp">종목</a></li>
-          <li><a href="../Board/board_main.jsp">자유게시판</a></li>
-          <li><a href="../Support/support_main.jsp">후원</a></li>
+          <li><a class="active" href="/sports/list">종목</a></li>
+          <li><a href="/board/list">자유게시판</a></li>
+          <li><a href="/support/list">후원</a></li>
           <li><input type="search" placeholder="검색" size="10" id="search"></li>
-            <li><a href="../login_registration/login.jsp">Login</a></li>
+       	  <li>
+       	  	<c:if test="${sessionScope.userId eq null }">
+       	 		 <a href="/member/login">Login</a>
+       	 	</c:if>
+       	 	<c:if test = "${sessionScope.userId ne null }">
+       	 		<a href="/member/logout">Logout</a>
+       	 	</c:if>
+       	  </li>
           <li class="dropdown"><a href="#"><span>SIDE MENU</span> <i class="bi bi-chevron-down"></i></a>
           <ul>
-             <li><a href="../Notice/notice_main.jsp">공지사항</a></li>     
-             <li><a href="../MyPage/Mypage_Main.html">마이페이지</a></li>
-             <li><a href="../QnA/Qna_UserMain.html">1:1문의</a></li>
+             <li><a href="/notice/list">공지사항</a></li>     
+             <li><a href="/mypage/main">마이페이지</a></li>
+             <li><a href="/qna/list">1:1문의</a></li>
+             <c:if test="${sessionScope.userCode eq 'G'}"><li><a href="/admin/main">관리자 페이지</a></li></c:if>
           </ul>
           </li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
-    </div>
-  </header><!-- End Header -->
+		</div>
+	</header>
+	<!-- End Header -->
   <br><br>
   <!-- ======== 본문 ============= -->
   <main id="main">
@@ -182,9 +200,8 @@
       		<div class="container">
 	      		<h1>신고글 관리</h1><br><br>
 	      		<ul class="tabs">
-		      		<li class="tab-link current" data-tab="tab-1">신고 게시물</li>
-		      		<li class="tab-link" data-tab="tab-2">신고 댓글 </li>
-		      		<li class="tab-link" data-tab="tab-3">신고 응원글</li>
+		      		<a href="/admin/reportedList/board"><li class="tab-link current" data-tab="tab-1">신고 게시물</li></a>
+		      		<a href="/admin/reportedList/reply"><li class="tab-link" data-tab="tab-2">신고 댓글 </li></a>
 	   			</ul>
  					<!-- 회원 클릭시 회원 detail페이지/게시물 제목 클릭시 게시물 상세 조회 -->
  				<div id="tab-1" class="tab-content current">
@@ -240,13 +257,6 @@
 	   					</li>
 	   				</ul><br><br>
 	   				<div id="divPaging">
-						<div>◀</div>
-						<div><b>1</b></div>
-						<div>2</div>
-						<div>3</div>
-						<div>4</div>
-						<div>5</div>
-						<div>▶</div>
 					</div>
 				</div>
 	       		<div id="tab-3" class="tab-content">
@@ -314,8 +324,6 @@
     </div>
   </footer>
 <!-- End Footer -->
-<!-- Vendor JS Files -->
-	<script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-	
+
 </body>
 </html>

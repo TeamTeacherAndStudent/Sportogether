@@ -49,9 +49,9 @@ public class BoardSearchServlet extends HttpServlet {
 			if(!bList1.isEmpty()) {
 				request.setAttribute("bList", bList1);
 				request.setAttribute("pageNavi", pd1.getPageNavi());
-				request.getRequestDispatcher("/Board/board_search.jsp").forward(request, response);
+				request.getRequestDispatcher("/WEB-INF/Board/board_search.jsp").forward(request, response);
 			}else {
-				request.getRequestDispatcher("/Board/boardError.html").forward(request, response);
+				request.getRequestDispatcher("/WEB-INF/Board/boardError.html").forward(request, response);
 			}
 			break;
 			
@@ -61,9 +61,9 @@ public class BoardSearchServlet extends HttpServlet {
 			if(!bList2.isEmpty()) {
 				request.setAttribute("bList", bList2);
 				request.setAttribute("pageNavi", pd2.getPageNavi());
-				request.getRequestDispatcher("/Board/board_search.jsp").forward(request, response);
+				request.getRequestDispatcher("/WEB-INF/Board/board_search.jsp").forward(request, response);
 			}else {
-				request.getRequestDispatcher("/Board/boardError.html").forward(request, response);
+				request.getRequestDispatcher("/WEB-INF/Board/boardError.html").forward(request, response);
 			}
 			break;
 			
@@ -73,9 +73,9 @@ public class BoardSearchServlet extends HttpServlet {
 			if(!bList3.isEmpty()) {
 				request.setAttribute("bList", bList3);
 				request.setAttribute("pageNavi", pd3.getPageNavi());
-				request.getRequestDispatcher("/Board/board_search.jsp").forward(request, response);
+				request.getRequestDispatcher("/WEB-INF/Board/board_search.jsp").forward(request, response);
 			}else {
-				request.getRequestDispatcher("/Board/boardError.html").forward(request, response);
+				request.getRequestDispatcher("/WEB-INF/Board/boardError.html").forward(request, response);
 			}
 			break;
 		}

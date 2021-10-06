@@ -71,7 +71,7 @@ public class FileUploadServlet extends HttpServlet {
 			response.sendRedirect("/board/detail?boardNo="+boardNo);
 		}else {
 			//실패메세지 출력
-			request.getRequestDispatcher("/Board/boardError.html").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/Board/boardError.html").forward(request, response);
 		}
 	}
 

@@ -34,7 +34,7 @@ public class BoardModifyServlet extends HttpServlet {
 		int boardNo = Integer.parseInt(request.getParameter("boardNo"));
 		Board boardOne = new BoardService().printOneByNo(boardNo);
 		request.setAttribute("board", boardOne);
-		request.getRequestDispatcher("/Board/board_modify.jsp").forward(request, response);;
+		request.getRequestDispatcher("/WEB-INF/Board/board_modify.jsp").forward(request, response);;
 	}
 
 	/**
@@ -57,7 +57,7 @@ public class BoardModifyServlet extends HttpServlet {
 			response.sendRedirect("/board/list");
 			System.out.println("Yes");
 		}else {
-			request.getRequestDispatcher("/Board/boardError.html");
+			request.getRequestDispatcher("/WEB-INF/Board/boardError.html");
 		}
 	}
 }

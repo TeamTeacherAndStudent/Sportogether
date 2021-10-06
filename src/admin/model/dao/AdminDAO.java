@@ -166,17 +166,17 @@ public class AdminDAO {
 			return totalValue;
 		}
 		
-		
+		//신고된 자유게시판 글 목록
 		
 		public List<ReportedBoard> selectReportedBoard(Connection conn, int currentPage) {
 			List<ReportedBoard> bList = null;
 			PreparedStatement pstmt = null;
 			ResultSet rset = null;
-			String query = "SELECT * FROM(SELECT ROW_NUMBER() OVER(ORDER BY BOARD_NO DESC) AS NUM, BOARD_NO,USER_ID, REPOTED_NO FROM REPORTED_BOARD) WHERE NUM BETWEEN ? AND ?";
+			String query = "SELECT * FROM(SELECT ROW_NUMBER() OVER(ORDER BY BOARD_NO DESC) AS NUM, BOARD_NO, USER_ID, REPORTED_NO FROM REPORTED_BOARD) WHERE NUM BETWEEN ? AND ?";
 			try {
 				pstmt = conn.prepareStatement(query);
 				
-				int viewCountPerPage = 8;
+				int viewCountPerPage = 5;
 				int start = currentPage * viewCountPerPage - (viewCountPerPage - 1);
 				int end = currentPage * viewCountPerPage;
 				
@@ -189,6 +189,7 @@ public class AdminDAO {
 					ReportedBoard rBoard = new ReportedBoard();
 					rBoard.setBoardNo(rset.getInt("BOARD_NO"));
 					rBoard.setUserId(rset.getString("USER_ID"));
+				//	System.out.println(rBoard.getUserId());
 					bList.add(rBoard);
 				}
 			} catch (SQLException e) {
@@ -419,5 +420,38 @@ public class AdminDAO {
 				JDBCTemplate.close(pstmt);
 			}
 			return mList;
+		}
+		public List<ReportedReply> selectReportedReply(Connection conn, int currentPage) {
+			List<ReportedReply> rList = null;
+			PreparedStatement pstmt = null;
+			ResultSet rset = null;
+			String query = "SELECT * FROM(SELECT ROW_NUMBER() OVER(ORDER BY REPLY_NO DESC) AS NUM, REPLY_NO, USER_ID, REPORTED_REPLY_NO FROM REPORTED_REPLY) WHERE NUM BETWEEN ? AND ?";
+			try {
+				pstmt = conn.prepareStatement(query);
+				
+				int viewCountPerPage = 5;
+				int start = currentPage * viewCountPerPage - (viewCountPerPage - 1);
+				int end = currentPage * viewCountPerPage;
+				
+				pstmt.setInt(1, start);
+				pstmt.setInt(2, end);
+				rset = pstmt.executeQuery();
+				rList = new ArrayList<ReportedReply>();
+				
+				while(rset.next()) {
+					ReportedReply rReply = new ReportedReply();
+					rReply.setReplyNo(rset.getInt("REPLY_NO"));
+					rReply.setUserId(rset.getString("USER_ID"));
+				//	System.out.println(rReply.getUserId());
+					rList.add(rReply);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally  {
+				JDBCTemplate.close(rset);
+				JDBCTemplate.close(pstmt);
+				
+			}
+			return rList ;
 		}
 }

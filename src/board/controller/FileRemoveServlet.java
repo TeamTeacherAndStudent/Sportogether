@@ -48,7 +48,7 @@ public class FileRemoveServlet extends HttpServlet {
 			removeFile.delete();
 			response.sendRedirect("/board/detail?boardNo="+boardNo);
 		}else {
-			request.getRequestDispatcher("/Board/boardError.html").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/Board/boardError.html").forward(request, response);
 		}
 	}
 }

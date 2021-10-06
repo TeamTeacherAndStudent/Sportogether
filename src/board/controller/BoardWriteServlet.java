@@ -34,7 +34,7 @@ public class BoardWriteServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//views로 이동하는 코드작성
-		request.getRequestDispatcher("/Board/boardWrite.html").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/Board/boardWrite.html").forward(request, response);
 	}
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
@@ -58,7 +58,7 @@ public class BoardWriteServlet extends HttpServlet {
 		if(result > 0) {
 			response.sendRedirect("/board/list");
 		}else {
-			request.getRequestDispatcher("/Board/serviceFailed.html").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/Board/serviceFailed.html").forward(request, response);
 			System.out.println("error");
 		}
 	}
