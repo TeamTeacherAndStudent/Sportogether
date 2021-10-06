@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>     
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
@@ -72,11 +72,10 @@
       <h1 class="logo"><a href="/index.jsp"> Sportogether </a></h1>
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a class="active" href="/Sports/sportsList.jsp">종목</a></li>
+          <li><a class="active" href="/sports/list">종목</a></li>
           <li><a href="/board/list">자유게시판</a></li>
           <li><a href="/support/list">후원</a></li>
-          <li><input type="search" placeholder="검색" size="10" id="search"></li>
-       	  <li>
+          <li>
        	  	<c:if test="${sessionScope.userId eq null }">
        	 		 <a href="/member/login">Login</a>
        	 	</c:if>
@@ -115,14 +114,13 @@
 			    <h5 class="card-title">${support.supportTitle }</h5>
 			    <p class="card-text">${support.supportIntro }</p>
 			   
-				<p class="card-text">NOW : ${support.supportAchived } WON</p>
+				<p class="card-text">NOW  <fmt:formatNumber type="currency"> ${support.supportAchived }</fmt:formatNumber></p>
 					<!-- 그래프 -->
 				<div class="progress">
-					<div class="progress-bar bg-warning" role="progressbar" background-color ="yellow" style="width: ${(support.supportAchived / support.supportGoal)*100 }%"
-					 ></div>
+					<div class="progress-bar bg-warning" role="progressbar" background-color ="yellow" style="width: ${(support.supportAchived / support.supportGoal)*100 }%"></div>
 				</div>
 					<!-- 달성률 text -->	    
-				<span>${(support.supportAchived / support.supportGoal)*100 } %</span><br>
+				<span><fmt:formatNumber pattern=".0">${(support.supportAchived / support.supportGoal)*100 }</fmt:formatNumber> %</span><br>
 			    
 			    <span class= "card-text">기한 : ${support.supportEndDate }</span><br>
 			    

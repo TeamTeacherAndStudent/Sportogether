@@ -49,7 +49,6 @@ public class SupportDetailServlet extends HttpServlet {
 //		String useridtest = (String)session.getAttribute("userId");
 //		System.out.println(useridtest);
 		if(spt != null) {
-			request.setAttribute("supportNo", supportNo);
 			request.setAttribute("donator", dm);
 			request.setAttribute("member", member);
 			request.setAttribute("supportOne", spt);

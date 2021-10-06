@@ -12,16 +12,16 @@ import javax.servlet.http.HttpServletResponse;
 import support.model.service.SupportService;
 
 /**
- * Servlet implementation class SupportPayServlet
+ * Servlet implementation class PaymentTestServlet
  */
-@WebServlet("/support/pay")
-public class SupportPayServlet extends HttpServlet {
+@WebServlet("/support/paytest")
+public class PaymentTestServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SupportPayServlet() {
+    public PaymentTestServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -38,20 +38,16 @@ public class SupportPayServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-		SupportService ss= new SupportService();
-		int donateMin = 1000;
-		String userId = request.getParameter("donator-id");
 		int supportNo = Integer.parseInt(request.getParameter("supportNo"));
-		String pAmount = request.getParameter("amount");
+		String userId = request.getParameter("donator-id");
+		String userEmail = request.getParameter("donator-email");
+		String userPhone = request.getParameter("donator-phone");
+		String payMoney =request.getParameter("amount");
 		
-//		if( pAmount.equals("")) {
-//			
-//			
-//		}
-		int payAmount = Integer.parseInt(pAmount);
+		int pAmount = Integer.parseInt(payMoney);
 		
-		if(payAmount < donateMin) {
+		if(pAmount < 1000)
+		{
 			response.setContentType("text/html;charset=UTF-8");
 
 			PrintWriter out = response.getWriter();
@@ -63,18 +59,14 @@ public class SupportPayServlet extends HttpServlet {
 			out.println("history.back()");
 
 			out.println("</script>");
-			
-		
 		}
 		
-		System.out.println(payAmount);
-		
-		int result = ss.registerSptHistory(userId, supportNo, payAmount);
-		if(result > 1) {
-			response.sendRedirect("/support/detail?supportNo="+supportNo);
-		}else {
-			request.getRequestDispatcher("/WEB-INF/Support/supportError.html").forward(request, response);
-		}
+		request.setAttribute("supportNo", supportNo);
+		request.setAttribute("userId", userId);
+		request.setAttribute("userEmail", userEmail);
+		request.setAttribute("userPhone", userPhone);
+		request.setAttribute("Amount", pAmount);
+		request.getRequestDispatcher("/WEB-INF/Support/paytest.jsp").forward(request, response);
 		
 	}
 

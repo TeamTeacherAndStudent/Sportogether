@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
   <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>  
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>  
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,7 +12,8 @@
   <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
   <!-- iamport.payment.js -->
   <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
-
+<!-- jquery ui -->
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
  <!-- font Awesome -->
@@ -19,10 +21,8 @@
  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
    
-    <!-- jQuery -->
-  <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
-  <!-- iamport.payment.js -->
-  <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+   
+
  
    <!-- Vendor CSS Files -->
   <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -92,13 +92,12 @@
       <h1 class="logo"><a href="/index.jsp"> Sportogether </a></h1>
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a class="active" href="/Sports/sportsList.jsp">종목</a></li>
+          <li><a class="active" href="/sports/list">종목</a></li>
           <li><a href="/board/list">자유게시판</a></li>
           <li><a href="/support/list">후원</a></li>
-          <li><input type="search" placeholder="검색" size="10" id="search"></li>
        	  <li>
        	  	<c:if test="${sessionScope.userId eq null }">
-       	 		 <a href="/meber/login">Login</a>
+       	 		 <a href="/member/login">Login</a>
        	 	</c:if>
        	 	<c:if test = "${sessionScope.userId ne null }">
        	 		<a href="/member/logout">Logout</a>
@@ -163,17 +162,17 @@
 					<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAMAAACahl6sAAAAh1BMVEUAAAD///8ICAjo6Oi5ubn29vYEBAQpKSn7+/sYGBjX19fx8fEODg5VVVVkZGQ4ODhGRkbOzs6srKw+Pj7Pz88eHh7i4uI2NjZ/f388PDzIyMhISEhxcXHr6+vb29tCQkJ1dXWSkpJpaWmfn5+np6coKCgcHByFhYVZWVm2trZPT0+NjY2ZmZmA3fcuAAAIv0lEQVR4nO3dZ5uiOhQAYBQZsffuKLaxzPz/37cYEClpJzmRuI/ny927qyGvtJRDcCr/SThlVwArPhDb4gOxLT4Q2+IDsS0+ENsCDJnWDvP9pT/qzWaj1WV/PtRc/Vp8L4/n/WUVFtob9S/7+aE2hRYBgUyP60XbKUZ7Gwy/oRt+xPcw2DZohY7WQ8hPJAvxr/sTZXPPmAVLuGIZzLiF1tc1HxVSu9D2RD4a6wFEMVjT9kRhz3RrWBB3PpHYYPwT/rXkFK1dXbrQ01niwBVCmt2q9BbJLxhIHNluILOHn1HtbjQhzQtog9FW1wKKu4f9Nvf4ElG4EHcPZxDK3GMX6s3hDEJZcw8wDsTfwfZ/OiZDVqlD+RMuH+0/JciYf2UUxY16fLk3rUIXTTDE/1U7AJ7RpuyUo/o+jqK6A0LcreYW77HPnSleF6HQFeNMoUOWMrcqccwyLaaN/J2DFxN6C4IK+ftC2WR4eI2fhdZ0D6tHVI+ykABpi05acsD6ccKYS0F8jCM5iYfkilmo0y02JQsQv4O6yUSC+vM4l4IkD8F2vEySg/gKbStRmJF0+ZA16sbiMCMJeJBf1E0l0R6YkOzYENxLSyrMSGosyAbrllUMI5L2lA7xcJoQjI2akMx8KgR4ovdg7UojkoAGqcHK6LU8CyS1IqQF67n1WuGxWL7k5BUgsAOrR0Z9LJAEecgY9v161JEtX/LVzEGgPUJrJKssZAguwBpJLQNRuIXYIpmlIfAd4tgjuaYgakNYlkh6TwjwXpiEJZJlAlEe/rND0nlAXPUBDiskX24MOWsUYoXkN4bwJwcFoSXx9ca0kzpEEGDrpFCKjsTT+hGTaBLIXLMULckAZQDyTCB68yBh1L+VJFFzD2XcZnGHuNrFdOIepzcCfW1CugLfKAMFrRBy1C2kk/ScgZIL3i4ZhhDdgjqpEQCghNySm5rbJ7EOIZqnSOzYuAqSG/kOxoWrV3F8vctG7Gg26ioSF+vYqvqO3l0kcTyvwhAJmW/WPknv0XS0ikk5EkkLIOminSRDR6ehlXGoSEhXoqVRgyTOjka7LedQkEzI59Vr8Iy901f+bsEBl/yQj2O0UlaO8tWX4gBLTqQJrFqDdMwc1RwXqgMqGZFGimINMjFxFJs6DAdQsicNYLUaZKPtqOXOMB1PyUKimMP9kwelGuRCMQWI4wBJyCcVs9uyoXbB4DoAkmjcVj0TLRMK+0TgkJeQMULNnnYcVYWTXeiQlURDhDhT+23nB/oVCYekhPTaWzhTyRMHOg4v5ZCSRMlKOm29VMwc4AyPpCMex+RJbqQkF2luvw9sNEo76o8kU5ZkFE1jYiXxdB3QqBbcwZLcIgdKp+oeZwdyX1VxhH3GYgpY9Tf6J7ykkaMDaOmoOcL4y9V3FU/Fukj3wjDGjif9WbijNov/1Do/q9zuPvJdXbzkly/PkZ4HVXBUnXqSwDPYdVfbVfdcS3IVmnj7w6lXHNk5CiVHeKNKZf5m46ibs56ObgiRO9sVHcxs9iluEughhGxkPqjsCGNWzAF3A8zdEcb0Pq0gMWSp4whjcUw/eeXXgE87ieNE5kfEzU9NRxjV/nw4mLrT8fV8M5BwuCYQ4Sy7vsN01AjEF1TQfkfDj2Z1+Z1m+x33I4tAlrwPvYGDTBiRFA7Ozf0dHCTRiUB2zM+8gyOaZSEQZr/5LRztVgKpBPSPmHAgthTjiPr+EWRK3b4JR9/TTbTIR9VNQah3dzMO/ZSRXMSZvzHELVbBlANZ0v7OQIqFm3PgSh6P8j0grVyFTTowU0wnXg6S61/djDqWeA3g5Mnm52MX6SHHuvcmjn6lCNk8q1JtvomjOqVAUo+8zd/E4ewqNEjlMeUe3fNd4YRD6Y5VhQ55jIyvyf+tRMWU7mi4DMjjOUQyASPsAJfuYD+HGM+6NKR2SPmO30zVc8/q3hOKSV5bSzDfW76jk615DuLN4muW4Mgq39HLrYyRf57dnTi7+3/ZncZ7lO845RfjKKwwsGmQvAruHGX5jp/CSkLFNR+apPnCeyC8fEejuGINa6UazlNX5TvalLkKFmT6Zg72Ikissa7yHQ3q3BETwjhJDDkAYyt0BxuS7zIadSxa0r1fynnOh1BPd2MO6X48y8Fb8aw4RGTQISlhOrhr0OWHCIw6pCRsB38xveyqZ6vHRKAZh8QDwxyHYHnDzXMSeXJ4/KUphzC/kucQLjg5/e3UfyaL/TV5bsdOB3yZXEsdYMjSUgcU4gqHiEpyQCHCzL2yHECIMG+lNAcQIrpnlecAQnr8Da4Sx+DVDiCEf8kq0wGD8PMfS3UgQsp14B1aEEcP3wGEsB+RK9sBhATWOoAQVtp2+Q5oE4X+UJ4FDiiEuktscICb8ZTBbSsc8I5VIWnBkKM43o4MqQTZDXbscKi82uaaGt9s75K/Lteh9I4e/7CNanKaP+eNUB0TsEP1ZUPe4DrMvJynbAfWW5NwHeA3DaFBxqU7cCDiBV2NO3Agwgc3zDtQIJTMTmXHSdGBAhGtbf4KBwpEsLQKxKH+ujUMCH8Y9TUOFIgNDuMQgCP/hO/rIZy74cscKBD2QOrrHCiQAMOh/ELFODAgrJVNZi904DRR6AtgABwzbQcOZEyr6WsdSM14ytjKix1YHavC2ArEIflSS35gvVc3yFZu+2oHGiQztlKdP/IkxI4ejgMPUvEO8UouP+ukLf46ByIkjNbyeLimRkDEjgWWAxeSi+sLHSYh4rSVEZ7DIES8ADmmwyBE+JayLeedtfAwBxGNdeE6zEFEq0QhO8xB/viOPrLDHCR4rcMchLtGyQrdUc4eMeAwB+E8pGXCUcZV62bCYQ7isx71vRXfiYsR5m6IjPxHQw6DEPqqMR1DDpOtX9qqmMYcRvsjxRk5cw6jkMJNsfjGaLwwCqnsMn0r2tvI0cIspDJ9LgC4GhjdkmFIePE67le97WWnkJUBCuOQV8UHYlt8ILbFB2JbfCC2xQdiW/w3kH+5qbD8QUc84AAAAABJRU5ErkJggg==">
 					
 					<!-- 목표 금액 -->
-					<h5> GOAL: ${supportOne.supportGoal } WON </h5> <br><br>
+					<h5> GOAL <fmt:formatNumber type="currency"> ${supportOne.supportGoal } </fmt:formatNumber> </h5> <br><br>
 					
 					<!-- 현재 모금액 -->
-					<h4>NOW : ${supportOne.supportAchived } WON </h4> <br><br>
+					<h4>NOW <fmt:formatNumber type="currency"> ${supportOne.supportAchived }</fmt:formatNumber>  </h4> <br><br>
 					<div class="progress">
-						<div class="progress-bar bg-warning" role="progressbar" style="width: ${(support.supportAchived / support.supportGoal)*100 }% aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-					</div>
+					<div class="progress-bar bg-warning" role="progressbar" background-color ="yellow" style="width: ${(support.supportAchived / support.supportGoal)*100 }%"></div>
+				</div>
 					
 					<!-- 달성률 % -->
-					<h6>${(supportOne.supportAchived/ supportOne.supportGoal)*100 } %</h6><br>
-<!-- 					<form action = "/support/pay" method = "post"> -->
+					<h6><fmt:formatNumber pattern = ".0">${(supportOne.supportAchived/ supportOne.supportGoal)*100 }</fmt:formatNumber>%</h6><br>
+					<form action = "/support/paytest" method = "post">
 					<div  class="container px-5 my-5">
 					
 						<!-- 후원자 정보-->
@@ -181,21 +180,21 @@
 							<input type = "hidden" id = "donator-id" name = "donator-id" value ="${sessionScope.userId }">
 							<input type = "hidden" id = "donator-email" name= "donator-email" value="${donator.userEmail}">
 							<input type = "hidden" id = "donator-phone" name = "donator-phone" value = "${donator.userPhone }">
-							<input type = "text" id = "amount" name = "amount" placeholder = "금액을 입력해주세요!" class = form-control  pattern="^[0-9]+$"> 
+							<input type = "text" id = "amount" name = "amount" placeholder = "금액을 입력해주세요!" class = form-control required pattern="^[0-9]+$"> 
 					
 					</div>
 					
 					<!-- 후원 버튼  -->
 					<div class="d-grid gap-2" >
 <!-- 						<button id="modbtn" type="submit" class="btn btn-primary" >후원하기</button> -->
-						<button id="modbtn"  class="btn btn-primary" >후원하기</button>
-<!-- 						<input  type="submit" class="btn btn-primary" value="후원하기"> -->
+<!-- 						<button id="modbtn"  class="btn btn-primary" >후원하기</button> -->
+						<input  type="submit" id ="modbtn" class="btn btn-primary" value="후원하기">
 
 
 <!--   						<a href="javascript:gotopay();"  id="modbtn" class="btn btn-primary" >후원하기</a> -->
 
 					</div>
-<!-- 					</form> -->
+					</form>
 					
 					<!-- sns 로고 -->
 					<div class= "logos">
@@ -396,86 +395,7 @@
   <!-- End Footer -->
    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
   
-   <!-- i'mport 카카오 결제 -->
-  <script>
-   $("#modbtn").click(function (){
-// 	   function gotopay(){
-// 	   if(true){
-// 		   alert.("로그인 후 이용해주세요.");
-// 		   location.href="/member/login";
-// 	   }
-        var supportNo = $("#supportNo").val();
-	    var donatorId = $("#donator-id").val();
-	    var donatorEmail = $("#donator-email").val();
-	    var donatorPhone = $("#donator-phone").val();
-	    var donateAmount = $("#amount").val();
-	    
-    	 // 생략가능
-        var IMP = window.IMP;
-        IMP.init('imp70817839'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
-        var msg;
-       
-        IMP.request_pay({
-            pg : 'kakaopay',
-            pay_method : 'card',
-            merchant_uid : 'merchant_' + new Date().getTime(),
-            name : 'Sportogether 후원 결제',
-//             amount : donatorAmount,
-//             buyer_email : donatorEmail,
-//             buyer_name : donatorId,
-//             buyer_tel : donatorPhone,
-            amount : 2000,
-            buyer_email : 'email',
-            buyer_name : 'userId',
-            buyer_tel : '0104666',
-            buyer_addr : 'not',
-            buyer_postcode : 'not',
-            //m_redirect_url : 'http://www.naver.com'
-        }, function(rsp) {
-            if ( rsp.success ) {
-            	
-                //[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
-                jQuery.ajax({
-                    url: "/support/pay", //cross-domain error가 발생하지 않도록 주의해주세요
-                    type: 'POST',
-                    dataType: 'json',
-                    data: {
-                        imp_uid : rsp.imp_uid
-                        //기타 필요한 데이터가 있으면 추가 전달
-                    }
-                }).done(function(data) {
-                    //[2] 서버에서 REST API로 결제정보확인 및 서비스루틴이 정상적인 경우
-                    if ( everythings_fine ) {
-                        msg = '결제가 완료되었습니다.';
-                        msg += '\n고유ID : ' + rsp.imp_uid;
-                        msg += '\n상점 거래ID : ' + rsp.merchant_uid;
-                        msg += '\결제 금액 : ' + rsp.paid_amount;
-                        msg += '카드 승인번호 : ' + rsp.apply_num;
-                        
-                        alert(msg);
-                    } else {
-                        //[3] 아직 제대로 결제가 되지 않았습니다.
-                        //[4] 결제된 금액이 요청한 금액과 달라 결제를 자동취소처리하였습니다.
-                    }
-                });
-                //성공시 이동할 페이지
-<%--                 location.href='<%=request.getContextPath()%>/order/paySuccess?msg='+msg; --%>
-// 					location.href="/support/detail?supportNo="+supportNo";
-					alert(msg);
-					history.back();
-            } else {
-                msg = '결제에 실패하였습니다.';
-                msg += '에러내용 : ' + rsp.error_msg;
-                //실패시 이동할 페이지
-<%--                 location.href="<%=request.getContextPath()%>/order/payFail"; --%>
-// 				location.href="/support/detail?supportNo="+supportNo;
-					history.back();
-                alert(msg);
-            }
-        });
-        
-    });
-    </script>
+  
   
   
   <!-- Vendor JS Files -->
@@ -521,7 +441,7 @@
 		var supportNo = $("#supportNo").val();
 		var replyNo = $("#replyNo").val();
 		if(removeReplyChk) {
-			location.href = "/supportReply/Remove?replyNo=" + replyNo + "&supportNo=" + supportNo;;
+			location.href = "/supportReply/Remove?replyNo=" + replyNo + "&supportNo=" + supportNo;
 					
 		}else{
 			window.alert("취소하였습니다.");

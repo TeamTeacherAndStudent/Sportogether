@@ -388,9 +388,9 @@ public class SupportDAO {
 	}
 	//누적모금액조회
 	private int getAchived(Connection conn, int supportNo) {
-		String query = "SELECT ACHIVED_RECORD FROM SUPPORT WHERE SUPPORT_NO = ?";
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
+		String query = "SELECT ACHIVED_RECORD FROM SUPPORT WHERE SUPPORT_NO = ?";
 		int aMoney=0;
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -408,13 +408,14 @@ public class SupportDAO {
 		return aMoney;
 	}
 	//  후원 내역 저장
-	public int insertSuppotHistory(Connection conn, String userId , int supportNo, int payAmount) {
+	public int insertSupportHistory(Connection conn, String userId , int supportNo, int payAmount) {
 		PreparedStatement pstmt = null;
 		int result =  0;
 		Support spt= selectOneByNo(conn,supportNo);
 		String writer = spt.getSupportWriter();
 		String sportCategory = spt.getSportsCategory();
-		String query = "INSERT INTO SUPPORT_MANAGE VALUES (SEQ_SPT_MNG.NEXTVAL, ? , ? , ? , DEFAULT , DEFAULT,?,?";
+		System.out.println(writer + sportCategory);
+		String query = "INSERT INTO SUPPORT_MANAGE VALUES (SEQ_SPT_MNG.NEXTVAL, ? , ? , ? , DEFAULT , DEFAULT,?,?)";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, supportNo);
