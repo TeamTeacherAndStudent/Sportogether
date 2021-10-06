@@ -55,7 +55,7 @@ float: left;
           <li><a class="active" href="sports.html">종목</a></li>
           <li><a href="freeboard.html">자유게시판</a></li>
           <li><a href="support.html">후원</a></li>
-          <li><input type="search" placeholder="검색" size="5"></li>
+         <!--  <li><input type="search" placeholder="검색" size="5"></li> -->
           <li class="dropdown"><a href="#"><span>SIDE MENU</span> <i class="bi bi-chevron-down"></i></a>
           <ul>
              <li><a href="noticelist.html">공지사항</a></li>     

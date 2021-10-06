@@ -241,7 +241,7 @@ button:hover {
           <li><a class="active" href="/sports/list">종목</a></li>
           <li><a href="/board/list">자유게시판</a></li>
           <li><a href="/support/list">후원</a></li>
-          <li><input type="search" placeholder="검색" size="10" id="search"></li>
+          <!-- <li><input type="search" placeholder="검색" size="10" id="search"></li> -->
           <li>
           	<c:if test="${sessionScope.userId eq null }">
 				<a href="/member/login">Login</a>
@@ -304,7 +304,7 @@ button:hover {
 							<ul>
 								<li>${notice.noticeNo}</li>
 								<li class="left"><a href="/notice/detail?noticeNo=${notice.noticeNo}">${notice.noticeTitle}</a></li>
-								<li><fmt:formatDate pattern = "yyyy-MM-dd hh:mm" value="${notice.noticeDate}"/></li>
+								<li><fmt:formatDate pattern = "yyyy-MM-dd HH:mm" value="${notice.noticeDate}"/></li>
 								<li>${notice.noticeWriter}</li>
 								<li>${notice.noticeCount}</li>
 							</ul>

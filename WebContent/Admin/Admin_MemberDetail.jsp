@@ -205,7 +205,7 @@ button:hover {
           <li><a class="active" href="/sports/list">종목</a></li>
           <li><a href="/board/list">자유게시판</a></li>
           <li><a href="/support/list">후원</a></li>
-          <li><input type="search" placeholder="검색" size="10" id="search"></li>
+         <!--  <li><input type="search" placeholder="검색" size="10" id="search"></li> -->
           <li>
 				<a href="/member/logout">Logout</a>
 			</li>
