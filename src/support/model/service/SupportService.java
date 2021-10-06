@@ -192,6 +192,32 @@ public class SupportService {
 		
 		return result;
 	}
+	//후원 정보 등록 / 모금액 누적
+	public int registerSptHistory(String userId, int supportNo, int payAmount) {
+		int resultA= 0;
+		int resultB= 0 ;
+		int result = 0;
+		SupportDAO sDAO = new SupportDAO();
+		Connection conn = null;
+		
+		try {
+			conn=jdbcTemplate.createConnection();
+			resultA = sDAO.donateSupport(conn, supportNo, payAmount);
+			resultB = sDAO.insertSuppotHistory(conn, userId, supportNo,payAmount);
+			if(resultA + resultB > 1) {
+				JDBCTemplate.commit(conn);
+			}else {
+				JDBCTemplate.rollback(conn);
+			}
+			result = resultA + resultB;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(conn);
+		}
+		return result;
+	}
 	
 
 }

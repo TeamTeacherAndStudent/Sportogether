@@ -32,16 +32,25 @@ public class SupportDetailServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//후원 상세 page
+		//후원 상세 page로 이동
+		MemberService ms = new MemberService();
 		SupportService ss = new SupportService();
 		int supportNo = Integer.parseInt(request.getParameter("supportNo"));
+		
+		HttpSession session = request.getSession();
+		String donatorId = (String)session.getAttribute("userId");
+		Member dm = ms.printOneById(donatorId);
+		
+		
 		Support spt = ss.printOneByNo(supportNo);
 		String userId = spt.getSupportWriter();
-		Member member = new MemberService().printOneById(userId);
+		Member member = ms.printOneById(userId);
 //		HttpSession session = request.getSession();
 //		String useridtest = (String)session.getAttribute("userId");
 //		System.out.println(useridtest);
 		if(spt != null) {
+			request.setAttribute("supportNo", supportNo);
+			request.setAttribute("donator", dm);
 			request.setAttribute("member", member);
 			request.setAttribute("supportOne", spt);
 			request.getRequestDispatcher("/WEB-INF/Support/supportDetail.jsp").forward(request, response);
