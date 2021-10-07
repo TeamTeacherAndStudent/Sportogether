@@ -20,32 +20,88 @@
 
   <!-- Template Main CSS File -->
   <link href="../assets/css/style.css" rel="stylesheet">
-  <style>
-  		/*제목*/
+   <!-- Template Main JS File -->
+  <script src="../assets/js/main.js"></script>
+  <script src = "../assets/js/waypoints.min.js"></script>
+	<!-- jQuery  CDN -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	
+  
+<style>
+	#main {
+		 width:100%;
+		 height : 800px;
+	}
+	 #search{
+       margin-left: 30px;
+    }
+	/*제목*/
 	h1{
 	    vertical-align:middle;
 	    line-height:30px;
    		color: rgb(140, 158, 91);
 	    text-align: center;
 	}
-		.ulTable {
+/*탭관련 css*/
+	.tab-content.currnet{
+		display: block;
+	}
+	.container{
+		margin: 0 auto;
+	}
+	
+	ul, li{
+		list-style: none;
+		text-align: center;
+		padding : 0px;
+		margin : 0px;
+	}
+	ul.tabs{
+	  margin: 0px;
+	  padding: 0px;
+	  text-align: center;
+	  list-style: none;
+	  font-weight:bold;
+	  font-size: 18px;
+	}
+	ul.tabs li{
+	  background: none;
+	  color: #222;
+	  display: inline-block;
+	  padding: 10px 15px;
+	  cursor: pointer;
+	}
+	
+	ul.tabs li.current{
+	  background-color: #ededed;
+	  color: #222;
+	}
+	
+	.tab-content{
+	  display: none;
+	  background-color: #ededed;
+	  padding: 20px;
+	}
+	
+	.tab-content.current{
+	  display: inherit;
+	}
+	
+/* 테이블(게시판 형태) CSS*/
+	.ulTable {
 		margin-top:10px;
 		text-align: center;
-		list-style: none;
 	}
 	
 	.ulTable > li:first-child > ul > li {
-		list-style: none;
 		background-color:#c9c9c9;
 		font-weight:bold;
+		font-size: 15px;
 		text-align:center;
-		height: 40px;
-		line-height: 40px;
-		font-size : 15px;
+		width: 40px;
 	}
 	
 	.ulTable > li > ul {
-		list-style: none;
 		clear:both;
 		padding:0px auto;
 		position:relative;
@@ -57,14 +113,12 @@
 		border-bottom:1px solid #ededed;
 		vertical-align:baseline;
 	}
-	.ulTable > li > ul > li:first-child             	      {width:10%;} /*후원No 열 크기*/
-	.ulTable > li > ul > li:first-child +li            		  {width:10%;} /*캠페인No 열 크기*/
-	.ulTable > li > ul > li:first-child +li+li        		  {width:10%;} /*종목 열 크기*/
-	.ulTable > li > ul > li:first-child +li+li+li     		  {width:10%;} /*후원자 열 크기*/
-	.ulTable > li > ul > li:first-child +li+li+li+li   		  {width:10%;} /*선수이름 열 크기*/
-	.ulTable > li > ul > li:first-child +li+li+li+li+li		  {width:20%;} /*후원금액 열 크기*/
-	.ulTable > li > ul > li:first-child +li+li+li+li+li+li    {width:10%;} /*걸제수단 열 크기*/
-	.ulTable > li > ul > li:first-child +li+li+li+li+li+li+li {width:15%;} /*후원일 열 크기*/
+	
+	.ulTable > li > ul > li:first-child                {width:10%;} /*No 열 크기*/
+	.ulTable > li > ul > li:first-child +li            {width:40%;} /*제목 열 크기*/
+	.ulTable > li > ul > li:first-child +li+li         {width:20%;} /*작성자 열 크기*/
+	.ulTable > li > ul > li:first-child +li+li+li      {width:20%;} /*날짜 열 크기*/
+	.ulTable > li > ul > li:first-child +li+li+li+li   {width:10%;} /*신고수 열 크기*/
 	
 	#divPaging {
 		clear:both;
@@ -79,15 +133,24 @@
 		margin:0 auto;
 		text-align:center;
 	}
-	.link {
-		text-align: center;
-	}
-   #search{
-  	 margin-left: 30px;
-	}
-  </style>
+</style>
 </head>
 <body>
+<script>
+		
+	$(document).ready(function(){
+	    $('ul.tabs li').click(function(){
+	        var tab_id = $(this).attr('data-tab');
+	 
+	        $('ul.tabs li').removeClass('current');
+	        $('.tab-content').removeClass('current');
+	 
+	        $(this).addClass('current');
+	        $("#"+tab_id).addClass('current');
+	    })
+	});
+
+</script>
   <!-- ======= Header ======= -->
   <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center justify-content-between">
@@ -120,56 +183,113 @@
 		</div>
 	</header>
 	<!-- End Header -->
-
- 	<br><br>
- 	<main id="main">
-  		<section id="supportManage">
+  <br><br>
+  <!-- ======== 본문 ============= -->
+  <main id="main">
+  		<section id="reposted">
       		<div class="container">
-	       		<h1>후원 결제 관리</h1><br><br>
-	       		<ul class="ulTable">
-        			<li>
-						<ul>
-							<li>후원No</li>
-							<li>캠페인No</li>
-							<li>후원종목</li>
-							<li>후원자</li>
-							<li>후원선수</li>
-							<li>후원금액</li>
-							<li>결제수단</li>
-							<li>결제일</li>
-						</ul>
-					</li>
-					<li>
-						<ul>
-							<li>1</li>
-							<li>1</li>
-							<li>배구</li>
-							<li>admin</li>
-							<li>김연경</li>
-							<li>10,000</li>
-							<li>카카오페이</li>
-							<li>2021.09.26</li>
-						</ul>
-					</li>
-				</ul>
-			</div>
-			<br>
-			<div id="divPaging">
-				<div>◀</div>
-				<div><b>1</b></div>
-				<div>2</div>
-				<div>3</div>
-				<div>4</div>
-				<div>5</div>
-				<div>▶</div>
-			</div>
-			<!-- 링크를 오른쪽 하단에 재배치 -->
-			<div class="link">
-				<a href ="support_chart.jsp">종목별 비율 차트 보기</a><br>
-			</div>
-		</section>
-	</main>
-	<br><br><br>
+	      		<h1>신고글 관리</h1><br><br>
+	      		<ul class="tabs">
+		      		<li class="tab-link current" data-tab="tab-1">신고 게시물</li>
+		      		<li class="tab-link" data-tab="tab-2">신고 댓글 </li>
+	   			</ul>
+ 					<!-- 회원 클릭시 회원 detail페이지/게시물 제목 클릭시 게시물 상세 조회 -->
+ 				<div id="tab-1" class="tab-content current">
+	        		<ul class ="ulTable">
+	   					<li>
+	   						<ul>
+	   							<li>No</li>
+	   							<li>제목</li>
+	   							<li>작성자</li>
+	   							<li>날짜</li>
+	   							<li>신고수</li>
+	   						</ul>
+	   					</li>
+	   					<li>
+	   						<ul>
+	   							<li>1</li>
+	   							<li>불법주정차</li>
+	   							<li>car</li>
+	   							<li>2021-09-27</li>
+	   							<li>5</li>
+	   						</ul>
+	   					</li>
+	   				</ul><br><br>
+	   				<div id="divPaging">
+						<div>◀</div>
+						<div><b>1</b></div>
+						<div>2</div>
+						<div>3</div>
+						<div>4</div>
+						<div>5</div>
+						<div>▶</div>
+					</div>
+       			</div>
+	       		<div id="tab-2" class="tab-content">
+	        		<ul class ="ulTable">
+	   					<li>
+	   						<ul>
+	   							<li>No</li>
+	   							<li>댓글내용</li>
+	   							<li>작성자</li>
+	   							<li>날짜</li>
+	   							<li>신고수</li>
+	   						</ul>
+	   					</li>
+	   					<li>
+	   						<ul>
+	   							<li>1</li>
+	   							<li>2</li>
+	   							<li>3</li>
+	   							<li>4</li>
+	   							<li>5</li>
+	   						</ul>
+	   					</li>
+	   				</ul><br><br>
+   					<div id="divPaging">
+						<div>◀</div>
+						<div><b>1</b></div>
+						<div>2</div>
+						<div>3</div>
+						<div>4</div>
+						<div>5</div>
+						<div>▶</div>
+					</div>
+				</div>
+	       		<!-- <div id="tab-3" class="tab-content">
+	        		<ul class ="ulTable">
+	   					<li>
+		   					<ul>
+	   							<li>No</li>
+	   							<li>응원글 내용</li>
+	   							<li>작성자</li>
+	   							<li>날짜</li>
+	   							<li>신고수</li>
+		   					</ul>
+		   				</li>
+		   				<li>
+		   					<ul>
+	   							<li>No</li>
+	   							<li>응원글 내용</li>
+	   							<li>작성자</li>
+	   							<li>날짜</li>
+	   							<li>신고수</li>
+		   					</ul>
+		   				</li>
+		   			</ul><br><br>
+	   				<div id="divPaging">
+						<div>◀</div>
+						<div><b>1</b></div>
+						<div>2</div>
+						<div>3</div>
+						<div>4</div>
+						<div>5</div>
+						<div>▶</div>
+					</div>
+	  			</div> -->
+   		</div>
+     </section>
+  </main>
 <!-- ======= Footer ======= -->
   <footer id="footer">
     <div class="container">

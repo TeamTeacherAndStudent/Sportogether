@@ -141,7 +141,7 @@
   	<div class="container">
 	 	<div class="row">
 	 		<div class="col-lg-4 col-md-4 col-xs-4 col-sm-4">
-				<a href="/admin/reportedList/board">
+				<a href="/report/manage">
 					<div id="reportedcard" class="card">
 						<div class="card-header">
 							<h3>신고글 목록</h3>
@@ -177,7 +177,7 @@
 				</a>
 			</div>
 			<div class="col-lg-4 col-md-4 col-xs-4 col-sm-4">
-				<a href="support_manage.jsp">
+				<a href="/support/manage">
 					<div id="paycard" class="card">
 						<div class="card-header">
 							<h3>후원 결제 관리</h3>
@@ -185,7 +185,7 @@
 					</div>
 				</a>
 			</div>
-			<div class="col-lg-4 col-md-4 col-xs-4 col-sm-4">
+			<!-- <div class="col-lg-4 col-md-4 col-xs-4 col-sm-4">
 				<a href="sports_manage.jsp">
 					<div  id="sportscard"  class="card">
 						<div class="card-header">
@@ -193,7 +193,7 @@
 						</div>
 					</div>
 				</a>
-			</div>
+			</div> -->
 		</div>
 	</div>
   </section>

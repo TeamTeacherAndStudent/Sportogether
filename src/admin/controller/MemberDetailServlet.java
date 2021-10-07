@@ -35,9 +35,9 @@ public class MemberDetailServlet extends HttpServlet {
 		Member member = new AdminService().printOneById(userId);
 		if(userId != null) {
 			request.setAttribute("member", member);
-			request.getRequestDispatcher("/Admin/Admin_MemberDetail.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/Admin/Admin_MemberDetail.jsp").forward(request, response);
 		}else {
-			RequestDispatcher view = request.getRequestDispatcher("/Admin/Admin_Error.html");
+			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/Admin/Admin_Error.html");
 			view.forward(request, response);
 		}
 	}

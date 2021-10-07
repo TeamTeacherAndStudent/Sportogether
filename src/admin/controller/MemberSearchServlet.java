@@ -39,9 +39,9 @@ public class MemberSearchServlet extends HttpServlet {
 		
 		if(!mList.isEmpty()) {
 			request.setAttribute("mList", mList);
-			request.getRequestDispatcher("/Admin/Admin_MemberSearch.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/Admin/Admin_MemberSearch.jsp").forward(request, response);
 		}else {
-			RequestDispatcher view = request.getRequestDispatcher("/Admin/Admin_Error.html");
+			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/Admin/Admin_Error.html");
 			view.forward(request, response);
 		}
 	}

@@ -88,8 +88,8 @@
 	#ulTable > li > ul > li:first-child               	   {width:10%;} /*No 열 크기*/
 	#ulTable > li > ul > li:first-child +li                {width:10%;} /*종목 열 크기*/
 	#ulTable > li > ul > li:first-child +li+li             {width:30%;} /*제목 열 크기*/
-	#ulTable > li > ul > li:first-child +li+li+li          {width:15%;} /*작성일 열 크기*/
-	#ulTable > li > ul > li:first-child +li+li+li+li       {width:15%;} /*작성자 열 크기*/
+	#ulTable > li > ul > li:first-child +li+li+li          {width:20%;} /*작성일 열 크기*/
+	#ulTable > li > ul > li:first-child +li+li+li+li       {width:10%;} /*작성자 열 크기*/
 	#ulTable > li > ul > li:first-child +li+li+li+li+li    {width:10%;} /*추천수 열 크기*/
 	#ulTable > li > ul > li:first-child +li+li+li+li+li+li {width:10%;} /*조회수 열 크기*/
 	
@@ -151,7 +151,6 @@
 		height:38px;
 		width: 300px;
 	}
-	
   </style>
 <title>자유게시판 </title>
 </head>
@@ -210,7 +209,7 @@
                         <li>
                         	<ul>
                                 <li>No</li>
-                                <li>종목</li>
+                                <li class="sports">종목</li>
                                 <li>제목</li>
                                 <li>작성일</li>
                                 <li>작성자</li>
@@ -220,7 +219,7 @@
                             <% for(Board bOne : bList) { %>
                             <ul>
                             	 <li><%=bOne.getBoardNo() %></li>
-                            	 <li><%=bOne.getSportsName() %></li>
+                            	 <li class="sports"><%=bOne.getSportsName() %></li>
 								 <li><a href="/board/detail?boardNo=<%=bOne.getBoardNo() %>"><%=bOne.getBoardTitle() %></a></li>
 								 <li><%=bOne.getBoardEnrollDate() %></li>
 								 <li><%=bOne.getUserId() %></li>

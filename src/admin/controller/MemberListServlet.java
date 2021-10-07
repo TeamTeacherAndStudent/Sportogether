@@ -40,9 +40,9 @@ public class MemberListServlet extends HttpServlet {
 		if(!mList.isEmpty()) {
 			request.setAttribute("mList", mList);
 			request.setAttribute("pageNavi", pageData.getPageNavi());
-			request.getRequestDispatcher("/Admin/Admin_MemberList.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/Admin/Admin_MemberList.jsp").forward(request, response);
 		}else {
-			RequestDispatcher view = request.getRequestDispatcher("/Admin/Admin_Error.html");
+			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/Admin/Admin_Error.html");
 			view.forward(request, response);
 		}
 	}

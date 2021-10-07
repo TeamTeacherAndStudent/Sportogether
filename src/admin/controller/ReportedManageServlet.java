@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class CampaignDeleteServlet
+ * Servlet implementation class ReportedManageServlet
  */
-@WebServlet("/campaign/delete")
-public class CampaignDeleteServlet extends HttpServlet {
+@WebServlet("/report/manage")
+public class ReportedManageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CampaignDeleteServlet() {
+    public ReportedManageServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,8 +26,8 @@ public class CampaignDeleteServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		request.getRequestDispatcher("/WEB-INF/Admin/reportedManage.jsp").forward(request, response);
+	
 	}
 
 	/**

@@ -18,7 +18,7 @@ import admin.model.vo.ReportedReply;
 /**
  * Servlet implementation class ReportedReplyList
  */
-@WebServlet("/admin/reportedList/reply")
+@WebServlet("/admin/reply")
 public class ReportedReplyListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -48,9 +48,9 @@ public class ReportedReplyListServlet extends HttpServlet {
 		if(!rList.isEmpty()) {
 			request.setAttribute("rList", rList);
 			request.setAttribute("pageNavi", pd.getReportPageNavi());
-			request.getRequestDispatcher("/Admin/reported_manage.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/Admin/reported_manage.jsp").forward(request, response);
 		}else {
-			RequestDispatcher view = request.getRequestDispatcher("/Admin/serviceFailed.html");
+			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/Admin/serviceFailed.html");
 			view.forward(request, response);
 		}
 	}

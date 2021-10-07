@@ -120,6 +120,9 @@
 	.replyNo{
 		display: hidden;
 	}
+	.category{
+		display: hidden;
+	}
   </style>
 <title>자유게시판</title>
 </head>

@@ -35,7 +35,7 @@ public class MemberRemoveServlet extends HttpServlet {
 		if(result > 0) {
 			response.sendRedirect("/admin/main");
 		}else {
-			RequestDispatcher view = request.getRequestDispatcher("/Admin/Admin_Error.html");
+			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/Admin/Admin_Error.html");
 			view.forward(request, response);
 		}
 	}

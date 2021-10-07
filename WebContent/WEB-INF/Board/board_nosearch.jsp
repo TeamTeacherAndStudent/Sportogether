@@ -150,7 +150,7 @@
 		width: 300px;
 	}
 	#box{
-		width : 100%;
+		width : 1000px;
 		height : 500px;
 		background-color : silver;
 	}

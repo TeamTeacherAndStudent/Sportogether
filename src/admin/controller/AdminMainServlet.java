@@ -31,7 +31,7 @@ public class AdminMainServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		String userCode = (String)session.getAttribute("userCode");
-			response.sendRedirect("/Admin/admin_main.jsp");
+	    request.getRequestDispatcher("/WEB-INF/Admin/admin_main.jsp").forward(request, response);
 	}
 
 	/**

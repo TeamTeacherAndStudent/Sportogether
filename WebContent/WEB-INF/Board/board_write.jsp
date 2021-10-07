@@ -181,7 +181,7 @@
 				    <form action="/board/write" method="post" id ="form">
 					    <div class="sportsName">
 							<input type="text" placeholder="종목입력" size="10" id="sportEnroll">
-					    	<input type="hidden" value="종목" name="sportsName">
+					    	<input type="hidden" value="기타" name="sportsName">
 					    	<input type="text" name="title" id="title" maxlength="50" pattern=".{4,50}" placeholder="제목입력(4-50)" size="80" required>
 					    </div>
 					      <br><br>

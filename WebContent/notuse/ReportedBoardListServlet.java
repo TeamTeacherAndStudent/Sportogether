@@ -48,9 +48,9 @@ public class ReportedBoardListServlet extends HttpServlet {
 		if(!bList.isEmpty()) {
 			request.setAttribute("bList", bList);
 			request.setAttribute("pageNavi", pd.getReportPageNavi());
-			request.getRequestDispatcher("/Admin/reported_manage.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/Admin/reported_manage.jsp").forward(request, response);
 		}else {
-			RequestDispatcher view = request.getRequestDispatcher("/Admin/serviceFailed.html");
+			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/Admin/serviceFailed.html");
 			view.forward(request, response);
 		}
 	}

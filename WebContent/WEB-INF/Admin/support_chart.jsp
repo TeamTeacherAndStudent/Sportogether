@@ -19,6 +19,9 @@
 
   <!-- Template Main CSS File -->
   <link href="../assets/css/style.css" rel="stylesheet">
+  	<!--Load the AJAX API-->
+<script type="text/javascript"
+	src="https://www.gstatic.com/charts/loader.js"></script>
 	<style>
 		#search{
 		   margin-left: 30px;
@@ -44,8 +47,44 @@
 		text-align: center;
 		}
 	</style>
+
 </head>
 <body>
+<script type="text/javascript">
+
+      // Load the Visualization API and the corechart package.
+      google.charts.load('current', {'packages':['corechart']});
+
+      // Set a callback to run when the Google Visualization API is loaded.
+      google.charts.setOnLoadCallback(drawChart);
+
+      // Callback that creates and populates a data table,
+      // instantiates the pie chart, passes in the data and
+      // draws it.
+      function drawChart() {
+
+        // Create the data table.
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Topping');
+        data.addColumn('number', 'Slices');
+        data.addRows([
+          ['Mushrooms', 3],
+          ['Onions', 1],
+          ['Olives', 1],
+          ['Zucchini', 1],
+          ['Pepperoni', 2]
+        ]);
+
+        // Set chart options
+        var options = {'title':'내가 한 후원 종목 비율 확인',
+                       'width':700,
+                       'height':500};
+
+        // Instantiate and draw our chart, passing in some options.
+        var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+      }
+    </script>
   <!-- ======= Header ======= -->
   <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center justify-content-between">
@@ -55,7 +94,6 @@
           <li><a class="active" href="/sports/list">종목</a></li>
           <li><a href="/board/list">자유게시판</a></li>
           <li><a href="/support/list">후원</a></li>
-          <li><input type="search" placeholder="검색" size="10" id="search"></li>
        	  <li>
        	  	<c:if test="${sessionScope.userId eq null }">
        	 		 <a href="/member/login">Login</a>
@@ -90,7 +128,7 @@
 				 	총 방문자 수 :
 				</div>
 				<div class="row">
-					<div class="col-md-6">
+					<div class="col-md-5">
 						<div class="section1">
 							<h4>월별 차트</h4>
 							 <select name="selectmonth">
@@ -109,7 +147,21 @@
 							 </select>
 							총 후원자 수 : <br>
 							<!-- 월별 방문자수  차트 -->
+					<section>
+					<div id="main-content">
+						<!--Div that will hold the pie chart-->
+						<div id="chart_div"></div>
+						<div id="count">
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
 						</div>
+					</div>
+					</section>
 					</div>
 					<div class="col-md-6">
 						<div class="section2">
@@ -126,7 +178,7 @@
 			</div>
 			<br><br>
 			<div class="link">
-				<a href="support_manage.jsp">후원 결제 관리 보기</a><br>
+				<a href="/support/manage">후원 결제 관리 보기</a><br>
 			</div>
 		</section>
 	</main>
