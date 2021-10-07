@@ -71,8 +71,8 @@
       <input type= "hidden" value = "${supportOne.supportNo }" name = "supportNo">
       <label for="title">캠페인 제목</label>
       <input type="text" class="form-control" id="title"
-       placeholder="제목 입력(4-30)" name="title"
-       maxlength="100" required="required"
+       placeholder="제목 입력(4-24)" name="title"
+       maxlength="24" required="required"
        pattern=".{4,30}" value = "${supportOne.supportTitle }">
        <br>
        
