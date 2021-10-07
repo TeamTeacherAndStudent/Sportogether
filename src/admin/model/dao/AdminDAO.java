@@ -41,7 +41,7 @@ public class AdminDAO {
 		List<Support> sList = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String query = "SELECT * FROM(SELECT ROW_NUMBER() OVER(ORDER BY SUPPORT_NO DESC) AS NUM, SUPPORT_NO,SUPPORT_APPROVAL, SUPPORT_CATEGORY, USER_ID, END_DATE, POSTING_DATE,SUPPORT_TITLE, SUPPORT_INTRO, SUPPORT_PURPOSE,SUPPORT_CONTENTS,SUPPORT_GOAL,ACHIVED_RECORD,FILE_NAME,FILE_SIZE,FILE_PATH  FROM SUPPORT  ) WHERE NUM BETWEEN ? AND ? AND SUPPORT_APPROVAL = ?";
+		String query = "SELECT * FROM(SELECT ROW_NUMBER() OVER(ORDER BY SUPPORT_NO DESC) AS NUM, SUPPORT_NO,SUPPORT_APPROVAL, SUPPORT_CATEGORY, USER_ID, END_DATE, POSTING_DATE,SUPPORT_TITLE, SUPPORT_INTRO, SUPPORT_PURPOSE,SUPPORT_CONTENTS,SUPPORT_GOAL,ACHIVED_RECORD,FILE_NAME,FILE_SIZE,FILE_PATH  FROM SUPPORT) WHERE NUM BETWEEN ? AND ? AND SUPPORT_APPROVAL = ?";
 		try {
 			pstmt = conn.prepareStatement(query);
 			
@@ -172,22 +172,24 @@ public class AdminDAO {
 			List<ReportedBoard> bList = null;
 			PreparedStatement pstmt = null;
 			ResultSet rset = null;
-			String query = "SELECT * FROM(SELECT ROW_NUMBER() OVER(ORDER BY BOARD_NO DESC) AS NUM, BOARD_NO, USER_ID, REPORTED_NO FROM REPORTED_BOARD) WHERE NUM BETWEEN ? AND ?";
+			String query = "SELECT BOARD_NO, COUNT(USER_ID) AS REPORT_NUM, USER_ID, BOARD_TITLE FROM(SELECT ROW_NUMBER() OVER(ORDER BY BOARD_NO ASC) AS NUM, SEQ_BOARD_NO, USER_ID, SEQ_REPORTED_BOARD_NO, BOARD_TITLE FROM REPORTED_BOARD) WHERE NUM BETWEEN ? AND ? GROUP BY BOARD_NO";
+
 			try {
 				pstmt = conn.prepareStatement(query);
-				
-				int viewCountPerPage = 5;
-				int start = currentPage * viewCountPerPage - (viewCountPerPage - 1);
-				int end = currentPage * viewCountPerPage;
-				
-				pstmt.setInt(1, start);
-				pstmt.setInt(2, end);
-				rset = pstmt.executeQuery();
-				bList = new ArrayList<ReportedBoard>();
+				  int viewCountPerPage = 5;
+				  int start = currentPage * viewCountPerPage - (viewCountPerPage - 1); 
+				  int end = currentPage * viewCountPerPage;
+				  pstmt.setInt(1, start);
+				  pstmt.setInt(2, end);
+				 
+				  rset = pstmt.executeQuery();
+				  bList = new ArrayList<ReportedBoard>();
 				
 				while(rset.next()) {
 					ReportedBoard rBoard = new ReportedBoard();
 					rBoard.setBoardNo(rset.getInt("BOARD_NO"));
+					rBoard.setReportedBoardNo(rset.getInt("REPORTED_BOARD_NO"));
+					rBoard.setBoardTitle(rset.getString("BOARD_TITLE"));
 					rBoard.setUserId(rset.getString("USER_ID"));
 				//	System.out.println(rBoard.getUserId());
 					bList.add(rBoard);
@@ -197,7 +199,6 @@ public class AdminDAO {
 			} finally  {
 				JDBCTemplate.close(rset);
 				JDBCTemplate.close(pstmt);
-				
 			}
 			return bList ;
 		}

@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!-- 포맷태그 식별 태그라이브러리  -->
+<%@taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -168,17 +170,17 @@
 	  			<div id="form">
 					<div class="text">
 					 	<div class="row"> 
-							<input type="hidden" value="${requestScope.boardOne.boardNo }">
+							<input type="hidden" name="boardNo" value="${requestScope.boardOne.boardNo }">
 							<div class = "col-md-2">
 								<div id="category"class="input-field">${requestScope.boardOne.sportsName }</div>
 							</div>
 							<div class="col-md-6">	
-								<div id="title" class="input-field">${requestScope.boardOne.boardTitle }</div>
+								<input type="text" id="title" name = "boardTitle" class="input-field">${requestScope.boardOne.boardTitle }</div>
 							</div>
 							<div class="col-md-3">	
 								<div id="writeInf" class="input-field">
 									작성자 ${requestScope.boardOne.userId }
-									&nbsp;&nbsp;${requestScope.boardOne.boardEnrollDate }
+									&nbsp;&nbsp;<fmt:formatDate pattern = "yyyy-MM-dd HH:mm" value="${requestScope.boardOne.boardEnrollDate }"></fmt:formatDate>
 									<br>조회수 : ${requestScope.boardOne.boardCount } 
 									&nbsp;&nbsp;추천수 : ${requestScope.boardOne.boardLike }
 								</div>
@@ -221,7 +223,7 @@
 				<div class="reply">
 					<div class="row">
 					<!-- 버튼 숨김(등록시 수정안보이게/ 수정시 등록 안보이게 정렬 -->
-	                   <h3 class="subtitle">댓글<h3></h3><hr><br>
+	                   <h3 class="subtitle">댓글</h3><hr><br>
 						<form action="/boardReply/write" method="post">
 		                        <div class="replyEnroll">
 		                           	<input type="text" name="replyContents" id="comment" placeholder="댓글을 입력해주세요." maxlength="500" size="100">
@@ -234,14 +236,14 @@
 						<input type="hidden" name="boardReplyNo" id="replyNo" value="${reply.boardReplyNo }">
 						<div class="col-md-1">
 	                    	<div class="replyContents">
-	                    		작성자  ${reply.boardReplyUserId }
+	                    		${reply.boardReplyUserId }
 	                    	</div>
 	                    </div>
 	    				<div class="col-md-11">            
 	                  	  <div class="replyDate">
-	                   		${reply.boardReplyDate }
+	                  		  <fmt:formatDate pattern = "yyyy-MM-dd HH:mm" value="${reply.boardReplyDate }"></fmt:formatDate>
 	                      </div>
-	                    </div>
+	                    </div><br>
 	                   	<div class="col-md-9">
 		                    <div class="replyContent">
 		                    	${reply.boardReplyContents }
@@ -338,8 +340,9 @@
 	function onReportedBoardClick(){
 		var reportedChk = window.confirm("해당 게시물을 신고하겠습니까?");
 		var boardNo = "${requestScope.boardOne.boardNo}";
+		var boardTitle = "${requestScope.boardOne.boardTitle}";
 		if(reportedChk) {
-				location.href ="/board/reported?boardNo="+boardNo; //관리자 신고리스트servlet들어가기
+				location.href ="/board/reported?boardNo="+boardNo+"&boardTitle="+boardTitle; //관리자 신고리스트servlet들어가기
 				window.alert("게시물이 신고되었습니다");
 		}else{
 			return
@@ -371,21 +374,12 @@
 		var replyNo = "${reply.boardReplyNo }";
 		if(reportedChk) {
 				window.alert("댓글이 신고되었습니다");
-			 	location.href="/boardReply/reported?boardNo="+boardNo2+"&boardReplyNo="+replyNo2; //신고리스트servlet에 들어가기
+			 	location.href="/boardReply/reported?boardNo="+boardNo2+"&boardReplyNo="+replyNo2; 
+			 	//신고리스트servlet에 들어가기
 		}else{
 			return
 		}
 	}
-	/* function onRemoveReplyClick(){
-		var removeReplyChk= window.confirm("댓글을 삭제하겠습니까?");
-		var boardNo = "${reply.boardNo }";
-		var replyNo = "${reply.boardReplyNo }";	
-		if(removeReplyChk){
-			window.alert("댓글이 삭제되었습니다");
-			location.href ="/boardReply/delete?boardNo="+boardNo+"&boardReplyNo="+replyNo;
-		}else{
-			return
-		} */
 	
 </script>
 </body>

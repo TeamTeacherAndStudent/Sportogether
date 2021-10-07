@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    <%-- +페이징 처리/ tr하나 클릭시 후원사이트로 이동  --%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+<title>관리자 신고글 관리</title>
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
@@ -18,96 +20,32 @@
 
   <!-- Template Main CSS File -->
   <link href="../assets/css/style.css" rel="stylesheet">
-
-    <!-- Vendor JS Files -->
-  <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="../assets/vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="../assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-  <script src="../assets/vendor/php-email-form/validate.js"></script>
-  <script src="../assets/vendor/swiper/swiper-bundle.min.js"></script>
-  
-  <!-- Template Main JS File -->
-  <script src="../assets/js/main.js"></script>
-  <script src = "../assets/js/waypoints.min.js"></script>
-	<!-- jQuery  CDN -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-	
-  
-<style>
-	#main {
-		 width:100%;
-		 height : 800px;
-	}
-	 #search{
-       margin-left: 30px;
-    }
-	/*제목*/
+  <style>
+  		/*제목*/
 	h1{
 	    vertical-align:middle;
 	    line-height:30px;
    		color: rgb(140, 158, 91);
 	    text-align: center;
 	}
-/*탭관련 css*/
-	.tab-content.currnet{
-		display: block;
-	}
-	.container{
-		margin: 0 auto;
-	}
-	
-	ul, li{
-		list-style: none;
-		text-align: center;
-		padding : 0px;
-		margin : 0px;
-	}
-	ul.tabs{
-	  margin: 0px;
-	  padding: 0px;
-	  text-align: center;
-	  list-style: none;
-	  font-weight:bold;
-	  font-size: 18px;
-	}
-	ul.tabs li{
-	  background: none;
-	  color: #222;
-	  display: inline-block;
-	  padding: 10px 15px;
-	  cursor: pointer;
-	}
-	
-	ul.tabs li.current{
-	  background-color: #ededed;
-	  color: #222;
-	}
-	
-	.tab-content{
-	  display: none;
-	  background-color: #ededed;
-	  padding: 20px;
-	}
-	
-	.tab-content.current{
-	  display: inherit;
-	}
-	
-/* 테이블(게시판 형태) CSS*/
-	.ulTable {
+		.ulTable {
 		margin-top:10px;
 		text-align: center;
+		list-style: none;
 	}
 	
 	.ulTable > li:first-child > ul > li {
+		list-style: none;
 		background-color:#c9c9c9;
 		font-weight:bold;
-		font-size: 15px;
 		text-align:center;
-		width: 40px;
+		height: 40px;
+		line-height: 40px;
+		font-size : 15px;
 	}
 	
 	.ulTable > li > ul {
+		list-style: none;
 		clear:both;
 		padding:0px auto;
 		position:relative;
@@ -119,12 +57,14 @@
 		border-bottom:1px solid #ededed;
 		vertical-align:baseline;
 	}
-	
-	.ulTable > li > ul > li:first-child                {width:10%;} /*No 열 크기*/
-	.ulTable > li > ul > li:first-child +li            {width:40%;} /*제목 열 크기*/
-	.ulTable > li > ul > li:first-child +li+li         {width:20%;} /*작성자 열 크기*/
-	.ulTable > li > ul > li:first-child +li+li+li      {width:20%;} /*날짜 열 크기*/
-	.ulTable > li > ul > li:first-child +li+li+li+li   {width:10%;} /*신고수 열 크기*/
+	.ulTable > li > ul > li:first-child             	      {width:10%;} /*후원No 열 크기*/
+	.ulTable > li > ul > li:first-child +li            		  {width:10%;} /*캠페인No 열 크기*/
+	.ulTable > li > ul > li:first-child +li+li        		  {width:10%;} /*종목 열 크기*/
+	.ulTable > li > ul > li:first-child +li+li+li     		  {width:10%;} /*후원자 열 크기*/
+	.ulTable > li > ul > li:first-child +li+li+li+li   		  {width:10%;} /*선수이름 열 크기*/
+	.ulTable > li > ul > li:first-child +li+li+li+li+li		  {width:20%;} /*후원금액 열 크기*/
+	.ulTable > li > ul > li:first-child +li+li+li+li+li+li    {width:10%;} /*걸제수단 열 크기*/
+	.ulTable > li > ul > li:first-child +li+li+li+li+li+li+li {width:15%;} /*후원일 열 크기*/
 	
 	#divPaging {
 		clear:both;
@@ -139,65 +79,54 @@
 		margin:0 auto;
 		text-align:center;
 	}
-</style>
+	.link {
+		text-align: center;
+	}
+   #search{
+  	 margin-left: 30px;
+	}
+  </style>
 </head>
-<body>
-	<script>
-		
-	$(document).ready(function(){
-	    $('ul.tabs li').click(function(){
-	        var tab_id = $(this).attr('data-tab');
-	 
-	        $('ul.tabs li').removeClass('current');
-	        $('.tab-content').removeClass('current');
-	 
-	        $(this).addClass('current');
-	        $("#"+tab_id).addClass('current');
-	    })
-	});
 
-	</script>
-  <!-- ======= Header ======= -->
-  <header id="header" class="fixed-top">
-    <div class="container d-flex align-items-center justify-content-between">
-      <h1 class="logo"><a href="/"> Sportogether </a></h1>
-      <nav id="navbar" class="navbar">
+<body>
+ <header id="header" class="fixed-top">
+     <div class="container d-flex align-items-center justify-content-between">
+      <!-- 여기에 로고 사진 추가 -->
+        <h1 class="logo"><a href="/"> Sportogether </a></h1>
+       <nav id="navbar" class="navbar">
         <ul>
           <li><a class="active" href="/sports/list">종목</a></li>
           <li><a href="/board/list">자유게시판</a></li>
           <li><a href="/support/list">후원</a></li>
-          <li><input type="search" placeholder="검색" size="10" id="search"></li>
-       	  <li>
-       	  	<c:if test="${sessionScope.userId eq null }">
-       	 		 <a href="/member/login">Login</a>
-       	 	</c:if>
-       	 	<c:if test = "${sessionScope.userId ne null }">
-       	 		<a href="/member/logout">Logout</a>
-       	 	</c:if>
-       	  </li>
+         <!--  <li><input type="search" placeholder="검색" size="10" id="search"></li> -->
+             <c:if test="${sessionScope.userId eq null }">
+                 <a href="/member/login">Login</a>
+             </c:if>
+             <c:if test = "${sessionScope.userId ne null }">
+                <a href="/member/logout">Logout</a>
+             </c:if>
           <li class="dropdown"><a href="#"><span>SIDE MENU</span> <i class="bi bi-chevron-down"></i></a>
           <ul>
              <li><a href="/notice/list">공지사항</a></li>     
              <li><a href="/mypage/main">마이페이지</a></li>
              <li><a href="/qna/list">1:1문의</a></li>
-             <c:if test="${sessionScope.userCode eq 'G'}"><li><a href="/admin/main">관리자 페이지</a></li></c:if>
           </ul>
           </li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
-		</div>
-	</header>
-	<!-- End Header -->
-  <br><br>
-  <!-- ======== 본문 ============= -->
-  <main id="main">
+
+    </div>
+  </header><!-- End Header -->
+
+<br><br><br><br>
+    <main id="main">
   		<section id="reposted">
       		<div class="container">
 	      		<h1>신고글 관리</h1><br><br>
 	      		<ul class="tabs">
-		      		<a href="/admin/reportedList/board"><li class="tab-link current" data-tab="tab-1">신고 게시물</li></a>
-		      		<a href="/admin/reportedList/reply"><li class="tab-link" data-tab="tab-2">신고 댓글 </li></a>
+		      		<li class="tab-link current" data-tab="tab-1">신고 게시물</li>
+		      		<li class="tab-link" data-tab="tab-2">신고 댓글 </li>
 	   			</ul>
  					<!-- 회원 클릭시 회원 detail페이지/게시물 제목 클릭시 게시물 상세 조회 -->
  				<div id="tab-1" class="tab-content current">
@@ -212,23 +141,18 @@
 	   						</ul>
 	   					</li>
 	   					<li>
-	   						<ul>
-	   							<li>1</li>
-	   							<li>불법주정차</li>
-	   							<li>car</li>
-	   							<li>2021-09-27</li>
-	   							<li>5</li>
-	   						</ul>
-	   					</li>
+	   					 <c:forEach items="${requestScope.rList}" var="board">
+	                            <ul>
+	                            	 <li>${reportedBoard.boardNo}</li>
+									 <li><a href="/board/detail?boardNo=${reportedBoard.boardNo}">${reportedBoard.boardTitle}</a></li>
+									 <li>${reportedBoard.userName}</li>
+									 <li>${reportedBoard.userId}</li>
+	                            </ul>
+						</c:forEach>
+						</li>
 	   				</ul><br><br>
 	   				<div id="divPaging">
-						<div>◀</div>
-						<div><b>1</b></div>
-						<div>2</div>
-						<div>3</div>
-						<div>4</div>
-						<div>5</div>
-						<div>▶</div>
+						${ requestScope.pageNavi}
 					</div>
        			</div>
 	       		<div id="tab-2" class="tab-content">
@@ -252,10 +176,17 @@
 	   						</ul>
 	   					</li>
 	   				</ul><br><br>
-	   				<div id="divPaging">
+   					<div id="divPaging">
+						<div>◀</div>
+						<div><b>1</b></div>
+						<div>2</div>
+						<div>3</div>
+						<div>4</div>
+						<div>5</div>
+						<div>▶</div>
 					</div>
 				</div>
-	       		<div id="tab-3" class="tab-content">
+	       		<!-- <div id="tab-3" class="tab-content">
 	        		<ul class ="ulTable">
 	   					<li>
 		   					<ul>
@@ -285,12 +216,12 @@
 						<div>5</div>
 						<div>▶</div>
 					</div>
-	  			</div>
+	  			</div> -->
    		</div>
      </section>
   </main>
-  <br><br>
-  <!-- ======= Footer ======= -->
+                           
+<!-- ======= Footer ======= -->
   <footer id="footer">
     <div class="container">
       <h3>SPORTOGETHER</h3>
@@ -320,6 +251,7 @@
     </div>
   </footer>
 <!-- End Footer -->
-
+<!-- Vendor JS Files -->
+	<script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

@@ -1,18 +1,18 @@
 package board.model.vo;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 public class BoardReply {
 	private int boardNo;
 	private int boardReplyNo;
 	private String boardReplyContents;
 	private String boardReplyUserId;
-	private Date boardReplyDate;
+	private Timestamp boardReplyDate;
 	
 	public BoardReply() {};
 	
 	public BoardReply(int boardNo, int boardReplyNo, String boardReplyContents, String boardReplyUserId,
-			Date boardReplyDate) {
+			Timestamp boardReplyDate) {
 		super();
 		this.boardNo = boardNo;
 		this.boardReplyNo = boardReplyNo;
@@ -44,10 +44,10 @@ public class BoardReply {
 	public void setBoardReplyUserId(String boardReplyUserId) {
 		this.boardReplyUserId = boardReplyUserId;
 	}
-	public Date getBoardReplyDate() {
+	public Timestamp getBoardReplyDate() {
 		return boardReplyDate;
 	}
-	public void setBoardReplyDate(Date boardReplyDate) {
+	public void setBoardReplyDate(Timestamp boardReplyDate) {
 		this.boardReplyDate = boardReplyDate;
 	}
 	@Override

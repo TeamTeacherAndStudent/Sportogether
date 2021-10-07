@@ -97,6 +97,7 @@
           <li><a class="active" href="/sports/list">종목</a></li>
           <li><a href="/board/list">자유게시판</a></li>
           <li><a href="/support/list">후원</a></li>
+  <!--         <li><input type="search" placeholder="검색" size="10" id="search"></li> -->
        	  <li>
        	  	<c:if test="${sessionScope.userId eq null }">
        	 		 <a href="/member/login">Login</a>
@@ -144,34 +145,10 @@
 							<li>1</li>
 							<li>배구</li>
 							<li>admin</li>
-							<li>최성국</li>
+							<li>김연경</li>
 							<li>10,000</li>
 							<li>카카오페이</li>
 							<li>2021.09.26</li>
-						</ul>
-					</li>
-					<li>
-						<ul>
-							<li>2</li>
-							<li>2</li>
-							<li>요트</li>
-							<li>admin</li>
-							<li>김은경</li>
-							<li>10,000</li>
-							<li>카카오페이</li>
-							<li>2021.10.06</li>
-						</ul>
-					</li>
-					<li>
-						<ul>
-							<li>3</li>
-							<li>3</li>
-							<li>양궁</li>
-							<li>admin</li>
-							<li>신원</li>
-							<li>10,000</li>
-							<li>카카오페이</li>
-							<li>2021.10.07</li>
 						</ul>
 					</li>
 				</ul>

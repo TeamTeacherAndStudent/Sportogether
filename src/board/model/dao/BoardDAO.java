@@ -60,7 +60,7 @@ public class BoardDAO {
 				boardOne.setBoardContents(rset.getString("BOARD_CONTENTS"));
 				boardOne.setSportsName(rset.getString("SPORTS_NAME"));
 				boardOne.setUserId(rset.getString("USER_ID"));
-				boardOne.setBoardEnrollDate(rset.getDate("BOARD_ENROLLDATE"));
+				boardOne.setBoardEnrollDate(rset.getTimestamp("BOARD_ENROLLDATE"));
 				boardOne.setBoardCount(rset.getInt("BOARD_COUNT"));
 				boardOne.setBoardLike(rset.getInt("BOARD_LIKE"));
 				SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
@@ -230,15 +230,15 @@ public class BoardDAO {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 			rList = new ArrayList<BoardReply>();
 			rset = pstmt.executeQuery();
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 			while(rset.next()) {
 				BoardReply reply = new BoardReply();
 				reply.setBoardNo(rset.getInt("BOARD_NO"));
 				reply.setBoardReplyNo(rset.getInt("REPLY_NO"));
 				reply.setBoardReplyContents(rset.getString("REPLY_CONTENTS"));
 				reply.setBoardReplyUserId(rset.getString("USER_ID"));
-				reply.setBoardReplyDate(rset.getDate("REPLY_DATE"));
+				reply.setBoardReplyDate(rset.getTimestamp("REPLY_DATE"));
 				rList.add(reply);
-				SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 			}
 		}catch (SQLException e) {
 			e.printStackTrace();
@@ -330,6 +330,7 @@ public class BoardDAO {
 			pstmt.setInt(2, end);
 			rset = pstmt.executeQuery();
 			bList = new ArrayList<Board>();
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		while(rset.next()) {
 			Board board = new Board();
 			board.setBoardNo(rset.getInt("BOARD_NO"));
@@ -337,11 +338,10 @@ public class BoardDAO {
 			board.setBoardTitle(rset.getString("BOARD_TITLE"));
 			board.setBoardContents(rset.getString("BOARD_CONTENTS"));
 			board.setUserId(rset.getString("USER_ID"));
-			board.setBoardEnrollDate(rset.getDate("BOARD_ENROLLDATE"));
+			board.setBoardEnrollDate(rset.getTimestamp("BOARD_ENROLLDATE"));
 			board.setBoardCount(rset.getInt("BOARD_COUNT"));
 			board.setBoardLike(rset.getInt("BOARD_LIKE"));
 			bList.add(board);
-			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -379,7 +379,7 @@ public class BoardDAO {
 				board.setBoardContents(rset.getString("BOARD_CONTENTS"));
 				board.setSportsName(rset.getString("SPORTS_NAME"));
 				board.setUserId(rset.getString("USER_ID"));
-				board.setBoardEnrollDate(rset.getDate("BOARD_ENROLLDATE"));
+				board.setBoardEnrollDate(rset.getTimestamp("BOARD_ENROLLDATE"));
 				bList.add(board);
 				//List에 답아 전체적으로 결과가 나오게 해준다
 			}
@@ -514,7 +514,7 @@ public class BoardDAO {
 				board.setBoardNo(rset.getInt("BOARD_NO"));
 				board.setBoardTitle(rset.getString("BOARD_TITLE"));
 				board.setBoardContents(rset.getString("BOARD_CONTENTS"));
-				board.setBoardEnrollDate(rset.getDate("BOARD_ENROLLDATE"));
+				board.setBoardEnrollDate(rset.getTimestamp("BOARD_ENROLLDATE"));
 				board.setSportsName(rset.getString("SPORTS_NAME"));
 				board.setUserId(rset.getString("USER_ID"));
 				bList.add(board);
@@ -552,7 +552,7 @@ public class BoardDAO {
 				board.setBoardContents(rset.getString("BOARD_CONTENTS"));
 				board.setSportsName(rset.getString("SPORTS_NAME"));
 				board.setUserId(rset.getString("USER_ID"));
-				board.setBoardEnrollDate(rset.getDate("BOARD_ENROLLDATE"));
+				board.setBoardEnrollDate(rset.getTimestamp("BOARD_ENROLLDATE"));
 				bList.add(board);
 			}
 		} catch (SQLException e) {
@@ -568,18 +568,19 @@ public class BoardDAO {
 
 		PreparedStatement pstmt = null;
 		int result = 0;
-		String query = "INSERT INTO REPORTED_BOARD VALUES(?, ?, SEQ_REPORTED_BOARD_NO.NEXTVAL)";
-	try {
-		pstmt = conn.prepareStatement(query);
-		pstmt.setInt(1,rboard.getBoardNo());
-		pstmt.setString(2, rboard.getUserId());
-		result = pstmt.executeUpdate();
-	}catch(SQLException e) {
-			e.printStackTrace();
-	}finally {
-		JDBCTemplate.close(pstmt);
-	}
-	return result;
+		String query = "INSERT INTO REPORTED_BOARD VALUES(?, ?, SEQ_REPORTED_BOARD_NO.NEXTVAL, ?)";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1,rboard.getBoardNo());
+			pstmt.setString(2, rboard.getUserId());
+			pstmt.setString(3, rboard.getBoardTitle());
+			result = pstmt.executeUpdate();
+		}catch(SQLException e) {
+				e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
 	}
 
 
@@ -680,7 +681,7 @@ public class BoardDAO {
 				board.setBoardContents(rset.getString("BOARD_CONTENTS"));
 				board.setSportsName(rset.getString("SPORTS_NAME"));
 				board.setUserId(rset.getString("USER_ID"));
-				board.setBoardEnrollDate(rset.getDate("BOARD_ENROLLDATE"));
+				board.setBoardEnrollDate(rset.getTimestamp("BOARD_ENROLLDATE"));
 				bList.add(board);
 			}
 		}catch (SQLException e) {

@@ -1,6 +1,6 @@
 package board.model.vo;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
 public class Board {
@@ -9,14 +9,14 @@ public class Board {
 	private String boardContents;
 	private String sportsName;
 	private String userId;
-	private Date boardEnrollDate;
+	private Timestamp boardEnrollDate;
 	private int boardCount;
 	private int boardLike;
 	private List<FileData> files; //파일
 	private List<BoardReply> replies; //댓글:toString  x
 	
 	public Board() {}	
-	public Board(int boardNo, String boardTitle, String boardContents, String sportsName, String userId, Date boardEnrollDate, int boardCount,
+	public Board(int boardNo, String boardTitle, String boardContents, String sportsName, String userId, Timestamp boardEnrollDate, int boardCount,
 			int boardLike) {
 		super();
 		this.boardNo = boardNo;
@@ -71,11 +71,11 @@ public class Board {
 		this.userId = userId;
 	}
 
-	public Date getBoardEnrollDate() {
+	public Timestamp getBoardEnrollDate() {
 		return boardEnrollDate;
 	}
 
-	public void setBoardEnrollDate(Date boardEnrollDate) {
+	public void setBoardEnrollDate(Timestamp boardEnrollDate) {
 		this.boardEnrollDate = boardEnrollDate;
 	}
 

@@ -30,32 +30,27 @@ public class ReportedBoardServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//reported insertServlet
-		request.getRequestDispatcher("/WEB-INF/Admin/reposted_manage.jsp").forward(request, response);
-				HttpSession session = request.getSession();
-				int boardNo  = Integer.parseInt(request.getParameter("boardNo"));
-				String userId = (String)session.getAttribute("userId");
-				
-				
-				ReportedBoard rboard = new ReportedBoard();
-				rboard.setBoardNo(boardNo);
-				rboard.setUserId(userId);
-				
-				int result = new BoardService().insertReportedBoard(rboard);
-				if(result >0) {
-					response.sendRedirect("/board/detail?boardNo="+boardNo);
-					
-				}else {
-					request.getRequestDispatcher("/Board/serviceFailed.html").forward(request, response);
-				}
+		HttpSession session = request.getSession();
+		int boardNo  = Integer.parseInt(request.getParameter("boardNo"));
+		String userId = (String)session.getAttribute("userId");//로그인 한 사람의 userId
+		String boardTitle = request.getParameter("boardTitle");
+		
+		ReportedBoard rboard = new ReportedBoard();
+		rboard.setBoardNo(boardNo);
+		rboard.setUserId(userId);
+		rboard.setBoardTitle(boardTitle);
+		
+		int result = new BoardService().insertReportedBoard(rboard);
+		if(result >0) {
+			response.sendRedirect("/board/list");
+		}else {
+			request.getRequestDispatcher("/Board/serviceFailed.html").forward(request, response);
+		}
 	}			
 				
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-	
 	}
-
 }

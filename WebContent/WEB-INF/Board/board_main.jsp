@@ -8,6 +8,9 @@
 		String pageNavi = (String)request.getAttribute("pageNavi");
 		 
 %>
+<!-- 포맷태그 식별 태그라이브러리  -->
+<%@taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -216,17 +219,17 @@
                                 <li>조회수</li>
                                 <li>추천수</li>
                             </ul>
-                            <% for(Board bOne : bList) { %>
+                            <c:forEach items="${requestScope.bList}" var="board">
                             <ul>
-                            	 <li><%=bOne.getBoardNo() %></li>
-                            	 <li class="sports"><%=bOne.getSportsName() %></li>
-								 <li><a href="/board/detail?boardNo=<%=bOne.getBoardNo() %>"><%=bOne.getBoardTitle() %></a></li>
-								 <li><%=bOne.getBoardEnrollDate() %></li>
-								 <li><%=bOne.getUserId() %></li>
-								 <li><%=bOne.getBoardCount() %></li>
-								 <li><%=bOne.getBoardLike() %></li>					
+                            	 <li>${board.boardNo}</li>
+                            	 <li class="sports">${board.sportsName}</li>
+								 <li><a href="/board/detail?boardNo=${board.boardNo}">${board.boardTitle}</a></li>
+								 <li><fmt:formatDate pattern = "yyyy-MM-dd HH:mm" value="${board.boardEnrollDate}"></fmt:formatDate></li>
+								 <li>${board.userId}</li>
+								 <li>${board.boardCount}</li>
+								 <li>${board.boardLike}</li>					
                             </ul>
-							<% } %>  
+							</c:forEach>
                         </li>
                     </ul>
                 </li>

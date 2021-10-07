@@ -178,7 +178,7 @@ public class MemberDAO {
 				board.setBoardTitle(rset.getString("BOARD_TITLE"));
 				board.setBoardContents(rset.getString("BOARD_CONTENTS"));
 				board.setUserId(rset.getString("USER_ID"));
-				board.setBoardEnrollDate(rset.getDate("BOARD_ENROLLDATE"));
+				board.setBoardEnrollDate(rset.getTimestamp("BOARD_ENROLLDATE"));
 				board.setBoardCount(rset.getInt("BOARD_COUNT"));
 				board.setBoardLike(rset.getInt("BOARD_COUNT"));
 				bList.add(board);

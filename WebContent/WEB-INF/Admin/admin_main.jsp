@@ -112,7 +112,7 @@
           <li><a class="active" href="/sports/list">종목</a></li>
           <li><a href="/board/list">자유게시판</a></li>
           <li><a href="/support/list">후원</a></li>
-          <li><input type="search" placeholder="검색" size="10" id="search"></li>
+      <!--     <li><input type="search" placeholder="검색" size="10" id="search"></li> -->
        	  <li>
        	  	<c:if test="${sessionScope.userId eq null }">
        	 		 <a href="/member/login">Login</a>
@@ -185,15 +185,6 @@
 					</div>
 				</a>
 			</div>
-			<!-- <div class="col-lg-4 col-md-4 col-xs-4 col-sm-4">
-				<a href="sports_manage.jsp">
-					<div  id="sportscard"  class="card">
-						<div class="card-header">
-							<h3>종목 관리</h3>
-						</div>
-					</div>
-				</a>
-			</div> -->
 		</div>
 	</div>
   </section>
