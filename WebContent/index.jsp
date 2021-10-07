@@ -188,18 +188,18 @@
       <div class="carousel-inner" role="listbox">
 
         <!-- Slide 1 -->
-        <div class="carousel-item active" style="background-image: url(banner/1.png)">
+        <div class="carousel-item active" style="background-image: url(banner/banner1.png)">
         </div>
 
         <!-- Slide 2 -->
-        <div class="carousel-item" style="background-image: url(banner/2.png)">
+        <div class="carousel-item" style="background-image: url(banner/banner2.png)">
         </div>
 
         <!-- Slide 3 -->
-        <div class="carousel-item" style="background-image: url(banner/3.png)">
+        <div class="carousel-item" style="background-image: url(banner/banner3.png)">
         </div>
         
-		 <div class="carousel-item" style="background-image: url(banner/4.png)">
+		 <div class="carousel-item" style="background-image: url(banner/banner4.png)">
 		 </div>
       </div>
 
@@ -252,8 +252,8 @@
                               <div class="sigle_counter_item">
                                    <img src="img/tree.png" alt="">
                                   <div class="counter_text">
-                                   		<span class="people-counter"><%=session.getAttribute("todayCount") %></span>   
-                                	  	<p>일일 방문자 수<p>
+                                   		<span class="people-counter" style='color: #347aaf'><b><%=session.getAttribute("todayCount") %></b></span>   
+                                	  	<p><b>일일 방문자 수</b><p>
                                   </div>
                               </div>
                           </div>
@@ -263,8 +263,8 @@
                               <div class="sigle_counter_item">
                                   <img src="img/hand.png" alt="">
                                   <div class="counter_text">
-                                      <span class="people-counter"><%=session.getAttribute("totalCount") %></span>
-                                      <p>전체 방문자 수</p>
+                                      <span class="people-counter" style='color: #347aaf'><b><%=session.getAttribute("totalCount") %></b></span>
+                                      <p><b>전체 방문자 수</b></p>
                                   </div>
                               </div>
                           </div>
@@ -274,8 +274,8 @@
                               <div class="sigle_counter_item">
                                   <img src="img/hand.png" alt="">
                                   <div class="counter_text">
-                                      <span class="people-counter">1,458,000</span>
-                                      <p>누적 후원 금액</p>
+                                      <span class="people-counter" style='color: #347aaf'><b>1,458,000</b></span>
+                                      <p><b>누적 후원 금액</b></p>
                                   </div>
                               </div>
                           </div>
@@ -313,7 +313,7 @@
 	<section id="campaign-recent-photos" class="recent-photos">
 	<div class="container">
 		<div class="section-title">
-			<h2>최신 캠페인 목록</h2>
+			<h2 style='color: #1d284b'>최신 캠페인 목록</h2>
 		</div>
 		<div class="recent-photos-slider swiper">
 			<div class="swiper-wrapper align-items-center">
@@ -332,7 +332,7 @@
       <div class="container">
 
         <div class="section-title">
-          <h2>종목소개</h2>
+          <h2 style='color: #1d284b'>종목소개</h2>
           <p>선수들이 열심히 이뤄낸 성장을 응원하고 같이 즐기기 위해<br>여러 종목들에 대한 경기규칙과 방식을 소개합니다</p>
         </div>
 
