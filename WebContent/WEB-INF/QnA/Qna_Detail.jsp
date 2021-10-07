@@ -186,7 +186,7 @@ button:hover {
           <li><a class="active" href="/sports/list">종목</a></li>
           <li><a href="/board/list">자유게시판</a></li>
           <li><a href="/support/list">후원</a></li>
-          <li><input type="search" placeholder="검색" size="10" id="search"></li>
+      <!--     <li><input type="search" placeholder="검색" size="10" id="search"></li> -->
           <li>
           	<c:if test="${sessionScope.userId eq null }">
 				<a href="/member/login">Login</a>
@@ -255,7 +255,7 @@ button:hover {
 					<tr>
 						<td>${reply.userId}</td>
 						<td>${reply.qnaReplyContents}</td>
-						<td><pre><fmt:formatDate pattern = "yyyy-MM-dd hh:mm" value="${reply.qnaReplyDate}"/></pre> </td>
+						<td><pre><fmt:formatDate pattern = "yyyy-MM-dd HH:mm" value="${reply.qnaReplyDate}"/></pre> </td>
 						<c:if test="${sessionScope.userCode eq 'G'}"><td><a href="/qnaReply/remove?qnaNo=${reply.qnaNo}&qnaReplyNo=${reply.qnaReplyNo}" class="check-btn" id="deleteReply-Btn"><button>삭제</button></a></td></c:if>
 					</tr>
 					

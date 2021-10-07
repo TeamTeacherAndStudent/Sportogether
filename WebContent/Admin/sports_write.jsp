@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-  <!-- Google Fonts -->
+<title>관리자 종목 관리</title>
+<!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
   <!-- Vendor CSS Files -->
@@ -18,89 +18,65 @@
 
   <!-- Template Main CSS File -->
   <link href="../assets/css/style.css" rel="stylesheet">
+  <!-- jQuery  CDN -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
-    <!-- Vendor JS Files -->
-  <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="../assets/vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="../assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-  <script src="../assets/vendor/php-email-form/validate.js"></script>
-  <script src="../assets/vendor/swiper/swiper-bundle.min.js"></script>
-  
-  <!-- Template Main JS File -->
-  <script src="../assets/js/main.js"></script>
-  <script src = "../assets/js/waypoints.min.js"></script>
-  <!-- CKEditor5-->
-  <script src="https://cdn.ckeditor.com/ckeditor5/29.2.0/classic/ckeditor.js"></script>
-	<!-- 추가 -->
-	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<title>자유게시판 수정</title>
-  
   <style>
-     .ck.ck-editor{
-     	max-width: 100%;
-     	text-align: center;
-     }
-     .ck.ck-editor-editable{
-     }
-	  #main{
-	    width: 100%;
-	  }
-	  #mainform{
-	    border: 1px solid black;
-	  }
-	  #maindiv{
-	    width: 70%;
-	    height: 70%;
-	  }
-	   #search{
+    #search{
 		   margin-left: 30px;
 		}
-	  .text{
-		text-align:center;
-		}
-		select {
-			text-align:center;
-			width:150px;
-			height:30px;
-			margin-right: 10px;
-		}
-	  #form{
-	    width: 100%;
-	  	display: inline-block;
-        text-align: center;
+  /*제목*/
+	h1{
+	    vertical-align:middle;
+	    line-height:30px;
+   		color: rgb(140, 158, 91);
+	    text-align: center;
+	}
+	select{
+		width: 150px;
+		height: 30px;
+		text-align : center;
+		margin-right: 5px;
+	}
+	.Name-input {
+		margin-right: 5px;
+	}
+	#etc-field{
+		display : none;
+	}
+    form{
     	border: 1px solid #f5f5f5;
     	padding : 30px;
-	  }
-	  .box{
-	    color: rgb(140, 158, 91);
-	    text-align:center;
-	  }
-	  .file-upload{
-	  	text-align:center;
-	  }
-	    /*파일 업로드 버튼 css*/
-	  	.input-file-button{
-		    font-family: "Raleway", sans-serif;
-		    font-weight: 600;
-		    font-size: 14px;
-		    border-style : none;
-		    margin-top: 6px;
-		    margin-left : 10px;
-	  		padding: 12px 32px;
-		    border-radius: 5px;
-		    border: 2px solid #1d284b;
-		    transition: 0.3s;
-		    line-height: 1;
-	  		background-color: #1d284b;
-	  		color : white;
-	  		cursor: pointer;
-	  		width: 150px;
-		    letter-spacing: 1px;
-	  	}
-	  	#input-file{
-	  		display: none;
-	  	}
-	  input.upload-name {
+    }
+	button:hover{
+	  background: #006fbe;
+	  color: #fff;
+	  text-decoration: none;
+	}
+  /*파일 업로드 버튼 css*/
+  	.input-file-button{
+	    font-family: "Raleway", sans-serif;
+	    font-weight: 600;
+	    font-size: 14px;
+	    border-style : none;
+	    margin-top: 6px;
+	    margin-left : 10px;
+  		padding: 12px 32px;
+	    border-radius: 5px;
+	    border: 2px solid #1d284b;
+	    transition: 0.3s;
+	    line-height: 1;
+  		background-color: #1d284b;
+  		color : white;
+  		cursor: pointer;
+  		width: 150px;
+	    letter-spacing: 1px;
+  	}
+  	#input-file{
+  		display: none;
+  	}
+  	/* 파일명 upload */
+	input.upload-name {
 	    display: inline-block;
 	    padding: 12px 32px;  /* label의 패딩값과 일치 */
 	    font-size: inherit;
@@ -109,12 +85,20 @@
 	    vertical-align: middle;
 	    background-color: #f5f5f5;
 	    border: 1px solid #ebebeb;
-	   	width : 500px;
+	   	width : 660px;
 	   	height: 38px;
-	  }
-	  .Btn{
-	    position:relative;
-	    left: 800px;
+	}
+	.text{
+		text-align:center;
+	}
+  	/*등록버튼 라인 버튼들*/
+  	#back-btn{
+	  	margin-top : 10px;
+		margin-left: 3px;
+		margin-right: 3px;
+		text-align : right;
+  	}
+  	.Btn{
   		font-family: "Raleway", sans-serif;
 	    font-weight: 600;
 	    font-size: 14px;
@@ -131,16 +115,10 @@
   		width: 150px;
 	    letter-spacing: 1px;
   		color : white;
-  	  }
-  	  #BtnZip{
-  	  	margin-right: 800px;
-  	  }
+  	}
   </style>
-
 </head>
-
 <body>
-
   <!-- ======= Header ======= -->
   <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center justify-content-between">
@@ -170,34 +148,46 @@
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
-     </div>
-    </header>
-
-<br><br><br><br><br><br><br>
-
-    <main id="main">
-        <div class="container">
-		  <h2 class="box">게시글 수정</h2>
-		  <div id="form">
-			     <form action ="/board/modify" method="post">
-				 		<input type="text" id="sportsName" name="sportsName" value="${board.sportsName }">
-				    	<input type="hidden" name="boardNo" value="${board.boardNo}">
-				    	<input type="text" id="title" name="title" value = "${board.boardTitle }" maxlength="50" pattern=".{4,50}" size="70" required><br><br>
-				    	<textarea rows="30" cols="100" id="editor" name="contents" value="${board.boardContents }"></textarea>
-						<!-- 파일 수정 불가 -->
-						<div class="file-upload">
-							<input type="text" class="upload-name" readonly value="${file.fileName }">
-							<label class="input-file-button" for="input-file">파일 업로드</label>
-							<input type="file" id="input-file" name="file" multiple="multiple">
-						</div>
-						<br><br>
-						<div id="BtnZip">
-					   		<input type="submit" value="수정" class="Btn" onClick="onEnrollClick();">
-					    	<input type="reset" value="취소" class="Btn" onClick="location.href='/board/list'">
-						</div>
-				</form>
 		</div>
-   </main><br><br><br>
+	</header>
+	<!-- End Header -->
+  <br><br>
+  <main id="main">
+	<section id="sportsManage">
+			<div class="container">
+				<h1>종목 등록 </h1><br>
+				<div id="form">
+				<div class="text">
+					<form action ="../Sports/sportsDetail.jsp" method="post" name="sportEnroll" target="_self">
+						<br>
+						<select name="sports">
+							<option value="">종목분류</option>
+							<!-- 종목 소분류 긁어오기 optgroup label-->
+							<option value="">구기</option>
+							<option value="etc">기타</option>
+						</select>
+						<input type="text" id="etc-field" class="Name-input" placeholder="기타입력" size="20" required>
+						<!-- 이름값도 넘겨주기 -->
+						<input type="text" class="Name-input" placeholder=" 종목 이름 입력" size="55" required><br><br>
+						<textarea id="sports_enroll" name="sport_enroll" cols="100" rows="30" placeholder=" 내용을 입력하세요."></textarea><br>
+						<hr>
+						<div class="file-upload">
+							<input type="text" class="upload-name" readonly>
+							<label class="input-file-button" for="input-file">파일 업로드</label>
+							<input type="file" id="input-file"><!-- 파일버튼 숨김 -->
+						</div>
+					</form>
+					</div>
+					<!-- 버튼 숨김(등록시 수정안보이게/ 수정시 등록 안보이게 정렬 -->
+						<div id="back-btn">
+								<button class="Btn">미리보기</button>
+								<input type="submit" value="등록" class="Btn">
+								<input type="reset" value="취소" onclick="location.href='Admin_Main.jsp'" class="Btn">
+						</div>
+				</div>
+			</div>
+	</section>  
+  </main>
   <!-- ======= Footer ======= -->
   <footer id="footer">
     <div class="container">
@@ -226,26 +216,27 @@
         Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
       </div>
     </div>
-</footer>
-<script>
-		ClassicEditor
-		.create( document.querySelector( '#editor' ) )
-		.catch( error => {
-		    console.error( error );
-		});
-		
-//등록 클릭이벤트
-	function onEnrollClick() {
-		var enrollResult = window.confirm("글이 수정되었습니다.");
-	}
-		//파일 경로 무조건 C:\fakepath\
+  </footer>
+<!-- End Footer -->
+<!-- Vendor JS Files -->
+	<script src="../assets/vendor/bootstrap/js/bootstr-ap.bundle.min.js"></script>
+	<script>
+	//파일 경로 무조건 C:\fakepath\
 		$(function(){
 			$('.upload-name').val('파일선택');
 			$('#input-file').change(function(){
 				var filename = $(this).val();
 				$('.upload-name').val(filename);
 			});
-		}); 
-</script>
+		});
+		$("select[name=sports]").change(function(){
+				var selectVal = $(this).val();
+				if(selectVal == 'etc'){
+					$('#etc-field').css({
+						"display" : 'inline-block'
+					});
+				}
+		});
+	</script>
 </body>
 </html>

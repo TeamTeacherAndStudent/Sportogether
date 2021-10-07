@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>회원상세</title>
-
+<title>회원정보 상세조회</title>
+<!-- Google Fonts -->
 <!-- Google Fonts -->
 <link
 	href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
@@ -27,10 +28,9 @@
 <!-- Template Main CSS File -->
 <link href="../assets/css/style.css" rel="stylesheet">
 
+<script src="https://code.jquery.com/jquery-latest.min.js"></script>
+
 <style>
- #search{
-		   margin-left: 30px;
-		}
 #main-title {
 	margin-top: 2%;
 	width: 100%;
@@ -39,7 +39,7 @@
 }
 
 #main-title h1 {
-	color: rgb(140, 158, 91);
+	color: #1d284b;
 	/* margin-left: 15%; */
 	font-weight: bolder;
 	line-height: 50px;
@@ -57,8 +57,8 @@
 }
 
 .mybox {
-	width: 80%;
-	height: 500px;
+	width: 100%;
+	height: 650px;
 	border: 1px solid #165992;
 	border-radius: 10px;
 	background-color: white;
@@ -107,9 +107,9 @@
 
 .button {
 	height: 20%;
-	margin: 2%;
-	text-aligh: right;
-	float: right;
+	margin :3%
+	
+	/* float: right; */
 }
 
 button {
@@ -121,15 +121,23 @@ button {
 	font-size: 14px;
 	letter-spacing: 1px;
 	display: inline-block;
-	padding: 12px 10px;
+	padding: 12px 32px;
 	border-radius: 5px;
 	transition: 0.3s;
 	line-height: 1;
 	-webkit-animation-delay: 0.8s;
 	animation-delay: 0.8s;
 	margin-top: 6px;
+	margin-left: 5px;
 	border: 2px solid #1d284b;
+	text-aligh: right;
+	float:right; 
+
 }
+
+/* .btn-layerClose{
+	padding : 0.5%;
+} */
 
 button:hover {
 	background: #006fbe;
@@ -137,83 +145,147 @@ button:hover {
 	text-decoration: none;
 }
 
-#withdraw{
-	background : #B2B2B2;
+#withdraw {
+	background: #B2B2B2;
 	border: 2px solid #B2B2B2;
 }
-#withdraw:hover{
-	background : #DB4455;
+
+#withdraw:hover {
+	background: #DB4455;
+}
+
+#search {
+	margin-left: 30px;
+}
+
+.pop-layer .pop-container {
+	padding: 20px 25px;
+}
+
+.pop-laeyr p.ctxt {
+	color: #666;
+	line-height: 25px;
+}
+
+.pop-layer .btn-r {
+	width: 100%;
+	margin: 10px 0 20px;
+	padding-top: 10px;
+	border-top: 1px solid #ddd;
+	text-align: right;
+}
+
+.pop-layer {
+	display: none;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 410px;
+	height: auto;
+	background-color: #fff;
+	border: 5px solid #3571B5;
+	z-index: 10;
+}
+
+.admin-btn{
+
 }
 </style>
 </head>
 <body>
-<script>
-function onStatusClick(){
-	var statuscheck = window.confirm("선수 등록을 하시겠습니까?");
-	if(statuscheck) {
-		console.log("선수인증");
-	}else{
-		console.log("선수인증 no");
-	}
-}
-</script>
+
 	<!-- ======= Header ======= -->
-	 <header id="header" class="fixed-top">
-	    <div class="container d-flex align-items-center justify-content-between">
+	<header id="header" class="fixed-top">
+		<div
+			class="container d-flex align-items-center justify-content-between">
 		<!-- 여기에 로고 사진 추가 -->
-     	<h1 class="logo"><a href="../index.html"> Sportogether </a></h1>
+     	<h1 class="logo"><a href="/index.jsp"> Sportogether </a></h1>
        <nav id="navbar" class="navbar">
         <ul>
-          <li><a class="active" href="../Sports/sportsList.jsp">종목</a></li>
-          <li><a href="../Board/board_main.jsp">자유게시판</a></li>
-          <li><a href="../Support/support_main.jsp">후원</a></li>
-          <!-- <li><input type="search" placeholder="검색" size="10" id="search"></li> -->
-            <li><a href="../login_registration/login.jsp">Login</a></li>
+          <li><a class="active" href="/sports/list">종목</a></li>
+          <li><a href="/board/list">자유게시판</a></li>
+          <li><a href="/support/list">후원</a></li>
+         <!--  <li><input type="search" placeholder="검색" size="10" id="search"></li> -->
+          <li>
+				<a href="/member/logout">Logout</a>
+			</li>
           <li class="dropdown"><a href="#"><span>SIDE MENU</span> <i class="bi bi-chevron-down"></i></a>
           <ul>
-             <li><a href="../Notice/notice_main.jsp">공지사항</a></li>     
-             <li><a href="../MyPage/Mypage_Main.html">마이페이지</a></li>
-             <li><a href="../QnA/Qna_UserMain.html">1:1문의</a></li>
+             <li><a href="/notice/list">공지사항</a></li>     
+             <li><a href="/mypage/main">마이페이지</a></li>
+             <li><a href="/qna/list">1:1문의</a></li>
+             <li><a href="/admin/main">관리자 페이지</a></li>
           </ul>
           </li>
         </ul>
-        <i class="bi bi-list mobile-nav-toggle"></i>
-      </nav><!-- .navbar -->
-    </div>
-  </header><!-- End Header -->
+				<i class="bi bi-list mobile-nav-toggle"></i>
+			</nav>
+			<!-- .navbar -->
+			</div>
+			</header>
+
+		</div>
+	</header>
+	<!-- End Header -->
 
 	<!-- === Main ===  -->
 	<main>
 		<section>
 			<div id="main-title">
-				<h1>회원 조회</h1>
+				<h1>${member.userId}님의 정보</h1>
 			</div>
 		</section>
 
 
-		<!-- section : 프로필 수정-->
+		
+		<!-- section : 관리자확인용-->
 		<section>
 			<div id="main-content">
+				<form action="/admin/player" method="post">
 				<div class="mybox">
+				
 					<div class="content">
 						<!-- 회원 정보 공간 -->
-						아이디 : king2021 <br>
-						<br> 닉네임 : <input type="text" size=16> <br>
-						<br> 이름 : 홍길동 <br>
-						<br> 성별 : 남 <br>
-						<br> 이메일 : <input type="email"> <br>
+						아이디 : <input type="text" name="user-id" value="${requestScope.member.userId}" readonly> <br>
+						<br> 닉네임 : <input type="text" size=16 name="user-nickName" value="${member.userNickName}"> <br>
+						<br> 이름 : <input type="text" size=16 name="user-name" value="${member.userName}" readonly> <br>
+						<br> 성별 : <input type="text" size=16 name="user-gender" value="${member.userGender}" readonly> <br>
+						<br> 생년월일 : <input type="text" size=16 name="user-birthDate" value="${member.userBirthDate}" readonly> <br>
+						<br> 비밀번호 : <input type="password" name="user-pw" value="${member.userPw}"> <br>
+						<br> 이메일 : <input type="email" name="user-email" value="${member.userEmail}"> <br>
+						<br> 전화번호 : <input type="text" name="user-phone" value="${member.userPhone}"> <br>
+						<input type="hidden" name="user-player" value="${member.userPlayer}">
 					</div>
-
+					
 					<div class="side">
 						<div class="side-top">
 							<div id="photo"></div>
 							<button>변경</button>
 						</div>
 						<br>
-						<div class="button">
-							<button id="statusBtn" onclick="onStatusClick();">선수등록</button>
-					<a href="member_manage.jsp"><button id="backBtn">뒤로가기</button></a>
+					</div>
+					
+				</div>
+				</form>	
+				<div class="button">
+				<a href="/admin/player?user-id=${member.userId}"><button class="admin-btn">선수인증</button></a> <br>
+				<a href="/admin/main"><button class="admin-btn">관리자페이지</button></a> <br>
+					<a href="#layer" class="check-btn"><button  class="admin-btn" id="withdraw">탈퇴처리</button></a>
+				</div>
+			</div>	
+		</section>
+		<section>
+				<div id="layer" class="pop-layer">
+				<div class="pop-container">
+					<div class="pop-conts">
+						<!-- 내용 -->
+						<p class="ctxt mb20">정말로 탈퇴처리하시겠습니까?</p>
+						<div class="btn-r">
+						
+							<a href="/admin/remove?userId=${member.userId }"><button class="btn-layerClose" onclick="deleteNotice()">탈퇴</button><!-- </a> --> 
+							<a href="#" class="btn-layerClose"><button class="btn-layerClose">취소</button></a>
 						</div>
+						<!--  // 내용 끝 -->
 					</div>
 				</div>
 			</div>
@@ -276,6 +348,47 @@ function onStatusClick(){
 	<script src="assets/js/jquery-1.12.3.min.js"></script>
 	<script src="assets/js/jquery.counterup.min.js"></script>
 	<script src="assets/js/waypoints.min.js"></script>
+	
+	
+	<!-- 삭제 경고창 -->
+	<script>
+	$(".check-btn").click(function(){
+        var $href = $(this).attr("href");
+        layer_popup($href);
+    });
+    function layer_popup(el){
 
+        var $el = $(el);    //레이어의 id를 $el 변수에 저장
+        var isDim = $el.prev().hasClass("dimBg"); //dimmed 레이어를 감지하기 위한 boolean 변수
+
+        isDim ? $(".dim-layer").fadeIn() : $el.fadeIn();
+
+        var $elWidth = ~~($el.outerWidth()),
+            $elHeight = ~~($el.outerHeight()),
+            docWidth = $(document).width(),
+            docHeight = $(document).height();
+
+        // 화면의 중앙에 레이어를 띄운다.
+        if ($elHeight < docHeight || $elWidth < docWidth) {
+            $el.css({
+                marginTop: -$elHeight /2,
+                marginLeft: -$elWidth/2
+            })
+        } else {
+            $el.css({top: 0, left: 0});
+        }
+
+        $el.find("a.btn-layerClose").click(function(){
+            isDim ? $(".dim-layer").fadeOut() : $el.fadeOut(); // 닫기 버튼을 클릭하면 레이어가 닫힌다.
+            return false;
+        });
+
+        $(".layer .dimBg").click(function(){
+            $(".dim-layer").fadeOut();
+            return false;
+        });
+
+    }
+	</script>
 </body>
 </html>
