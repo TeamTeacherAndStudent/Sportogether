@@ -66,7 +66,7 @@ public class PaymentTestServlet extends HttpServlet {
 		request.setAttribute("userEmail", userEmail);
 		request.setAttribute("userPhone", userPhone);
 		request.setAttribute("Amount", pAmount);
-		request.getRequestDispatcher("/WEB-INF/Support/paytest.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/Support/paypage.jsp").forward(request, response);
 		
 	}
 

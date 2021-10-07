@@ -423,6 +423,7 @@ public class SupportDAO {
 			pstmt.setInt(3, payAmount);
 			pstmt.setString(4, sportCategory);
 			pstmt.setString(5, writer);
+			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {

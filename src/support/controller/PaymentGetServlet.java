@@ -42,7 +42,7 @@ public class PaymentGetServlet extends HttpServlet {
 		int result2 = ss.addDonation(supportNo,  payAmount);
 		
 		
-		if(result1>0 && result2>0) {
+		if(result1>0 || result2>0) {
 			response.sendRedirect("/support/detail?supportNo="+supportNo);
 		}else {
 			request.getRequestDispatcher("/WEB-INF/Support/supportError.html").forward(request, response);
