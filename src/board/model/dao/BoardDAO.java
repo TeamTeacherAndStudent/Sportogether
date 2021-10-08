@@ -270,7 +270,7 @@ public class BoardDAO {
 		if(startNavi == 1) {
 			needPrev = false;
 		}
-		if(endNavi == pageTotalCount) { //끝값을 알아야(pageTotalCount 전체게시물가져옴
+		if(endNavi >= pageTotalCount) { //끝값을 알아야(pageTotalCount 전체게시물가져옴
 			needNext = false;
 		}
 		StringBuilder sb = new StringBuilder();
@@ -279,7 +279,7 @@ public class BoardDAO {
 		}
 		for(int i = startNavi ; i <= endNavi; i++) {
 			if(i == currentPage) {
-				sb.append(i);
+				sb.append(i + " ");
 			}else {
 				sb.append("<a href='/board/list?currentPage=" + i + "'>" + i + "</a>");
 			}
@@ -604,7 +604,7 @@ public class BoardDAO {
 
 	public String getSearchPageNavi(Connection conn, String searchKeyword, int currentPage) {
 		int pageCountPerView = 5;
-		int viewTotalCount = totalCount(conn);
+		int viewTotalCount = SearchTotalCount(conn);
 		int viewCountPerPage = 10;
 		int pageTotalCount = 0;
 		int pageTotalCountMod = viewTotalCount % viewCountPerPage;
@@ -621,7 +621,7 @@ public class BoardDAO {
 		
 		boolean needPrev = true; //다음이전값
 		boolean needNext = true;
-		if(startNavi == 1) {
+		if(startNavi >= 1) {
 			needPrev = false;
 		}
 		if(endNavi == pageTotalCount) { //끝값을 알아야(pageTotalCount 전체게시물가져옴
@@ -633,7 +633,7 @@ public class BoardDAO {
 		}
 		for(int i = startNavi ; i <= endNavi; i++) {
 			if(i == currentPage) {
-				sb.append(i);
+				sb.append(i + " ");
 			}else {
 				sb.append("<a href='/board/search?currentPage=" + i + "'>" + i + "</a>");
 			}

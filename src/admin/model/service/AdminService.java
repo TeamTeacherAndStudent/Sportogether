@@ -65,8 +65,8 @@ private JDBCTemplate jdbcTemplate;
 		PageData1 pd = new PageData1();
 		try { 
 			conn = jdbcTemplate.createConnection();
-			pd.setReportPageNavi(aDAO.getReportPageNavi(conn, currentPage));
 			pd.setReportedbList(aDAO.selectReportedBoard(conn, currentPage));
+			pd.setReportPageNavi(aDAO.getReportPageNavi(conn, currentPage));
 		} catch (SQLException e) { 
 			e.printStackTrace(); 
 		} finally {

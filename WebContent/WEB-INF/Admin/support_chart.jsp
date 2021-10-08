@@ -46,11 +46,16 @@
 		.link {
 		text-align: center;
 		}
+		#chart_div2{
+			width :500px;
+			height : 500px;
+		}
 	</style>
-
+<script src="https://www.gstatic.com/charts/loader.js"></script>
+  
 </head>
 <body>
-<script type="text/javascript">
+<script>
 
       // Load the Visualization API and the corechart package.
       google.charts.load('current', {'packages':['corechart']});
@@ -68,22 +73,64 @@
         data.addColumn('string', 'Topping');
         data.addColumn('number', 'Slices');
         data.addRows([
-          ['Mushrooms', 3],
-          ['Onions', 1],
-          ['Olives', 1],
-          ['Zucchini', 1],
-          ['Pepperoni', 2]
+          ['배구', 3],
+          ['요트', 1],
+          ['역도', 1],
+          ['탁구', 1],
+          ['클라이밍', 2]
         ]);
 
         // Set chart options
-        var options = {'title':'내가 한 후원 종목 비율 확인',
+        var options = {'title':'사용자 후원한 종목별 비율 확인(월별)',
                        'width':700,
                        'height':500};
 
         // Instantiate and draw our chart, passing in some options.
-        var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+        var chart = new google.visualization.PieChart(document.getElementById('chart_div1'));
         chart.draw(data, options);
       }
+      
+      //년도별 차트
+    	 google.charts.load('current', {packages: ['corechart', 'line']});
+		google.charts.setOnLoadCallback(drawBasic);
+		
+		function drawBasic() {
+		
+		      var data = new google.visualization.DataTable();
+		      data.addColumn('number', 'X');
+		      data.addColumn('number', 'support count');
+		
+		      data.addRows([
+		        [0, 0],   [1, 10],  [2, 23],  [3, 17],  [4, 18],  [5, 9],
+		        [6, 11],  [7, 27],  [8, 33],  [9, 40],  [10, 32], [11, 35],
+		        [12, 30], [13, 40], [14, 42], [15, 47], [16, 44], [17, 48],
+		        [18, 52], [19, 54], [20, 42], [21, 55], [22, 56], [23, 57],
+		        [24, 60], [25, 50], [26, 52], [27, 51], [28, 49], [29, 53],
+		        [30, 55], [31, 60], [32, 61], [33, 59], [34, 62], [35, 65],
+		        [36, 62], [37, 58], [38, 55], [39, 61], [40, 64], [41, 65],
+		        [42, 63], [43, 66], [44, 67], [45, 69], [46, 69], [47, 70],
+		        [48, 72], [49, 68], [50, 66], [51, 65], [52, 67], [53, 70],
+		        [54, 71], [55, 72], [56, 73], [57, 75], [58, 70], [59, 68],
+		        [60, 64], [61, 60], [62, 65], [63, 67], [64, 68], [65, 69],
+		        [66, 70], [67, 72], [68, 75], [69, 80]
+		      ]);
+		
+		      var options = {
+		        hAxis: {
+		          title: 'Time'
+		        },
+		        vAxis: {
+		          title: 'Popularity'
+		        }
+		      };
+		
+		      var chart = new google.visualization.LineChart(document.getElementById('chart_div2'));
+		
+		      chart.draw(data, options);
+		    }
+		      
+      
+      
     </script>
   <!-- ======= Header ======= -->
   <header id="header" class="fixed-top">
@@ -123,63 +170,69 @@
 		<section id="supportChart">
 			<div class="container">
 				<h1>종목별 후원 비율</h1>
-				<div class="counter">
-				 	일일 방문자 수 : <br>
-				 	총 방문자 수 :
-				</div>
-				<div class="row">
-					<div class="col-md-5">
-						<div class="section1">
-							<h4>월별 차트</h4>
-							 <select name="selectmonth">
-							 	<option value="1월">1월</option>
-							 	<option value="2월">2월</option>
-							 	<option value="3월">3월</option>
-							 	<option value="4월">4월</option>
-							 	<option value="5월">5월</option>
-							 	<option value="6월">6월</option>
-							 	<option value="7월">7월</option>
-							 	<option value="8월">8월</option>
-							 	<option value="9월">9월</option>
-							 	<option value="10월">10월</option>
-							 	<option value="11월">11월</option>
-							 	<option value="12월">12월</option>
-							 </select>
-							총 후원자 수 : <br>
-							<!-- 월별 방문자수  차트 -->
-					<section>
-					<div id="main-content">
-						<!--Div that will hold the pie chart-->
-						<div id="chart_div"></div>
-						<div id="count">
-							<br>
-							<br>
-							<br>
-							<br>
-							<br>
-							<br>
-							<br>
+					<div class="counter">
+					 	<div class="counter_text">
+							<span class="people-counter" style='color: #347aaf'><b><%=session.getAttribute("todayCount") %></b></span>
+							<p><b>일일 방문자 수</b><p>
+							</div>
+							
+							<div class="counter_text">
+							<span class="people-counter" style='color: #347aaf'><b><%=session.getAttribute("totalCount") %></b></span>
+							<p><b>전체 방문자 수</b></p>
 						</div>
 					</div>
-					</section>
-					</div>
-					<div class="col-md-6">
-						<div class="section2">
-							<h4>년도별 차트</h4>
-							<select name="selectyear">
-								<option value="2021" selected>2021</option>
-							</select>
-							년
-							 <!-- 년도별 방문자수
-							 -->
+					<div class="row">
+						<div class="col-md-6">
+							<div class="section1">
+								<h4>월별 차트</h4>
+								 <select name="selectmonth">
+								 	<option value="1월">1월</option>
+								 	<option value="2월">2월</option>
+								 	<option value="3월">3월</option>
+								 	<option value="4월">4월</option>
+								 	<option value="5월">5월</option>
+								 	<option value="6월">6월</option>
+								 	<option value="7월">7월</option>
+								 	<option value="8월">8월</option>
+								 	<option value="9월">9월</option>
+								 	<option value="10월">10월</option>
+								 	<option value="11월">11월</option>
+								 	<option value="12월">12월</option>
+								 </select>
+								총 후원자 수 : 172 <br>
+								<!-- 월별 방문자수  차트 -->
+									<section>
+										<div id="main-content">
+											<!--Div that will hold the pie chart-->
+											<div id="chart_div1"></div>
+											<div id="count">
+												<br>
+												<br>
+												<br>
+												<br>
+											</div>
+										</div>
+									</section>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="section2">
+									<h4>년도별 차트</h4>
+									<select name="selectyear">
+										<option value="2021" selected>2021</option> 
+									</select>
+									년
+									 <!-- 년도별 방문자수
+									 -->
+									 <div id="chart_div2"></div>
+								</div>
+							</div>
 						</div>
 					</div>
-				</div>
-			</div>
-			<br><br>
-			<div class="link">
-				<a href="/support/manage">후원 결제 관리 보기</a><br>
-			</div>
+					<br><br>
+					<div class="link">
+						<a href="/support/manage">후원 결제 관리 보기</a><br>
+					</div>
 		</section>
 	</main>
 	<!-- ======= Footer ======= -->

@@ -60,11 +60,11 @@
 		height: 35px;
 		line-height: 35px;
 	}
-	.ulTable > li > ul > li:first-child                  {width:10%;} /*체크박스 열 크기*/
-	.ulTable > li > ul > li:first-child +li              {width:10%;} /*캠페인 번호 열 크기*/
-	.ulTable > li > ul > li:first-child +li+li           {width:30%;} /*캠페인 이름크기*/
-	.ulTable > li > ul > li:first-child +li+li+li        {width:30%;} /*선수이름 열 크기*/
-	.ulTable > li > ul > li:first-child +li+li+li+li     {width:20%;} /*캠페인 게시일자 열 크기*/
+	.ulTable > li > ul > li:first-child                  {width:10%;} /*번호 열 크기*/
+	.ulTable > li > ul > li:first-child +li              {width:40%;} /*캠페인 제목 열 크기*/
+	.ulTable > li > ul > li:first-child +li+li           {width:10%;} /*작성자 이름크기*/
+	.ulTable > li > ul > li:first-child +li+li+li        {width:20%;} /*일자 열 크기*/
+	.ulTable > li > ul > li:first-child +li+li+li+li     {width:20%;} /*삭제 열 크기*/
 	
 	#divPaging {
 		clear:both;
@@ -101,7 +101,6 @@
 	    font-weight: 600;
 	    font-size: 14px;
 	    border-style : none;
-	    margin-left : 5px;
   		padding: 12px 12px;
 	    border-radius: 5px;
 	    border: 2px solid #1d284b;
@@ -117,7 +116,7 @@
   		margin-right: 100px;
 	}
 	#deleteBtn{
-		height:32px
+		height:32px;
 	}
 /* 	.deleteBtn{ */
 /* 		font-family: "Raleway", sans-serif; */
@@ -200,7 +199,6 @@
 								<li><a style= "color: black;"   href = "/support/detail?supportNo=${support.supportNo }">${support.supportTitle }</a></li>
 								<li>${support.supportWriter }</li>
 								<li><fmt:formatDate value="${support.supportRegDate }" pattern="yyyy/MM/dd HH:mm"/></li>
-							
 								<li>
 									<button class="Btn" id = "deleteBtn" onclick="onDeleteClick();" value = "${support.supportNo }">삭제</button>
 								</li>

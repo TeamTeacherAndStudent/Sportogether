@@ -44,7 +44,6 @@ public class ReportedManageServlet extends HttpServlet {
 		}
 		PageData1 pd = new AdminService().printReportedBoard(currentPage);
 		List<ReportedBoard> rList = pd.getReportedbList();
-	//	System.out.println(pd.getReportPageNavi());
 		System.out.println(rList);
 		if(!rList.isEmpty()) {
 			request.setAttribute("rList", rList);

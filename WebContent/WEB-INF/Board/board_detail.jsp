@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!-- 포맷태그 식별 태그라이브러리  -->
-<%@taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -48,8 +46,6 @@
 	}
 	.subtitle{
 		color: rgb(140, 158, 91);
-		text-align : left;
-		margin-left: 500px;
 	}
 	.text{
 		text-align:center;
@@ -105,7 +101,6 @@
   	}
   	#BtnZip {
   		text-align : right;
-  		margin-right:700px;
   	}
   	/*스크랩, 좋아요 클릭시 색변경*/
   	.like {
@@ -128,12 +123,6 @@
 	.category{
 		display: hidden;
 	}
-	.reply {
-		text-align : center;
-	}
-	.replies{
-		margin-left:250px;
-	}
   </style>
 <title>자유게시판</title>
 </head>
@@ -148,7 +137,6 @@
           <li><a class="active" href="/sports/list">종목</a></li>
           <li><a href="/board/list">자유게시판</a></li>
           <li><a href="/support/list">후원</a></li>
-          <!-- <li><input type="search" placeholder="검색" size="10" id="search"></li> -->
        	  <li>
        	  	<c:if test="${sessionScope.userId eq null }">
        	 		 <a href="/member/login">Login</a>
@@ -175,62 +163,65 @@
     <main id="main">
   		<div class="container">
   			<h1 class="">자유게시판</h1><br><hr><br>
-		  			<div id="form">
-						<div class="text">
-						 	<div class="row"> 
-								<input type="hidden" name="boardNo" value="${requestScope.boardOne.boardNo }">
-								<div class = "col-lg-1 col-md-1 col-sm-1 col-xs-1">
-									<div id="category"class="input-field">${requestScope.boardOne.sportsName }</div>
+  			<fieldset>
+	  			<div id="form">
+					<div class="text">
+					 	<div class="row"> 
+							<input type="hidden" value="${requestScope.boardOne.boardNo }">
+							<div class = "col-md-1">
+								<div id="category"class="input-field">${requestScope.boardOne.sportsName }</div>
+							</div>
+							<div class="col-md-6">	
+								<div id="title" class="input-field">${requestScope.boardOne.boardTitle }</div>
+							</div>
+							<div class="col-md-4">	
+								<div id="writeInf" class="input-field">
+									작성자 ${requestScope.boardOne.userId }
+									&nbsp;&nbsp;${requestScope.boardOne.boardEnrollDate }
+									<br>조회수 : ${requestScope.boardOne.boardCount } 
+									&nbsp;&nbsp;추천수 : ${requestScope.boardOne.boardLike }
 								</div>
-								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">	
-									<input type="text" id="title" name = "boardTitle" class="input-field">${requestScope.boardOne.boardTitle }</div>
-								</div>
-								<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">	
-									<div id="writeInf" class="input-field">
-										작성자 ${requestScope.boardOne.userId }<br>
-										&nbsp;<fmt:formatDate pattern = "yyyy-MM-dd HH:mm" value="${requestScope.boardOne.boardEnrollDate }"></fmt:formatDate>
-										<br>조회수 : ${requestScope.boardOne.boardCount } 
-										&nbsp;&nbsp;추천수 : ${requestScope.boardOne.boardLike }
-									</div>
-								</div>
-							</div><br><br>
-							<div class="row">
-	                     		 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-									<div id="content">
-										<br><br>${requestScope.boardOne.boardContents }
-									</div><br>
-								</div>
-							</div><hr>
-							<div class="file-download">
-								파일 선택 : ${requestScope.boardOne.files }
-							</div><br><hr>
-						</div>
+							</div>
+						</div><br><br>
+						<div class="row">
+                     		 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+								<div id="content">
+									<br><br>${requestScope.boardOne.boardContents }
+								</div><br>
+							</div>
+						</div><hr>
+						<div class="file-download">
+							파일 선택 : ${requestScope.boardOne.files }
+						</div><br><hr>
 					</div>
+				</div>
+			</fieldset>
 					<c:if test="${sessionScope.userId ne null }">
 						<div id="center-btn">
 					<!--<c:if test="${sessionScope.userId eq boardLike.userId }" var="likeChk">
 	    						<button type="submit" id="likeBtn" class="Btn" onclick="offLikeChange()">좋아요</button>
 	                    </c:if>
 	                    <c:if test="${sessionScope.userId ne boardLike.userId }" var="likeChk">
-	    						<button type="submit" id="likeBtn" class="Btn" onclick="onLikeChange()">좋아요</button>
+	    						<button type="submit" id="likeBtn" class="Btn" onclick				</fieldset>
+="onLikeChange()">좋아요</button>
 	                    </c:if>-->
 	    		     		<button type="submit" id="likeBtn" class="Btn" onclick="onLikeChange(this)">좋아요</button>
 	                        <button id="reportBtn" class="Btn" onclick="onReportedBoardClick();">게시글신고</button>
 						</div>
 					</c:if>
 					<br><br>
-					<!-- 버튼 숨김(로그인해야지만 볼 수 있는 버튼들 -->
 	                <div id="BtnZip">
-	                	<c:if test="${sessionScope.userId eq boardOne.userId }">
-	                 	 <button type="submit" id="modifyBtn" class="Btn" onclick="onModifyClick();">수정</button>
-	                 	 <button type="submit" id="removeBtn" class="Btn" onclick="onRemoveClick();">삭제</button>
+	                	<c:if test="${sessionScope.userId eq boardOne.userId || sessionScope.userCode eq 'G'}">
+		                 	 <button type="submit" id="modifyBtn" class="Btn" onclick="onModifyClick();">수정</button>
+		                 	 <button type="submit" id="removeBtn" class="Btn" onclick="onRemoveClick();">삭제</button>
 						</c:if>
 	                 	 <button id="listBtn" class="Btn" onclick="location.href='/board/list'">목록</button>
 					</div>
 				<br><br>
-				<div class="row">
-					<div class="reply">	
-	                   <h3 class="subtitle">댓글</h3><hr><br>
+				<div class="reply">
+					<div class="row">
+					<!-- 버튼 숨김(등록시 수정안보이게/ 수정시 등록 안보이게 정렬 -->
+	                   <h3 class="subtitle">댓글<h3></h3><hr><br>
 						<form action="/boardReply/write" method="post">
 		                        <div class="replyEnroll">
 		                           	<input type="text" name="replyContents" id="comment" placeholder="댓글을 입력해주세요." maxlength="500" size="100">
@@ -238,39 +229,37 @@
 									<input type="submit" value="등록" class="Btn">
 		                        </div>
 						</form><br><br>
-					</div>
-					<div class="replies">
 						<!-- 출력 -->
-						<c:forEach items="${boardOne.replies }" var ="reply"> <!-- 반복문 -->
-							<input type="hidden" name="boardReplyNo" id="replyNo" value="${reply.boardReplyNo }">
-							
-							<div class="col-md-1">
-		                    	<div class="replyContents">
-		                    		${reply.boardReplyUserId }
-		                    	</div>
+					<c:forEach items="${boardOne.replies }" var ="reply"> <!-- 반복문 -->
+						<input type="hidden" name="boardReplyNo" id="replyNo" value="${reply.boardReplyNo }">
+						<div class="col-md-1">
+	                    	<div class="replyContents">
+	                    		  ${reply.boardReplyUserId }
+	                    	</div>
+	                    </div>
+	    				<div class="col-md-11">            
+	                  	  <div class="replyDate">
+	                   		${reply.boardReplyDate }
+	                      </div>
+	                    </div>
+	                   	<div class="col-md-9">
+		                    <div class="replyContent">
+		                    	${reply.boardReplyContents }
 		                    </div>
-		    				<div class="col-md-11">            
-		                  	  <div class="replyDate">
-		                  		  <fmt:formatDate pattern = "yyyy-MM-dd HH:mm" value="${reply.boardReplyDate }"></fmt:formatDate>
-		                      </div>
-		                    </div><br>
-		                   	<div class="col-md-9">
-			                    <div class="replyContent">
-			                    	${reply.boardReplyContents }
-			                    </div>
-		                    </div>
-		                    <div class="col-md-1">
-		                    <c:if test="${sessionScope.userId eq reply.boardReplyUserId}">
-		                    	<a href="/boardReply/delete?boardNo=${reply.boardNo }&boardReplyNo=${reply.boardReplyNo}">삭제</a>
-		                    </c:if>	
-		                    </div>
-		                    <div class="col-md-2">
-		                    <c:if test="${sessionScope.userId ne null}">
-		                    	<a href="javascript:onReportedReplyClick();">신고</a>
-		                    </c:if>
-		                    </div><hr>
-						</c:forEach>
-					</div>
+	                    </div>
+	                    <div class="col-md-1">
+	                    <c:if test="${sessionScope.userId eq reply.boardReplyUserId}">
+	                    	<a href="/boardReply/delete?boardNo=${reply.boardNo }&boardReplyNo=${reply.boardReplyNo}">삭제</a>
+	                    </c:if>	
+	                    </div>
+	                    <div class="col-md-2">
+	                    <c:if test="${sessionScope.userId ne null}">
+	                    	<a href="javascript:onReportedReplyClick();">신고</a>
+	                    </c:if>
+	                    </div><hr>
+					</c:forEach>
+				</div>
+			</div>
 		</div>
     </main><br><br><br><br>
     <!-- footer 옆으로 넘어감 방지 -->
@@ -351,7 +340,7 @@
 		var boardNo = "${requestScope.boardOne.boardNo}";
 		var boardTitle = "${requestScope.boardOne.boardTitle}";
 		if(reportedChk) {
-				location.href ="/board/reported?boardNo="+boardNo+"&boardTitle="+boardTitle; //관리자 신고리스트servlet들어가기
+				location.href ="/board/reported?boardNo="+boardNo+"&boardTitle="+boardTitle;
 				window.alert("게시물이 신고되었습니다");
 		}else{
 			return
@@ -375,21 +364,37 @@
 			window.alert("로그인 후 이용해주세요.");
 		}
 	}
+	
+	function onRemoveClickG(){
+		var removeChk = window.confirm("해당 글을 삭제하시겠습니까?");
+		var boardNo = '${requestScope.boardOne.boardNo }';
+		if(removeChk) {
+			location.href ="/board/remove?boardNo="+boardNo;
+			window.alert("글이 삭제되었습니다");
+		}
+	}
+	
 	function onReportedReplyClick(){
 	 	var replyNo = $("#replyNo").val();
 	 	var boardNo = $("#boardNo").val();
 		var reportedChk = window.confirm("해당 댓글을 신고하겠습니까?"); 
-		var boardTitle = "${requestScope.boardOne.boardTitle }";
-		var boardTitle = "${reply.boardReplyUserId}";
-		
 		if(reportedChk) {
 				window.alert("댓글이 신고되었습니다");
-			 	location.href="/boardReply/reported?boardNo="+boardNo2+"&boardReplyNo="+replyNo2+"&boardTitle="+boardTitle; 
-			 	//신고리스트servlet에 들어가기
+		//	 	location.href="/boardReply/reported?boardNo="+boardNo+"&boardReplyNo="+replyNo; //신고리스트servlet에 들어가기
 		}else{
 			return
 		}
 	}
+	/* function onRemoveReplyClick(){
+		var removeReplyChk= window.confirm("댓글을 삭제하겠습니까?");
+		var boardNo = "${reply.boardNo }";
+		var replyNo = "${reply.boardReplyNo }";	
+		if(removeReplyChk){
+			window.alert("댓글이 삭제되었습니다");
+			location.href ="/boardReply/delete?boardNo="+boardNo+"&boardReplyNo="+replyNo;
+		}else{
+			return
+		} */
 	
 </script>
 </body>

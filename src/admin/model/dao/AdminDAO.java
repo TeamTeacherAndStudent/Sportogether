@@ -123,7 +123,7 @@ public class AdminDAO {
 		}
 		for ( int i = startNavi ; i <= endNavi; i ++) {
 			if(i == currentPage) {
-				sb.append(i + " ");
+				sb.append(" "+ i + " ");
 			}else {
 				sb.append("<a href ='/support/appList?currentPage=" + i + "'>" + i + " </a>");
 			}
@@ -188,7 +188,7 @@ public class AdminDAO {
 				while(rset.next()) {
 					ReportedBoard rBoard = new ReportedBoard();
 					rBoard.setBoardNo(rset.getInt("BOARD_NO"));
-					rBoard.setReportedBoardNo(rset.getInt("REPORTED_COUNT"));
+					rBoard.setReportedCount(rset.getInt("REPORTED_COUNT"));
 					rBoard.setBoardTitle(rset.getString("BOARD_TITLE"));
 //					rBoard.setUserId(rset.getString("USER_ID"));
 					//	System.out.println(rBoard.getUserId());
@@ -206,7 +206,7 @@ public class AdminDAO {
 		
 		public String getReportPageNavi(Connection conn, int currentPage) {
 			int pageCountPerView = 5;
-			int viewTotalCount = totalCount(conn);
+			int viewTotalCount = ReportTotalCount(conn);
 			int viewCountPerPage = 10;
 			int pageTotalCount = 0;
 			int pageTotalCountMod = viewTotalCount % viewCountPerPage;
@@ -215,7 +215,7 @@ public class AdminDAO {
 			}else {
 				pageTotalCount = viewTotalCount / viewCountPerPage;
 			}
-			int startNavi = ((currentPage - 1)/pageCountPerView) *pageCountPerView + 1;
+			int startNavi = ((currentPage - 1)/pageCountPerView) * pageCountPerView + 1;
 			int endNavi = startNavi + pageCountPerView - 1;
 			if(endNavi > pageTotalCount) {
 				endNavi = pageTotalCount; //끝페이지 이후의 값들 총 13페이지면 14 15안나오게
@@ -226,22 +226,22 @@ public class AdminDAO {
 			if(startNavi == 1) {
 				needPrev = false;
 			}
-			if(endNavi == pageTotalCount) { //끝값을 알아야(pageTotalCount 전체게시물가져옴
+			if(endNavi >= pageTotalCount) { //끝값을 알아야(pageTotalCount 전체게시물가져옴
 				needNext = false;
 			}
 			StringBuilder sb = new StringBuilder();
 			if(needPrev) {
-				sb.append("<a href = '/reportedList/board?currnetPage=" + (startNavi-1) +"'> [이전] </a>");
+				sb.append("<a href = '/report/manage?currnetPage=" + (startNavi-1) +"'> [이전] </a>");
 			}
 			for(int i = startNavi ; i <= endNavi; i++) {
 				if(i == currentPage) {
-					sb.append(i);
+					sb.append(" "+ i + "  ");
 				}else {
-					sb.append("<a href='/reportedList/board?currentPage=" + i + "'>" + i + "</a>");
+					sb.append("<a href='/report/manage?currentPage=" + i + "'>" + i + "</a>");
 				}
 			}
 			if(needNext){
-				sb.append("<a href = '/reportedList/board?currentPage=" +(endNavi+1) +"'> [다음] </a>");
+				sb.append("<a href = '/report/manage?currentPage=" +(endNavi+1) +"'> [다음] </a>");
 			}
 				return sb.toString();
 		}
