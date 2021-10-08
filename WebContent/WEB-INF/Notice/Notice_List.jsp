@@ -108,23 +108,23 @@ ul, li {
 }
 
 #ulTable>li>ul>li:first-child {
-	width: 10%;
+	width: 15%;
 } /*No 열 크기*/
 #ulTable>li>ul>li:first-child+li {
-	width: 30%;
+	width: 35%;
 } /*제목 열 크기*/
 #ulTable>li>ul>li:first-child+li+li {
 	width: 25%;
 } /*작성일 열 크기*/
 #ulTable>li>ul>li:first-child+li+li+li {
-	width: 15%;
+	width: 25%;
 } /*작성자 열 크기*/
-#ulTable>li>ul>li:first-child+li+li+li+li {
+/* #ulTable>li>ul>li:first-child+li+li+li+li {
 	width: 10%;
 } /*추천수 열 크기*/
 #ulTable>li>ul>li:first-child+li+li+li+li+li {
 	width: 10%;
-} /*조회수 열 크기*/
+} /*조회수 열 크기*/ */
 #divPaging {
 	clear: both;
 	margin: 0 auto;
@@ -284,7 +284,7 @@ button:hover {
 								<li>제목</li>
 								<li>작성일</li>
 								<li>작성자</li>
-								<li>조회수</li>
+							<!-- 	<li>조회수</li> -->
 							</ul>
 						</li>
 						
@@ -306,7 +306,7 @@ button:hover {
 								<li class="left"><a href="/notice/detail?noticeNo=${notice.noticeNo}">${notice.noticeTitle}</a></li>
 								<li><fmt:formatDate pattern = "yyyy-MM-dd HH:mm" value="${notice.noticeDate}"/></li>
 								<li>${notice.noticeWriter}</li>
-								<li>${notice.noticeCount}</li>
+								<%-- <li>${notice.noticeCount}</li> --%>
 							</ul>
 						</li>
 						</c:forEach>
