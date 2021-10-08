@@ -33,7 +33,7 @@ public class SupportReplyReport extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		SupportService ss = new SupportService();
 		//신고 대상 댓글 번호 , 게시물 번호
-		int supportNo = Integer.parseInt(request.getParameter("supportNo"));
+//		int supportNo = Integer.parseInt(request.getParameter("supportNo"));
 		int replyNo = Integer.parseInt(request.getParameter("replyNo"));
 	
 		//세션에서 아이디 가져오기

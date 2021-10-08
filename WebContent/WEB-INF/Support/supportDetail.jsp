@@ -298,7 +298,7 @@
  							</th>
  							
  						</tr>
- 						<!--  EL/JSTL로 댓글 소환 -->
+ 						<!--   댓글 소환 -->
  						<c:forEach items = "${requestScope.supportOne.rList }" var = "supportReply">
  						<tr>
  							<td>${supportReply.supportReplyWriter}</td>
@@ -306,24 +306,23 @@
  							<td>${supportReply.supportReplyRegDate }</td>
  							<td>
  								<!-- 댓글 번호 저장해두기 -->
- 								<input id = "replyNo" type="text" value = "${supportReply.supportReplyNo }">
+ 								<input type="text" value="${supportReply.supportReplyNo }">
  								<!-- 댓글 작성자와 세션 아이디가 같으면 삭제 버튼 활성화 -->
  								<c:if test="${sessionScope.userId eq supportReply.supportReplyWriter }">
- 									<a href = "javascript:removeReply();">삭제</a>
+ 									<a href = "javascript:void(0)" onclick="removeReply(this);">삭제</a>
  								</c:if>
  							</td>
  							<td>
- 								
- 								
  								<!-- confirm창으로 확인 후 신고하기 -->
- 								<a href="javascript:reportReply();" >신고</a>
+ 								<a href="javascript:void(0)" onclick="reportReply(this);" >신고</a>
  							</td>
  						</tr>
  						</c:forEach>
  						
  						<tr>
  							<td colspan="4" align="center"> 
- 								<!-- 댓글 페이징..??-->
+ 						<!-- pa -->
+ 						
  							</td>
  							
  						</tr>
@@ -456,34 +455,35 @@
 	window.copyURL = function(){
 		prompt("[Ctrl + c]를 눌러 URL을 복사하세요:",window.location);
 	}
+	// confirm 후 댓글 신고하기
 	
+	function reportReply(obj){
+		var replyNo2 = $(obj).parent().prev().find("input").val();
+		var reportReplyChk = window.confirm("해당 댓글을 신고하시겠습니까?");
+		if(reportReplyChk) {
+			location.href ="/supportReply/report?replyNo=" + replyNo2;
+		}else{
+			window.alert("취소하였습니다.");
+		}
+	}			
 	
 	// confirm 후 댓글 삭제하기
-	function removeReply(){
-		var removeReplyChk = window.confirm("해당 댓글을 삭제하시겠습니까?");
+	function removeReply(obj){
 		var supportNo = $("#supportNo").val();
-		var replyNo = $("#replyNo").val();
+		var replyNo = $(obj).parent().parent().find("input").val();
+		var removeReplyChk = window.confirm("해당 댓글을 삭제하시겠습니까?");
 		if(removeReplyChk) {
-			location.href = "/supportReply/Remove?replyNo=" + replyNo + "&supportNo=" + supportNo;
+			location.href ="/supportReply/Remove?replyNo=" + replyNo + "&supportNo=" + supportNo;
 					
 		}else{
 			window.alert("취소하였습니다.");
 		}
 	}
-	// confirm 후 댓글 신고하기
-	
-	function reportReply(){
-		var supportNo = $("#supportNo").val();
-		var replyNo = $("#replyNo").val();
-		var reportReplyChk = window.confirm("해당 댓글을 신고하시겠습니까?");
-		if(reportReplyChk) {
-			
-			location.href ="/supportReply/report?replyNo=" + replyNo + "&supportNo=" + supportNo;
-		}else{
-			window.alert("취소하였습니다.");
-		}
-	}			
+
 		
+	</script>
+	<script type="text/javascript">
+	
 	</script>
   
 </body>
