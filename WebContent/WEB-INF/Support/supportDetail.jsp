@@ -306,7 +306,7 @@
  							<td>${supportReply.supportReplyRegDate }</td>
  							<td>
  								<!-- 댓글 번호 저장해두기 -->
- 								<input type="text" value="${supportReply.supportReplyNo }">
+ 								<input type="hidden" value="${supportReply.supportReplyNo }">
  								<!-- 댓글 작성자와 세션 아이디가 같으면 삭제 버튼 활성화 -->
  								<c:if test="${sessionScope.userId eq supportReply.supportReplyWriter }">
  									<a href = "javascript:void(0)" onclick="removeReply(this);">삭제</a>
