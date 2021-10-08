@@ -20,32 +20,85 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <!-- Template Main CSS File -->
   <link href="../assets/css/style.css" rel="stylesheet">
-  <style>
-  		/*제목*/
+  	<!-- jQuery  CDN -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	
+  
+<style>
+	#main {
+		 width:100%;
+		 height : 800px;
+	}
+	 #search{
+       margin-left: 30px;
+    }
+	/*제목*/
 	h1{
 	    vertical-align:middle;
 	    line-height:30px;
    		color: rgb(140, 158, 91);
 	    text-align: center;
 	}
-		.ulTable {
+/*탭관련 css*/
+	.tab-content.currnet{
+		display: block;
+	}
+	.container{
+		margin: 0 auto;
+	}
+	
+	ul, li{
+		list-style: none;
+		text-align: center;
+		padding : 0px;
+		margin : 0px;
+	}
+	ul.tabs{
+	  margin: 0px;
+	  padding: 0px;
+	  text-align: center;
+	  list-style: none;
+	  font-weight:bold;
+	  font-size: 18px;
+	}
+	ul.tabs li{
+	  background: none;
+	  color: #222;
+	  display: inline-block;
+	  padding: 10px 15px;
+	  cursor: pointer;
+	}
+	
+	ul.tabs li.current{
+	  background-color: #ededed;
+	  color: #222;
+	}
+	
+	.tab-content{
+	  display: none;
+	  background-color: #ededed;
+	  padding: 20px;
+	}
+	
+	.tab-content.current{
+	  display: inherit;
+	}
+	
+/* 테이블(게시판 형태) CSS*/
+	.ulTable {
 		margin-top:10px;
 		text-align: center;
-		list-style: none;
 	}
 	
 	.ulTable > li:first-child > ul > li {
-		list-style: none;
 		background-color:#c9c9c9;
 		font-weight:bold;
+		font-size: 15px;
 		text-align:center;
-		height: 40px;
-		line-height: 40px;
-		font-size : 15px;
+		width: 40px;
 	}
 	
 	.ulTable > li > ul {
-		list-style: none;
 		clear:both;
 		padding:0px auto;
 		position:relative;
@@ -54,12 +107,14 @@
 	.ulTable > li > ul > li {
 		float:left;
 		font-size:10pt;
+		height: 30px;
 		border-bottom:1px solid #ededed;
 		vertical-align:baseline;
 	}
-	.ulTable > li > ul > li:first-child             	      {width:10%;} /*후원No 열 크기*/
-	.ulTable > li > ul > li:first-child +li            		  {width:70%;} /*캠페인No 열 크기*/
-	.ulTable > li > ul > li:first-child +li+li        		  {width:20%;} /*종목 열 크기*/
+	
+	.ulTable > li > ul > li:first-child                {width:10%;} /*No 열 크기*/
+	.ulTable > li > ul > li:first-child +li            {width:70%;} /*제목 열 크기*/
+	.ulTable > li > ul > li:first-child +li+li         {width:20%;} /*작성자 열 크기*/
 	
 	#divPaging {
 		clear:both;
@@ -74,15 +129,9 @@
 		margin:0 auto;
 		text-align:center;
 	}
-	.link {
-		text-align: center;
-	}
-   #search{
-  	 margin-left: 30px;
-	}
-  </style>
+</style>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
-
 <body>
 	<script>
 		
@@ -99,36 +148,38 @@
 	});
 
 	</script>
-	
- <header id="header" class="fixed-top">
-     <div class="container d-flex align-items-center justify-content-between">
-      <!-- 여기에 로고 사진 추가 -->
-        <h1 class="logo"><a href="/"> Sportogether </a></h1>
-       <nav id="navbar" class="navbar">
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top">
+    <div class="container d-flex align-items-center justify-content-between">
+      <h1 class="logo"><a href="/"> Sportogether </a></h1>
+      <nav id="navbar" class="navbar">
         <ul>
           <li><a class="active" href="/sports/list">종목</a></li>
           <li><a href="/board/list">자유게시판</a></li>
           <li><a href="/support/list">후원</a></li>
-         <!--  <li><input type="search" placeholder="검색" size="10" id="search"></li> -->
-             <c:if test="${sessionScope.userId eq null }">
-                 <a href="/member/login">Login</a>
-             </c:if>
-             <c:if test = "${sessionScope.userId ne null }">
-                <a href="/member/logout">Logout</a>
-             </c:if>
+       	  <li>
+       	  	<c:if test="${sessionScope.userId eq null }">
+       	 		 <a href="/member/login">Login</a>
+       	 	</c:if>
+       	 	<c:if test = "${sessionScope.userId ne null }">
+       	 		<a href="/member/logout">Logout</a>
+       	 	</c:if>
+       	  </li>
           <li class="dropdown"><a href="#"><span>SIDE MENU</span> <i class="bi bi-chevron-down"></i></a>
           <ul>
              <li><a href="/notice/list">공지사항</a></li>     
              <li><a href="/mypage/main">마이페이지</a></li>
              <li><a href="/qna/list">1:1문의</a></li>
+             <c:if test="${sessionScope.userCode eq 'G'}"><li><a href="/admin/main">관리자 페이지</a></li></c:if>
           </ul>
           </li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
-
-    </div>
-  </header><!-- End Header -->
+		</div>
+	</header>
+	<!-- End Header -->
+  <br><br>
 
 <br><br><br><br>
     <main id="main">
@@ -169,30 +220,25 @@
 	   					<li>
 	   						<ul>
 	   							<li>댓글내용</li>
-	   							<li>게시물</li>
+	   							<li>게시물제목</li>
 	   							<li>신고수</li>
 	   						</ul>
 	   					</li>
 	   				</ul>
-	   			</div>
-	   			<div id="divPaging">
-	   				${requestScope.pageNavi }
+		   			<div id="divPaging">
+		   				${requestScope.pageNavi }
+		   			</div>
 	   			</div>
 	       		<div id="tab-3" class="tab-content">
 	        		<ul class ="ulTable">
 	   					<li>
 		   					<ul>
+	   							<li>캠페인 번호</li>
 	   							<li>응원글 내용</li>
 	   							<li>신고수</li>
 		   					</ul>
 		   				</li>
-		   				<li>
-		   					<ul>
-	   							<li></li>
-	   							<li></li>
-		   					</ul>
-		   				</li>
-		   			</ul><br><br>
+		   			</ul>
 	   				<div id="divPaging">
 						${requestScope.pageNavi}
 					</div>

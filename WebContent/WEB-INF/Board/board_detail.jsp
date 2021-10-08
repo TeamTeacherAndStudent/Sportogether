@@ -128,6 +128,12 @@
 	.category{
 		display: hidden;
 	}
+	.reply {
+		text-align : center;
+	}
+	.replies{
+		margin-left:250px;
+	}
   </style>
 <title>자유게시판</title>
 </head>
@@ -169,7 +175,6 @@
     <main id="main">
   		<div class="container">
   			<h1 class="">자유게시판</h1><br><hr><br>
-  			<fieldset>
 		  			<div id="form">
 						<div class="text">
 						 	<div class="row"> 
@@ -201,7 +206,6 @@
 							</div><br><hr>
 						</div>
 					</div>
-				</fieldset>
 					<c:if test="${sessionScope.userId ne null }">
 						<div id="center-btn">
 					<!--<c:if test="${sessionScope.userId eq boardLike.userId }" var="likeChk">
@@ -224,8 +228,8 @@
 	                 	 <button id="listBtn" class="Btn" onclick="location.href='/board/list'">목록</button>
 					</div>
 				<br><br>
-				<div class="reply">
-					<div class="row">
+				<div class="row">
+					<div class="reply">	
 	                   <h3 class="subtitle">댓글</h3><hr><br>
 						<form action="/boardReply/write" method="post">
 		                        <div class="replyEnroll">
@@ -234,37 +238,39 @@
 									<input type="submit" value="등록" class="Btn">
 		                        </div>
 						</form><br><br>
+					</div>
+					<div class="replies">
 						<!-- 출력 -->
-					<c:forEach items="${boardOne.replies }" var ="reply"> <!-- 반복문 -->
-						<input type="hidden" name="boardReplyNo" id="replyNo" value="${reply.boardReplyNo }">
-						<div class="col-md-1">
-	                    	<div class="replyContents">
-	                    		${reply.boardReplyUserId }
-	                    	</div>
-	                    </div>
-	    				<div class="col-md-11">            
-	                  	  <div class="replyDate">
-	                  		  <fmt:formatDate pattern = "yyyy-MM-dd HH:mm" value="${reply.boardReplyDate }"></fmt:formatDate>
-	                      </div>
-	                    </div><br>
-	                   	<div class="col-md-9">
-		                    <div class="replyContent">
-		                    	${reply.boardReplyContents }
+						<c:forEach items="${boardOne.replies }" var ="reply"> <!-- 반복문 -->
+							<input type="hidden" name="boardReplyNo" id="replyNo" value="${reply.boardReplyNo }">
+							
+							<div class="col-md-1">
+		                    	<div class="replyContents">
+		                    		${reply.boardReplyUserId }
+		                    	</div>
 		                    </div>
-	                    </div>
-	                    <div class="col-md-1">
-	                    <c:if test="${sessionScope.userId eq reply.boardReplyUserId}">
-	                    	<a href="/boardReply/delete?boardNo=${reply.boardNo }&boardReplyNo=${reply.boardReplyNo}">삭제</a>
-	                    </c:if>	
-	                    </div>
-	                    <div class="col-md-2">
-	                    <c:if test="${sessionScope.userId ne null}">
-	                    	<a href="javascript:onReportedReplyClick();">신고</a>
-	                    </c:if>
-	                    </div><hr>
-					</c:forEach>
-				</div>
-			</div>
+		    				<div class="col-md-11">            
+		                  	  <div class="replyDate">
+		                  		  <fmt:formatDate pattern = "yyyy-MM-dd HH:mm" value="${reply.boardReplyDate }"></fmt:formatDate>
+		                      </div>
+		                    </div><br>
+		                   	<div class="col-md-9">
+			                    <div class="replyContent">
+			                    	${reply.boardReplyContents }
+			                    </div>
+		                    </div>
+		                    <div class="col-md-1">
+		                    <c:if test="${sessionScope.userId eq reply.boardReplyUserId}">
+		                    	<a href="/boardReply/delete?boardNo=${reply.boardNo }&boardReplyNo=${reply.boardReplyNo}">삭제</a>
+		                    </c:if>	
+		                    </div>
+		                    <div class="col-md-2">
+		                    <c:if test="${sessionScope.userId ne null}">
+		                    	<a href="javascript:onReportedReplyClick();">신고</a>
+		                    </c:if>
+		                    </div><hr>
+						</c:forEach>
+					</div>
 		</div>
     </main><br><br><br><br>
     <!-- footer 옆으로 넘어감 방지 -->
