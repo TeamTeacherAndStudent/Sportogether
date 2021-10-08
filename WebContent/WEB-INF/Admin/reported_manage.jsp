@@ -17,7 +17,7 @@
   <link href="../assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
   <link href="../assets/vendor/remixicon/remixicon.css" rel="stylesheet">
   <link href="../assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <!-- Template Main CSS File -->
   <link href="../assets/css/style.css" rel="stylesheet">
   <style>
@@ -84,6 +84,22 @@
 </head>
 
 <body>
+	<script>
+		
+	$(document).ready(function(){
+	    $('ul.tabs li').click(function(){
+	        var tab_id = $(this).attr('data-tab');
+	 
+	        $('ul.tabs li').removeClass('current');
+	        $('.tab-content').removeClass('current');
+	 
+	        $(this).addClass('current');
+	        $("#"+tab_id).addClass('current');
+	    })
+	});
+
+	</script>
+	
  <header id="header" class="fixed-top">
      <div class="container d-flex align-items-center justify-content-between">
       <!-- 여기에 로고 사진 추가 -->
@@ -178,13 +194,7 @@
 		   				</li>
 		   			</ul><br><br>
 	   				<div id="divPaging">
-						<div>◀</div>
-						<div><b>1</b></div>
-						<div>2</div>
-						<div>3</div>
-						<div>4</div>
-						<div>5</div>
-						<div>▶</div>
+						${requestScope.pageNavi}
 					</div>
 	  			</div> 
    		</div>
