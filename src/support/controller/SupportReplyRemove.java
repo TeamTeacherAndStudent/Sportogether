@@ -36,9 +36,7 @@ public class SupportReplyRemove extends HttpServlet {
 		if(result > 0) {
 //			response.sendRedirect("/support/detail?supportNo="+supportNo);
 
-			response.setContentType("text/html;charset=UTF-8");
 
-			PrintWriter out = response.getWriter();
 			response.sendRedirect("/support/detail?supportNo="+supportNo);
 
 			

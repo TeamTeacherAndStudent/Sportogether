@@ -306,7 +306,7 @@
  							<td>${supportReply.supportReplyRegDate }</td>
  							<td>
  								<!-- 댓글 번호 저장해두기 -->
- 								<input id = "replyNo" type="hidden" value = "${supportReply.supportReplyNo }">
+ 								<input id = "replyNo" type="text" value = "${supportReply.supportReplyNo }">
  								<!-- 댓글 작성자와 세션 아이디가 같으면 삭제 버튼 활성화 -->
  								<c:if test="${sessionScope.userId eq supportReply.supportReplyWriter }">
  									<a href = "javascript:removeReply();">삭제</a>
@@ -445,10 +445,10 @@
  <!-- 카운팅 -->
  <script>
 //카운팅
-	$(".counter").counterUp({
-			delay: 20,
-			time : 2000
-		});
+// 	$(".counter").counterUp({
+// 			delay: 20,
+// 			time : 2000
+// 		});
  </script>
 	<script>
 	 <!-- URL 복사 -->
@@ -473,9 +473,9 @@
 	// confirm 후 댓글 신고하기
 	
 	function reportReply(){
-		var reportReplyChk = window.confirm("해당 댓글을 신고하시겠습니까?");
 		var supportNo = $("#supportNo").val();
 		var replyNo = $("#replyNo").val();
+		var reportReplyChk = window.confirm("해당 댓글을 신고하시겠습니까?");
 		if(reportReplyChk) {
 			
 			location.href ="/supportReply/report?replyNo=" + replyNo + "&supportNo=" + supportNo;
