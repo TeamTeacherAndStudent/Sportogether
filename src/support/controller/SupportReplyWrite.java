@@ -1,6 +1,8 @@
 package support.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -43,12 +45,31 @@ public class SupportReplyWrite extends HttpServlet {
 		HttpSession session = request.getSession();
 		String userId = (String) session.getAttribute("userId");
 		
-		int result = new SupportService().registerSupportReply(supportNo, userId, supportReplyContents);
-		if(result > 0) {
-			response.sendRedirect("/support/detail?supportNo="+supportNo);
+		
+	
+		//로그인 했는지 세션 확인
+		if(userId == null) {
+			response.setContentType("text/html;charset=UTF-8");
+
+			PrintWriter out = response.getWriter();
+
+			out.println("<script>");
+
+			out.println("alert('로그인 후에 이용해주세요.')");
+
+			out.println("history.back()");
+
+			out.println("</script>");
+			
 		}else {
-			request.getRequestDispatcher("WEB-INF/Support/supportError.html").forward(request, response);
+			int result = new SupportService().registerSupportReply(supportNo, userId, supportReplyContents);
+			if(result > 0) {
+				response.sendRedirect("/support/detail?supportNo="+supportNo);
+			}else {
+				request.getRequestDispatcher("/WEB-INF/Support/supportError.html").forward(request, response);
+			}
 		}
+	
 		
 	
 	}
