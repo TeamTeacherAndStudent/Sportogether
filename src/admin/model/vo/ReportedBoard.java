@@ -6,16 +6,18 @@ public class ReportedBoard {
 	private int reportedBoardNo;
 	private String boardTitle;
 	private String userId;
+	private int reportedCount;
 	
 	public ReportedBoard() {}
 
 	
-	public ReportedBoard(int boardNo, int reportedBoardNo, String boardTitle, String userId) {
+	public ReportedBoard(int boardNo, int reportedBoardNo, String boardTitle, String userId, int reportedCount) {
 		super();
 		this.boardNo = boardNo;
 		this.reportedBoardNo = reportedBoardNo;
 		this.boardTitle = boardTitle;
 		this.userId = userId;
+		this.reportedCount = reportedCount;
 	}
 
 
@@ -51,10 +53,20 @@ public class ReportedBoard {
 		this.userId = userId;
 	}
 
+	public int getReportedCount() {
+		return reportedCount;
+	}
+	
+	
+	public void setReportedCount(int reportedCount) {
+		this.reportedCount = reportedCount;
+	}
 	@Override
 	public String toString() {
 		return "ReportedBoard [boardNo=" + boardNo + ", reportedBoardNo=" + reportedBoardNo + ", boardTitle="
-				+ boardTitle + ", userId=" + userId + "]";
+				+ boardTitle + ", userId=" + userId  +", userId=" + userId + "]";
 	}
+
+
 
 }

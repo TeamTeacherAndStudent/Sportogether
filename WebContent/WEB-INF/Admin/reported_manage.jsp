@@ -58,13 +58,8 @@
 		vertical-align:baseline;
 	}
 	.ulTable > li > ul > li:first-child             	      {width:10%;} /*후원No 열 크기*/
-	.ulTable > li > ul > li:first-child +li            		  {width:10%;} /*캠페인No 열 크기*/
-	.ulTable > li > ul > li:first-child +li+li        		  {width:10%;} /*종목 열 크기*/
-	.ulTable > li > ul > li:first-child +li+li+li     		  {width:10%;} /*후원자 열 크기*/
-	.ulTable > li > ul > li:first-child +li+li+li+li   		  {width:10%;} /*선수이름 열 크기*/
-	.ulTable > li > ul > li:first-child +li+li+li+li+li		  {width:20%;} /*후원금액 열 크기*/
-	.ulTable > li > ul > li:first-child +li+li+li+li+li+li    {width:10%;} /*걸제수단 열 크기*/
-	.ulTable > li > ul > li:first-child +li+li+li+li+li+li+li {width:15%;} /*후원일 열 크기*/
+	.ulTable > li > ul > li:first-child +li            		  {width:70%;} /*캠페인No 열 크기*/
+	.ulTable > li > ul > li:first-child +li+li        		  {width:20%;} /*종목 열 크기*/
 	
 	#divPaging {
 		clear:both;
@@ -127,26 +122,24 @@
 	      		<ul class="tabs">
 		      		<li class="tab-link current" data-tab="tab-1">신고 게시물</li>
 		      		<li class="tab-link" data-tab="tab-2">신고 댓글 </li>
+		      		<li class="tab-link" data-tab="tab-3">신고 응원 댓글 </li>
 	   			</ul>
  					<!-- 회원 클릭시 회원 detail페이지/게시물 제목 클릭시 게시물 상세 조회 -->
  				<div id="tab-1" class="tab-content current">
 	        		<ul class ="ulTable">
 	   					<li>
 	   						<ul>
-	   							<li>No</li>
+	   							<li>게시물No</li>
 	   							<li>제목</li>
-	   							<li>작성자</li>
-	   							<li>날짜</li>
 	   							<li>신고수</li>
 	   						</ul>
 	   					</li>
 	   					<li>
-	   					 <c:forEach items="${requestScope.rList}" var="board">
+	   					 <c:forEach items="${requestScope.rList}" var="rList">
 	                            <ul>
-	                            	 <li>${reportedBoard.boardNo}</li>
-									 <li><a href="/board/detail?boardNo=${reportedBoard.boardNo}">${reportedBoard.boardTitle}</a></li>
-									 <li>${reportedBoard.userName}</li>
-									 <li>${reportedBoard.userId}</li>
+	                            	 <li>${rList.boardNo}</li>
+									 <li><a href="/board/detail?boardNo=${rList.boardNo}">${rList.boardTitle}</a></li>
+									 <li>${rList.reportedCount}</li>
 	                            </ul>
 						</c:forEach>
 						</li>
@@ -159,51 +152,28 @@
 	        		<ul class ="ulTable">
 	   					<li>
 	   						<ul>
-	   							<li>No</li>
 	   							<li>댓글내용</li>
-	   							<li>작성자</li>
-	   							<li>날짜</li>
+	   							<li>게시물</li>
 	   							<li>신고수</li>
 	   						</ul>
 	   					</li>
-	   					<li>
-	   						<ul>
-	   							<li>1</li>
-	   							<li>2</li>
-	   							<li>3</li>
-	   							<li>4</li>
-	   							<li>5</li>
-	   						</ul>
-	   					</li>
-	   				</ul><br><br>
-   					<div id="divPaging">
-						<div>◀</div>
-						<div><b>1</b></div>
-						<div>2</div>
-						<div>3</div>
-						<div>4</div>
-						<div>5</div>
-						<div>▶</div>
-					</div>
-				</div>
-	       		<!-- <div id="tab-3" class="tab-content">
+	   				</ul>
+	   			</div>
+	   			<div id="divPaging">
+	   				${requestScope.pageNavi }
+	   			</div>
+	       		<div id="tab-3" class="tab-content">
 	        		<ul class ="ulTable">
 	   					<li>
 		   					<ul>
-	   							<li>No</li>
 	   							<li>응원글 내용</li>
-	   							<li>작성자</li>
-	   							<li>날짜</li>
 	   							<li>신고수</li>
 		   					</ul>
 		   				</li>
 		   				<li>
 		   					<ul>
-	   							<li>No</li>
-	   							<li>응원글 내용</li>
-	   							<li>작성자</li>
-	   							<li>날짜</li>
-	   							<li>신고수</li>
+	   							<li></li>
+	   							<li></li>
 		   					</ul>
 		   				</li>
 		   			</ul><br><br>
@@ -216,7 +186,7 @@
 						<div>5</div>
 						<div>▶</div>
 					</div>
-	  			</div> -->
+	  			</div> 
    		</div>
      </section>
   </main>

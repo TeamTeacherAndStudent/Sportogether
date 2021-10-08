@@ -48,6 +48,8 @@
 	}
 	.subtitle{
 		color: rgb(140, 158, 91);
+		text-align : left;
+		margin-left: 500px;
 	}
 	.text{
 		text-align:center;
@@ -103,6 +105,7 @@
   	}
   	#BtnZip {
   		text-align : right;
+  		margin-right:700px;
   	}
   	/*스크랩, 좋아요 클릭시 색변경*/
   	.like {
@@ -167,38 +170,38 @@
   		<div class="container">
   			<h1 class="">자유게시판</h1><br><hr><br>
   			<fieldset>
-	  			<div id="form">
-					<div class="text">
-					 	<div class="row"> 
-							<input type="hidden" name="boardNo" value="${requestScope.boardOne.boardNo }">
-							<div class = "col-md-2">
-								<div id="category"class="input-field">${requestScope.boardOne.sportsName }</div>
-							</div>
-							<div class="col-md-6">	
-								<input type="text" id="title" name = "boardTitle" class="input-field">${requestScope.boardOne.boardTitle }</div>
-							</div>
-							<div class="col-md-3">	
-								<div id="writeInf" class="input-field">
-									작성자 ${requestScope.boardOne.userId }
-									&nbsp;&nbsp;<fmt:formatDate pattern = "yyyy-MM-dd HH:mm" value="${requestScope.boardOne.boardEnrollDate }"></fmt:formatDate>
-									<br>조회수 : ${requestScope.boardOne.boardCount } 
-									&nbsp;&nbsp;추천수 : ${requestScope.boardOne.boardLike }
+		  			<div id="form">
+						<div class="text">
+						 	<div class="row"> 
+								<input type="hidden" name="boardNo" value="${requestScope.boardOne.boardNo }">
+								<div class = "col-lg-1 col-md-1 col-sm-1 col-xs-1">
+									<div id="category"class="input-field">${requestScope.boardOne.sportsName }</div>
 								</div>
-							</div>
-						</div><br><br>
-						<div class="row">
-                     		 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-								<div id="content">
-									<br><br>${requestScope.boardOne.boardContents }
-								</div><br>
-							</div>
-						</div><hr>
-						<div class="file-download">
-							파일 선택 : ${requestScope.boardOne.files }
-						</div><br><hr>
+								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">	
+									<input type="text" id="title" name = "boardTitle" class="input-field">${requestScope.boardOne.boardTitle }</div>
+								</div>
+								<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">	
+									<div id="writeInf" class="input-field">
+										작성자 ${requestScope.boardOne.userId }<br>
+										&nbsp;<fmt:formatDate pattern = "yyyy-MM-dd HH:mm" value="${requestScope.boardOne.boardEnrollDate }"></fmt:formatDate>
+										<br>조회수 : ${requestScope.boardOne.boardCount } 
+										&nbsp;&nbsp;추천수 : ${requestScope.boardOne.boardLike }
+									</div>
+								</div>
+							</div><br><br>
+							<div class="row">
+	                     		 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+									<div id="content">
+										<br><br>${requestScope.boardOne.boardContents }
+									</div><br>
+								</div>
+							</div><hr>
+							<div class="file-download">
+								파일 선택 : ${requestScope.boardOne.files }
+							</div><br><hr>
+						</div>
 					</div>
-				</div>
-			</fieldset>
+				</fieldset>
 					<c:if test="${sessionScope.userId ne null }">
 						<div id="center-btn">
 					<!--<c:if test="${sessionScope.userId eq boardLike.userId }" var="likeChk">
@@ -212,6 +215,7 @@
 						</div>
 					</c:if>
 					<br><br>
+					<!-- 버튼 숨김(로그인해야지만 볼 수 있는 버튼들 -->
 	                <div id="BtnZip">
 	                	<c:if test="${sessionScope.userId eq boardOne.userId }">
 	                 	 <button type="submit" id="modifyBtn" class="Btn" onclick="onModifyClick();">수정</button>
@@ -222,7 +226,6 @@
 				<br><br>
 				<div class="reply">
 					<div class="row">
-					<!-- 버튼 숨김(등록시 수정안보이게/ 수정시 등록 안보이게 정렬 -->
 	                   <h3 class="subtitle">댓글</h3><hr><br>
 						<form action="/boardReply/write" method="post">
 		                        <div class="replyEnroll">
@@ -367,14 +370,15 @@
 		}
 	}
 	function onReportedReplyClick(){
-	 	var replyNo2 = $("#replyNo").val();
-	 	var boardNo2 = $("#boardNo").val();
+	 	var replyNo = $("#replyNo").val();
+	 	var boardNo = $("#boardNo").val();
 		var reportedChk = window.confirm("해당 댓글을 신고하겠습니까?"); 
-		var boardNo = "${reply.boardNo }";
-		var replyNo = "${reply.boardReplyNo }";
+		var boardTitle = "${requestScope.boardOne.boardTitle }";
+		var boardTitle = "${reply.boardReplyUserId}";
+		
 		if(reportedChk) {
 				window.alert("댓글이 신고되었습니다");
-			 	location.href="/boardReply/reported?boardNo="+boardNo2+"&boardReplyNo="+replyNo2; 
+			 	location.href="/boardReply/reported?boardNo="+boardNo2+"&boardReplyNo="+replyNo2+"&boardTitle="+boardTitle; 
 			 	//신고리스트servlet에 들어가기
 		}else{
 			return

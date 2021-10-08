@@ -33,13 +33,16 @@ public class ReportedReplyServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		String userId = (String)session.getAttribute("userId"); //여기가 안된다
 		int replyNo = Integer.parseInt(request.getParameter("boardReplyNo"));
+		String replyContents= (String)session.getAttribute("replyContents");
 	//위에 null처리됨 : js코드를 받아오거나 
 		
 		int boardNo = Integer.parseInt(request.getParameter("boardNo"));
 	
 		ReportedReply rReply = new ReportedReply();
-		rReply.setReplyNo(replyNo);
-		rReply.setUserId(userId);
+		/*
+		 * rReply.setReplyNo(replyNo); rReply.setBoardReplyContents(replyContents);
+		 *	rReply.setBoardReplyTitle(replyContents);
+		*/
 		int result = new BoardService().insertReportedReply(rReply);
 		if(result > 0) {
 			response.sendRedirect("/board/detail?boardNo="+boardNo);

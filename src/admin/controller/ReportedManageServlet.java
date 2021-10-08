@@ -34,7 +34,7 @@ public class ReportedManageServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("값이 넘어오나요?");
+		//System.out.println("값이 넘어오나요?");
 		int currentPage = 0;
 		String getCurrentPage = request.getParameter("currentPage");
 		if(getCurrentPage == null) {
@@ -43,11 +43,11 @@ public class ReportedManageServlet extends HttpServlet {
 			currentPage = Integer.parseInt(getCurrentPage);
 		}
 		PageData1 pd = new AdminService().printReportedBoard(currentPage);
-		List<ReportedBoard> bList = pd.getReportedbList();
-		System.out.println(pd.getReportPageNavi());
-		System.out.println(bList);
-		if(!bList.isEmpty()) {
-			request.setAttribute("bList", bList);
+		List<ReportedBoard> rList = pd.getReportedbList();
+	//	System.out.println(pd.getReportPageNavi());
+		System.out.println(rList);
+		if(!rList.isEmpty()) {
+			request.setAttribute("rList", rList);
 			request.setAttribute("pageNavi", pd.getReportPageNavi());
 			request.getRequestDispatcher("/WEB-INF/Admin/reported_manage.jsp").forward(request, response);
 		}else {

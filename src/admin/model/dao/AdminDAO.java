@@ -172,7 +172,7 @@ public class AdminDAO {
 			List<ReportedBoard> bList = null;
 			PreparedStatement pstmt = null;
 			ResultSet rset = null;
-			String query = "SELECT BOARD_NO, COUNT(USER_ID) AS REPORT_NUM, USER_ID, BOARD_TITLE FROM(SELECT ROW_NUMBER() OVER(ORDER BY BOARD_NO ASC) AS NUM, SEQ_BOARD_NO, USER_ID, SEQ_REPORTED_BOARD_NO, BOARD_TITLE FROM REPORTED_BOARD) WHERE NUM BETWEEN ? AND ? GROUP BY BOARD_NO";
+			String query = "SELECT COUNT(*) AS REPORTED_COUNT,BOARD_NO, BOARD_TITLE FROM(SELECT ROW_NUMBER() OVER(ORDER BY BOARD_NO ASC) AS NUM, BOARD_NO, USER_ID, BOARD_TITLE FROM REPORTED_BOARD) WHERE NUM BETWEEN ? AND ? GROUP BY BOARD_NO, BOARD_TITLE";
 
 			try {
 				pstmt = conn.prepareStatement(query);
@@ -188,10 +188,10 @@ public class AdminDAO {
 				while(rset.next()) {
 					ReportedBoard rBoard = new ReportedBoard();
 					rBoard.setBoardNo(rset.getInt("BOARD_NO"));
-					rBoard.setReportedBoardNo(rset.getInt("REPORTED_BOARD_NO"));
+					rBoard.setReportedBoardNo(rset.getInt("REPORTED_COUNT"));
 					rBoard.setBoardTitle(rset.getString("BOARD_TITLE"));
-					rBoard.setUserId(rset.getString("USER_ID"));
-				//	System.out.println(rBoard.getUserId());
+//					rBoard.setUserId(rset.getString("USER_ID"));
+					//	System.out.println(rBoard.getUserId());
 					bList.add(rBoard);
 				}
 			} catch (SQLException e) {
@@ -202,6 +202,8 @@ public class AdminDAO {
 			}
 			return bList ;
 		}
+		
+		
 		public String getReportPageNavi(Connection conn, int currentPage) {
 			int pageCountPerView = 5;
 			int viewTotalCount = totalCount(conn);
@@ -438,13 +440,13 @@ public class AdminDAO {
 				rset = pstmt.executeQuery();
 				rList = new ArrayList<ReportedReply>();
 				
-				while(rset.next()) {
+			/*	while(rset.next()) {
 					ReportedReply rReply = new ReportedReply();
 					rReply.setReplyNo(rset.getInt("REPLY_NO"));
 					rReply.setUserId(rset.getString("USER_ID"));
 				//	System.out.println(rReply.getUserId());
 					rList.add(rReply);
-				}
+				} */
 			} catch (SQLException e) {
 				e.printStackTrace();
 			} finally  {
