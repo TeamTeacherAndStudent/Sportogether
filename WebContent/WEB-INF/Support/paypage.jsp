@@ -64,13 +64,6 @@
  </div>
   <script>
    $(function (){
-// 	   function gotopay(){
-// 	   if(true){
-// 		   alert.("로그인 후 이용해주세요.");
-// 		   location.href="/member/login";
-// 	   }
-// 	    var donatorEmail = $("#donator-email").val();
-// 	    var donatorPhone = $("#donator-phone").val();
         var supportNo = $("#supportNo").val();
 	    var userId = $("#userId").val();
 	    var amount = $("#amount").val();
@@ -121,8 +114,6 @@
                 });
                 //성공시 이동할 페이지
 					location.href="/support/paytodb?supportNo=<%=supportNo%>&userId=<%=userId%>&amount=<%=amount%>";
-// 					 alert("소중한 후원  감사합니다!");
-// 					history.back();
             } else {
                 msg = '결제에 실패하였습니다.';
                 msg += '에러내용 : ' + rsp.error_msg;

@@ -6,6 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>로그인</title>
+
+
 <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
    <!-- Vendor CSS Files -->
@@ -20,6 +22,10 @@
   <link href="../assets/css/style.css" rel="stylesheet">
   <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
   <script src="https://kit.fontawesome.com/a9dc1781b1.js" crossorigin="anonymous"></script>
+  
+  
+  <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+
   <style>
   	#formtest{
   		margin-top:5%;
@@ -86,11 +92,15 @@
 					<hr>
 				</form>
 				
-					간편 로그인
-					<div>
 					
+					<div>
+					<a id="kakao-login-btn"></a>
+  					
+					
+					<div id="result"></div>
+					<a href="javascript:void(0)" onclick="kakaoOut()"> 카카오 로그아웃</a>
 					</div>
-				
+					<a href="javascript:void(0)" style= "{text-decoration:none;,color: black;}" onclick="unlinkApp()">카카오 연동 해제</a>
 			</div>
 		</div>
 	</section>
@@ -145,6 +155,75 @@
   <script src = "../assets/js/jquery-1.12.3.min.js"></script>
   <script src = "../assets/js/jquery.counterup.min.js"></script>
   <script src = "../assets/js/waypoints.min.js"></script>
+    <script>
+ 	 Kakao.init('731fd7d33749e9a6bb2bf8fb2a1d7327');
+  	Kakao.isInitialized();
+ </script>
+ 
+ <script type="text/javascript">
+  function unlinkApp() {
+    Kakao.API.request({
+      url: '/v1/user/unlink',
+      success: function(res) {
+        alert('success: ' + JSON.stringify(res))
+      },
+      fail: function(err) {
+        alert('fail: ' + JSON.stringify(err))
+      },
+    })
+  }
+</script>
+<script>
+	function kakaoOut(){
+		if (!Kakao.Auth.getAccessToken()) {
+			  console.log('Not logged in.');
+			  return;
+			}
+			Kakao.Auth.logout(function() {
+			  console.log(Kakao.Auth.getAccessToken());
+			});
+	}
+</script>
+  <script type="text/javascript">
+  Kakao.Auth.createLoginButton({
+	    container: '#kakao-login-btn',
+	    success: function(authObj) {
+	      Kakao.API.request({
+	        url: '/v2/user/me',
+	        success: function(result) {
+	        	
+	          $('#result').append(result);
+	          id = result.id
+	          connected_at = result.connected_at
+	          kakao_account = result.kakao_account
+	          $('#result').append(kakao_account);
+	          resultdiv="<h2>로그인 성공 !!"
+	          resultdiv += '<h4>id: '+id+'<h4>'
+	          resultdiv += '<h4>connected_at: '+connected_at+'<h4>'
+	          email ="";
+	          gender = "";
+	          if(typeof kakao_account != 'undefined'){
+	        	  email = kakao_account.email;
+	        	  gender = kakao_account.gender;
+	          }
+	          resultdiv += '<h4>email: '+email+'<h4>'
+	          resultdiv += '<h4>gender: '+gender+'<h4>'
+	          $('#result').append(resultdiv);
+	          location.href="/index.jsp";
+	        },
+	        fail: function(error) {
+	          alert(
+	            'login success, but failed to request user information: ' +
+	              JSON.stringify(error)
+	          )
+	        },
+	      })
+	    },
+	    fail: function(err) {
+	      alert('failed to login: ' + JSON.stringify(err))
+	    },
+	  })
+</script>
 
 </body>
 </html>
