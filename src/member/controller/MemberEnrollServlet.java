@@ -67,7 +67,7 @@ public class MemberEnrollServlet extends HttpServlet {
 
 			out.println("alert('회원가입이 완료되었습니다.')");
 			
-			out.println("history.back()");
+			out.println("location.href='/index.jsp';");
 
 			out.println("</script>");
 		}else {
