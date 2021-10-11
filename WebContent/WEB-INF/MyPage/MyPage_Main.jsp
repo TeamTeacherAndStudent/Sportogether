@@ -244,13 +244,13 @@ button:hover {
 							<a href="/mypage/mypost"><button>보기</button></a>
 						</div>
 					</div>
-					<div class="mybox">
+					<!-- <div class="mybox">
 						<div class="title">나의 스크랩 내역</div>
 						<div class="content"></div>
 						<div class="button">
 							<a href="/Mypage_html/Mypage_Scrap.html"><button>보기</button></a>
 						</div>
-					</div>
+					</div> -->
 				</div>
 			</section>
 		</div>
